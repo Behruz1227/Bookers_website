@@ -9,8 +9,8 @@ type MenuItem = {
 export default function TermsOfUse() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [content, setContent] = useState<string>(""); 
-  const [error, setError] = useState<string | null>(null); 
+  const [content, setContent] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -49,7 +49,7 @@ export default function TermsOfUse() {
         );
 
         setMenuItems(response.menu);
-        setSelectedKey(response.menu[0]?.key || null); // Default to the first item
+        setSelectedKey(response.menu[0]?.key || null);
         setContent(response.menu[0]?.content || "");
       } catch (err) {
         setError("Failed to load data");
