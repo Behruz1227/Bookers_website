@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import OTPModal from "./components/Modals/OTPModal";
 import TermsOfUse from "./components/MenuBar";
+import StandartPlan from "./components/Accardion";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TermsOfUse />} />
-          {/* <Route path="" element={<OTPModal />} /> */}
+          <Route path="/accardion" element={<StandartPlan />} />
         </Routes>
       </BrowserRouter>
     </>
