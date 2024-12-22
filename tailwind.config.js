@@ -5,7 +5,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}", // Barcha komponentlar uchun Tailwindni faollashtiring
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      manrope: ['Manrope', 'sans-serif'],
+    },
   },
   plugins: [],
 };

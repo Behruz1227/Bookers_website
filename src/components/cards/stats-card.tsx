@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 
-// Define the props interface for the StatsCard component
+
 interface StatsCardProps {
   icon: React.ReactNode;
   count: number;
@@ -34,19 +34,17 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       `}
     >
       <div className="flex items-center justify-center gap-8">
-        <div className="text-text-[#ffffff]">
+        <div className="text-[#ffffff]">
           {icon}
         </div>
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <span
-            className="text-[40px] font-extrabold text-[#ffffff]"
-            style={{ lineHeight: '56px', fontFamily: 'Manrope, sans-serif' }}
+            className="text-[40px] font-extrabold text-[#ffffff] leading-[56px] font-manrope"
           >
             {count.toLocaleString()}
           </span>
           <span
-            className="text-[20px] font-normal text-[#ffffff]"
-            style={{ fontFamily: 'Manrope, sans-serif' }}
+            className="text-[20px] font-normal text-[#ffffff] font-manrope"
           >
             {title}
           </span>
@@ -55,3 +53,12 @@ export const StatsCard: React.FC<StatsCardProps> = ({
     </Card>
   );
 };
+
+
+
+//ishlatilishi 
+{/* <StatsCard 
+icon={<BookOutlined style={{ fontSize: '34px' }} />}
+count={500}
+title="Количество мастеров"
+/> */}

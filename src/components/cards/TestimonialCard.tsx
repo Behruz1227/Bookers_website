@@ -74,3 +74,16 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
     </Card>
   );
 };
+
+
+
+//ishlatilishi
+// {testimonials.map((testimonial, index) => (
+//   <TestimonialCard
+//     key={index}
+//     avatarUrl={testimonial.avatarUrl}
+//     content={testimonial.content}
+//     author={testimonial.author}
+//     company={testimonial.company}
+//   />
+// ))}
