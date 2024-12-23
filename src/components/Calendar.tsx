@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const App: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
-  const [events, setEvents] = useState<any[]>([]); // API ma'lumotlari uchun
-  const [loading, setLoading] = useState<boolean>(false);
 
   const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
   const monthNames = [
@@ -26,24 +24,6 @@ const App: React.FC = () => {
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
 
-  // API ma'lumotlarini olish
-  const fetchEvents = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("https://your-api-endpoint.com/events"); // API endpointi
-      const data = await response.json();
-      setEvents(data);
-    } catch (error) {
-      console.error("API xatosi:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchEvents(); // komponent yuklanganda API ma'lumotlarini olish
-  }, [currentMonth, currentYear]);
-
   const changeMonth = (direction: number) => {
     setCurrentMonth((prevMonth) => {
       const newMonth = prevMonth + direction;
@@ -61,7 +41,13 @@ const App: React.FC = () => {
   const toggleDate = (date: number) => {
     setSelectedDate((prev) => {
       const newSelectedDate = prev === date ? null : date;
-      console.log("Selected Date:", newSelectedDate); // Konsolga chiqarish
+      if (newSelectedDate) {
+        const fullDate = new Date(currentYear, currentMonth, newSelectedDate);
+        const formattedDate = `${fullDate.getDate()}-${fullDate.getMonth() + 1}-${fullDate.getFullYear()} ${fullDate.getHours()}:${fullDate.getMinutes()}:${fullDate.getSeconds()}`;
+        console.log("Selected Date:", formattedDate); // To'liq sanani konsolga chiqarish
+      } else {
+        console.log("No date selected");
+      }
       return newSelectedDate;
     });
   };
@@ -116,9 +102,6 @@ const App: React.FC = () => {
             const dayIndex =
               (new Date(currentYear, currentMonth, day).getDay() + 6) % 7;
             const isWeekend = dayIndex === 5 || dayIndex === 6;
-            const hasEvent = events.some(
-              (event) => new Date(event.date).getDate() === day
-            );
 
             return (
               <div
@@ -128,17 +111,13 @@ const App: React.FC = () => {
                   selectedDate === day
                     ? "bg-[#9C0B35] text-white"
                     : "hover:bg-blue-100"
-                } ${isWeekend ? "text-[#9C0B35]" : "text-gray-700"} ${
-                  hasEvent ? "border-2 border-blue-500" : ""
-                }`}
+                } ${isWeekend ? "text-[#9C0B35]" : "text-gray-700"}`}
               >
                 {day}
               </div>
             );
           })}
         </div>
-        {/* Loading spinner */}
-        {loading && <div className="text-center text-blue-500">Loading...</div>}
       </div>
     </div>
   );
