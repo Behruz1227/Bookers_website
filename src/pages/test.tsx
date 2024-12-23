@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { PiWarningCircle } from "react-icons/pi";
 import { UniversalModal } from "../components/Modal/UniversalModal";
 import { CheckCircle } from "lucide-react";
-import Buttonn from "@/components/Button";
-import { Textarea } from "@/components/ui/textarea";
+import Button from "@/components/button/Button";
 
 interface OTPInputProps {
   length: number;
@@ -79,7 +78,9 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onChange }) => {
 };
 
 const OTPModal: React.FC<OTPModalProps> = ({ visible, onClose, onVerify }) => {
+  console.log(OTPModal);
   const [phoneNumber, setPhoneNumber] = useState<string>("+99 888 517 11 98");
+  console.log(setPhoneNumber);
   const [otpCode, setOtpCode] = useState<string[]>([]);
   const [verificationStatus, setVerificationStatus] = useState<
     "pending" | "success" | "failed"
@@ -130,9 +131,9 @@ const OTPModal: React.FC<OTPModalProps> = ({ visible, onClose, onVerify }) => {
               Ваша заявка принята. Cтатус вашей записи можно <br /> отслеживать
               в мобильном приложении bookers
             </p>
-            <Buttonn className="text-[#9C0A35] border-[#9C0A35] rounded-full border-[1px] py-3 px-14 font-bold">
+            <Button className="text-[#9C0A35] border-[#9C0A35] rounded-full border-[1px] py-3 px-14 font-bold">
               Скачать приложение
-            </Buttonn>
+            </Button>
           </div>
         )}
         {verificationStatus === "failed" && (
@@ -144,12 +145,12 @@ const OTPModal: React.FC<OTPModalProps> = ({ visible, onClose, onVerify }) => {
             <p className="text-xl">
               Что бы записаться необходимо пройти <br /> регистрацию клиента
             </p>
-            <Buttonn
+            <Button
               className="text-white border-[#9C0A35] bg-[#9C0A35] rounded-full border-[1px] py-3 px-14 font-medium
             "
             >
               Зарегистрироваться
-            </Buttonn>
+            </Button>
           </div>
         )}
       </div>
