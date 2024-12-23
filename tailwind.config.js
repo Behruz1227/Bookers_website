@@ -6,6 +6,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}", // Barcha komponentlar uchun Tailwindni faollashtiring
   ],
   theme: {
+<<<<<<< HEAD
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -55,6 +56,11 @@ module.exports = {
   			}
   		}
   	}
+=======
+    fontFamily: {
+      manrope: ['Manrope', 'sans-serif'],
+    },
+>>>>>>> e6bb0c034aa9ddcdafd60133861da32890cef221
   },
   plugins: [require("tailwindcss-animate")],
 };

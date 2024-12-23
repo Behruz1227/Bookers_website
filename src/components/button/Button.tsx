@@ -1,3 +1,4 @@
+
 import React from "react";
 import classNames from "classnames";
 
@@ -8,7 +9,7 @@ interface ButtonProps {
   className?: string; // Qo‘shimcha uslublar
 }
 
-const Buttonn: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   disabled = false,
@@ -27,4 +28,23 @@ const Buttonn: React.FC<ButtonProps> = ({
   );
 };
 
-export default Buttonn;
+export default Button;
+
+
+///////ishlatish
+
+{/* <Buttonn
+className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+onClick={() => alert("Скачать приложение")}
+>
+button
+</Buttonn> */}
+
+{/* <Buttonn
+className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+onClick={() => alert("Войти / Регистрация")}
+>
+Войти / Регистрация
+</Buttonn> */}
+
+

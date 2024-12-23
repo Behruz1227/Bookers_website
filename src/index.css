@@ -5,6 +5,7 @@
 ::-webkit-scrollbar {
   display: none;
 }
+<<<<<<< HEAD
 
 @layer base {
   :root {
@@ -70,3 +71,7 @@
     @apply bg-background text-foreground;
   }
 }
+=======
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+>>>>>>> e6bb0c034aa9ddcdafd60133861da32890cef221
