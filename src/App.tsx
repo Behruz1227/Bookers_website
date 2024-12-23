@@ -1,4 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import Index from "./pages/test";
+>>>>>>> a24381c8e8f99f97bf16c713f576e0aba46f3fee
 // import TermsOfUse from "./components/MenuBar";
 // import StandartPlan from "./components/Accardion";
 // import CalendarMultiSelect from "./components/Calendar";
@@ -6,6 +10,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/home";
 import Footer from "./components/footer/Footer";
 
+//foooter links
+import Условия from "./page/Условия использования"
 function App() {
   return (
     <>
@@ -17,7 +23,12 @@ function App() {
           <Route path="/calendar" element={<CalendarMultiSelect />} />
           <Route path="/time" element={<TimePicker />} /> */}
          <Footer/>
+          <Route path="/" element={<Home />} />
+          <Route path="/Условия использования" element={<Условия />} />
+          <Route path="/" element={<Home />} />
+          <Footer />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )
