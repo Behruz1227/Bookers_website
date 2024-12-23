@@ -7,6 +7,16 @@ const TimePicker: React.FC = () => {
   const hours = [1, 2, 3];
   const minutes = [5, 10, 15, 30, 45];
 
+  const handleHourChange = (hour: number) => {
+    setSelectedHour(hour);
+    console.log(`Selected Hour: ${hour} ч.`); // Tanlangan soatni konsolga chiqarish
+  };
+
+  const handleMinuteChange = (minute: number) => {
+    setSelectedMinute(minute);
+    console.log(`Selected Minute: ${minute} мин.`); // Tanlangan minutani konsolga chiqarish
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-200">
       <div className="bg-[#B1B1C2] rounded-lg shadow-lg p-6 w-[315px] h-[297px]">
@@ -22,7 +32,7 @@ const TimePicker: React.FC = () => {
                       ? "bg-[#9C0B35] text-white border-[#9C0B35]"
                       : " text-gray-700 border-none"
                   }`}
-                  onClick={() => setSelectedHour(hour)}
+                  onClick={() => handleHourChange(hour)} // Soatni tanlashda konsolga chiqarish
                 >
                   {hour} ч.
                 </div>
@@ -41,7 +51,7 @@ const TimePicker: React.FC = () => {
                       ? "bg-[#9C0B35] text-white border-[#9C0B35]"
                       : " text-gray-700 border-none"
                   }`}
-                  onClick={() => setSelectedMinute(minute)}
+                  onClick={() => handleMinuteChange(minute)} // Minutani tanlashda konsolga chiqarish
                 >
                   {minute} мин.
                 </div>
@@ -51,13 +61,13 @@ const TimePicker: React.FC = () => {
         </div>
 
         {/* Selected Time Display */}
-        {/* <div className="mt-6 text-center">
+        <div className="mt-6 text-center">
           <h3 className="text-lg font-medium text-gray-700">
             {selectedHour !== null && selectedMinute !== null
-              ? `Выбрано: ${selectedHour} ч. ${selectedMinute} мин.`
+              ? `Выбрано время: ${selectedHour} ч. ${selectedMinute} мин.`
               : "Выберите время"}
           </h3>
-        </div> */}
+        </div>
       </div>
     </div>
   );

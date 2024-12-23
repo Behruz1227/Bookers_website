@@ -20,7 +20,7 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold font-manrope">Документация</h2>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">
+            <Link to="/Условия использования" className="text-[15px] font-normal font-manrope">
               Условия использования
             </Link>
             <Link to="/about" className="text-[15px] font-normal font-manrope">
