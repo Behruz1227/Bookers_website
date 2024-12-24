@@ -157,3 +157,23 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
+
+{
+  /* ===========================================Shunday ishlatiladi copy paste qil=============================================== */
+}
+
+// {/* <Select>
+//   <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/3 h-14 text-white rounded-[7px] px-3">
+//     {/* SelectValue komponentida placeholder ni to'g'ri ishlatish */}
+//     <SelectValue placeholder="Парикмахерские услуги" />
+//   </SelectTrigger>
+//   <SelectContent className="text-white bg-gray-800 rounded-md">
+//     <SelectGroup>
+//       {/* SelectItem variantlari */}
+//       <SelectItem value="option0">Парикмахерские услуги</SelectItem>
+//       <SelectItem value="option1">Option 1</SelectItem>
+//       <SelectItem value="option2">Option 2</SelectItem>
+//     </SelectGroup>
+//     <SelectSeparator />
+//   </SelectContent>
+// </Select>; */}

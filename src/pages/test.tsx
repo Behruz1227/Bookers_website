@@ -5,6 +5,7 @@ import { PiWarningCircle } from "react-icons/pi";
 import { UniversalModal } from "../components/Modal/UniversalModal";
 import { CheckCircle } from "lucide-react";
 import Button from "@/components/button/Button";
+import { Input } from "@/components/ui/input";
 
 interface OTPInputProps {
   length: number;
@@ -61,7 +62,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onChange }) => {
   return (
     <div className="flex justify-center gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 lg:mb-12">
       {otp.map((value, index) => (
-        <input
+        <Input
           key={index}
           id={`otp-${index}`}
           value={value}
@@ -161,6 +162,7 @@ const OTPModal: React.FC<OTPModalProps> = ({ visible, onClose, onVerify }) => {
 function Index() {
   return (
     <>
+    <Input type="search"></Input>
     </>
   );
 }
