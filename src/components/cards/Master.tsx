@@ -35,7 +35,7 @@ const Master: React.FC<MasterProps> = ({
     onclickSecondButton,
 }) => {
     return (
-        <div className="bg-[#B9B9C9] rounded-xl text-black p-4 shadow-md">
+        <div className="bg-[#B9B9C9] w-full h-full  rounded-xl text-black p-4 shadow-md">
             <div className="overflow-hidden rounded-xl">
                 <img
                     src={image}
@@ -76,14 +76,24 @@ const Master: React.FC<MasterProps> = ({
                     <span className="text-[#9C0B35]">от {price}</span>
                 </div>
             </div>
-            {firstButtonTitle && <div className="flex gap-5 justify-between mt-4">
-                <Button  onClick={onclickFirstButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-3 text-white hover:bg-red-800">
-                    {firstButtonTitle}
-                </Button>
-                {secondButtonTitle && <Button onClick={onclickSecondButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-2 text-white hover:bg-red-800">
-                    {secondButtonTitle}
-                </Button>}
-            </div>}
+            {firstButtonTitle && (
+  <div className="grid gap-5 justify-items-center mt-4 sm:flex sm:gap-5 sm:justify-between">
+    <Button
+      onClick={onclickFirstButton}
+      className="bg-[#9C0B35] w-auto rounded-full text-sm px-10 py-3 text-white hover:bg-red-800"
+    >
+      {firstButtonTitle}
+    </Button>
+    {secondButtonTitle && (
+      <Button
+        onClick={onclickSecondButton}
+        className="bg-[#9C0B35] w-auto rounded-full text-sm px-10 py-2 text-white hover:bg-red-800"
+      >
+        {secondButtonTitle}
+      </Button>
+    )}
+  </div>
+)}
         </div>
     );
 };

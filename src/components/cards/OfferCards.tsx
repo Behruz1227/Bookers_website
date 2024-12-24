@@ -4,8 +4,8 @@ import Button from '../button/Button';
 
 interface HomeOffersTypes {
     title: string;
-    icon: React.ElementType;
-    data: HomeOffersCardData[];
+    icon?: React.ElementType;
+    data?: HomeOffersCardData[];
     firstButtonTitle?: string;
     secondButtonTitle?: string;
     onclickFirstButton?: () => void;
@@ -23,11 +23,11 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
     return (
         <div className='h-max w-full lg:w-[30%] flex flex-col items-center justify-center p-6 rounded-2xl bg-[#B9B9C9] mb-6 lg:mb-0'>
             <div className='text-center flex flex-col items-center mb-5'>
-                <Icon className='text-[70px] text-[#9C0B35]' />
+               {Icon && <Icon className='text-[70px] text-[#9C0B35]' />}
                 <p className='text-[#9C0B35] font-semibold text-xl px-5 lg:px-10 mt-2'>{title}</p>
             </div>
             <div className='text-left text-[#242424] space-y-4 mb-5'>
-                {data.map((item, index) => (
+                {data && data.map((item, index) => (
                     <div key={index} className='flex items-center'>
                         <FaRegCircleCheck size={24} className='text-[#9C0B35] mr-3' />
                         <p className='flex-1'>{item.text}</p>
