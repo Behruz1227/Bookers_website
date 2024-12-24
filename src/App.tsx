@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import CalendarMultiSelect from "./components/Calendar";
 // import TimePicker from "./components/Time";
 import Services from "./app/services";
+import Index from "./app/request";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Условия использования" element={<Условия />} />
           <Route path="/" element={<Home />} /> */}
           <Route path="/services" element={<Services />} />
+          <Route path="/request" element={<Index />} />
           {/* <Footer /> */}
         </Routes>
         {/* <Footer /> */}

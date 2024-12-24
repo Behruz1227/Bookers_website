@@ -10,13 +10,9 @@ import {
 } from "@/components/ui/select";
 import Button from "@/components/button/Button";
 import Footer from "@/components/footer/Footer";
-import { UniversalModal } from "@/components/Modal/UniversalModal";
-import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 function Services() {
-  const [open, setOpen] = useState(false);
   return (
     <>
       <main className="w-[100%] h-full bg-[#21212E] px-[7%]">
@@ -56,113 +52,10 @@ function Services() {
         </section>
         <section className="flex justify-center py-10 w-full ">
           {/* Cardlar kerak */}
-          <Button
-            onClick={() => setOpen(true)}
-            className="text-white px-12 py-3 bg-[#9C0B35] rounded-full"
-          >
+          <Button className="text-white px-12 py-3 bg-[#9C0B35] rounded-full">
             Показать больше
           </Button>
         </section>
-        <UniversalModal
-          style=" w-[90%] overflow-y-auto max-h-[95vh] rounded-xl"
-          isOpen={open}
-          onClose={() => setOpen(false)}
-        >
-          <div className="w-full h-max flex flex-col gap-5 px-16 pb-16">
-            <div className=" flex justify-center">
-              <h1 className=" font-bold text-4xl">Форма заявки</h1>
-            </div>
-            <div className=" flex justify-between ">
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">
-                  Имя мастера или название салона*
-                </p>
-                <Input className="rounded-[8px] h-16 border-[#4F4F4F] px-3"></Input>
-              </div>
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">
-                  Имя мастера или название салона*
-                </p>
-                <Select>
-                  <SelectTrigger className="placeholder:text-[#4F4F4F] border border-[#4F4F4F] w-full h-16 text-[#4F4F4F] rounded-[7px] px-3">
-                    {/* SelectValue komponentida placeholder ni to'g'ri ishlatish */}
-                    <SelectValue placeholder="Парикмахерские услуги" />
-                  </SelectTrigger>
-                  <SelectContent className="text-[#4F4F4F] bg-gray-500 rounded-md">
-                    <SelectGroup>
-                      {/* SelectItem variantlari */}
-                      <SelectItem value="option0">
-                        Парикмахерские услуги
-                      </SelectItem>
-                      <SelectItem value="option1">Option 1</SelectItem>
-                      <SelectItem value="option2">Option 2</SelectItem>
-                    </SelectGroup>
-                    <SelectSeparator />
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div>
-              <p className="text-[#4F4F4F] mb-2">Название мероприятия*</p>
-              <Textarea
-                rows={5}
-                className="rounded-[8px] border-[#4F4F4F]"
-              ></Textarea>
-            </div>
-            <div className="flex justify-between">
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Дата проведения*</p>
-                <Input
-                  type="date"
-                  className="rounded-[8px] border-[#4F4F4F] h-16"
-                ></Input>
-              </div>
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Дата проведения*</p>
-                <Input
-                  type="time"
-                  className="rounded-[8px] border-[#4F4F4F] h-16"
-                ></Input>
-              </div>
-            </div>
-            <div>
-              <p className="text-[#4F4F4F] mb-2">Описание мероприятия*</p>
-              <Textarea
-                rows={5}
-                className="rounded-[8px] border-[#4F4F4F]"
-              ></Textarea>
-            </div>
-            <div className="flex justify-between">
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Контактная информация*</p>
-                <Input
-                  type="phone"
-                  className="rounded-[8px] border-[#4F4F4F] h-16"
-                ></Input>
-              </div>
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Место проведения*</p>
-                <Input
-                  // type="time"
-                  className="rounded-[8px] border-[#4F4F4F] h-16"
-                ></Input>
-              </div>
-            </div>
-            <div className="flex justify-between">
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Дополнительная информация</p>
-                <Input className="rounded-[8px] border-[#4F4F4F] h-16"></Input>
-              </div>
-              <div className="w-[49%]">
-                <p className="text-[#4F4F4F] mb-2">Стоимость участия</p>
-                <Input className="rounded-[8px] border-[#4F4F4F] h-16"></Input>
-              </div>
-            </div>
-            <Button className="w-52 h-12 mx-auto rounded-full bg-[#9C0B35] text-white">
-              Подать заявку
-            </Button>
-          </div>
-        </UniversalModal>
       </main>
       <Footer></Footer>
     </>
