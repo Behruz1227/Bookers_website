@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/galereya" element={<Gallery />} />
-          <Route path="/menu" element={<TermsOfUse />} />
+          <Route path="/AboutCompany" element={<TermsOfUse />} />
           {/* <Route path="/" element={<TermsOfUse />} />
           <Route path="/accardion" element={<StandartPlan />} />
           <Route path="/calendar" element={<CalendarMultiSelect />} />
