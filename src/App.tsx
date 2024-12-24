@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Services from "./app/services";
 // import Index from "./app/request";
 import Home from "./app/home/index";
-import Index from "./app/request";
+// import Index from "./app/request";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
