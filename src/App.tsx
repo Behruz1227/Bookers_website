@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import StandartPlan from "./components/Accardion";
 // import CalendarMultiSelect from "./components/Calendar";
 // import TimePicker from "./components/Time";
-import Home from "./page/home";
 import Services from "./app/services";
 import Index from "./app/request";
 // import Footer from "./components/footer/Footer";

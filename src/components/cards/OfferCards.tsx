@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import React from 'react';
 import { FaRegCircleCheck } from "react-icons/fa6";
 
@@ -28,25 +27,16 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data }) => {
                 ))}
             </div>
             <div>
-            <Button
-                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
-                onClick={() => alert("Скачать приложение")}
-                >
-                button
-            </Button>
+                <button />Скачать приложение<button />
 
-            <Button
-                className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                onClick={() => alert("Войти / Регистрация")}
-                >
-                Войти / Регистрация
-             </Button>
+                <button />Войти / Регистрация<button />
             </div>
         </div>
     );
 }
 
 export default OfferCards;
+
 
 
 
