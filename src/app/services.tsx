@@ -12,7 +12,7 @@ import Button from "@/components/button/Button";
 import Footer from "@/components/footer/Footer";
 import { Input } from "@/components/ui/input";
 import Master from "@/components/cards/Master";
-import { avatar } from "../assets/img/Rectangle 4171.png";
+import avatar from "../assets/img/Rectangle 4171.png";
 
 function Services() {
   return (
@@ -52,7 +52,7 @@ function Services() {
             className="border-white text-white w-96 placeholder:text-white"
           ></Input>
         </section>
-        <section className="flex justify-center py-10 w-full ">
+        <section className="flex justify-center items-center flex-col py-10 w-full ">
           {/* Cardlar kerak */}
           <div>
             <Master avatar={avatar} name="John Doe" salon="Salon XYZ"></Master>

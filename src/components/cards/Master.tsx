@@ -77,7 +77,7 @@ const Master: React.FC<MasterProps> = ({
                 </div>
             </div>
             {firstButtonTitle && <div className="flex gap-5 justify-between mt-4">
-                <Button onClick={onclickFirstButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-3 text-white hover:bg-red-800">
+                <Button  onClick={onclickFirstButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-3 text-white hover:bg-red-800">
                     {firstButtonTitle}
                 </Button>
                 {secondButtonTitle && <Button onClick={onclickSecondButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-2 text-white hover:bg-red-800">
