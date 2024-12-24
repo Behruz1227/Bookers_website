@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import StandartPlan from "./components/Accardion";
 // import CalendarMultiSelect from "./components/Calendar";
 // import TimePicker from "./components/Time";
-import Services from "./app/services";
+import Services from "../src/components/Accardion";
+import StandartPlan from "../src/components/Accardion";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
@@ -22,7 +23,7 @@ function App() {
           {/* <Route path="/" element={<Home />} />
           <Route path="/Условия использования" element={<Условия />} />
           <Route path="/" element={<Home />} /> */}
-          <Route path="/services" element={<Services />} />
+          <Route path="/acrdion" element={<StandartPlan/>} />
           {/* <Footer /> */}
         </Routes>
         {/* <Footer /> */}
