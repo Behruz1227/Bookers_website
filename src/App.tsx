@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Services from "./app/services";
 // import Index from "./app/request";
 import Home from "./app/home/index";
-import Index from "./app/request";
+import Gallery from "./app/gallery";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
@@ -17,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/Home" element={<Home />} />
+          <Route path="/galereya" element={<Gallery />} />
           {/* <Route path="/" element={<TermsOfUse />} />
           <Route path="/accardion" element={<StandartPlan />} />
           <Route path="/calendar" element={<CalendarMultiSelect />} />
