@@ -16,7 +16,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<Home/>} />
+          <Route path="/Home" element={<Home />} />
           {/* <Route path="/" element={<TermsOfUse />} />
           <Route path="/accardion" element={<StandartPlan />} />
           <Route path="/calendar" element={<CalendarMultiSelect />} />
