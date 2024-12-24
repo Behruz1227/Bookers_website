@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import TimePicker from "./components/Time";
 import Services from "./app/services";
 import Index from "./app/request";
+import Home from "./page/home";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
@@ -21,8 +22,8 @@ function App() {
           <Route path="/time" element={<TimePicker />} /> */}
           {/* <Footer/> */}
           {/* <Route path="/" element={<Home />} />
-          <Route path="/Условия использования" element={<Условия />} />
-          <Route path="/" element={<Home />} /> */}
+          <Route path="/Условия использования" element={<Условия />} />*/}
+          <Route path="/" element={<Home />} /> 
           <Route path="/services" element={<Services />} />
           <Route path="/request" element={<Index />} />
           {/* <Footer /> */}
