@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type MenuItem = {
   key: string;
@@ -6,74 +6,46 @@ type MenuItem = {
   content: string;
 };
 
+const menuData = {
+  items: [
+    {
+      key: "1",
+      label: "Условия использования",
+      content: "Полное описание условий использования.",
+    },
+    {
+      key: "2",
+      label: "Публичное соглашение",
+      content: "Детали публичного соглашения.",
+    },
+    {
+      key: "3",
+      label: "Лицензионное соглашение",
+      content: "Текст лицензионного соглашения.",
+    },
+    {
+      key: "4",
+      label: "Политика конфиденциальности",
+      content: "Политика конфиденциальности сайта.",
+    },
+  ] as MenuItem[],
+};
+
 export default function TermsOfUse() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [content, setContent] = useState<string>("");
-
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        setError(null);
-
-        const response = await new Promise<{ menu: MenuItem[] }>((resolve) =>
-          setTimeout(
-            () =>
-              resolve({
-                menu: [
-                  {
-                    key: "1",
-                    label: "Условия использования",
-                    content: "Полное описание условий использования.",
-                  },
-                  {
-                    key: "2",
-                    label: "Публичное соглашение",
-                    content: "Детали публичного соглашения.",
-                  },
-                  {
-                    key: "3",
-                    label: "Лицензионное соглашение",
-                    content: "Текст лицензионного соглашения.",
-                  },
-                  {
-                    key: "4",
-                    label: "Политика конфиденциальности",
-                    content: "Политика конфиденциальности сайта.",
-                  },
-                ],
-              }),
-            1000
-          )
-        );
-
-        setMenuItems(response.menu);
-        setSelectedKey(response.menu[0]?.key || null);
-        setContent(response.menu[0]?.content || "");
-      } catch (err) {
-        setError(error);
-        console.log(err);
-      }
-    };
-
-    fetchMenuData();
-  }, []);
+  const [selectedKey, setSelectedKey] = useState<string | null>(
+    menuData.items[0]?.key || null
+  );
+  const [content, setContent] = useState<string>(menuData.items[0]?.content || "");
 
   const handleMenuClick = (key: string) => {
-    const selectedItem = menuItems.find((item) => item.key === key);
+    const selectedItem = menuData.items.find((item) => item.key === key);
     if (selectedItem) {
       setSelectedKey(key);
       setContent(selectedItem.content);
     }
   };
 
-  if (error) {
-    return <div className="text-red-500 text-center py-20">{error}</div>;
-  }
-
-  const currentLabel = menuItems.find(
+  const currentLabel = menuData.items.find(
     (item) => item.key === selectedKey
   )?.label;
 
@@ -88,7 +60,7 @@ export default function TermsOfUse() {
           {/* Sidebar Menu */}
           <nav className="mr-6 pe-8 font-medium border-r-2 h-max">
             <ul>
-              {menuItems.map((item) => (
+              {menuData.items.map((item) => (
                 <li key={item.key} className="mb-2">
                   <button
                     onClick={() => handleMenuClick(item.key)}
