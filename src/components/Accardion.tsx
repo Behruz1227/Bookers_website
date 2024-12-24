@@ -69,7 +69,7 @@ const StandartPlan: React.FC = () => {
           </Button>
 
           <Button className="px-6 py-3 text-sm sm:text-base bg-pink-600 text-white border-none rounded-full">
-            Оформить подписку
+            Оформить подпискуgit
           </Button>
         </div>
 
