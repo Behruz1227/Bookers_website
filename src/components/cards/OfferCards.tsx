@@ -5,13 +5,20 @@ interface HomeOffersTypes {
     title: string;
     icon: React.ElementType;
     data: HomeOffersCardData[];
+    firstButtonTitle?: string;
+    secondButtonTitle?: string;
+    onclickFirstButton?: () => void;
+    onclickSecondButton?: () => void;
 }
 
 interface HomeOffersCardData {
     text: string;
 }
 
-const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data }) => {
+const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstButtonTitle,
+    secondButtonTitle,
+    onclickFirstButton,
+    onclickSecondButton, }) => {
     return (
         <div className='h-max w-full lg:w-[30%] flex flex-col items-center justify-center p-6 rounded-2xl bg-[#B9B9C9] mb-6 lg:mb-0'>
             <div className='text-center flex flex-col items-center mb-5'>
@@ -26,11 +33,13 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data }) => {
                     </div>
                 ))}
             </div>
-            <div>
-                <button />Скачать приложение<button />
+            <button className="bg-[#9C0B35] text-white px-6 py-2 rounded-full mt-2" onClick={onclickFirstButton}>
+                {firstButtonTitle}
+            </button>
+            <button className="bg-[#242424] text-white px-6 py-2 rounded-full mt-2" onClick={onclickSecondButton}>
+                {secondButtonTitle}
+            </button>
 
-                <button />Войти / Регистрация<button />
-            </div>
         </div>
     );
 }
