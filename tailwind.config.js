@@ -7,6 +7,17 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		container: {
+			center: true, // Containerni markazlashtiradi
+			padding: '2rem', // Barcha breakpointlarda padding qo'shadi
+			screens: {
+			  sm: '600px',
+			  md: '700px',
+			  lg: '900px',
+			  xl: '1100px',
+			  '2xl': '1400px',
+			},
+		  },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
