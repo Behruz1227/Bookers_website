@@ -15,8 +15,8 @@ const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
 
     return (
-        <div className="">
-            <header className=" text-white relative shadow-md bg-[#2B2B2B]">
+        <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
+            <header className=" text-white relative container mx-auto ">
                 <div className="mx-auto flex justify-between items-center py-6">
                     {/* Logo bo'limi */}
                     <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
@@ -111,7 +111,7 @@ const Header: React.FC = () => {
 
                 {/* Mobil menyu */}
                 <div
-                    className={`lg:hidden bg-[#343434] transition-all duration-500 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+                    className={`lg:hidden  transition-all duration-500 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
                 >
                     <div className="flex flex-col items-center py-4 gap-6">
                         <div>
