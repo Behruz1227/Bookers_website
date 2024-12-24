@@ -24,10 +24,7 @@ function App() {
           {/* <Footer/> */}
           {/* <Route path="/" element={<Home />} />
           <Route path="/Условия использования" element={<Условия />} />*/}
-<<<<<<< Updated upstream
-=======
           {/* <Route path="/" element={<Home />} /> 
->>>>>>> Stashed changes
           <Route path="/services" element={<Services />} />
           <Route path="/request" element={<Index />} /> */}
           {/* <Footer /> */}

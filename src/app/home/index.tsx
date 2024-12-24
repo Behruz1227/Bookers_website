@@ -3,6 +3,8 @@ import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import OfferCards from '@/components/cards/OfferCards';
 import { Gift } from 'lucide-react';
+import { HandCoins } from 'lucide-react';
+import { ServiceCard } from '@/components/cards/ServiceCard';
 
 
 const FirstCard = [
@@ -11,11 +13,27 @@ const FirstCard = [
     { text: 'Большой выбор мастеров' },
     { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
     { text: 'Интеграция с календарем и напоминания' },
-    { text: 'Программы лояльности и бонусы' },
+    { text: 'Программы лояльности и бонусы' },]
+
+const TwoCard = [
+    { text: 'Возможность настраивать услуги по полу, категориям,специализациям и процедурам' },
+    { text: 'Управление графиком работы' },
+    { text: 'Онлайн бронирование' },
+    { text: 'Активация времени для VIP клиентов' },
+    { text: 'ИНастройка приема онлайн оплаты и и предоплаты' },
+    { text: 'Учет расходов мастера' },
+]
+const ThreeCard = [
+    { text: 'Модуль управления клиентами' },
+    { text: 'Модуль мониторинга и аналитики' },
+    { text: 'Модуль планирования и расписания' },
+    { text: 'Модуль маркетинга и продвижения' },
+    { text: 'Модуль управления персоналом' },
+    { text: 'Модуль комьюнити' },
 ];
 function Home() {
   return (
-    <div>
+    <div className='bg-[#111827]'>
       <Header />
       <Hero slides={[ {
         title: "Slide 1",
@@ -34,7 +52,32 @@ function Home() {
         description: "This is the third slide description.",
         image: "/images/slide3.jpg", // Replace with your image path
     },]} />
- <OfferCards  icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' />
+
+
+    <div className='flex justify-around'>
+        <OfferCards  icon={Gift} data={FirstCard}  title='Что предлагает BOOKERS клиентам услуг красоты?' />
+        <OfferCards  icon={HandCoins} data={TwoCard} title='Что предлагает BOOKERS мастерам?' />
+        <OfferCards  icon={Gift} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:'    />
+    </div>
+
+    {/* <div className="bg-gray-900 p-4  pt-[162px]">
+      <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-red-700 text-3xl font-semibold">
+        Выберите категорию услуг красоты в bookers
+      </h2> 
+      <div>
+        <ServiceCard icon={} title={} description={"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat."}></ServiceCard>
+      </div>
+    </div> */}
+
+    <div>
+      <div>
+        <h2 className='pb-[50px]  text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-red-700 text-3xl font-semibold'>Продвигайте свои мастер-классы, тренинги <br /> и обучения на платформах bookers</h2>
+        <p>Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.</p>
+      </div>
+    </div>
+
+     
+  
     </div>
   );
 }
