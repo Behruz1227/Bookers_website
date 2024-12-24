@@ -5,11 +5,9 @@ const Home: React.FC = () => {
     const handleFirstButtonClick = () => {
         alert("First button clicked!");
     };
-
     const handleSecondButtonClick = () => {
         alert("Second button clicked!");
     };
-
     return (
         <div className="container">
             <Master
