@@ -11,8 +11,8 @@ import {
 import Button from "@/components/button/Button";
 import Footer from "@/components/footer/Footer";
 import { Input } from "@/components/ui/input";
-import { StatsCard } from "@/components/cards/stats-card";
-import MasterCard from "@/components/cards/MasterCard";
+import Master from "@/components/cards/Master";
+import { avatar } from "../assets/img/Rectangle 4171.png";
 
 function Services() {
   return (
@@ -55,7 +55,7 @@ function Services() {
         <section className="flex justify-center py-10 w-full ">
           {/* Cardlar kerak */}
           <div>
-            <MasterCard></MasterCard>
+            <Master avatar={avatar} name="John Doe" salon="Salon XYZ"></Master>
           </div>
           <Button className="text-white px-12 py-3 bg-[#9C0B35] rounded-full">
             Показать больше
