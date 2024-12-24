@@ -10,6 +10,7 @@ export default function TermsOfUse() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [content, setContent] = useState<string>("");
+
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -71,11 +72,15 @@ export default function TermsOfUse() {
     return <div className="text-red-500 text-center py-20">{error}</div>;
   }
 
+  const currentLabel = menuItems.find(
+    (item) => item.key === selectedKey
+  )?.label;
+
   return (
     <div className="min-h-screen bg-[#21212E]">
       <div className="px-28 py-10">
         <h1 className="font-bold text-[#FF6B9B] text-5xl mb-14 bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] bg-clip-text text-transparent">
-          Условия использования
+          {currentLabel || "Загрузка..."} {/* H1 sarlavhasi dinamik o'zgardi */}
         </h1>
 
         <div className="flex">
