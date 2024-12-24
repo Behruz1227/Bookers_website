@@ -53,7 +53,8 @@ export default function TermsOfUse() {
         setSelectedKey(response.menu[0]?.key || null);
         setContent(response.menu[0]?.content || "");
       } catch (err) {
-        setError("Failed to load data");
+        setError(error);
+        console.log(err);
       }
     };
 
