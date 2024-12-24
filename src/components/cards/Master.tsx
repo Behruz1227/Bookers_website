@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../button/Button";
 
 interface MasterProps {
     image?: string;
@@ -76,12 +77,12 @@ const Master: React.FC<MasterProps> = ({
                 </div>
             </div>
             {firstButtonTitle && <div className="flex gap-5 justify-between mt-4">
-                <button onClick={onclickFirstButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-3 text-white hover:bg-red-800">
+                <Button onClick={onclickFirstButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-3 text-white hover:bg-red-800">
                     {firstButtonTitle}
-                </button>
-                {secondButtonTitle && <button onClick={onclickSecondButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-2 text-white hover:bg-red-800">
+                </Button>
+                {secondButtonTitle && <Button onClick={onclickSecondButton} className="bg-[#9C0B35] rounded-full text-sm px-10 py-2 text-white hover:bg-red-800">
                     {secondButtonTitle}
-                </button>}
+                </Button>}
             </div>}
         </div>
     );
