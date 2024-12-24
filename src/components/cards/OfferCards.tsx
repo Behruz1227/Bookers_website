@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaRegCircleCheck } from "react-icons/fa6";
+import Button from '../button/Button';
 
 interface HomeOffersTypes {
     title: string;
@@ -34,22 +35,22 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
                 ))}
             </div>
             {firstButtonTitle && (
-                <button
+                <Button
                     className={`px-6 py-2 rounded-full mt-2 ${firstButtonTitle ? "bg-[#9C0B35]" : "bg-[#242424]"
                         } text-white`}
                     onClick={onclickFirstButton}
                 >
                     {firstButtonTitle}
-                </button>
+                </Button>
             )}
 
             {secondButtonTitle && (
-                <button
+                <Button
                     className="bg-[#242424] text-white px-6 py-2 rounded-full mt-2"
                     onClick={onclickSecondButton}
                 >
                     {secondButtonTitle}
-                </button>
+                </Button>
             )}
 
 
