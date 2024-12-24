@@ -11,6 +11,8 @@ import {
 import Button from "@/components/button/Button";
 import Footer from "@/components/footer/Footer";
 import { Input } from "@/components/ui/input";
+import { StatsCard } from "@/components/cards/stats-card";
+import MasterCard from "@/components/cards/MasterCard";
 
 function Services() {
   return (
@@ -52,6 +54,9 @@ function Services() {
         </section>
         <section className="flex justify-center py-10 w-full ">
           {/* Cardlar kerak */}
+          <div>
+            <MasterCard></MasterCard>
+          </div>
           <Button className="text-white px-12 py-3 bg-[#9C0B35] rounded-full">
             Показать больше
           </Button>
