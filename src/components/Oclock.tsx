@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./button/Button";
 
 function Oclock() {
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -19,7 +20,7 @@ function Oclock() {
             <h1 className="text-2xl font-medium mb-6 text-slate-800">Свободное время</h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {timeSlots.map((time) => (
-                    <button
+                    <Button
                         key={time}
                         onClick={() => handleTimeSelect(time)}
                         className={`py-2 px-4 rounded-[5px] text-center transition-colors ${
@@ -29,7 +30,7 @@ function Oclock() {
                         }`}
                     >
                         {time}
-                    </button>
+                    </Button>
                 ))}
             </div>
         </div>

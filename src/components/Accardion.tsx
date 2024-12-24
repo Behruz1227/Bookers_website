@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import db from "../data/db.json";
+import Button from "./button/Button";
 
 const StandartPlan: React.FC = () => {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
@@ -63,12 +64,13 @@ const StandartPlan: React.FC = () => {
 
 
         <div className="flex flex-col sm:flex-row justify-between gap-4 p-6 sm:p-8 border-none bg-[#B9B9C9]">
-          <button className="px-6 py-3 text-sm sm:text-base bg-transparent text-pink-600 border-pink-600 border-[1px] rounded-full">
+          <Button className="px-6 py-3 text-sm sm:text-base bg-transparent text-pink-600 border-pink-600 border-[1px] rounded-full">
             Скачать приложение
-          </button>
-          <button className="px-6 py-3 text-sm sm:text-base bg-pink-600 text-white border-none rounded-full">
-            Оформить подписку
-          </button>
+          </Button>
+
+          <Button className="px-6 py-3 text-sm sm:text-base bg-pink-600 text-white border-none rounded-full">
+            Оформить подпискуgit
+          </Button>
         </div>
 
       </div>

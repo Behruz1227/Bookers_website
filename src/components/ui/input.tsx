@@ -80,7 +80,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           {...props}
         />
         {type === "search" && (
-          <div className="absolute right-2 top-1 flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35]">
+          <div className="absolute right-2 top-1 flex items-center justify-center h-8 w-8 rounded-full bg-[#9C0B35]">
             <SearchIcon className="text-white" />
           </div>
         )}
