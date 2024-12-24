@@ -4,7 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import StandartPlan from "./components/Accardion";
 // import CalendarMultiSelect from "./components/Calendar";
 // import TimePicker from "./components/Time";
-import Services from "./app/services";
+// import Services from "./app/services";
+// import Index from "./app/request";
+import Home from "./app/home/index";
 import Index from "./app/request";
 // import Footer from "./components/footer/Footer";
 
@@ -14,7 +16,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/Home" element={<Home/>} />
           {/* <Route path="/" element={<TermsOfUse />} />
           <Route path="/accardion" element={<StandartPlan />} />
           <Route path="/calendar" element={<CalendarMultiSelect />} />
@@ -22,8 +24,12 @@ function App() {
           {/* <Footer/> */}
           {/* <Route path="/" element={<Home />} />
           <Route path="/Условия использования" element={<Условия />} />*/}
+<<<<<<< Updated upstream
+=======
+          {/* <Route path="/" element={<Home />} /> 
+>>>>>>> Stashed changes
           <Route path="/services" element={<Services />} />
-          <Route path="/request" element={<Index />} />
+          <Route path="/request" element={<Index />} /> */}
           {/* <Footer /> */}
         </Routes>
         {/* <Footer /> */}
