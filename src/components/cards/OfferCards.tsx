@@ -33,31 +33,28 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
                     </div>
                 ))}
             </div>
-            <button className="bg-[#9C0B35] text-white px-6 py-2 rounded-full mt-2" onClick={onclickFirstButton}>
-                {firstButtonTitle}
-            </button>
-            <button className="bg-[#242424] text-white px-6 py-2 rounded-full mt-2" onClick={onclickSecondButton}>
-                {secondButtonTitle}
-            </button>
+            {firstButtonTitle && (
+                <button
+                    className={`px-6 py-2 rounded-full mt-2 ${firstButtonTitle ? "bg-[#9C0B35]" : "bg-[#242424]"
+                        } text-white`}
+                    onClick={onclickFirstButton}
+                >
+                    {firstButtonTitle}
+                </button>
+            )}
+
+            {secondButtonTitle && (
+                <button
+                    className="bg-[#242424] text-white px-6 py-2 rounded-full mt-2"
+                    onClick={onclickSecondButton}
+                >
+                    {secondButtonTitle}
+                </button>
+            )}
+
 
         </div>
     );
 }
 
 export default OfferCards;
-
-
-
-
-//ishlatilishi
-
-// const FirstCard = [
-//     { text: 'Быстрое и удобное бронирование' },
-//     { text: 'Гарантированные онлайн-записи' },
-//     { text: 'Большой выбор мастеров' },
-//     { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
-//     { text: 'Интеграция с календарем и напоминания' },
-//     { text: 'Программы лояльности и бонусы' },
-// ];
-// <OffersCard icon={BsGift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' />
-
