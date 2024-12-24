@@ -1,14 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import Index from "./pages/test";
-// import TermsOfUse from "./components/MenuBar";
-// import StandartPlan from "./components/Accardion";
-// import CalendarMultiSelect from "./components/Calendar";
-// import TimePicker from "./components/Time";
-// import Services from "./app/services";
-// import Index from "./app/request";
 import Home from "./app/home/index";
 import Gallery from "./app/gallery";
-import TermsOfUse from "./components/MenuBar";
+import { AboutCompany } from "./app/AboutCompany/AboutCompany";
 // import Footer from "./components/footer/Footer";
 
 //foooter links
@@ -19,18 +12,7 @@ function App() {
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/galereya" element={<Gallery />} />
-          <Route path="/menu" element={<TermsOfUse />} />
-          {/* <Route path="/" element={<TermsOfUse />} />
-          <Route path="/accardion" element={<StandartPlan />} />
-          <Route path="/calendar" element={<CalendarMultiSelect />} />
-          <Route path="/time" element={<TimePicker />} /> */}
-          {/* <Footer/> */}
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/Условия использования" element={<Условия />} />*/}
-          {/* <Route path="/" element={<Home />} /> 
-          <Route path="/services" element={<Services />} />
-          <Route path="/request" element={<Index />} /> */}
-          {/* <Footer /> */}
+          <Route path="/menu" element={<AboutCompany />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
