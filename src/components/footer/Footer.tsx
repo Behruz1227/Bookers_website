@@ -17,36 +17,36 @@ function Footer() {
     <div className="bg-[#161621] w-full text-[#ffffff]">
       <div className="container mx-auto py-10 px-5">
         {/* top */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10  text-center md:text-left">
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold font-manrope">Документация</h2>
-            <Link to="/Условия использования" className="text-[15px] font-normal font-manrope">
+            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
               Условия использования
             </Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">
+            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
               Публичное соглашение
             </Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">
+            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
               Лицензионным соглашением
             </Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">
+            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
               Политикой конфиденциальности
             </Link>
           </div>
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold font-manrope">Ссылки основных страниц</h2>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Kлиентам</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Mастерам</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Бизнес-партнерство</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Мастерклассы / Обучение/ Тренинги</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Пакеты для мастеров</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">FAQ</Link>
+            <Link to="/" className="text-[15px] font-normal font-manrope">Kлиентам</Link>
+            <Link to="/" className="text-[15px] font-normal font-manrope">Mастерам</Link>
+            <Link to="/" className="text-[15px] font-normal font-manrope">Бизнес-партнерство</Link>
+            <Link to="/" className="text-[15px] font-normal font-manrope">Мастерклассы / Обучение/ Тренинги</Link>
+            <Link to="/Tariffs" className="text-[15px] font-normal font-manrope">Пакеты для мастеров</Link>
+            <Link to="/#" className="text-[15px] font-normal font-manrope">FAQ</Link>
           </div>
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold font-manrope">Вход / Регистрация</h2>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Kлиент</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Mастер</Link>
-            <Link to="/about" className="text-[15px] font-normal font-manrope">Бизнес-партнер</Link>
+            <Link to="/royhatdan-otish" className="text-[15px] font-normal font-manrope">Kлиент</Link>
+            <Link to="/royhatdan-otish" className="text-[15px] font-normal font-manrope">Mастер</Link>
+            <Link to="/" className="text-[15px] font-normal font-manrope">Бизнес-партнер</Link>
           </div>
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold font-manrope">Kонтактные данные</h2>
@@ -84,10 +84,10 @@ function Footer() {
                 Мы в социальных сетях
               </p>
               <div className="flex gap-4">
-                <a href="/"><img src={Facebook} alt="Facebook" /></a>
-                <a href="/"><img src={Instagram} alt="Instagram" /></a>
-                <a href="/"><img src={X} alt="X" /></a>
-                <a href="/"><img src={YouTube} alt="YouTube" /></a>
+                <a href="#"><img src={Facebook} alt="Facebook" /></a>
+                <a href="#"><img src={Instagram} alt="Instagram" /></a>
+                <a href="#"><img src={X} alt="X" /></a>
+                <a href="#"><img src={YouTube} alt="YouTube" /></a>
               </div>
             </div>
             <div className="flex flex-col gap-5 items-center sm:items-start">
@@ -95,8 +95,8 @@ function Footer() {
                 Загрузите наше приложение на
               </p>
               <div className="flex gap-4">
-                <a href="/"><img src={APP} alt="App Store" /></a>
-                <a href="/"><img src={Play} alt="Google Play" /></a>
+                <a href="#"><img src={APP} alt="App Store" /></a>
+                <a href="#"><img src={Play} alt="Google Play" /></a>
               </div>
             </div>
           </div>
