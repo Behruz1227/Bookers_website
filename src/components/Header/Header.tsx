@@ -61,7 +61,7 @@ const Header: React.FC = () => {
 
                     {/* Qo'shimcha navigatsiya */}
                     <div className="hidden lg:flex hover:text-[#9C0B35]">
-                        <Link to="/">Партнерство</Link>
+                        <Link to="/Partnership">Партнерство</Link>
                     </div>
                     <div className="hidden lg:flex">
                         {/* Til tanlash bo'limi */}

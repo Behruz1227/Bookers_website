@@ -48,7 +48,7 @@ export const Bookers: MenuProps['items'] = [
         key: '3',
         label: (
             <div>
-                <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Стандартизация / Безопасность</Link>
+                <Link to="/StandardsSafety" className="hover:text-[#9C0B35] text-[#21212E]">Стандартизация / Безопасность</Link>
             </div>
         ),
 
@@ -57,7 +57,7 @@ export const Bookers: MenuProps['items'] = [
         key: '4',
         label: (
             <div>
-                <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Вакансии</Link>
+                <Link to="/Vacancies" className="hover:text-[#9C0B35] text-[#21212E]">Вакансии</Link>
             </div>
         ),
 
