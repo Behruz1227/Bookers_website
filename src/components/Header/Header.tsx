@@ -98,8 +98,8 @@ const Header: React.FC = () => {
                 <div className=" w-full h-">
                     <div>
                     </div>
-                    <div className="flex items-center gap-28 lg:justify-end justify-center py-6">
-                        <Input type="search" placeholder="Поиск мастеров/салонов/услуг" className="w-[350px] pl-4">
+                    <div className="flex items-center gap-28 lg:justify-end justify-center  py-6">
+                        <Input type="search" placeholder="Поиск мастеров/салонов/услуг" className="w-[350px] px-6 pl-4">
                         </Input>
                         <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
                             <FiPhoneCall className="bg-[#9C0B35] p-2 rounded-full " size={30} />
