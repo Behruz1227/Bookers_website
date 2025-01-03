@@ -44,20 +44,20 @@ function Home() {
           title: "Slide 1",
           description: "This is the first slide description.",
           description2: "Additional information for Slide 1.",
-          image: "/images/slide1.jpg", // Replace with your image path
+          image: "https://picsum.photos/1001",
         },
         {
           title: "Slide 2",
           description: "This is the second slide description.",
           description2: "Additional information for Slide 2.",
-          image: "/images/slide2.jpg", // Replace with your image path
+          image: "https://picsum.photos/1002", 
         },
         {
           title: "Slide 3",
           description: "This is the third slide description.",
-          image: "/images/slide3.jpg", // Replace with your image path
+          image: "https://picsum.photos/1000",
         },]} />
-        <div className='flex justify-around pb-[162px]'>
+        <div className='grid lg:grid-cols-3 gris-cols-1 pb-[162px]'>
           <OfferCards icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' />
           <OfferCards icon={HandCoins} data={TwoCard} title='Что предлагает BOOKERS мастерам?' />
           <OfferCards icon={Gift} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:' />
