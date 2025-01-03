@@ -50,12 +50,12 @@ function Home() {
           title: "Slide 2",
           description: "This is the second slide description.",
           description2: "Additional information for Slide 2.",
-          image: "/images/slide2.jpg", 
+          image: "/images/slide2.jpg", // Replace with your image path
         },
         {
           title: "Slide 3",
           description: "This is the third slide description.",
-          image: "/images/slide3.jpg", 
+          image: "/images/slide3.jpg", // Replace with your image path
         },]} />
         <div className='flex justify-around pb-[162px]'>
           <OfferCards icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' />

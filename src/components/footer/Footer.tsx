@@ -15,74 +15,65 @@ import Play from "../../assets/footer/Group 144.png";
 function Footer() {
   return (
     <div className="bg-[#161621] w-full text-[#ffffff]">
-      <div className=" mx-auto py-10 container ">
-        {/* top */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10  text-center md:text-left">
+      <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+          {/* Documentation */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold font-manrope">Документация</h2>
-            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
-              Условия использования
-            </Link>
-            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
-              Публичное соглашение
-            </Link>
-            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
-              Лицензионным соглашением
-            </Link>
-            <Link to="/conditions" className="text-[15px] font-normal font-manrope">
-              Политикой конфиденциальности
-            </Link>
+            <h2 className="text-[20px] font-bold">Документация</h2>
+            <Link to="/conditions" className="text-[15px]">Условия использования</Link>
+            <Link to="/conditions" className="text-[15px]">Публичное соглашение</Link>
+            <Link to="/conditions" className="text-[15px]">Лицензионным соглашением</Link>
+            <Link to="/conditions" className="text-[15px]">Политикой конфиденциальности</Link>
           </div>
+          {/* Main Links */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold font-manrope">Ссылки основных страниц</h2>
-            <Link to="/Home" className="text-[15px] font-normal font-manrope">Kлиентам</Link>
-            <Link to="/Home" className="text-[15px] font-normal font-manrope">Mастерам</Link>
-            <Link to="/Home" className="text-[15px] font-normal font-manrope">Бизнес-партнерство</Link>
-            <Link to="/Home" className="text-[15px] font-normal font-manrope">Мастерклассы / Обучение/ Тренинги</Link>
-            <Link to="/Tariffs" className="text-[15px] font-normal font-manrope">Пакеты для мастеров</Link>
-            <Link to="/#" className="text-[15px] font-normal font-manrope">FAQ</Link>
+            <h2 className="text-[20px] font-bold">Ссылки основных страниц</h2>
+            <Link to="#app" className="text-[15px]">Kлиентам</Link>
+            <Link to="/Home" className="text-[15px]">Mастерам</Link>
+            <Link to="/Home" className="text-[15px]">Бизнес-партнерство</Link>
+            <Link to="/Home" className="text-[15px]">Мастерклассы / Обучение/ Тренинги</Link>
+            <Link to="/Tariffs" className="text-[15px]">Пакеты для мастеров</Link>
+            <Link to="/#" className="text-[15px]">FAQ</Link>
           </div>
+          {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold font-manrope">Вход / Регистрация</h2>
-            <Link to="/register" className="text-[15px] font-normal font-manrope">Kлиент</Link>
-            <Link to="/register" className="text-[15px] font-normal font-manrope">Mастер</Link>
-            <Link to="/Home" className="text-[15px] font-normal font-manrope">Бизнес-партнер</Link>
+            <h2 className="text-[20px] font-bold">Вход / Регистрация</h2>
+            <Link to="/register" className="text-[15px]">Kлиент</Link>
+            <Link to="/register" className="text-[15px]">Mастер</Link>
+            <Link to="/Home" className="text-[15px]">Бизнес-партнер</Link>
           </div>
-          <div className="flex flex-col gap-5 items-start md:items-start">
-            <h2 className="text-[20px] font-bold font-manrope">Kонтактные данные</h2>
-            <a href="#" className="flex flex-col sm:flex-row items-start gap-3">
+          {/* Contacts */}
+          <div className="flex flex-col gap-5 items-center md:items-start">
+            <h2 className="text-[20px] font-bold">Kонтактные данные</h2>
+            <a href="#" className="flex items-start gap-3">
               <img src={Pin} alt="Pin" />
-              <p className="text-[15px] font-normal font-manrope">
-                Республика Узбекистан, город <br />
-                Ташкент, Алмазарский район СГМ <br />
-                Янги Себзор, Массив Себзар <br />
-                Ц17/18, дом 8, кв. 31
-              </p>
+              <p className="text-[15px]">Республика Узбекистан, город Ташкент</p>
             </a>
-            <a href="#" className="flex flex-col sm:flex-row  gap-3">
+            <a href="#" className="flex items-start gap-3">
               <img src={Phone} alt="Phone" />
-              <p className="text-[15px] font-normal font-manrope">+998 77 308-88-88</p>
+              <p className="text-[15px]">+998 77 308-88-88</p>
             </a>
-            <a href="#" className="flex flex-col sm:flex-row items-center gap-3">
+            <a href="#" className="flex items-start gap-3">
               <img src={Messege} alt="Message" />
-              <p className="text-[15px] font-normal font-manrope">info@welltech.uz</p>
+              <p className="text-[15px]">info@welltech.uz</p>
             </a>
           </div>
         </div>
 
-        {/* main */}
+        {/* Middle Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-10 py-10">
-          <div className="flex justify-center items-center flex-col gap-3">
-            <Link to="Home" className="flex flex-col items-center">
-              <img src={logo} width={60} height={76.67} alt="logo" />
+          {/* Logo */}
+          <div className="flex flex-col items-center">
+            <Link to="/Home">
+              <img src={logo} width={60} alt="Logo" />
               <p>bookers</p>
             </Link>
           </div>
+          {/* Social and App Links */}
           <div className="flex flex-col sm:flex-row gap-10">
-            <div className="flex flex-col gap-5 items-center sm:items-start">
-              <p className="text-[20px] font-extrabold font-manrope text-center sm:text-left">
-                Мы в социальных сетях
-              </p>
+            <div className="flex flex-col items-center sm:items-start gap-5">
+              <p className="text-[20px] font-bold">Мы в социальных сетях</p>
               <div className="flex gap-4">
                 <a href="#"><img src={Facebook} alt="Facebook" /></a>
                 <a href="#"><img src={Instagram} alt="Instagram" /></a>
@@ -90,10 +81,8 @@ function Footer() {
                 <a href="#"><img src={YouTube} alt="YouTube" /></a>
               </div>
             </div>
-            <div className="flex flex-col gap-5 items-center sm:items-start">
-              <p className="text-[20px] font-extrabold font-manrope text-center sm:text-left">
-                Загрузите наше приложение на
-              </p>
+            <div className="flex flex-col items-center sm:items-start gap-5">
+              <p className="text-[20px] font-bold">Загрузите наше приложение на</p>
               <div className="flex gap-4">
                 <a href="#"><img src={APP} alt="App Store" /></a>
                 <a href="#"><img src={Play} alt="Google Play" /></a>
@@ -102,9 +91,9 @@ function Footer() {
           </div>
         </div>
 
-        {/* bottom */}
+        {/* Bottom Section */}
         <div className="text-center pt-5">
-          <p className="text-[15px] font-normal font-manrope">© 2024 Bookers. Все права защищены.</p>
+          <p className="text-[15px]">© 2024 Bookers. Все права защищены.</p>
         </div>
       </div>
     </div>

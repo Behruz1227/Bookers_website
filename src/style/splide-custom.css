@@ -1,0 +1,76 @@
+/* Pagination styling */
+.splide__pagination {
+    bottom: -2rem !important;
+  }
+  
+  .splide__pagination__page {
+    background: #4D4D4D !important;
+    opacity: 0.4;
+    margin: 0 4px;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .splide__pagination__page.is-active {
+    background: #9C0B35 !important;
+    opacity: 1;
+    transform: scale(1) !important;
+  }
+  
+  /* Arrow styling */
+  .custom-arrows {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: transparent !important;
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  
+  .custom-arrow::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .custom-prev {
+    left: -3rem;
+  }
+  
+  .custom-next {
+    right: -3rem;
+  }
+  
+  .custom-prev::before {
+    transform: translate(-25%, -50%) rotate(-135deg);
+  }
+  
+  .custom-next::before {
+    transform: translate(-75%, -50%) rotate(45deg);
+  }
+  
+  .custom-arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  

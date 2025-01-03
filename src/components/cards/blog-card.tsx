@@ -12,7 +12,7 @@ interface CardProps {
 
 export default function Blogcard({ image, date, title, description, id }: CardProps) {
   return (
-    <div className="max-w-sm rounded-2xl bg-gray-100/80 overflow-hidden ">
+    <div className="max-w-sm rounded-2xl bg-[#B9B9C9] overflow-hidden ">
       {/* Image Container */}
       <div className="relative h-[289px] w-full">
         <img
@@ -36,7 +36,7 @@ export default function Blogcard({ image, date, title, description, id }: CardPr
         </h3>
 
         {/* Description */}
-        <p className="font-manrope py-2 font-medium text-[18px] leading-[20px]">
+        <p className="font-manrope py-2 font-medium text-[18px] leading-[27px]">
           {description}
         </p>
 
