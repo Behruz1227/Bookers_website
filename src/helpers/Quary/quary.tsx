@@ -14,7 +14,6 @@ export function useGlobalRequest<T>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     data?: T,
     configType: "DEFAULT" | "IMAGE" = "DEFAULT",
-    isAlert = false
 ): UseGlobalResponse<T> {
     const mutation = useMutation({
         mutationFn: async () => {
