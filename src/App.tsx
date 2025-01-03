@@ -9,7 +9,6 @@ import { Vacancies } from "./app/Vacancies/Vacancies";
 import { Partnership } from "./app/Partnership/Partnership";
 // import Footer from "./components/footer/Footer";
 
-//foooter links
 function App() {
   return (
     <>
