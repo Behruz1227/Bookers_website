@@ -33,8 +33,8 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         ${className}
       `}
     >
-      <div className="flex items-center justify-center gap-8">
-        <div className="text-[#ffffff]">
+      <div className="flex justify-between gap-5 items-center ">
+        <div className="text-[#ffffff] ">
           {icon}
         </div>
         <div className="flex flex-col">

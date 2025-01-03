@@ -6,7 +6,7 @@ export const Bookers: MenuProps['items'] = [
         key: '1',
         label: (
             <div>
-                <Link to="/salom" className="hover:text-[#9C0B35] text-[#21212E]">О продукте</Link>
+                <Link to="/Home" className="hover:text-[#9C0B35] text-[#21212E]">О продукте</Link>
             </div>
         ),
     },
@@ -22,7 +22,7 @@ export const Bookers: MenuProps['items'] = [
                 key: '2-1',
                 label: (
                     <div>
-                        <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Нормативные права</Link>
+                        <Link to="/AboutCompany" className="hover:text-[#9C0B35] text-[#21212E]">Нормативные права</Link>
                     </div>
                 ),
             },

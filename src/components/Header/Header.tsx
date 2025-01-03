@@ -20,8 +20,10 @@ const Header: React.FC = () => {
                 <div className="mx-auto flex justify-between items-center py-6">
                     {/* Logo bo'limi */}
                     <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
+                        <Link to='/Home'>
                         <img className="w-full h-full pb-2" src={logo} alt="logo" />
                         <img src={logoText} alt="logo text" />
+                        </Link>
                     </div>
 
                     {/* Asosiy navigatsiya */}
