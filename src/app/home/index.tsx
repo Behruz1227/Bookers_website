@@ -1,12 +1,16 @@
-import React from 'react';
+
 import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import OfferCards from '@/components/cards/OfferCards';
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
 import { ServiceCard } from '@/components/cards/ServiceCard';
-import { TestimonialCard } from '@/components/cards/TestimonialCard';
+;
 import Footer from '@/components/footer/Footer';
+import HeaderTitles from '@/components/HeadTitle';
+import { useGlobalRequest } from '@/helpers/Quary/quary';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { useEffect } from 'react';
 
 
 const FirstCard = [
@@ -36,6 +40,23 @@ const ThreeCard = [
 
 
 function Home() {
+  const url = "http://207.154.246.120:8080/api/leave/feedback/list"; 
+    const { loading, error, response, globalDataFunc } = useGlobalRequest<any>(
+        url,
+        "GET"
+    );
+
+    useEffect(() => {
+      globalDataFunc()
+  }, [])
+  
+  if (loading) {
+      return <div>Loading...</div>;
+  }
+  
+  if (error) {
+      return <div>Error: {error}</div>;
+  }
   return (
     <>
       <div className='bg-[#111827] w-full px-[7%]'>
@@ -87,6 +108,16 @@ function Home() {
         </div>
         <div>
           {/* <TestimonialCard /> */}
+        </div>
+        <div>
+        <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' size='w-[1156px]' />
+        {response?.data?.body?.length > 0 && response.data.body.map((item , i) => {
+          <>
+          {item.text}
+          </>
+        })
+
+        }
         </div>
       </div>
       <Footer />
