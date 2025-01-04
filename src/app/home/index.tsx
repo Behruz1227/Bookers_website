@@ -5,13 +5,20 @@ import OfferCards from '@/components/cards/OfferCards';
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
 import { ServiceCard } from '@/components/cards/ServiceCard';
-;
 import Footer from '@/components/footer/Footer';
-import HeaderTitles from '@/components/HeadTitle';
 import { useGlobalRequest } from '@/helpers/Quary/quary';
 import { useEffect } from 'react';
 import { TestimonialSlider } from '@/components/splide/TestimonialSlider';
+import { StatsCard } from '@/components/cards/stats-card';
 
+//card icons 
+import { PiGraduationCapDuotone } from "react-icons/pi";
+import { HiUserGroup } from "react-icons/hi";
+import { IoLocationSharp } from "react-icons/io5";
+import { BsCheckCircle } from "react-icons/bs";
+import HeaderTitles from '@/components/HeadTitle';
+import { Line } from '@/components/Line/Line';
+import Button from '@/components/button/Button';
 
 const FirstCard = [
   { text: 'Быстрое и удобное бронирование' },
@@ -40,22 +47,30 @@ const ThreeCard = [
 
 
 function Home() {
-  const url = "http://207.154.246.120:8080/api/leave/feedback/list";
+
   const { loading, error, response, globalDataFunc } = useGlobalRequest(
-    'http://207.154.246.120:8080/api/leave/feedback/list',
-    "GET",
+    'http://207.154.246.120:8080/api/dashboard/website/statistic',
+    'GET',
   );
+
   useEffect(() => {
-    globalDataFunc()
-  }, [])
+    globalDataFunc(); // API so'rovini amalga oshirish
+  }, []);
+
+  // Yuklanayotgan paytdagi holat
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // Xato bo'lgan holat
   if (error) {
     return <div>Error: {error}</div>;
   }
-  console.log("sygeqwjgsjbhqwjbhshjqwsbhqwhjshjwq", response);
+
+  // API ma'lumotlari
+  const data = response?.body || {};
+
+  console.log(response);
 
   return (
     <>
@@ -109,32 +124,45 @@ function Home() {
         <div>
           {/* <TestimonialCard /> */}
         </div>
-        <div>
-          <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' size='w-[1156px]' />
+        <section>
+          <h2 className='text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] '>Ознакомьтесь с отзывами клиентов касательно услуг <br /> мастеров и салонов красоты перед бронированием</h2>
           <TestimonialSlider />
-        </div>
-      </div>
-      <div className="bg-white">
-        {response?.length > 0 && response?.map((item: any, i: number) => 
-          <div className='h-96'>
-            {item.text}
-            <div className='flex justify-between items-center '>
-              jfjfjjf
-              <p className='text-[16px] text-[#B9B9C9]'>asdsad {item.masterName}</p>
-            </div>
+          <div className='flex justify-center '>
+            <Button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+              onClick={() => alert("alert")}>
+              Оставить отзыв
+            </Button>
           </div>
-        )}
-        {/* {response.map((item: any, i: number) => { */}
-          <div className='h-96'>
-            {/* {item.text} */}
-            <div className='flex justify-between items-center '>
-              jfjfjjf
-              <p className='text-[16px] text-[#B9B9C9]'>asdsad</p>
-            </div>
+        </section>
+        <Line />
+        <section>
+          <HeaderTitles text='Статистика bookers' size='' />
+          <div className="flex flex-wrap gap-4 justify-center md:justify-between py-10">
+            <StatsCard
+              icon={<PiGraduationCapDuotone style={{ fontSize: '34px' }} />}
+              count={data.masterCount || 0}
+              title="Количество мастеров"
+            />
+            <StatsCard
+              icon={<HiUserGroup style={{ fontSize: '34px' }} />}
+              count={data.clientCount || 0}
+              title="Количество клиентов"
+            />
+            <StatsCard
+              icon={<IoLocationSharp style={{ fontSize: '34px' }} />}
+              count={data.locationCount || 0}
+              title="Количество локаций"
+            />
+            <StatsCard
+              icon={<BsCheckCircle style={{ fontSize: '34px' }} />}
+              count={data.completedOrderCount || 0}
+              title="Успешных бронирований"
+            />
           </div>
-        {/* })} */}
-        swqswqsjjkhhkhkh
+        </section>
+
       </div>
+
       <Footer />
     </>
   );

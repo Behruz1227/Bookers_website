@@ -1,68 +1,92 @@
-import React from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import React, { useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
 import { TestimonialCard } from '@/components/cards/TestimonialCard';
-
-const testimonials = [
-  {
-    avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "Анастасия Дан",
-    company: "Beauty Wave"
-  },
-  {
-    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "Роман Левел",
-    company: "Tamo Style"
-  },
-  {
-    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "Алекс Сажетт",
-    company: "Lotus SPA"
-  },
-  {
-    avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "Анастасия Дан",
-    company: "Beauty Wave"
-  },
-  {
-    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "Роман Левел",
-    company: "Tamo Style"
-  },
-];
+import { useGlobalRequest } from '@/helpers/Quary/quary';
 
 export const TestimonialSlider: React.FC = () => {
-  const splideOptions = {
-    type: 'slide',
-    perPage: 3,
-    perMove: 1,
-    gap: '1rem',
-    pagination: true,
-    arrows: true,
-    breakpoints: {
-      1024: {
-        perPage: 2,
-      },
-      768: {
-        perPage: 1,
-      }
-    }
+  const { loading, error, response, globalDataFunc } = useGlobalRequest(
+    'http://207.154.246.120:8080/api/leave/feedback/list',
+    'GET',
+  );
+
+  useEffect(() => {
+    globalDataFunc();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  console.log('Response:', response);
+
+  const buttonStyles = {
+    width: '40px',
+    height: '40px',
+    display: 'flex',
+    justifyContent: 'justify-between ',
+    alignItems: 'center',
+    color: '#ffffff',
+    borderRadius: '50%',
+    position: 'absolute' as const,
+    zIndex: 10,
+    opacity: 0.7,
+    transition: 'opacity 0.3s ease',
+    cursor: 'pointer',
   };
 
+  const prevButtonStyles = { ...buttonStyles, left: '8px' }; // Chap tugma
+  const nextButtonStyles = { ...buttonStyles, right: '8px' }; // O‘ng tugma
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20">
-      <Splide options={splideOptions}>
-        {testimonials.map((testimonial, index) => (
-          <SplideSlide key={index}>
-            <TestimonialCard {...testimonial} />
-          </SplideSlide>
-        ))}
-      </Splide>
+    <div className="max-w-7xl mx-auto px-4 py-20 relative">
+      <Swiper
+        modules={[Pagination, Navigation]}
+        spaceBetween={24}
+        slidesPerView={3}
+        pagination={{ clickable: true }}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        breakpoints={{
+          1280: { slidesPerView: 3 },
+          1024: { slidesPerView: 2, spaceBetween: 16 },
+          768: { slidesPerView: 1, spaceBetween: 12 },
+        }}
+      >
+        {response?.body?.length > 0 &&
+          response?.body?.map((testimonial: any, index: number) => (
+            <SwiperSlide key={index}>
+              <TestimonialCard {...testimonial} />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+
+      {/* Tugmalar */}
+      <div
+        className="swiper-button-prev"
+        style={prevButtonStyles}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.7')}
+      >
+      
+      </div>
+      <div
+        className="swiper-button-next"
+        style={nextButtonStyles}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.7')}
+      >
+
+      </div>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
 
-
 interface StatsCardProps {
   icon: React.ReactNode;
   count: number;
@@ -24,7 +23,8 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         cursor-pointer 
         border-none 
         shadow-lg 
-        w-[278px] h-[140px] 
+        w-full sm:w-[278px] 
+        h-[140px] 
         rounded-[20px] 
         text-[#ffffff] 
         flex
@@ -33,15 +33,15 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         ${className}
       `}
     >
-      <div className="flex justify-between gap-5 items-center ">
-        <div className="text-[#ffffff] ">
+      <div className="flex justify-between gap-5 items-center">
+        <div className="text-[#ffffff]">
           {icon}
         </div>
         <div className="flex flex-col">
           <span
             className="text-[40px] font-extrabold text-[#ffffff] leading-[56px] font-manrope"
           >
-            {count.toLocaleString()}
+            {count}
           </span>
           <span
             className="text-[20px] font-normal text-[#ffffff] font-manrope"
@@ -53,12 +53,3 @@ export const StatsCard: React.FC<StatsCardProps> = ({
     </Card>
   );
 };
-
-
-
-//ishlatilishi 
-{/* <StatsCard 
-icon={<BookOutlined style={{ fontSize: '34px' }} />}
-count={500}
-title="Количество мастеров"
-/> */}

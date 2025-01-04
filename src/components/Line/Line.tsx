@@ -9,7 +9,7 @@ interface LineProps {
   }: LineProps) {
     return (
       <div 
-        className={`w-full my-20 md:px-6 lg:px-8 ${className}`}
+        className={`w-full my-10 md:px-6 lg:px-8 ${className}`}
         role="separator"
       >
         <div

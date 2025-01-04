@@ -1,19 +1,20 @@
 import React from 'react';
 import { Card, Avatar } from 'antd';
 import line from "../../assets/cards/Rectangle.svg";
+import { attachment } from '@/helpers/Url';
 
 interface TestimonialCardProps {
-  avatarUrl: string;
-  content: string;
-  author: string;
-  company: string;
+  clientAttachmentId: string;
+  text: string;
+  masterName: string;
+  salonName: string;
 }
 
 export const TestimonialCard: React.FC<TestimonialCardProps> = ({
-  avatarUrl,
-  content,
-  author,
-  company
+  clientAttachmentId,
+  text,
+  masterName,
+  salonName
 }) => {
   return (
     <Card
@@ -23,7 +24,7 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <div className="flex items-start gap-4">
           <div className="relative mb-3">
             <Avatar
-              src={avatarUrl}
+              src={attachment + clientAttachmentId} 
               size={48}
               className="shadow-sm "
             />
@@ -56,7 +57,7 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
             className="mt-2  text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal"
 
           >
-            {content}
+            {text}
           </p>
           <div className="py-5">
             <img src={line} alt="line" />
@@ -66,9 +67,9 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
           className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium "
           style={{ fontFamily: 'Manrope, sans-serif' }}
         >
-          <span className='font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{author}</span>
+          <span className='font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{masterName}</span>
           <span>/</span>
-          <span className='text-[#9C0B35] font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{company}</span>
+          <span className='text-[#9C0B35] font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{salonName}</span>
         </div>
       </div>
     </Card>
