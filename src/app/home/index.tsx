@@ -9,9 +9,8 @@ import { ServiceCard } from '@/components/cards/ServiceCard';
 import Footer from '@/components/footer/Footer';
 import HeaderTitles from '@/components/HeadTitle';
 import { useGlobalRequest } from '@/helpers/Quary/quary';
-import { QueryClient, QueryClientProvider } from "react-query";
 import { useEffect } from 'react';
-import axios from 'axios';
+import { TestimonialSlider } from '@/components/splide/TestimonialSlider';
 
 
 const FirstCard = [
@@ -112,11 +111,19 @@ function Home() {
         </div>
         <div>
           <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' size='w-[1156px]' />
-
+          <TestimonialSlider />
         </div>
       </div>
       <div className="bg-white">
-        {}
+        {response?.length > 0 && response?.map((item: any, i: number) => 
+          <div className='h-96'>
+            {item.text}
+            <div className='flex justify-between items-center '>
+              jfjfjjf
+              <p className='text-[16px] text-[#B9B9C9]'>asdsad {item.masterName}</p>
+            </div>
+          </div>
+        )}
         {/* {response.map((item: any, i: number) => { */}
           <div className='h-96'>
             {/* {item.text} */}
