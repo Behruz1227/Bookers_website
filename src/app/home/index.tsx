@@ -57,7 +57,7 @@ function Home() {
           description: "This is the third slide description.",
           image: "https://picsum.photos/1000",
         },]} />
-        <div className='grid lg:grid-cols-3 gris-cols-1 pb-[162px]'>
+        <div className='grid lg:grid-cols-3 gap-3 gris-cols-1 pb-[162px]'>
           <OfferCards icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' />
           <OfferCards icon={HandCoins} data={TwoCard} title='Что предлагает BOOKERS мастерам?' />
           <OfferCards icon={Gift} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:' />
@@ -66,7 +66,7 @@ function Home() {
           <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-red-700 text-3xl font-semibold">
             Выберите категорию услуг красоты в bookers
           </h2>
-          <div className='grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 '>
+          <div className='grid gap-2 xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 '>
             <ServiceCard link='/galereya' className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
             <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
             <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />

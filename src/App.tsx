@@ -9,11 +9,10 @@ import { Vacancies } from "./app/Vacancies/Vacancies";
 import { Partnership } from "./app/Partnership/Partnership";
 import { getLocationPermission } from "./helpers/ForLocation/Location";
 import { useEffect, useState } from "react";
-// import Footer from "./components/footer/Footer";
 
 function App() {
-  const [location, setLocation] = useState<any>()
-  const [error, setError] = useState<any>()
+  const [location, setLocation] = useState<any>();
+  const [error, setError] = useState<any>();
   const userLocation: any = sessionStorage.getItem("userLocation");
   useEffect(() => {
     if (!userLocation) {
@@ -33,7 +32,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/galereya" element={<Gallery />} />
           <Route path="/AboutCompany" element={<AboutCompany />} />
           <Route path="/conditions" element={<Conditions />} />
