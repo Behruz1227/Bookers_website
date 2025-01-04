@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState<any>()
   const userLocation: any = sessionStorage.getItem("userLocation");
   useEffect(() => {
-    if (!userLocation.lang) {
+    if (!userLocation) {
       getLocationPermission(
         (loc: any) => {
           setLocation(loc);
@@ -42,7 +42,6 @@ function App() {
           <Route path="/Vacancies" element={<Vacancies />} />
           <Route path="/Partnership" element={<Partnership />} />
         </Routes>
-        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );

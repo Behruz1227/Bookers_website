@@ -21,7 +21,6 @@ export const getLocationPermission = (
             onSuccess({ lat, lng });
         },
         (err) => {
-            // Xato xabarini qaytarish
             onError(err.message);
         },
         {
