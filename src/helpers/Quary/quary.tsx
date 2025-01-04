@@ -40,7 +40,7 @@ export function useGlobalRequest<T>(
                 if (res.data.error) {
                     throw new Error(res.data.error.message);
                 }
-                return res.data.data;
+                return res.data.body;
             } catch (error: any) {
                 console.error("Request failed:", error);
                 if (error?.message) throw error?.message;

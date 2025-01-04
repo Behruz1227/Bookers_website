@@ -11,6 +11,7 @@ import HeaderTitles from '@/components/HeadTitle';
 import { useGlobalRequest } from '@/helpers/Quary/quary';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useEffect } from 'react';
+import axios from 'axios';
 
 
 const FirstCard = [
@@ -40,23 +41,23 @@ const ThreeCard = [
 
 
 function Home() {
-  const url = "http://207.154.246.120:8080/api/leave/feedback/list"; 
-    const { loading, error, response, globalDataFunc } = useGlobalRequest<any>(
-        url,
-        "GET"
-    );
-
-    useEffect(() => {
-      globalDataFunc()
+  const url = "http://207.154.246.120:8080/api/leave/feedback/list";
+  const { loading, error, response, globalDataFunc } = useGlobalRequest(
+    'http://207.154.246.120:8080/api/leave/feedback/list',
+    "GET",
+  );
+  useEffect(() => {
+    globalDataFunc()
   }, [])
-  
   if (loading) {
-      return <div>Loading...</div>;
+    return <div>Loading...</div>;
   }
-  
+
   if (error) {
-      return <div>Error: {error}</div>;
+    return <div>Error: {error}</div>;
   }
+  console.log("sygeqwjgsjbhqwjbhshjqwsbhqwhjshjwq", response);
+
   return (
     <>
       <div className='bg-[#111827] w-full px-[7%]'>
@@ -71,7 +72,7 @@ function Home() {
           title: "Slide 2",
           description: "This is the second slide description.",
           description2: "Additional information for Slide 2.",
-          image: "https://picsum.photos/1002", 
+          image: "https://picsum.photos/1002",
         },
         {
           title: "Slide 3",
@@ -110,15 +111,22 @@ function Home() {
           {/* <TestimonialCard /> */}
         </div>
         <div>
-        <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' size='w-[1156px]' />
-        {response?.data?.body?.length > 0 && response.data.body.map((item , i) => {
-          <>
-          {item.text}
-          </>
-        })
+          <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' size='w-[1156px]' />
 
-        }
         </div>
+      </div>
+      <div className="bg-white">
+        {}
+        {/* {response.map((item: any, i: number) => { */}
+          <div className='h-96'>
+            {/* {item.text} */}
+            <div className='flex justify-between items-center '>
+              jfjfjjf
+              <p className='text-[16px] text-[#B9B9C9]'>asdsad</p>
+            </div>
+          </div>
+        {/* })} */}
+        swqswqsjjkhhkhkh
       </div>
       <Footer />
     </>
