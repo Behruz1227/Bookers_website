@@ -6,6 +6,8 @@ import avatar from "../assets/img/Mask group.png";
 import { Galereya } from "@/components/Galereya/Galereya";
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import Footer from "@/components/footer/Footer";
+import { useNavigate } from "react-router-dom";
+import HeaderTitles from "@/components/HeadTitle";
 
 function Gallery() {
   const masters = [
@@ -44,7 +46,7 @@ function Gallery() {
       company: "Some Business",
     },
   ];
-
+  const navigate = useNavigate();
   const galleries = [
     {
       name: "Капсульное наращивание волос",
@@ -103,14 +105,15 @@ function Gallery() {
       <Header />
       <main className="w-full px-[7%] bg-[#21212E] pb-10">
         <section className="w-full py-20 flex flex-col gap-5">
-          <div className="flex items-center w-full gap-20">
-            <Button className="border-white text-white border-[1px] rounded-xl flex items-center py-6 px-12 gap-2">
+          <div className="flex items-start flex-col w-full gap-20">
+            <Button onClick={() => {
+              navigate(-1);
+            }}
+              className="border-white text-white border-[1px] rounded-xl flex items-center py-6 px-12 gap-2">
               <MdArrowBackIos className="text-white" />
               Назад
             </Button>
-            <h1 className="font-bold text-[#FF6B9B] text-5xl bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] bg-clip-text text-transparent">
-              Подробности о мастере
-            </h1>
+            <HeaderTitles text="Подробности о мастере" />
           </div>
           <div className="w-full h-max">
             {masters.slice(0, 6).map((master, index) => (
@@ -145,7 +148,7 @@ function Gallery() {
           <h1 className="text-white text-center font-medium text-3xl">
             Отзывы
           </h1>
-          <div className="w-full flex justify-between mt-10">
+          <div className="w-full grid lg:grid-cols-3 gap-5 mt-10">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard
                 key={index}

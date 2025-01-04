@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState<any>()
   const userLocation: any = sessionStorage.getItem("userLocation");
   useEffect(() => {
-    if (userLocation.lang || userLocation.lat) {
+    if (!userLocation.lang) {
       getLocationPermission(
         (loc: any) => {
           setLocation(loc);

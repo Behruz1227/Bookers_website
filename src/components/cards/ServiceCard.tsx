@@ -1,14 +1,17 @@
+import { Link } from "react-router-dom";
+
 interface ServiceCardProps {
    image: string;
     title: string;
     description: string;
     className?: string;
+    link?: string; 
   }
   
-  export function ServiceCard({ image, title, description, className = '' }: ServiceCardProps) {
+  export function ServiceCard({ image, title, description, className = '', link }: ServiceCardProps) {
     return (
       <div className={`rounded-lg ${className}`}>
-        <div className="bg-gradient-to-b bg-inherit text-white p-6 rounded-lg transition-transform ">
+        <Link to={link} className="bg-gradient-to-b bg-inherit text-white p-6 rounded-lg transition-transform ">
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="w-16 h-16 rounded-full bg-[#9B1B47] flex items-center justify-center">
             <img
@@ -22,7 +25,7 @@ interface ServiceCardProps {
               {description}
             </p>
           </div>
-        </div>
+        </Link>
       </div>
     )
   }

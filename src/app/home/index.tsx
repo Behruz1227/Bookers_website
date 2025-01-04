@@ -67,7 +67,7 @@ function Home() {
             Выберите категорию услуг красоты в bookers
           </h2>
           <div className='grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 '>
-            <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
+            <ServiceCard link='/galereya' className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
             <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
             <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />
             <ServiceCard className='' description='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat. услуги' image='https://picsum.photos/1000' title='Парикмахерские услуги' />

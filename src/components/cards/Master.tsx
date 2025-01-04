@@ -40,7 +40,7 @@ const Master: React.FC<MasterProps> = ({
                 <img
                     src={image}
                     alt="Hair Styling"
-                    className="w-full h-48 object-cover"
+                    className="w-full max-h-[500px] object-cover"
                 />
             </div>
             <div className="flex items-center mt-4">
