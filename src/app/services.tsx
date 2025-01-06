@@ -1,4 +1,5 @@
-import img from "../assets/img/Mask group.png";
+import { useEffect, useState } from "react";
+import HeroImg from "@/assets/img/Mask group (9).png";
 import {
   Select,
   SelectContent,
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import Master from "@/components/cards/Master";
 import avatar from "../assets/img/Rectangle 4171.png";
 import Header from "@/components/Header/Header";
+import { useGlobalRequest } from "@/helpers/Quary/quary";
 
 function Services() {
   const masters = [
@@ -38,7 +40,6 @@ function Services() {
       rating: 5,
     },
     {
-      // image: avatar,
       avatar: avatar,
       name: "Пётр Петров",
       salon: "Парикмахерская",
@@ -79,32 +80,56 @@ function Services() {
     },
   ];
 
+  // State to store categories
+  const [categories, setCategories] = useState<any[]>([]);
+
+  // Fetch categories
+  const { response, globalDataFunc } = useGlobalRequest(
+    "http://207.154.246.120:8080/api/category",
+    "GET"
+  );
+
+  useEffect(() => {
+    globalDataFunc();
+  }, []);
+
+  useEffect(() => {
+    if (response?.body) {
+      setCategories(response.body); 
+    }
+  }, [response]);
+
   return (
     <>
-      <Header></Header>
-      <main className="w-[100%] h-full bg-[#21212E] px-[7%]">
-        <section className="w-full bg-[#21212E] flex flex-col lg:flex-row lg:flex-wrap h-max py-10 lg:justify-between items-center">
-          <div className="pt-10 lg:pt-0 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent [background-image:linear-gradient(to_right,#FB7CA1,#9C0B35)]">
-              Услуги мастеров и <br /> салонов красоты: <br /> Барбершоп
-            </h1>
-          </div>
+      <Header />
+      <main className="bg-[#111827] w-full px-[7%]">
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
+            Услуги мастеров и салонов красоты: Барбершоп
+          </h1>
           <img
-            className="w-full lg:w-1/2 mt-10 lg:mt-0"
-            src={img}
-            alt="Барбершоп"
+            src={HeroImg}
+            alt="img"
+            className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] mt-6 lg:mt-0"
           />
-        </section>
+        </div>
+
         <section className="w-full py-10 flex flex-col md:flex-row justify-start md:gap-5 items-center">
+          
           <Select>
-            <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/2 h-14 text-white rounded-[7px] ">
-              <SelectValue placeholder="Парикмахерские услуги" />
+            <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/2 h-14 text-white rounded-[7px]">
+              <SelectValue placeholder="Выберите категорию" />
             </SelectTrigger>
             <SelectContent className="text-white bg-gray-800 rounded-md">
               <SelectGroup>
-                <SelectItem value="option0">Парикмахерские услуги</SelectItem>
-                <SelectItem value="option1">Option 1</SelectItem>
-                <SelectItem value="option2">Option 2</SelectItem>
+                {categories.map((category) => (
+                  <SelectItem
+                    key={category.id}
+                    value={category.name} 
+                  >
+                    {category.name}
+                  </SelectItem>
+                ))}
               </SelectGroup>
               <SelectSeparator />
             </SelectContent>
@@ -113,9 +138,9 @@ function Services() {
             placeholder="Поиск мастеров/салонов/услуг"
             type="search"
             className="border-white text-white w-96 placeholder:text-white"
-          ></Input>
+          />
         </section>
-        <section className="flex justify-center items-center flex-col py-10 w-full ">
+        <section className="flex justify-center items-center flex-col py-10 w-full">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10">
             {masters.slice(0, 6).map((master, index) => (
               <div key={index}>
@@ -139,7 +164,7 @@ function Services() {
           </Button>
         </section>
       </main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

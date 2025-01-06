@@ -69,7 +69,7 @@ export const Бронирование: MenuProps['items'] = [
         key: '1',
         label: (
             <div>
-                <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Парикмахерские услуги</Link>
+                <Link to="/Services" className="hover:text-[#9C0B35] text-[#21212E]">Парикмахерские услуги</Link>
             </div>
         ),
     },

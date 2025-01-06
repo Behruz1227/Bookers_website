@@ -38,11 +38,11 @@ const Hero: React.FC<HeroProps> = ({ slides }) => {
                               {slide.title}
                             </h1>
 
-                                <p className="text-gray-300 hidden lg:flex lg:text-lg text-base py-10 font-manrope leading-[26px] ">
+                                <p className="text-[#B9B9C9] hidden lg:flex lg:text-lg font-medium text-[26px] py-10 font-manrope leading-[26px] ">
                                     {slide.description}
                                 </p>
                                 {slide.description2 && (
-                                    <p className="text-gray-300 hidden lg:flex lg:text-lg text-base mt-4">
+                                    <p className="text-[#B9B9C9] hidden lg:flex lg:text-lg text-base mt-4">
                                         {slide.description2}
                                     </p>
                                 )}

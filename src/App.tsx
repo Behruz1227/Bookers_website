@@ -9,6 +9,7 @@ import { Vacancies } from "./app/Vacancies/Vacancies";
 import { Partnership } from "./app/Partnership/Partnership";
 import { getLocationPermission } from "./helpers/ForLocation/Location";
 import { useEffect, useState } from "react";
+import Services from "./app/services";
 
 function App() {
   const [location, setLocation] = useState<any>();
@@ -40,6 +41,7 @@ function App() {
           <Route path="/StandardsSafety" element={<StandardsSafety />} />
           <Route path="/Vacancies" element={<Vacancies />} />
           <Route path="/Partnership" element={<Partnership />} />
+          <Route path="/Services" element={<Services />} />
         </Routes>
       </BrowserRouter>
     </>

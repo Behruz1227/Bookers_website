@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Blogcard from '@/components/cards/blog-card';
+//card img
+import cardImg from "@/assets/cards/card.png"
 
 interface BlogPost {
   id: number;
-  image: string;
+  image?: string; // Adjusted to handle missing image
   date: string;
   title: string;
   description: string;
 }
 
-interface BlogCardSliderProps {
-  posts: BlogPost[];
-}
+export const BlogCardSlider: React.FC = () => {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export const BlogCardSlider: React.FC<BlogCardSliderProps> = ({ posts }) => {
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          'http://207.154.246.120:8080/api/masterClass/list?page=0&size=10'
+        );
+        const result = await response.json();
+        const apiData = result.body?.object || [];
+        const formattedPosts = apiData.map((item: any) => ({
+          id: item.id,
+          image: '', // Provide a default or dynamic image field here if available
+          date: item.eventDate,
+          title: item.eventName,
+          description: item.eventDescription,
+        }));
+        setPosts(formattedPosts);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch data');
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   const splideOptions = {
     type: 'loop',
     perPage: 3,
@@ -31,19 +59,27 @@ export const BlogCardSlider: React.FC<BlogCardSliderProps> = ({ posts }) => {
       },
       640: {
         perPage: 1,
-      }
-    }
+      },
+    },
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="w-full py-20">
-      <div className="max-w-7xl mx-auto ">
+      <div className="max-w-7xl mx-auto">
         <Splide options={splideOptions}>
           {posts.map((post) => (
             <SplideSlide key={post.id}>
               <Blogcard
                 id={post.id}
-                image={post.image}
+                image={post.image || cardImg} 
                 date={post.date}
                 title={post.title}
                 description={post.description}
