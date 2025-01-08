@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 export const Language: React.FC = () => {
   const [active, setActive] = useState<string>('uz')
-  console.log(active);
   
   interface Option {
     id: number;

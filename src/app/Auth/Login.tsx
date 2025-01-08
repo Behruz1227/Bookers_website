@@ -12,13 +12,17 @@ import { useCheckCode } from "@/hooks/useCheckCode";
 import useCheckCodeStore from "@/Store/CheckCode";
 import FileInput from "@/components/input/file-input";
 import { useRegisterMaster } from "@/hooks/useRegister";
+import { saveAuthData } from "@/helpers/Token";
+import LoginIndex from "@/Store";
 interface FileState {
     file: File
     name: string
     url: string
 }
-export const Login = (userRole: string, isOpen: boolean) => {
-    const [isModalOpen, setModalOpen] = useState(isOpen);
+export const Login: React.FC = () => {
+    const { loginRole: userRole, loginHolat, setLoginHolat,setLoginRole } = LoginIndex();
+    const [isModalOpen, setModalOpen] = useState(false);
+    
     const [messageApi, contextHolder] = message.useMessage();
     const [role, setRole] = useState<string | null>(userRole);
     const [phoneNumberInput, setPhoneNumberInput] = useState<string>("");
@@ -89,7 +93,9 @@ export const Login = (userRole: string, isOpen: boolean) => {
             setSendCode(null);
             setPhoneCheck(null);
             setLoginCheck(null);
-            toastBtn('Muvaffaqiyatli', 'success');
+            saveAuthData(LoginCheck?.body, LoginCheck?.message);
+            toastBtn('Muvaffaqiyatli', 'success')
+            setLoginHolat(false);
         } else if (CheckCode?.success === true) {
             setStatus('Registration');
             setSendCode(null);
@@ -102,7 +108,10 @@ export const Login = (userRole: string, isOpen: boolean) => {
             toastBtn('Tel Raqam bloklangan', 'error');
         } if (response?.success === true && response?.message === "Muvaffaqiyatli" && status === "Registration") {
             toastBtn('Muvaffaqiyatli', 'success');
+            saveAuthData(response?.body, role ? role : '');
             setStatus('Ok');
+            setLoginHolat(false);
+            setLoginRole(null);
         } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration") {
             toastBtn('Telefon raqami allaqachon mavjud', 'error');
             setRole(null);
@@ -118,6 +127,8 @@ export const Login = (userRole: string, isOpen: boolean) => {
             setFirstName('');
             setLastName('');
             setNickname('');
+            setLoginHolat(false);
+            setLoginRole(null);
         }
     }, [PhoneCheck, SendCode, LoginCheck, CheckCode, response]);
 
@@ -159,6 +170,20 @@ export const Login = (userRole: string, isOpen: boolean) => {
     const handleFileSelect = (fileState: FileState | null) => {
         setImageFile(fileState?.file ? fileState.file : null)
     }
+    
+    useEffect(() => {
+        if (userRole === null) {
+            if (loginHolat === true) {
+                setModalOpen(true);
+                setStatus('Selection');
+            } 
+        }else if (userRole !== null) {
+            if (loginHolat === true) {
+                setModalOpen(true);
+                setStatus('Login');
+            }
+        }
+    }, [loginHolat])
     return (
         <div>
             {contextHolder}
@@ -180,7 +205,8 @@ export const Login = (userRole: string, isOpen: boolean) => {
                     setFirstName('');
                     setLastName('');
                     setNickname('');
-
+                    setLoginHolat(false);
+                    setLoginRole(null);
                 }}
                 style="max-h-[90vh] w-[90%]"
             >
@@ -352,7 +378,7 @@ export const Login = (userRole: string, isOpen: boolean) => {
                                         registerMaster();
                                     } else if (PhoneCheck === 'login' && phoneNumberInput.length === 13 && firstName.length > 2 && lastName.length > 3 && nickname.length > 2) {
                                         registerMaster();
-                                    }else{
+                                    } else {
                                         toastBtn("To'liq ma'lumotlarni to'ldiring", 'error');
                                     }
                                 } else {

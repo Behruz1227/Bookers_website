@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import logo from '../../assets/img/Layer_1.png';
 import logoText from '../../assets/img/Мои записи.svg';
 import { Language } from "./Language";
@@ -9,20 +9,22 @@ import { Link } from "react-router-dom";
 import Button from "../button/Button";
 import { Input } from "../ui/input";
 import { FiPhoneCall } from "react-icons/fi";
+import LoginIndex from "@/Store";
+
 
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
-
+    const { setLoginHolat } = LoginIndex();
     return (
         <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
-            <header className=" text-white relative container mx-auto ">
+            <header className=" text-white relative ">
                 <div className="mx-auto flex justify-between items-center py-6">
                     {/* Logo bo'limi */}
                     <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
                         <Link to='/'>
-                        <img className="w-full h-full pb-2" src={logo} alt="logo" />
-                        <img src={logoText} alt="logo text" />
+                            <img className="w-full h-full pb-2" src={logo} alt="logo" />
+                            <img src={logoText} alt="logo text" />
                         </Link>
                     </div>
 
@@ -72,14 +74,12 @@ const Header: React.FC = () => {
 
                     {/* Login/Register tugmasi */}
                     <div className="absolute lg:relative lg:right-0 right-16">
-                        <Button
+                        <Button onClick={() => setLoginHolat(true)}
                             className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
                         >
-                            <Link className="hover:opacity-90" to="/">Войти </Link>/
-                            <Link className="hover:opacity-90" to="/"> Регистрация</Link>
+                            <span className="hover:opacity-90">Войти / Регистрация</span>
                         </Button>
                     </div>
-
                     {/* Mobil menyu tugmasi */}
                     <button
                         className="lg:hidden focus:outline-none"

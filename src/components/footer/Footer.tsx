@@ -11,8 +11,10 @@ import X from "../../assets/footer/X.png";
 import YouTube from "../../assets/footer/youtube.png";
 import APP from "../../assets/footer/Group (8).png";
 import Play from "../../assets/footer/Group 144.png";
+import LoginIndex from "@/Store";
 
 function Footer() {
+  const { setLoginHolat, setLoginRole } = LoginIndex();
   return (
     <div className="bg-[#161621] w-full text-[#ffffff]">
       <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -39,8 +41,14 @@ function Footer() {
           {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">Вход / Регистрация</h2>
-            <Link to="/register" className="text-[15px]">Kлиент</Link>
-            <Link to="/register" className="text-[15px]">Mастер</Link>
+            <p onClick={() => {
+              setLoginHolat(true);
+              setLoginRole("CLIENT");
+            }} className="text-[15px]">Kлиент</p>
+            <p onClick={() => {
+              setLoginHolat(true);
+              setLoginRole("MASTER");
+            }} className="text-[15px]">Mастер</p>
             <Link to="/Home" className="text-[15px]">Бизнес-партнер</Link>
           </div>
           {/* Contacts */}
