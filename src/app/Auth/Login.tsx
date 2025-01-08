@@ -20,7 +20,7 @@ interface FileState {
     url: string
 }
 export const Login: React.FC = () => {
-    const { loginRole: userRole, loginHolat, setLoginHolat,setLoginRole } = LoginIndex();
+    const { loginRole: userRole, loginHolat, lang: userLang, setLoginHolat,setLoginRole } = LoginIndex();
     const [isModalOpen, setModalOpen] = useState(false);
     
     const [messageApi, contextHolder] = message.useMessage();
@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [nickname, setNickname] = useState("");
-    const [lang, setLang] = useState("uz");
+    const [lang, setLang] = useState(userLang);
     const [imageFile, setImageFile] = useState<File | null>(null);
 
     const toastBtn = (text: string, type: "success" | "error") => {
@@ -208,9 +208,9 @@ export const Login: React.FC = () => {
                     setLoginHolat(false);
                     setLoginRole(null);
                 }}
-                style="max-h-[90vh] w-[90%]"
+                style="max-h-[90vh] w-[90%] "
             >
-                <div className="w-full grid place-items-center my-5">
+                <div className="w-full grid place-items-center my-5 mb-16">
                     {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
                     <h1 className="text-3xl font-semibold my-5">
                         {status === 'Login' && "Регистрация / Вход"}
@@ -261,7 +261,7 @@ export const Login: React.FC = () => {
                                 {phoneNumberInput.length === 13 ? `${phoneNumberInput}` : '+998 (__) ___ __ __'}
                             </h2>
                             <p className='text-slate-600 mb-6'>Мы отправили вам SMS с кодом подтверждения.</p>
-                            <div className="w-[60%] lg:w-[50%] otp-input">
+                            <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                 <Input.OTP
                                     length={4}
                                     onInput={(value) => setOtpCodeInput(value.join(''))}
@@ -280,13 +280,13 @@ export const Login: React.FC = () => {
                         </div>
                     )}
                     {status === 'Ok' && (
-                        <div className='text-center'>
+                        <div className='text-center p-[10%]'>
                             <div className='text-xl text-slate-600 text-center'>
                                 <p className='mb-5 '>Личный кабинет веб сайта находится на стадии разработки</p>
                                 <p>Полный доступ к личному кабинету</p>
                                 <p>Вы можете получить в мобильном приложении Bookers</p>
                             </div>
-                            <div className='text-4xl font-semibold my-10 text-center'>
+                            <div className='text-4xl font-semibold my-4 text-center'>
                                 <p>Мы уведомим вас о готовности веб кабинета</p>
                                 <p>в ближайшее время</p>
                             </div>
@@ -354,7 +354,7 @@ export const Login: React.FC = () => {
                         )
                     }
                     <button
-                        className={`${status !== 'Ok' ? 'mt-4 bg-[#9C0B35] text-white py-4 hover:bg-[#ae2e50] px-16 rounded-full' : ''} 
+                        className={`${status !== 'Ok' ? ' bg-[#9C0B35] text-white py-4 hover:bg-[#ae2e50] px-16 rounded-full' : ''} 
                ${loading || loadingSendCode || loadingLogin || loadingCheckCode || registerMasterLoading ? 'opacity-50 cursor-not-allowed' : ''} 
                ${status === 'Ok' ? 'mt-4 text-[#9C0B35] border border-[#9C0B35] py-4 hover:bg-[#88797d] px-16 rounded-full' : ''}`}
                         onClick={() => {

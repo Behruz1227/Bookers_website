@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import LoginIndex from '@/Store';
+import React, { useEffect, useState } from 'react'
 
 export const Language: React.FC = () => {
   const [active, setActive] = useState<string>('uz')
   
+  const { setLoginLang } = LoginIndex();
+  useEffect(() => {
+    setLoginLang(active)
+    console.log(active);
+    
+  }, [active])
   interface Option {
     id: number;
     value: string;
@@ -36,6 +43,7 @@ export const Language: React.FC = () => {
           name="language"
           aria-label="Language"
           className="appearance-none outline-none bg-[#21212E] text-white p-3 pl-5 pr-10 border border-white rounded-[10px] cursor-pointer"
+          onChange={(e) => setActive(e.target.value)}
         >
           {language.map((item, index) => (
             <option
