@@ -13,7 +13,7 @@ export const UniversalModal: React.FC<UniversalModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[500] flex items-center justify-center bg-slate-900 bg-opacity-50 transition duration-300">
-      <div className={`bg-white rounded-md overflow-y-auto ${style}`}>
+      <div className={`bg-[#B9B9C9] rounded-2xl overflow-y-auto ${style}`}>
         {/* Yopish tugmasi */}
         <button
           type="button"

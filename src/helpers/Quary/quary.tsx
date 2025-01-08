@@ -16,6 +16,7 @@ export function useGlobalRequest<T>(
     configType: "DEFAULT" | "IMAGE" = "DEFAULT",
 ): UseGlobalResponse<T> {
     const mutation = useMutation({
+
         mutationFn: async () => {
             try {
                 const config =

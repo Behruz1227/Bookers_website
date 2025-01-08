@@ -6,3 +6,10 @@
     display: none;
 }
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
+
+.otp-input > * input {
+   padding: 5% !important;
+   width: 100% !important;
+   font-size: 20px !important;
+  }
+  /* Checkboxni xususiylashtirish */
