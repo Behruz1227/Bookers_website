@@ -16,8 +16,8 @@ function Oclock() {
     };
 
     return (
-        <div className="p-6 bg-slate-200 rounded-xl max-w-lg mx-auto">
-            <h1 className="text-2xl font-medium mb-6 text-slate-800">Свободное время</h1>
+        <div className=" w-full  rounded-xl max-w-lg mx-auto">
+            
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {timeSlots.map((time) => (
                     <Button

@@ -58,8 +58,7 @@ export function useGlobalRequest<T>(
 
 export const getConfig = async () => {
     try {
-        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk4OTcwNzAzODM5LW1hc3RlciIsImlhdCI6MTczNjE2MjU5NSwiZXhwIjoxNzM4NzU0NTk1fQ.U0DCls7BF2VKmCgQJxPNzgxZQztsrlW_pNzPUiU5wJnP-sJaPMYhc0-HcyxahStC6p8F3GU3gtz81aUJAYZXFQ'
-        // await sessionStorage.getItem("token");
+        const token = await sessionStorage.getItem("token");
         if (token) {
             return {
                 headers: {

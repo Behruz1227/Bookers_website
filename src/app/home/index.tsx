@@ -142,33 +142,34 @@ function Home() {
         <section>
           <HeaderTitles text='Выберите категорию услуг красоты в bookers' />
           <div className='py-10'>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((item: any) => (
-              <ServiceCard
-                key={item.id}
-                className='px-10'
-                attachmentId={item.attachmentId}
-                title={item.name}
-                description="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat."
-              />
-            ))}
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categories.map((item: any) => (
+                <ServiceCard
+                  key={item.id}
+                  className='px-10'
+                  attachmentId={item.attachmentId}
+                  title={item.name}
+                  description="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat."
+                  id={item.id}
+                />
+              ))}
+            </div>
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-          <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
-            <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
-              Для создания объявления и обеспечения видимости <br className="hidden md:block" />
-              мероприятия в мобильном приложении и на сайте BOOKERS <br className="hidden md:block" />
-              отправьте заявку.
-            </h2>
-            <Button
-              className="w-full md:w-[340px] h-[50px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] md:text-[18px] leading-[25px] md:leading-[30px] hover:opacity-90"
-              onClick={() => alert("bookers")}
-            >
-              Отправить заявку
-            </Button>
+            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
+              <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
+                Для создания объявления и обеспечения видимости <br className="hidden md:block" />
+                мероприятия в мобильном приложении и на сайте BOOKERS <br className="hidden md:block" />
+                отправьте заявку.
+              </h2>
+              <Button
+                className="w-full md:w-[340px] h-[50px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] md:text-[18px] leading-[25px] md:leading-[30px] hover:opacity-90"
+                onClick={() => alert("bookers")}
+              >
+                Отправить заявку
+              </Button>
+            </div>
           </div>
-        </div>
         </section>
         <Line />
         <section>
@@ -176,7 +177,7 @@ function Home() {
             <HeaderTitles text="Продвигайте свои мастер-классы, тренинги и обучения на платформах bookers" />
           </div>
           <div className='w-full md:w-[60%]'>
-          <Subtitle text='Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.' />
+            <Subtitle text='Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.' />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>Какую пользу вы получите с участием в программе <br /> “Мастер классы”</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 py-5">
@@ -189,7 +190,7 @@ function Home() {
         </section>
         <section>
           <h2 className='text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35]'>
-          Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием
+            Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием
           </h2>
           <TestimonialSlider />
           <div className='flex justify-center'>
@@ -229,7 +230,7 @@ function Home() {
         </section>
         <Line />
         <section>
-          <HeaderTitles text='Бизнес-партнеры мобильного приложения bookers'/>
+          <HeaderTitles text='Бизнес-партнеры мобильного приложения bookers' />
           <LogoSlider logos={Logo} />
         </section>
         <section>

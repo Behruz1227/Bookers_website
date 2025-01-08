@@ -1,14 +1,12 @@
-import { useGlobalRequest } from "@/helpers/Quary/quary";
-import { attachment } from "@/helpers/Url";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { attachment } from '@/helpers/Url';
+import { Link } from 'react-router-dom';
 
 interface ServiceCardProps {
   attachmentId: string;
   title: string;
   description: string;
   className?: string;
-  link?: string;
+  id: string; // Add id prop for navigation
 }
 
 export function ServiceCard({
@@ -16,13 +14,13 @@ export function ServiceCard({
   title,
   description,
   className = "",
-  link,
+  id,
 }: ServiceCardProps) {
   return (
     <div className={`rounded-lg ${className}`}>
       <Link
-        to={link || "#"}
-        className="bg-gradient-to-b bg-inherit text-white p-6 rounded-lg transition-transform "
+        to={`/Services/${id}`}
+        className="bg-gradient-to-b bg-inherit text-white p-6 rounded-lg transition-transform block hover:scale-105"
       >
         <div className="flex flex-col items-center text-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-[#9B1B47] flex items-center justify-center">
@@ -40,41 +38,6 @@ export function ServiceCard({
           </p>
         </div>
       </Link>
-    </div>
-  );
-}
-
-// Dinamik render qilish uchun asosiy komponent
-export function ServicesList() {
-  const { loading, error, response, globalDataFunc } = useGlobalRequest(
-    "http://207.154.246.120:8080/api/category",
-    "GET"
-  );
-
-  useEffect(() => {
-    globalDataFunc();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  const data = response?.body || [];
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {data.map((item: any) => (
-        <ServiceCard
-          key={item.id}
-          attachmentId={item.attachmentId}
-          title={item.name}
-          description="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat."
-        />
-      ))}
     </div>
   );
 }
