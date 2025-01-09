@@ -8,8 +8,6 @@ export function useLogin( phoneNumber : string, role : string | null, code: stri
     const apiUrl = `http://207.154.246.120:8080/api/auth/login?ROLE=${role}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl,"POST", data);
     const { setLoginCheck, setError, setLoading } = useLoginCheckStore();
-
-
     const LoginBtn = async () => {
         try {
             setLoading(true); // Yuklanish holatini o‘rnatish

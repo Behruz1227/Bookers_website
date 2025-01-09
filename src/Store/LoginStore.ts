@@ -1,6 +1,4 @@
 import { create } from 'zustand';
-
-// Store interfeysi
 interface LoginCheckStore {
     LoginCheck: any;
     error: any;
@@ -9,8 +7,6 @@ interface LoginCheckStore {
     setError: (error: any) => void;
     setLoading: (loading: boolean) => void;
 }
-
-// Zustand store
 const useLoginCheckStore = create<LoginCheckStore>((set) => ({
     LoginCheck: null,
     error: null,

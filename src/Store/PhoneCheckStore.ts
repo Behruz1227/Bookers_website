@@ -3,7 +3,7 @@ import { create } from 'zustand';
 // Store interfeysi
 interface PhoneCheckStore {
     PhoneCheck: any;
-    error: any ;
+    error: any;
     loading: boolean;
     setPhoneCheck: (PhoneCheck: any) => void;
     setError: (error: any) => void;

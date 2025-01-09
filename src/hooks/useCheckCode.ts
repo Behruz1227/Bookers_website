@@ -1,8 +1,5 @@
-
 import { useGlobalRequest } from "@/helpers/Quary/quary";
-import useCheckCodeStore from "@/Store/CheckCode";
-
-
+import useCheckCodeStore from "@/Store/CheckCodeStore";
 export function useCheckCode(phoneNumber: string, code: string|null ) {
     const data = {
         "phoneNumber": `${phoneNumber}`

@@ -1,6 +1,4 @@
 import { create } from 'zustand';
-
-// Store interfeysi
 interface CheckCodeStore {
     CheckCode: any;
     error: any;
@@ -9,8 +7,6 @@ interface CheckCodeStore {
     setError: (error: any) => void;
     setLoading: (loading: boolean) => void;
 }
-
-// Zustand store
 const useCheckCodeStore = create<CheckCodeStore>((set) => ({
     CheckCode: null,
     error: null,

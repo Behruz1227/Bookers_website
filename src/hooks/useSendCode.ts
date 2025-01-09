@@ -1,7 +1,5 @@
-
 import { useGlobalRequest } from "@/helpers/Quary/quary";
-
-import useSendCodeStore from "@/Store/SendCode";
+import useSendCodeStore from "@/Store/SendCodeStore";
 export function useSendCode(phoneNumber: string, role: string | null, purpose: boolean | null) {
     const data = {
         "phoneNumber": `${phoneNumber}`
@@ -9,7 +7,6 @@ export function useSendCode(phoneNumber: string, role: string | null, purpose: b
     const apiUrl = `http://207.154.246.120:8080/api/auth/sendCode?purpose=${purpose}&ROLE=${role}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setSendCode, setError, setLoading } = useSendCodeStore();
-
     const SendCodeBtn = async () => {
         try {
             setLoading(true); // Yuklanish holatini o‘rnatish
@@ -23,7 +20,6 @@ export function useSendCode(phoneNumber: string, role: string | null, purpose: b
             setLoading(false); // Yuklanish tugaganini belgilash
         }
     };
-
     return {
         SendCodeBtn
     };

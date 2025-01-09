@@ -5,11 +5,11 @@ import { message, Select, Space, Input } from "antd";
 import { useEffect, useState } from "react";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import usePhoneCheckStore from "@/Store/PhoneCheckStore";
-import useSendCodeStore from "@/Store/SendCode";
+import useSendCodeStore from "@/Store/SendCodeStore";
 import { useLogin } from "@/hooks/useLogin";
 import useLoginCheckStore from "@/Store/LoginStore";
 import { useCheckCode } from "@/hooks/useCheckCode";
-import useCheckCodeStore from "@/Store/CheckCode";
+import useCheckCodeStore from "@/Store/CheckCodeStore";
 import FileInput from "@/components/input/file-input";
 import { useRegisterMaster } from "@/hooks/useRegister";
 import { saveAuthData } from "@/helpers/Token";
@@ -20,9 +20,9 @@ interface FileState {
     url: string
 }
 export const Login: React.FC = () => {
-    const { loginRole: userRole, loginHolat, lang: userLang, setLoginHolat,setLoginRole } = LoginIndex();
+    const { loginRole: userRole, loginHolat, lang: userLang, setLoginHolat, setLoginRole } = LoginIndex();
     const [isModalOpen, setModalOpen] = useState(false);
-    
+
     const [messageApi, contextHolder] = message.useMessage();
     const [role, setRole] = useState<string | null>(userRole);
     const [phoneNumberInput, setPhoneNumberInput] = useState<string>("");
@@ -49,7 +49,7 @@ export const Login: React.FC = () => {
     const { setSendCode, SendCode, loading: loadingSendCode } = useSendCodeStore();
 
     const { LoginBtn } = useLogin(phoneNumberInput, role, otpCodeInput);
-    const { setLoginCheck, LoginCheck, loading: loadingLogin, error: loginError } = useLoginCheckStore();
+    const { setLoginCheck, LoginCheck, loading: loadingLogin, } = useLoginCheckStore();
 
     const { CheckCodeBtn } = useCheckCode(phoneNumberInput, otpCodeInput);
     const { setCheckCode, CheckCode, loading: loadingCheckCode } = useCheckCodeStore();
@@ -68,38 +68,29 @@ export const Login: React.FC = () => {
             toastBtn('Please enter a valid OTP code', 'error');
             return;
         }
-        if (PhoneCheck === 'register') {
+        if (PhoneCheck === null) {
             CheckCodeBtn();
-        } else {
+        } else if (PhoneCheck === true) {
             LoginBtn();
         }
     };
     useEffect(() => {
-        if (PhoneCheck?.success === false && PhoneCheck?.status === 'OK') {
+        if (PhoneCheck?.message === "Telefon raqami allaqachon mavjud" && PhoneCheck?.status === 'OK' && status === 'Login') {
             SendCodeBtn();
-            setPhoneCheck('login');
-        } else if (PhoneCheck?.success === true && PhoneCheck?.status === 'OK') {
+            setPhoneCheck(true);
+        } else if (PhoneCheck?.message === "Phone number bazada topilmadi." && PhoneCheck?.status === 'OK' && status === 'Login') {
             SendCodeBtn();
-            setPhoneCheck('register');
-            setFirstName('');
-            setLastName('');
-            setNickname('');
-        } else if (SendCode?.success === true) {
+            setPhoneCheck(null);
+        } else if (SendCode?.success === true && SendCode?.message === "Success" && status === 'Login') {
             setStatus('OTPcode');
             toastBtn(SendCode?.body, 'success');
-            setSendCode(null);
-        } else if (LoginCheck?.success === true && LoginCheck?.status === "CREATED") {
+            setSendCode(null)
+        } else if (LoginCheck?.success === true && status === 'OTPcode') {
             setStatus('Ok');
-            setSendCode(null);
-            setPhoneCheck(null);
-            setLoginCheck(null);
             saveAuthData(LoginCheck?.body, LoginCheck?.message);
             toastBtn('Muvaffaqiyatli', 'success')
-            setLoginHolat(false);
-        } else if (CheckCode?.success === true) {
+        } else if (CheckCode?.body === phoneNumberInput && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode') {
             setStatus('Registration');
-            setSendCode(null);
-            setCheckCode(null);
         } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && LoginCheck?.message === "Kod mos emas") {
             toastBtn('Kod mos emas', 'error');
         } else if (CheckCode?.success === false && CheckCode?.status === "OK" && CheckCode?.message === "Kod mos emas") {
@@ -110,32 +101,14 @@ export const Login: React.FC = () => {
             toastBtn('Muvaffaqiyatli', 'success');
             saveAuthData(response?.body, role ? role : '');
             setStatus('Ok');
-            setLoginHolat(false);
-            setLoginRole(null);
         } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration") {
             toastBtn('Telefon raqami allaqachon mavjud', 'error');
-            setRole(null);
-            setStatus(null);
-            setModalOpen(false);
-            setPhoneNumberInput('');
-            setPhoneCheck(null);
-            setLoginCheck(null);
-            setSendCode(null);
-            setCheckCode(null);
-            setOtpCodeInput('');
-            setPhoneNumber('+998');
-            setFirstName('');
-            setLastName('');
-            setNickname('');
-            setLoginHolat(false);
-            setLoginRole(null);
         }
     }, [PhoneCheck, SendCode, LoginCheck, CheckCode, response]);
 
     const handleChange = (value: string) => {
         setRole(value);
     };
-
 
     const [phoneNumber, setPhoneNumber] = useState<string>("+998");
 
@@ -170,20 +143,34 @@ export const Login: React.FC = () => {
     const handleFileSelect = (fileState: FileState | null) => {
         setImageFile(fileState?.file ? fileState.file : null)
     }
-    
     useEffect(() => {
         if (userRole === null) {
             if (loginHolat === true) {
                 setModalOpen(true);
                 setStatus('Selection');
-            } 
-        }else if (userRole !== null) {
+            }
+        } else if (userRole !== null) {
             if (loginHolat === true) {
                 setModalOpen(true);
                 setStatus('Login');
             }
         }
     }, [loginHolat])
+
+    function RegisterBtn() {
+        if (checkBox) {
+            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length === 2 && lastName.length === 2 && nickname.length === 2) {
+                registerMaster();
+            } else if (role === 'CLIENT'&&  phoneNumberInput.length === 13 && firstName.length === 2 && lastName.length === 2) {
+                registerMaster();
+            }else {
+                toastBtn('malumotlarni to\'ldiring', 'error');
+            }
+        } else {
+            toastBtn('shartlarini tasdiqlang', 'error');
+            return;
+        }
+    }
     return (
         <div>
             {contextHolder}
@@ -264,11 +251,15 @@ export const Login: React.FC = () => {
                             <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                 <Input.OTP
                                     length={4}
-                                    onInput={(value) => setOtpCodeInput(value.join(''))}
+                                    onInput={(value) => {
+                                        setOtpCodeInput(value.join(''))
+                                        setLoginCheck(null);
+                                        setCheckCode(null);
+                                    }}
                                     inputMode='numeric'
                                     formatter={(str) => str.replace(/\D/g, '')}
                                     size='large'
-                                    status={loginError === null ? '' : 'error'}
+                                    status={LoginCheck?.success === false || CheckCode?.success === false ? 'error' : ''}
                                     style={{
                                         display: 'flex',
                                         width: '100%',
@@ -280,9 +271,9 @@ export const Login: React.FC = () => {
                         </div>
                     )}
                     {status === 'Ok' && (
-                        <div className='text-center p-[10%]'>
+                        <div className='text-center px-[10%]'>
                             <div className='text-xl text-slate-600 text-center'>
-                                <p className='mb-5 '>Личный кабинет веб сайта находится на стадии разработки</p>
+                                <p className=' '>Личный кабинет веб сайта находится на стадии разработки</p>
                                 <p>Полный доступ к личному кабинету</p>
                                 <p>Вы можете получить в мобильном приложении Bookers</p>
                             </div>
@@ -373,17 +364,7 @@ export const Login: React.FC = () => {
                             } else if (status === 'OTPcode') {
                                 handleOtpSubmit();
                             } else if (status === 'Registration') {
-                                if (checkBox) {
-                                    if (PhoneCheck === 'register' && phoneNumberInput.length === 13 && firstName.length > 2 && lastName.length > 3 && nickname.length > 2) {
-                                        registerMaster();
-                                    } else if (PhoneCheck === 'login' && phoneNumberInput.length === 13 && firstName.length > 2 && lastName.length > 3 && nickname.length > 2) {
-                                        registerMaster();
-                                    } else {
-                                        toastBtn("To'liq ma'lumotlarni to'ldiring", 'error');
-                                    }
-                                } else {
-                                    toastBtn('Please accept the terms and conditions', 'error');
-                                }
+                                RegisterBtn()
                             }
                         }}
                         disabled={loading || loadingSendCode || loadingLogin || loadingCheckCode || registerMasterLoading}>
