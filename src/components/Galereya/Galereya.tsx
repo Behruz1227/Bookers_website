@@ -22,7 +22,7 @@ export const Galereya: React.FC<GalereyaProps> = ({ imgData, name }) => {
     // images bo'lmasa null qaytaramiz
     if(images === '') return null
     return (
-        <div className='bg-[#21212E]'>
+        <div className='bg-[#111827 my-10'>
             <div className=' border border-[#353535] shadow-[5px_5px_5px_0px_#000111] rounded-[20px] py-8 px-6 '>
                 <h2 className="text-2xl font-bold text-white pb-8">{name}</h2>
                 <div className='grid lg:grid-cols-2 grid-cols-1 justify-center gap-6'>

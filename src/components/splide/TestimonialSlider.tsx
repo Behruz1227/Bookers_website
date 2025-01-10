@@ -48,27 +48,29 @@ export const TestimonialSlider: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-20 relative">
       <Swiper
-        modules={[Pagination, Navigation]}
-        spaceBetween={24}
-        slidesPerView={3}
-        pagination={{ clickable: true }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        breakpoints={{
-          1280: { slidesPerView: 3 },
-          1024: { slidesPerView: 2, spaceBetween: 16 },
-          768: { slidesPerView: 1, spaceBetween: 12 },
-        }}
-      >
-        {response?.body?.length > 0 &&
-          response?.body?.map((testimonial: any, index: number) => (
-            <SwiperSlide key={index}>
-              <TestimonialCard {...testimonial} />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+  modules={[Pagination, Navigation]}
+  spaceBetween={24}
+  slidesPerView={3} // Default
+  pagination={{ clickable: true }}
+  navigation={{
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  }}
+  breakpoints={{
+    1280: { slidesPerView: 3 }, // Desktop
+    1024: { slidesPerView: 2, spaceBetween: 16 }, // Tablet landscape
+    768: { slidesPerView: 1, spaceBetween: 12 }, // Tablet portrait
+    480: { slidesPerView: 1, spaceBetween: 8 }, // Mobile
+  }}
+>
+  {response?.body?.length > 0 &&
+    response?.body?.map((testimonial: any, index: number) => (
+      <SwiperSlide key={index}>
+        <TestimonialCard {...testimonial} />
+      </SwiperSlide>
+    ))}
+</Swiper>
+
 
       {/* Tugmalar */}
       <div

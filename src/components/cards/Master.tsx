@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Rate } from "antd";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import { UniversalModal } from "@/components/Modal/UniversalModal";
 import { attachment } from "@/helpers/Url";
-import Button from "../button/Button";
-import Calendar from "../Calendar";
-import Oclock from "../Oclock";
+import Button from "@/components/button/Button";
+import CalendarTimeSelection from "@/components/CalendarTimeSelection";
 
 interface MasterProps {
   id: string;
@@ -12,12 +13,15 @@ interface MasterProps {
   name: string;
   salon?: string;
   role?: string;
-  rating?: number;
+  feedbackCount?: number;
+  orderCount?: number;
+  clientCount?: number;
   address?: string;
   price?: string;
   firstButtonTitle?: string;
   secondButtonTitle?: string;
-  onClick?: () => void;
+  onProfileClick?: () => void;
+  mainPhoto?: string;
 }
 
 const Master: React.FC<MasterProps> = ({
@@ -27,67 +31,81 @@ const Master: React.FC<MasterProps> = ({
   name,
   salon,
   role,
-  rating = 5,
+  feedbackCount = 5,
+  orderCount = 0,
+  clientCount = 0,
   address,
   price,
-  firstButtonTitle,
-  secondButtonTitle,
-  onClick,
+  firstButtonTitle = "Профиль",
+  secondButtonTitle = "Записаться",
+  onProfileClick,
+  mainPhoto,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleCardClick = () => {
-    if (onClick) onClick();
-  };
+  const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null);
 
   const handleAppointmentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsModalOpen(true);
   };
 
-  return (
-    <div 
-      className="bg-[#B9B9C9] w-full rounded-2xl text-gray-800 shadow-lg overflow-hidden cursor-pointer"
-      onClick={handleCardClick}
-    >
-      {attachmentId && (
-        <div className="aspect-video overflow-hidden">
-          <img
-            src={attachment + attachmentId}
-            alt={`${name}'s service`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
+  const handleTimeSelect = (date: string, time: string) => {
+    setSelectedDateTime({ date, time });
+  };
 
+  const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null;
+
+  return (
+    <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="p-4">
-        <div className="flex items-center gap-3">
+        {imageUrl && (
+          <div className="relative pb-[56.25%]">
+            <img
+              src={imageUrl}
+              alt={`${name}'s service`}
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-[20px]"
+            />
+          </div>
+        )}
+        
+        <div className="flex items-center gap-4 mt-4 mb-3">
           {avatar && (
             <img
-              src={avatar}
+              src={attachment + avatar}
               alt={name}
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
             />
           )}
           <div>
-            <h3 className="font-medium text-base">
-              {name}{salon && ` / `}<span className="font-normal">{salon}</span>
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-semibold text-lg">{name}</h3>
+              {salon && (
+                <>
+                  <span className="text-gray-500">/</span>
+                  <span className="text-gray-500 font-medium">{salon}</span>
+                </>
+              )}
+            </div>
             {role && <p className="text-sm text-gray-600">{role}</p>}
           </div>
         </div>
 
-        <div className="mt-3 space-y-2">
-          <div className="flex text-[#9C0B35] text-lg">
-            {[...Array(rating)].map((_, index) => (
-              <span key={index}>★</span>
-            ))}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <Rate 
+              disabled 
+              defaultValue={feedbackCount} 
+              className="text-[#9C0B35] text-lg" 
+            />
+            <span className="text-sm text-gray-600">
+              {orderCount} заказа, {clientCount} клиентов
+            </span>
           </div>
 
           {address && (
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span className="material-icons text-[#9C0B35]">location_on</span>
-              <span>{address}</span>
+            <div className="flex items-center gap-2">
+              <HiOutlineLocationMarker className="text-[#9C0B35] w-5 h-5 flex-shrink-0" />
+              <span className="text-sm text-gray-700">{address}</span>
             </div>
           )}
 
@@ -95,26 +113,27 @@ const Master: React.FC<MasterProps> = ({
             <span className="text-sm text-gray-600">
               Ближайшая запись: Сегодня
             </span>
-            {price && <span className="text-[#9C0B35] font-medium">от {price}</span>}
+            {price && (
+              <span className="text-[#9C0B35] font-semibold text-lg">
+                от {price} ₽
+              </span>
+            )}
           </div>
         </div>
 
-        <div className="mt-4 flex gap-2">
-          {firstButtonTitle && (
-            <Button
-              className="flex-1 bg-[#9C0B35] rounded-full py-2 px-4 text-sm text-white hover:bg-[#7c092a] transition-colors"
-            >
-              {firstButtonTitle}
-            </Button>
-          )}
-          {secondButtonTitle && (
-            <Button
-              onClick={handleAppointmentClick}
-              className="flex-1 bg-[#9C0B35] rounded-full py-2 px-4 text-sm text-white hover:bg-[#7c092a] transition-colors"
-            >
-              {secondButtonTitle}
-            </Button>
-          )}
+        <div className="mt-4 flex gap-3">
+          <Button
+            onClick={onProfileClick}
+            className="flex-1 bg-[#9C0B35] rounded-[40px] py-3 px-6 text-base font-medium text-white hover:bg-[#7d092a] transition-colors"
+          >
+            {firstButtonTitle}
+          </Button>
+          <Button
+            onClick={handleAppointmentClick}
+            className="flex-1 bg-[#9C0B35] rounded-[40px] py-3 px-6 text-base font-medium text-white hover:bg-[#7d092a] transition-colors"
+          >
+            {secondButtonTitle}
+          </Button>
         </div>
       </div>
 
@@ -122,24 +141,28 @@ const Master: React.FC<MasterProps> = ({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="p-4 bg-[#B9B9C9]">
-          <div className="text-center">
-            <h2 className="font-manrope font-extrabold text-[44px] ">Записаться</h2>
-            <p className="font-manrope font-medium text-[30px] ">Сегодня четверг, 23 февраля</p>
+        <div className="p-6 bg-[#B9B9C9] rounded-[20px] ">
+          <div className="text-center mb-6">
+            <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">
+              Записаться к мастеру
+            </h2>
+            <p className="font-manrope text-xl text-gray-700">{name}</p>
           </div>
-          <div className="flex items-start justify-center gap-20 p-10">
-            <Calendar />
-            <div>
-              <h2 className="font-manrope  text-[26px]">Свободное время</h2>
-              <Oclock />
-            </div>
-          </div>
-          <div className="flex justify-center">
+        <div >
+            
+        <CalendarTimeSelection 
+            masterId={id}
+            onTimeSelect={handleTimeSelect}
+          />
+
+        </div>
+          <div className="flex justify-center mt-6">
             <Button
-              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+              className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => alert("Скачать приложение")}
+              disabled={!selectedDateTime}
             >
-              Записаться
+              {selectedDateTime ? 'Записаться' : 'Выберите дату и время'}
             </Button>
           </div>
         </div>
@@ -149,4 +172,3 @@ const Master: React.FC<MasterProps> = ({
 };
 
 export default Master;
-

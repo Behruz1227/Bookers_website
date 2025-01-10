@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import HeroImg from "@/assets/img/Mask group (9).png";
@@ -21,19 +23,15 @@ function Services() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [masters, setMasters] = useState<any[]>([]);
-  console.log(masters);
-
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
 
-  // Fetch categories
   const { response: categoryResponse, globalDataFunc: fetchCategories } = useGlobalRequest(
     "http://207.154.246.120:8080/api/category",
     "GET"
   );
 
-  // Fetch masters by category
   const fetchMastersByCategory = async (categoryId: string) => {
     try {
       const response = await fetch(
@@ -42,12 +40,11 @@ function Services() {
       const data = await response.json();
       console.log('Serverdan kelgan data:', data);
 
-      // data.body.object massivini tekshirib o'rnatish
       if (data && data.body && Array.isArray(data.body.object)) {
         setMasters(data.body.object);
       } else {
         console.error("Kutilgan formatdagi data.body.object kelmadi:", data);
-        setMasters([]); // Default bo'sh array
+        setMasters([]);
       }
       setLoading(false);
     } catch (error) {
@@ -86,8 +83,8 @@ function Services() {
     setPage(prevPage => prevPage + 1);
   };
 
-  const handleMasterClick = (masterId: string) => {
-    navigate(`/Master/${masterId}`); // Navigates to the Master's profile page
+  const handleMasterProfileClick = (masterId: string) => {
+    navigate(`/Master/${masterId}`);
   };
 
   return (
@@ -147,10 +144,10 @@ function Services() {
                       role={master.masterSpecialization?.[0] || "Мастер"}
                       address={`${master.district || ''}, ${master.street || ''} ${master.house || ''}`}
                       price={master.masterServicePrice || "0"}
-                      rating={master.rating || 5}
+                      feedbackCount={master.rating }
                       firstButtonTitle="Профиль"
                       secondButtonTitle="Записаться"
-                      onClick={() => handleMasterClick(master.id)} // This will navigate to the profile page
+                      onProfileClick={() => handleMasterProfileClick(master.id)}
                     />
                   </div>
                 ))}
@@ -173,3 +170,4 @@ function Services() {
 }
 
 export default Services;
+
