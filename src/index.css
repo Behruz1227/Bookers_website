@@ -16,3 +16,14 @@
 body{
     background-color: #111827;
 }
+
+.masterOrSalonName .ant-select-selector {
+    background-color: #B9B9C9 !important;
+    /* color: chartreuse !important; */
+    height: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+}

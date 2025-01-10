@@ -60,6 +60,7 @@ import uzun from "@/assets/logo/uzum.png"
 import oson from "@/assets/logo/oson.png"
 import sello from "@/assets/logo/sello.png"
 import click from "@/assets/logo/click.png"
+import LoginIndex from '@/Store';
 
 //logo splider
 const Logo = [
@@ -84,6 +85,7 @@ function Home() {
     'http://207.154.246.120:8080/api/dashboard/website/statistic',
     'GET',
   );
+  const { setOtzivHolat } = LoginIndex();
 
   const {
     loading: categoryLoading,
@@ -196,7 +198,7 @@ function Home() {
           <div className='flex justify-center'>
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] hover:opacity-90"
-              onClick={() => alert("Оставить отзыв")}
+              onClick={() => setOtzivHolat(true)}
             >
               Оставить отзыв
             </Button>

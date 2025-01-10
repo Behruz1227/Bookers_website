@@ -11,6 +11,7 @@ import { getLocationPermission } from "./helpers/ForLocation/Location";
 import { useEffect, useState } from "react";
 import Services from "./app/services";
 import MasterProfile from "./app/Profile/MasterProfile";
+import { LeaveFeedback } from "./components/leave-feedback-controller/LeaveFeedback";
 
 function App() {
   const [location, setLocation] = useState<any>();
@@ -44,6 +45,7 @@ function App() {
           <Route path="/Partnership" element={<Partnership />} />
           <Route path="/Services/:id" element={<Services />} />
           <Route path="/Master/:id" element={<MasterProfile />} />
+          <Route path="/otziv" element={<LeaveFeedback />} />
         </Routes>
       </BrowserRouter>
     </>

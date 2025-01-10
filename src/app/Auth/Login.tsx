@@ -22,7 +22,6 @@ interface FileState {
 export const Login: React.FC = () => {
     const { loginRole: userRole, loginHolat, lang: userLang, setLoginHolat, setLoginRole } = LoginIndex();
     const [isModalOpen, setModalOpen] = useState(false);
-
     const [messageApi, contextHolder] = message.useMessage();
     const [role, setRole] = useState<string | null>(userRole);
     const [phoneNumberInput, setPhoneNumberInput] = useState<string>("");
@@ -159,9 +158,9 @@ export const Login: React.FC = () => {
 
     function RegisterBtn() {
         if (checkBox) {
-            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length === 2 && lastName.length === 2 && nickname.length === 2) {
+            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length >= 2 && lastName.length >= 2 && nickname.length === 2) {
                 registerMaster();
-            } else if (role === 'CLIENT'&&  phoneNumberInput.length === 13 && firstName.length === 2 && lastName.length === 2) {
+            } else if (role === 'CLIENT'&& phoneNumberInput.length === 13 && firstName.length >= 2 && lastName.length >= 2) {
                 registerMaster();
             }else {
                 toastBtn('malumotlarni to\'ldiring', 'error');
