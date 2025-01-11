@@ -6,10 +6,12 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import { TestimonialCard } from '@/components/cards/TestimonialCard';
 import { useGlobalRequest } from '@/helpers/Quary/quary';
+//url
+import {BASE_URL} from "@/helpers/Url"
 
 export const TestimonialSlider: React.FC = () => {
   const { loading, error, response, globalDataFunc } = useGlobalRequest(
-    'http://207.154.246.120:8080/api/leave/feedback/list',
+    `${BASE_URL}/api/leave/feedback/list`,
     'GET',
   );
 
@@ -25,7 +27,7 @@ export const TestimonialSlider: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  console.log('Response:', response);
+  console.log('feedback', response);
 
   const buttonStyles = {
     width: '40px',
@@ -46,7 +48,7 @@ export const TestimonialSlider: React.FC = () => {
   const nextButtonStyles = { ...buttonStyles, right: '8px' }; // O‘ng tugma
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20 relative">
+    <div className="max-w-7xl mx-auto  py-20 relative">
       <Swiper
   modules={[Pagination, Navigation]}
   spaceBetween={24}

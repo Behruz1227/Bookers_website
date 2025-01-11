@@ -1,30 +1,32 @@
-import { useState } from "react";
-import { Rate } from "antd";
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import { UniversalModal } from "@/components/Modal/UniversalModal";
-import { attachment } from "@/helpers/Url";
-import Button from "@/components/button/Button";
-import CalendarTimeSelection from "@/components/CalendarTimeSelection";
+'use client'
+
+import { useState } from "react"
+import { Rate } from "antd"
+import { HiOutlineLocationMarker } from "react-icons/hi"
+import { UniversalModal } from "@/components/Modal/UniversalModal"
+import { attachment } from "@/helpers/Url"
+import Button from "@/components/button/Button"
+import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 
 interface MasterProps {
-  id: string;
-  attachmentId?: string;
-  avatar?: string;
-  name: string;
-  salon?: string;
-  role?: string;
-  feedbackCount?: number;
-  orderCount?: number;
-  clientCount?: number;
-  address?: string;
-  price?: string;
-  firstButtonTitle?: string;
-  secondButtonTitle?: string;
-  onProfileClick?: () => void;
-  mainPhoto?: string;
+  id: string
+  attachmentId?: string
+  avatar?: string
+  name: string
+  salon?: string
+  role?: string
+  feedbackCount?: number
+  orderCount?: number
+  clientCount?: number
+  address?: string
+  masterServicePrice?: string
+  firstButtonTitle?: string
+  secondButtonTitle?: string
+  onProfileClick?: () => void
+  mainPhoto?: string
 }
 
-const Master: React.FC<MasterProps> = ({
+export default function MasterCard({
   id,
   attachmentId,
   avatar,
@@ -35,25 +37,26 @@ const Master: React.FC<MasterProps> = ({
   orderCount = 0,
   clientCount = 0,
   address,
-  price,
+  masterServicePrice,
   firstButtonTitle = "Профиль",
   secondButtonTitle = "Записаться",
   onProfileClick,
   mainPhoto,
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null);
+}: MasterProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
 
   const handleAppointmentClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsModalOpen(true);
-  };
+    e.stopPropagation()
+    setIsModalOpen(true)
+  }
 
   const handleTimeSelect = (date: string, time: string) => {
-    setSelectedDateTime({ date, time });
-  };
+    setSelectedDateTime({ date, time })
+  }
 
-  const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null;
+  const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null
+  const rating = typeof feedbackCount === 'number' ? feedbackCount : 0;
 
   return (
     <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -78,26 +81,26 @@ const Master: React.FC<MasterProps> = ({
           )}
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold text-lg">{name}</h3>
+              <h3 className="font-bold font-manrope  text-[24px]">{name}</h3>
               {salon && (
                 <>
-                  <span className="text-gray-500">/</span>
-                  <span className="text-gray-500 font-medium">{salon}</span>
+                  <span className="font-manrope font-bold text-[24px]">/</span>
+                  <span className="font-manrope font-medium text-[24px]">{salon}</span>
                 </>
               )}
             </div>
-            {role && <p className="text-sm text-gray-600">{role}</p>}
+            {role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>}
           </div>
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
+          <div className="flex justify-between items-center py-3">
             <Rate 
               disabled 
-              defaultValue={feedbackCount} 
+              value={rating} 
               className="text-[#9C0B35] text-lg" 
             />
-            <span className="text-sm text-gray-600">
+            <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">
               {orderCount} заказа, {clientCount} клиентов
             </span>
           </div>
@@ -105,17 +108,17 @@ const Master: React.FC<MasterProps> = ({
           {address && (
             <div className="flex items-center gap-2">
               <HiOutlineLocationMarker className="text-[#9C0B35] w-5 h-5 flex-shrink-0" />
-              <span className="text-sm text-gray-700">{address}</span>
+              <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{address}</span>
             </div>
           )}
 
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">
+          <div className="flex justify-between items-center py-3">
+            <span className="font-medium font-manrope text-[22px]">
               Ближайшая запись: Сегодня
             </span>
-            {price && (
+            {masterServicePrice && (
               <span className="text-[#9C0B35] font-semibold text-lg">
-                от {price} ₽
+                от {masterServicePrice} 
               </span>
             )}
           </div>
@@ -142,20 +145,20 @@ const Master: React.FC<MasterProps> = ({
         onClose={() => setIsModalOpen(false)}
       >
         <div className="p-6 bg-[#B9B9C9] rounded-[20px] ">
-          <div className="text-center mb-6">
+          <div className="text-center mb-6 ">
             <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">
               Записаться к мастеру
             </h2>
-            <p className="font-manrope text-xl text-gray-700">{name}</p>
-          </div>
-        <div >
             
-        <CalendarTimeSelection 
-            masterId={id}
-            onTimeSelect={handleTimeSelect}
-          />
-
-        </div>
+          </div>
+          <div >
+            <div>
+            <CalendarTimeSelection 
+              masterId={id}
+              onTimeSelect={handleTimeSelect}
+            />
+            </div>
+          </div>
           <div className="flex justify-center mt-6">
             <Button
               className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -168,7 +171,6 @@ const Master: React.FC<MasterProps> = ({
         </div>
       </UniversalModal>
     </div>
-  );
-};
+  )
+}
 
-export default Master;

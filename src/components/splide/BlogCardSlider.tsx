@@ -4,10 +4,12 @@ import '@splidejs/react-splide/css';
 import Blogcard from '@/components/cards/blog-card';
 //card img
 import cardImg from "@/assets/cards/card.png"
+//url
+import {BASE_URL} from "@/helpers/Url"
 
 interface BlogPost {
   id: number;
-  image?: string; // Adjusted to handle missing image
+  image?: string;
   date: string;
   title: string;
   description: string;
@@ -15,6 +17,8 @@ interface BlogPost {
 
 export const BlogCardSlider: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  console.log("post",posts);
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +26,7 @@ export const BlogCardSlider: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          'http://207.154.246.120:8080/api/masterClass/list?page=0&size=10'
+          `${BASE_URL}/api/masterClass/list?page=0&size=10`
         );
         const result = await response.json();
         const apiData = result.body?.object || [];

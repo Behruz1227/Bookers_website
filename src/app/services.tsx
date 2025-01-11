@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import HeroImg from "@/assets/img/Mask group (9).png";
+import { BASE_URL } from "@/helpers/Url"
+import { useEffect, useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import HeroImg from "@/assets/img/Mask group (9).png"
 import {
   Select,
   SelectContent,
@@ -10,87 +11,88 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import Button from "@/components/button/Button";
-import Footer from "@/components/footer/Footer";
-import { Input } from "@/components/ui/input";
-import Master from "@/components/cards/Master";
-import Header from "@/components/Header/Header";
-import { useGlobalRequest } from "@/helpers/Quary/quary";
+} from "@/components/ui/select"
+import Button from "@/components/button/Button"
+import Footer from "@/components/footer/Footer"
+import { Input } from "@/components/ui/input"
+import MasterCard from "@/components/cards/Master"
+import Header from "@/components/Header/Header"
+import { useGlobalRequest } from "@/helpers/Quary/quary"
 
 function Services() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [masters, setMasters] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [selectedCategory, setSelectedCategory] = useState<string>("")
+  const [masters, setMasters] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(0)
+  const [size, setSize] = useState(10)
 
   const { response: categoryResponse, globalDataFunc: fetchCategories } = useGlobalRequest(
-    "http://207.154.246.120:8080/api/category",
+    `${BASE_URL}/api/category`,
     "GET"
-  );
+  )
 
   const fetchMastersByCategory = async (categoryId: string) => {
     try {
       const response = await fetch(
-        `http://207.154.246.120:8080/api/service/website-master?categoryId=${categoryId}&page=${page}&size=${size}`
-      );
-      const data = await response.json();
-      console.log('Serverdan kelgan data:', data);
+        `${BASE_URL}/api/service/website-master?categoryId=${categoryId}&page=${page}&size=${size}`
+      )
+      const data = await response.json()
+      console.log('Serverdan kelgan data:', data)
 
       if (data && data.body && Array.isArray(data.body.object)) {
-        setMasters(data.body.object);
+        setMasters(data.body.object)
       } else {
-        console.error("Kutilgan formatdagi data.body.object kelmadi:", data);
-        setMasters([]);
+        console.error("Kutilgan formatdagi data.body.object kelmadi:", data)
+        setMasters([])
       }
-      setLoading(false);
+      setLoading(false)
     } catch (error) {
-      console.error('Error kategoriyalarni yuklashda:', error);
-      setLoading(false);
-      setMasters([]);
+      console.error('Error kategoriyalarni yuklashda:', error)
+      setLoading(false)
+      setMasters([])
     }
-  };
+  }
 
   useEffect(() => {
-    fetchCategories();
+    fetchCategories()
     if (id) {
-      setSelectedCategory(id);
-      fetchMastersByCategory(id);
+      setSelectedCategory(id)
+      fetchMastersByCategory(id)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (selectedCategory) {
-      setLoading(true);
-      console.log(' category:', selectedCategory);
-      fetchMastersByCategory(selectedCategory);
+      setLoading(true)
+      console.log(' category:', selectedCategory)
+      fetchMastersByCategory(selectedCategory)
     }
-  }, [selectedCategory, page, size]);
+  }, [selectedCategory, page, size])
 
-  const categories = categoryResponse?.body || [];
+  const categories = categoryResponse?.body || []
 
   const handleCategoryChange = (value: string) => {
-    console.log('Selected category:', value);
-    setSelectedCategory(value);
-    setPage(0);
-    navigate(`/Services/${value}`);
-  };
+    console.log('Selected category:', value)
+    setSelectedCategory(value)
+    setPage(0)
+    navigate(`/Services/${value}`)
+  }
 
   const handleLoadMore = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+    setPage(prevPage => prevPage + 1)
+  }
 
   const handleMasterProfileClick = (masterId: string) => {
-    navigate(`/Master/${masterId}`);
-  };
+    navigate(`/Master/${masterId}`)
+  }
 
   return (
-    <>
+    <div>
+      <div className="bg-[#111827] w-full container mx-auto ">
       <Header />
-      <main className="bg-[#111827] w-full px-[7%]">
+      <main className="">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
             Услуги мастеров и салонов красоты: {categories.find(c => c.id === selectedCategory)?.name || "Все услуги"}
@@ -107,7 +109,7 @@ function Services() {
             <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/2 h-14 text-white rounded-[7px]">
               <SelectValue placeholder="Выберите категорию" />
             </SelectTrigger>
-            <SelectContent className="text-white bg-gray-800 rounded-md">
+            <SelectContent className=" bg-[#B9B9C9] rounded-md ">
               <SelectGroup>
                 {categories.map((category: any) => (
                   <SelectItem
@@ -135,7 +137,7 @@ function Services() {
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10">
                 {Array.isArray(masters) && masters.map((master: any, index) => (
                   <div key={master.id || index}>
-                    <Master
+                    <MasterCard
                       id={master.id}
                       attachmentId={master.mainPhoto}
                       avatar={master.mainPhoto}
@@ -143,8 +145,10 @@ function Services() {
                       salon={master.salonName || ""}
                       role={master.masterSpecialization?.[0] || "Мастер"}
                       address={`${master.district || ''}, ${master.street || ''} ${master.house || ''}`}
-                      price={master.masterServicePrice || "0"}
-                      feedbackCount={master.rating }
+                      masterServicePrice={master.masterServicePrice?.toString() || "0"}
+                      feedbackCount={master.rating || 0}
+                      orderCount={master.orderCount || 0}
+                      clientCount={master.clientCount || 0}
                       firstButtonTitle="Профиль"
                       secondButtonTitle="Записаться"
                       onProfileClick={() => handleMasterProfileClick(master.id)}
@@ -164,10 +168,12 @@ function Services() {
           )}
         </section>
       </main>
-      <Footer />
-    </>
-  );
+     
+    </div>
+     <Footer />
+    </div>
+  )
 }
 
-export default Services;
+export default Services
 

@@ -1,5 +1,14 @@
-import Header from '@/components/Header/Header';
-import Hero from '@/components/Hero/Hero';
+//url 
+import {BASE_URL} from "@/helpers/Url"
+
+// Hooks
+import { useEffect } from 'react';
+
+//Quary
+import { useGlobalRequest } from '@/helpers/Quary/quary';
+
+//components
+import Header from '@/components/Header/Header';import Hero from '@/components/Hero/Hero';
 import OfferCards from '@/components/cards/OfferCards';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import Footer from '@/components/footer/Footer';
@@ -11,8 +20,9 @@ import { StatsCard } from '@/components/cards/stats-card';
 import { Line } from '@/components/Line/Line';
 import Subtitle from '@/components/Subtitle';
 import Card from '@/components/cards/Card';
+import { LogoSlider } from '@/components/splide/LogoSlider';
 
-// Card icons 
+// icons 
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
 import { PiGraduationCapDuotone } from "react-icons/pi";
@@ -23,10 +33,28 @@ import { BsCheckCircle } from "react-icons/bs";
 // Images
 import HeroImg from '@/assets/img/Mask group (7).png';
 
-// Hooks
-import { useEffect } from 'react';
-import { useGlobalRequest } from '@/helpers/Quary/quary';
-import { LogoSlider } from '@/components/splide/LogoSlider';
+//logo img
+import payme from "@/assets/logo/payme.png"
+import uzun from "@/assets/logo/uzum.png"
+import oson from "@/assets/logo/oson.png"
+import sello from "@/assets/logo/sello.png"
+import click from "@/assets/logo/click.png"
+import LoginIndex from '@/Store';
+
+//logo splider
+const Logo = [
+  { src: payme, alt: 'Payme' },
+  { src: uzun, alt: 'Uzum Bank' },
+  { src: oson, alt: 'OSRN' },
+  { src: sello, alt: 'Sello' },
+  { src: click, alt: 'Click' },
+  { src: payme, alt: 'Payme' },
+  { src: uzun, alt: 'Uzum Bank' },
+  { src: oson, alt: 'OSRN' },
+  { src: sello, alt: 'Sello' },
+  { src: click, alt: 'Click' },
+];
+
 
 const FirstCard = [
   { text: 'Быстрое и удобное бронирование' },
@@ -54,27 +82,10 @@ const ThreeCard = [
   { text: 'Модуль управления персоналом' },
   { text: 'Модуль комьюнити' },
 ];
-//logo img
-import payme from "@/assets/logo/payme.png"
-import uzun from "@/assets/logo/uzum.png"
-import oson from "@/assets/logo/oson.png"
-import sello from "@/assets/logo/sello.png"
-import click from "@/assets/logo/click.png"
-import LoginIndex from '@/Store';
 
-//logo splider
-const Logo = [
-  { src: payme, alt: 'Payme' },
-  { src: uzun, alt: 'Uzum Bank' },
-  { src: oson, alt: 'OSRN' },
-  { src: sello, alt: 'Sello' },
-  { src: click, alt: 'Click' },
-  { src: payme, alt: 'Payme' },
-  { src: uzun, alt: 'Uzum Bank' },
-  { src: oson, alt: 'OSRN' },
-  { src: sello, alt: 'Sello' },
-  { src: click, alt: 'Click' },
-];
+
+
+
 function Home() {
   const {
     loading: statsLoading,
@@ -82,7 +93,7 @@ function Home() {
     response: statsResponse,
     globalDataFunc: fetchStats,
   } = useGlobalRequest(
-    'http://207.154.246.120:8080/api/dashboard/website/statistic',
+    `${BASE_URL}/api/dashboard/website/statistic`,
     'GET',
   );
   const { setOtzivHolat } = LoginIndex();
@@ -93,7 +104,7 @@ function Home() {
     response: categoryResponse,
     globalDataFunc: fetchCategories,
   } = useGlobalRequest(
-    "http://207.154.246.120:8080/api/category",
+    `${BASE_URL}/api/category`,
     "GET"
   );
 
@@ -112,6 +123,10 @@ function Home() {
 
   const statsData = statsResponse?.body || {};
   const categories = categoryResponse?.body || [];
+  console.log('countlaa ', statsData);
+  console.log('categoriyalar ', categories);
+  
+  
 
   return (
     <>
@@ -210,22 +225,22 @@ function Home() {
           <div className="flex flex-wrap gap-4 justify-center md:justify-between pt-10">
             <StatsCard
               icon={<PiGraduationCapDuotone style={{ fontSize: '34px' }} />}
-              count={statsData.masterCount || 0}
+              count={statsData.masterCount}
               title="Количество мастеров"
             />
             <StatsCard
               icon={<HiUserGroup style={{ fontSize: '34px' }} />}
-              count={statsData.clientCount || 0}
+              count={statsData.clientCount}
               title="Количество клиентов"
             />
             <StatsCard
               icon={<IoLocationSharp style={{ fontSize: '34px' }} />}
-              count={statsData.locationCount || 0}
+              count={statsData.locationCount}
               title="Количество локаций"
             />
             <StatsCard
               icon={<BsCheckCircle style={{ fontSize: '34px' }} />}
-              count={statsData.completedOrderCount || 0}
+              count={statsData.completedOrderCount}
               title="Успешных бронирований"
             />
           </div>
