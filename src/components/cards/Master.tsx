@@ -33,7 +33,7 @@ export default function MasterCard({
   name,
   salon,
   role,
-  feedbackCount = 5,
+  feedbackCount ,
   orderCount = 0,
   clientCount = 0,
   address,
@@ -55,9 +55,12 @@ export default function MasterCard({
     setSelectedDateTime({ date, time })
   }
 
+
   const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null
   const rating = typeof feedbackCount === 'number' ? feedbackCount : 0;
-
+  console.log(name,feedbackCount);
+  console.log(rating);
+  
   return (
     <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="p-4">
@@ -97,7 +100,7 @@ export default function MasterCard({
           <div className="flex justify-between items-center py-3">
             <Rate 
               disabled 
-              value={rating} 
+              value={feedbackCount} 
               className="text-[#9C0B35] text-lg" 
             />
             <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">

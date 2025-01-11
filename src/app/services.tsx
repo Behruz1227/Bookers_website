@@ -146,7 +146,7 @@ function Services() {
                       role={master.masterSpecialization?.[0] || "Мастер"}
                       address={`${master.district || ''}, ${master.street || ''} ${master.house || ''}`}
                       masterServicePrice={master.masterServicePrice?.toString() || "0"}
-                      feedbackCount={master.rating || 0}
+                      feedbackCount={master.feedbackCount || 0}
                       orderCount={master.orderCount || 0}
                       clientCount={master.clientCount || 0}
                       firstButtonTitle="Профиль"
