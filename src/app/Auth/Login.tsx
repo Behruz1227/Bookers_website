@@ -158,7 +158,7 @@ export const Login: React.FC = () => {
 
     function RegisterBtn() {
         if (checkBox) {
-            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length >= 2 && lastName.length >= 2 && nickname.length === 2) {
+            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length >= 0 && lastName.length >= 0 && nickname.length >= 2) {
                 registerMaster();
             } else if (role === 'CLIENT'&& phoneNumberInput.length === 13 && firstName.length >= 2 && lastName.length >= 2) {
                 registerMaster();
