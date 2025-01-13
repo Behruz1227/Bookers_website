@@ -58,8 +58,8 @@ export default function MasterCard({
 
   const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null
   const rating = typeof feedbackCount === 'number' ? feedbackCount : 0;
-  console.log(name,feedbackCount);
-  console.log(rating);
+ 
+ 
   
   return (
     <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">

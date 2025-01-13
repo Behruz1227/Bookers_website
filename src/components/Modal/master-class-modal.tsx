@@ -178,7 +178,7 @@ const MasterClassModal: React.FC<MasterClassModalProps> = ({ isOpen, onClose }) 
                   min="0"
                   max="23"
                   placeholder="Час"
-                  className="w-full px-4 py-2.5 bg-white rounded-lg border border-gray-100 focus:outline-none focus:border-gray-200"
+                  className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0"
                   value={formData.hour}
                   onChange={handleInputChange}
                 />
@@ -188,7 +188,7 @@ const MasterClassModal: React.FC<MasterClassModalProps> = ({ isOpen, onClose }) 
                   min="0"
                   max="59"
                   placeholder="Минута"
-                  className="w-full px-4 py-2.5 bg-white rounded-lg border border-gray-100 focus:outline-none focus:border-gray-200"
+                  className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0"
                   value={formData.minute}
                   onChange={handleInputChange}
                 />

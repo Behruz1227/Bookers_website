@@ -42,7 +42,7 @@ function Services() {
         `${BASE_URL}/api/service/website-master?categoryId=${categoryId}&page=${page}&size=${size}`
       )
       const data = await response.json()
-      console.log('Serverdan kelgan data:', data)
+    
 
       if (data && data.body && Array.isArray(data.body.object)) {
         setMasters(data.body.object)
