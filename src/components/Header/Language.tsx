@@ -7,7 +7,7 @@ export const Language: React.FC = () => {
   const { setLoginLang } = LoginIndex();
   useEffect(() => {
     setLoginLang(active)
-    console.log(active);
+ 
     
   }, [active])
   interface Option {

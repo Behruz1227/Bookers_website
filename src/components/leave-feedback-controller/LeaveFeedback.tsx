@@ -49,7 +49,7 @@ export const LeaveFeedback = () => {
     const { setCheckCode, CheckCode, loading: loadingCheckCode } = useCheckCodeStore();
 
 
-    console.log(fileResponse);
+
     const [timer, setTimer] = useState<number | null>(null);
     const startTimer = () => {
         setTimer(60); // 1 daqiqa taymerni boshlash
@@ -67,9 +67,6 @@ export const LeaveFeedback = () => {
             return () => clearTimeout(timeout); // Tozalash
         }
     }, [timer]);
-    // const response = globalDataFunc();
-    // console.log(response);
-    // Email validation
     const isEmailValid = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -99,17 +96,6 @@ export const LeaveFeedback = () => {
     const handleSubmit = () => {
         if (isFormValid) {
             SendCodeBtn();
-
-
-            // setStatus("OTPcode");
-
-            console.log("Форма успешно отправлена!");
-        } else {
-            if (!isEmailValid(email)) {
-                console.log("Пожалуйста, введите корректный адрес электронной почты!");
-            } else {
-                console.log("Пожалуйста, заполните все обязательные поля!");
-            }
         }
     };
 
@@ -172,7 +158,7 @@ export const LeaveFeedback = () => {
     useEffect(() => {
         if (SendCode?.message === "Success" && SendCode?.success === true) {
             setStatus("OTPcode");
-            console.log(SendCode);
+alert(SendCode.body)
             if (photo !== '') {
                 uploadFile(photo);
             }

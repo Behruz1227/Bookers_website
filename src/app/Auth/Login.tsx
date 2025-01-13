@@ -235,7 +235,7 @@ export const Login: React.FC = () => {
                                         value={phoneNumber}
                                         onChange={handleInputChange}
                                         className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
-                                        maxLength={13} // +998 dan keyin 9 ta raqam bo'lishi mumkin
+                                        maxLength={19} // +998 dan keyin 9 ta raqam bo'lishi mumkin
                                     />
                                 </div>
                             </div>
