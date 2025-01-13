@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import Services from "./app/services";
 import MasterProfile from "./app/Profile/MasterProfile";
 import { LeaveFeedback } from "./components/leave-feedback-controller/LeaveFeedback";
+import './i18n'; 
 
 function App() {
   const [location, setLocation] = useState<any>();

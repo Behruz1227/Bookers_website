@@ -41,6 +41,7 @@ import sello from "@/assets/logo/sello.png"
 import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
 import MasterClassModal from '@/components/Modal/master-class-modal';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -92,6 +93,7 @@ const ThreeCard = [
 
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const { t } = useTranslation()
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -142,7 +144,7 @@ function Home() {
         <Header />
         <Hero slides={[
           {
-            title: "Система бронирования для мастеров, салонов красоты и их клиентов",
+            title: t("sistema"),
             description: "Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров.",
             image: HeroImg,
           },

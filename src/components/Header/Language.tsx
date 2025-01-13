@@ -1,14 +1,18 @@
 import LoginIndex from '@/Store';
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 
 export const Language: React.FC = () => {
   const [active, setActive] = useState<string>('uz')
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng); // Tilni o‘zgartirish
+  };
   
   const { setLoginLang } = LoginIndex();
   useEffect(() => {
     setLoginLang(active)
- 
-    
   }, [active])
   interface Option {
     id: number;
@@ -19,19 +23,19 @@ export const Language: React.FC = () => {
   const language: Option[] = [{
     id: 1,
     value: 'uz',
-    label: 'O‘zbekcha',
+    label: t('uzbek'),
     img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
   },
   {
     id: 2,
     value: 'ru',
-    label: 'Русский',
+    label: t('rus'),
     img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
   },
   {
     id: 3,
     value: 'eng',
-    label: 'English',
+    label: t('english'),
     img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
   }
   ]
@@ -43,7 +47,10 @@ export const Language: React.FC = () => {
           name="language"
           aria-label="Language"
           className="appearance-none outline-none bg-[#21212E] text-white p-3 pl-5 pr-10 border border-white rounded-[10px] cursor-pointer"
-          onChange={(e) => setActive(e.target.value)}
+          onChange={(e) => {
+            changeLanguage(e.target.value)
+            setActive(e.target.value)
+          }}
         >
           {language.map((item, index) => (
             <option
