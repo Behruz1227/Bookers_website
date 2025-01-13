@@ -62,7 +62,7 @@ const Logo = [
 
 
 const FirstCard = [
-  { text: 'Быстрое и удобное бронирование' },
+  { text: 'xdfcggvhbjnkml,' },
   { text: 'Гарантированные онлайн-записи' },
   { text: 'Большой выбор мастеров' },
   { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
@@ -145,29 +145,29 @@ function Home() {
         <Hero slides={[
           {
             title: t("sistema"),
-            description: "Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров.",
+            description: t("HeroDescription"),
             image: HeroImg,
           },
           {
-            title: "Система бронирования для мастеров, салонов красоты и их клиентов",
-            description: "Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров.",
+            title: t("sistema"),
+            description: t("HeroDescription"),
             image: HeroImg,
           },
           {
-            title: "Система бронирования для мастеров, салонов красоты и их клиентов",
-            description: "Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров.",
+            title:t("sistema"),
+            description:t("HeroDescription"),
             image: HeroImg,
           }
         ]} />
         <Line />
         <section className='grid lg:grid-cols-3 gap-10 gris-cols-1 '>
-          <OfferCards icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' firstButtonTitle="Скачать приложение" secondButtonTitle="Войти / Регистрация" />
-          <OfferCards icon={HandCoins} data={TwoCard} title='Что предлагает BOOKERS мастерам?' firstButtonTitle="Скачать приложение" secondButtonTitle="Оформить подписку" />
-          <OfferCards icon={FiRefreshCw} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:' firstButtonTitle="Интеграция" secondButtonTitle="Войти / Регистрация" />
+          <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} secondButtonTitle="Войти / Регистрация" />
+          <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} secondButtonTitle="Оформить подписку" />
+          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle="Интеграция" secondButtonTitle="Войти / Регистрация" />
         </section>
         <Line />
         <section>
-          <HeaderTitles text='Выберите категорию услуг красоты в bookers' />
+          <HeaderTitles text={t("Headertitle1")} />
           <div className='pt-10'>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
               {categories.map((item: any) => (
@@ -187,10 +187,10 @@ function Home() {
         <Line />
         <section>
           <div className="w-full md:w-[60%]">
-            <HeaderTitles text="Продвигайте свои мастер-классы, тренинги и обучения на платформах bookers" />
+            <HeaderTitles text={t("Headertitle2")} />
           </div>
           <div className='w-full md:w-[60%]'>
-            <Subtitle text='Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.' />
+            <Subtitle text={t("Subtitle1")} />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>Какую пользу вы получите с участием в программе <br /> “Мастер классы”</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-5">

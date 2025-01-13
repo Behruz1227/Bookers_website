@@ -4,6 +4,16 @@
     "uzbek": "Uzbek",
     "rus": "Russian",
     "english": "English",
-    "sistema": "Booking system for masters, beauty salons and their clients"
+    "sistema": "Booking system for masters, beauty salons and their clients",
+    "HeroDescription": "We create a system of interaction between masters, business partners (beauty salons) and clients, which is the main mission of this booking system. The BOOKERS platform creates comfortable and profitable conditions for each client, providing qualified services of masters.",
+    "OfferCardsTitle":"What does BOOKERS offer to beauty service clients?",
+    "OfferCardsTitle1":"What does BOOKERS offer to masters?",
+    "OfferCardsTitle2":"What integration does BOOKERS offer to business partners:",
+    "OfferCardsText2":"BOOKERS biznes hamkorlariga qanday integratsiyani taklif qiladi:",
+    "OfferCardLeft1":"Fast and convenient booking",
+    "Headertitle1":"Select a beauty services category in bookers",
+    "Headertitle2":"Promote your master classes, trainings and education on bookers platforms",
+    "Subtitle1":"We offer masters the implementation of cross-marketing projects within the framework of the program  “Master Class”. This program is intended for masters who conduct master classes, trainings and education in their specialty."
+
   }
   

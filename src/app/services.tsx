@@ -176,44 +176,6 @@ function Services() {
 
 
 
-          <section className="flex justify-center items-center flex-col py-10 w-full">
-            {loading ? (
-              <div className="text-white">Loading...</div>
-            ) : (
-              <>
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10">
-                  {Array.isArray(masters) && masters.map((master: any, index) => (
-                    <div key={master.id || index}>
-                      <MasterCard
-                        id={master.id}
-                        attachmentId={master.mainPhoto}
-                        avatar={master.mainPhoto}
-                        name={master.fullName}
-                        salon={master.salonName || ""}
-                        role={master.masterSpecialization?.[0] || "Мастер"}
-                        address={`${master.district || ''}, ${master.street || ''} ${master.house || ''}`}
-                        masterServicePrice={master.masterServicePrice?.toString() || "0"}
-                        feedbackCount={master.feedbackCount || 0}
-                        orderCount={master.orderCount || 0}
-                        clientCount={master.clientCount || 0}
-                        firstButtonTitle="Профиль"
-                        secondButtonTitle="Записаться"
-                        onProfileClick={() => handleMasterProfileClick(master.id)}
-                      />
-                    </div>
-                  ))}
-                </div>
-                {masters.length > 0 && (
-                  <Button
-                    className="text-white px-12 py-3 my-10 bg-[#9C0B35] rounded-full"
-                    onClick={handleLoadMore}
-                  >
-                    Показать больше
-                  </Button>
-                )}
-              </>
-            )}
-          </section>
         </main>
        
       </div>
