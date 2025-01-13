@@ -14,10 +14,11 @@ import {
 } from "@/components/ui/select"
 import Button from "@/components/button/Button"
 import Footer from "@/components/footer/Footer"
-import { Input } from "@/components/ui/input"
+
 import MasterCard from "@/components/cards/Master"
 import Header from "@/components/Header/Header"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
+import { Input } from "@/components/ui/input"
 
 
 
@@ -30,6 +31,8 @@ function Services() {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
+  const [search, setSearch] = useState<string>("")
+
 
   const { response: categoryResponse, globalDataFunc: fetchCategories } = useGlobalRequest(
     `${BASE_URL}/api/category`,
@@ -39,10 +42,10 @@ function Services() {
   const fetchMastersByCategory = async (categoryId: string) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/api/service/website-master?categoryId=${categoryId}&page=${page}&size=${size}`
+        `${BASE_URL}/api/service/website-master?categoryId=${categoryId}&page=${page}&size=${size}&info=${search}`
       )
       const data = await response.json()
-    
+
 
       if (data && data.body && Array.isArray(data.body.object)) {
         setMasters(data.body.object)
@@ -64,7 +67,7 @@ function Services() {
       setSelectedCategory(id)
       fetchMastersByCategory(id)
     }
-  }, [])
+  }, [search])
 
   useEffect(() => {
     if (selectedCategory) {
@@ -72,7 +75,7 @@ function Services() {
       console.log(' category:', selectedCategory)
       fetchMastersByCategory(selectedCategory)
     }
-  }, [selectedCategory, page, size])
+  }, [selectedCategory, page, size, search])
 
   const categories = categoryResponse?.body || []
 
@@ -130,8 +133,11 @@ function Services() {
             <Input
               placeholder="Поиск мастеров/салонов/услуг"
               type="search"
+              onChange={(e) => setSearch(e.target.value)}
               className="border-white text-white w-full md:w-96 placeholder:text-white mt-5 md:mt-0"
             />
+ 
+      
           </section>
 
           <section className="flex justify-center items-center flex-col py-10 w-full">
@@ -215,10 +221,10 @@ function Services() {
             )}
           </section>
         </main>
-       
+
       </div>
       <Footer />
-   
+
     </div>
   )
 }
