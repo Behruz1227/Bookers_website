@@ -8,7 +8,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({  description }) => {
   return (
-    <div className="bg-inherit p-6 rounded-lg  max-w-sm">
+    <div className="bg-inherit  py-3 rounded-lg  max-w-sm">
       {/* SVG liniyasi */}
       <div className="mb-4">
         <svg

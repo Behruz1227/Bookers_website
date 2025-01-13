@@ -23,21 +23,21 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         cursor-pointer 
         border-none 
         shadow-lg 
-        w-full sm:w-[278px] 
-        h-[140px] 
-        rounded-[20px] 
+        w-full  
+        rounded-3xl
         text-[#ffffff] 
-        flex
-        items-center 
-        justify-center
+        
         ${className}
       `}
     >
-      <div className="flex justify-between gap-5 items-center">
-        <div className="text-[#ffffff]">
+      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-5">
+        {/* Icon container */}
+        <div className="text-[#ffffff] text-4xl sm:text-5xl flex justify-center sm:justify-start">
           {icon}
         </div>
-        <div className="flex flex-col">
+        
+        {/* Text container */}
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
           <span
             className="text-[40px] font-extrabold text-[#ffffff] leading-[56px] font-manrope"
           >

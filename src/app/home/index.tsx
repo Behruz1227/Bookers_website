@@ -1,14 +1,14 @@
-//url 
-import {BASE_URL} from "@/helpers/Url"
+//API
+import { category, dashboard } from '@/helpers/Url';
 
 // Hooks
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 //Quary
 import { useGlobalRequest } from '@/helpers/Quary/quary';
 
 //components
-import Header from '@/components/Header/Header';import Hero from '@/components/Hero/Hero';
+import Header from '@/components/Header/Header'; import Hero from '@/components/Hero/Hero';
 import OfferCards from '@/components/cards/OfferCards';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import Footer from '@/components/footer/Footer';
@@ -25,10 +25,10 @@ import { LogoSlider } from '@/components/splide/LogoSlider';
 // icons 
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
-import { PiGraduationCapDuotone } from "react-icons/pi";
-import { HiUserGroup } from "react-icons/hi";
-import { IoLocationSharp } from "react-icons/io5";
-import { BsCheckCircle } from "react-icons/bs";
+import { FiCheckCircle, FiRefreshCw } from 'react-icons/fi';
+import { PiGraduationCapDuotone, PiMapPinAreaBold } from "react-icons/pi";
+import { HiOutlineUserGroup } from "react-icons/hi";
+
 
 // Images
 import HeroImg from '@/assets/img/Mask group (7).png';
@@ -40,6 +40,10 @@ import oson from "@/assets/logo/oson.png"
 import sello from "@/assets/logo/sello.png"
 import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
+import MasterClassModal from '@/components/Modal/master-class-modal';
+
+
+
 
 //logo splider
 const Logo = [
@@ -87,13 +91,18 @@ const ThreeCard = [
 
 
 function Home() {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   const {
     loading: statsLoading,
     error: statsError,
     response: statsResponse,
     globalDataFunc: fetchStats,
   } = useGlobalRequest(
-    `${BASE_URL}/api/dashboard/website/statistic`,
+    `${dashboard}`,
     'GET',
   );
   const { setOtzivHolat } = LoginIndex();
@@ -104,7 +113,7 @@ function Home() {
     response: categoryResponse,
     globalDataFunc: fetchCategories,
   } = useGlobalRequest(
-    `${BASE_URL}/api/category`,
+    `${category}`,
     "GET"
   );
 
@@ -123,10 +132,9 @@ function Home() {
 
   const statsData = statsResponse?.body || {};
   const categories = categoryResponse?.body || [];
-  console.log('countlaa ', statsData);
-  console.log('categoriyalar ', categories);
-  
-  
+
+
+
 
   return (
     <>
@@ -150,16 +158,16 @@ function Home() {
           }
         ]} />
         <Line />
-        <section className='grid lg:grid-cols-3 gap-3 gris-cols-1 '>
+        <section className='grid lg:grid-cols-3 gap-10 gris-cols-1 '>
           <OfferCards icon={Gift} data={FirstCard} title='Что предлагает BOOKERS клиентам услуг красоты?' firstButtonTitle="Скачать приложение" secondButtonTitle="Войти / Регистрация" />
           <OfferCards icon={HandCoins} data={TwoCard} title='Что предлагает BOOKERS мастерам?' firstButtonTitle="Скачать приложение" secondButtonTitle="Оформить подписку" />
-          <OfferCards icon={Gift} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:' firstButtonTitle="Интеграция" secondButtonTitle="Войти / Регистрация" />
+          <OfferCards icon={FiRefreshCw} data={ThreeCard} title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:' firstButtonTitle="Интеграция" secondButtonTitle="Войти / Регистрация" />
         </section>
         <Line />
         <section>
           <HeaderTitles text='Выберите категорию услуг красоты в bookers' />
-          <div className='py-10'>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className='pt-10'>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
               {categories.map((item: any) => (
                 <ServiceCard
                   key={item.id}
@@ -172,21 +180,7 @@ function Home() {
               ))}
             </div>
           </div>
-          <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
-              <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
-                Для создания объявления и обеспечения видимости <br className="hidden md:block" />
-                мероприятия в мобильном приложении и на сайте BOOKERS <br className="hidden md:block" />
-                отправьте заявку.
-              </h2>
-              <Button
-                className="w-full md:w-[340px] h-[50px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] md:text-[18px] leading-[25px] md:leading-[30px] hover:opacity-90"
-                onClick={() => alert("bookers")}
-              >
-                Отправить заявку
-              </Button>
-            </div>
-          </div>
+
         </section>
         <Line />
         <section>
@@ -197,18 +191,32 @@ function Home() {
             <Subtitle text='Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.' />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>Какую пользу вы получите с участием в программе <br /> “Мастер классы”</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 py-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-5">
             <Card description="Повышение лояльности аудитории — создание условий для укрепления связи с текущими клиентами и привлечения новых." />
             <Card description="Увеличение узнаваемости бренда — активное продвижение вашего бренда через различные каналы, чтобы сделать его более известным и популярным." />
             <Card description="Сбор целевой аудитории — привлечение и удержание клиентов, которые действительно заинтересованы в ваших услугах и продуктах." />
             <Card description="Мониторинг интереса  — постоянный анализ и отслеживание предпочтений и интересов аудитории для более точного удовлетворения их потребностей." />
             <Card description="Создание эффективного канала продвижения — разработка и внедрение стратегий, которые обеспечат максимальную эффективность в продвижении ваших услуг и продуктов." />
           </div>
+          <div className="w-full bg-[#B9B9C9] rounded-[16px]">
+            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
+              <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
+                Для создания объявления и обеспечения видимости <br className="hidden md:block" />
+                мероприятия в мобильном приложении и на сайте BOOKERS <br className="hidden md:block" />
+                отправьте заявку.
+              </h2>
+              <div>
+              <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>Отправить заявку</button>
+              <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
+              </div>
+            </div>
+          </div>
         </section>
+        <Line />
         <section>
-          <h2 className='text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35]'>
-            Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием
-          </h2>
+          <div className='px-2'>
+            <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' />
+          </div>
           <TestimonialSlider />
           <div className='flex justify-center'>
             <Button
@@ -222,28 +230,29 @@ function Home() {
         <Line />
         <section>
           <HeaderTitles text='Статистика bookers' />
-          <div className="flex flex-wrap gap-4 justify-center md:justify-between pt-10">
+          <div className="grid grid-cols-1 gap-5 pt-10 sm:grid-cols-2 lg:grid-cols-4">
             <StatsCard
-              icon={<PiGraduationCapDuotone style={{ fontSize: '34px' }} />}
+              icon={<PiGraduationCapDuotone style={{ fontSize: '5rem' }} />}
               count={statsData.masterCount}
               title="Количество мастеров"
             />
             <StatsCard
-              icon={<HiUserGroup style={{ fontSize: '34px' }} />}
+              icon={<HiOutlineUserGroup style={{ fontSize: '5rem' }} />}
               count={statsData.clientCount}
               title="Количество клиентов"
             />
             <StatsCard
-              icon={<IoLocationSharp style={{ fontSize: '34px' }} />}
+              icon={<PiMapPinAreaBold style={{ fontSize: '5rem' }} />}
               count={statsData.locationCount}
               title="Количество локаций"
             />
             <StatsCard
-              icon={<BsCheckCircle style={{ fontSize: '34px' }} />}
+              icon={<FiCheckCircle style={{ fontSize: '5rem' }} />}
               count={statsData.completedOrderCount}
               title="Успешных бронирований"
             />
           </div>
+
         </section>
         <Line />
         <section>
@@ -253,9 +262,18 @@ function Home() {
         <section>
           <HeaderTitles text='Новости bookers' />
           <BlogCardSlider />
+          <div className='flex justify-center pb-20'  >
+            <Button
+              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+              onClick={() => alert("Скачать приложение")}
+            >
+              Все новости
+            </Button>
+          </div>
         </section>
       </div>
       <Footer />
+
     </>
   );
 }

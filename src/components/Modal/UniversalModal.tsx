@@ -39,16 +39,16 @@ export const UniversalModal: React.FC<UniversalModalProps> = ({
 
 // return (
 //   <>
-//     <button onClick={openModal} >modal on</button>
-//     <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
-//       <div className="w-full text-center">
-//         <div>
-//           <h1>Modal Content</h1>
-//           <p>This is a modal.</p>
-//           <button type="button" className="mt-4 bg-[#9C0B35] text-white py-2 px-4 rounded" onClick={closeModal}>close</button>
-//         </div>
-//       </div>
-//     </UniversalModal>
+    // <button onClick={openModal} >modal on</button>
+    // <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
+    //   <div className="w-full text-center">
+    //     <div>
+    //       <h1>Modal Content</h1>
+    //       <p>This is a modal.</p>
+    //       <button type="button" className="mt-4 bg-[#9C0B35] text-white py-2 px-4 rounded" onClick={closeModal}>close</button>
+    //     </div>
+    //   </div>
+    // </UniversalModal>
 //   </>
 // )
 

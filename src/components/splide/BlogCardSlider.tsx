@@ -17,7 +17,7 @@ interface BlogPost {
 
 export const BlogCardSlider: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  console.log("post",posts);
+
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

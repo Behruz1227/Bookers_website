@@ -20,7 +20,7 @@ export function ServiceCard({
     <div className={`rounded-lg ${className}`}>
       <Link
         to={`/Services/${id}`}
-        className="bg-gradient-to-b bg-inherit text-white p-6 rounded-lg transition-transform block hover:scale-105"
+        className="bg-gradient-to-b bg-inherit text-white  rounded-lg transition-transform block hover:scale-105"
       >
         <div className="flex flex-col items-center text-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-[#9B1B47] flex items-center justify-center">

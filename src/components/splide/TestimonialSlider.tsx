@@ -27,7 +27,7 @@ export const TestimonialSlider: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  console.log('feedback', response);
+ 
 
   const buttonStyles = {
     width: '40px',
