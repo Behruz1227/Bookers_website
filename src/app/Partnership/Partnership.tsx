@@ -23,8 +23,9 @@ export const Partnership: React.FC = () => {
     return (
         <div>
             <div className='bg-[#111827]'>
-                <Header />
+               
                 <div className='container mx-auto '>
+                <Header />
                     <Hero slides={[{
                         title: "Мы предлагаем взаимовыгодное сотрудничество",
                         image: imgSplide, // Replace with your image path
