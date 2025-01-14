@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from '../../assets/img/Layer_1.png';
 import logoText from '../../assets/img/Мои записи.svg';
 import { Language } from "./Language";
@@ -10,12 +10,23 @@ import Button from "../button/Button";
 import { FiPhoneCall } from "react-icons/fi";
 import LoginIndex from "@/Store";
 import { t } from "i18next";
+import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { getMe } from "@/helpers/Url";
+import Typography from "antd/es/typography/Typography";
+import HeaderTitles from "../HeadTitle";
 
 
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
+    const { response, globalDataFunc, } = useGlobalRequest(getMe, 'GET');
+    useEffect(() => {
+        globalDataFunc();
+    }, [])
+    console.log('get me', response?.body);
+    const res = response?.body;
     const { setLoginHolat } = LoginIndex();
+    const token = localStorage.getItem('Token');
     return (
         <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
             <header className=" text-white relative ">
@@ -73,13 +84,24 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* Login/Register tugmasi */}
-                    <div className="absolute lg:relative lg:right-0 right-16">
-                        <Button onClick={() => setLoginHolat(true)}
-                            className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
-                        >
-                            <span className="hover:opacity-90">{t("auth")}</span>
-                        </Button>
-                    </div>
+                    {!token ?
+                        <div className="absolute lg:relative lg:right-0 right-16">
+                            <Button onClick={() => setLoginHolat(true)}
+                                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+                            >
+                                <span className="hover:opacity-90">{t("auth")}</span>
+                            </Button>
+                        </div> :
+                        <div className="flex flex-col items-end justify-end">
+                            {/* <h1 className="text-[#9c0a1b] ">
+                                {`${res?.firstName || ''} ${res?.lastName || 'ds'}`}
+                            </h1> */}
+                            <HeaderTitles size="text-2xl" text={res?.firstName || ''} />
+                            <p className="text-sm">
+                                {res?.phoneNumber || ''}
+                            </p>
+                        </div>
+                    }
                     {/* Mobil menyu tugmasi */}
                     <button
                         className="lg:hidden focus:outline-none"

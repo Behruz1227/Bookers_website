@@ -17,7 +17,7 @@ export const getLocationPermission = (
         (position) => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            sessionStorage.setItem('userLocation', JSON.stringify({ lat, lng }));
+            localStorage.setItem('userLocation', JSON.stringify({ lat, lng }));
             onSuccess({ lat, lng });
         },
         (err) => {
