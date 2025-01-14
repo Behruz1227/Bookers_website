@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import logo from '../../assets/img/Layer_1.png';
 import logoText from '../../assets/img/Мои записи.svg';
 import { Language } from "./Language";
@@ -7,7 +7,6 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { Bookers, Бронирование } from "./navBarMenu";
 import { Link } from "react-router-dom";
 import Button from "../button/Button";
-import { Input } from "../ui/input";
 import { FiPhoneCall } from "react-icons/fi";
 import LoginIndex from "@/Store";
 import { t } from "i18next";
@@ -97,19 +96,6 @@ const Header: React.FC = () => {
                             className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
                         ></span>
                     </button>
-                </div>
-                <div className=" w-full h-">
-                    <div>
-                    </div>
-                    <div className="flex items-center gap-28 lg:justify-end justify-center  py-6">
-                        <Input type="search" placeholder="Поиск мастеров/салонов/услуг" className="w-[350px] px-6 pl-4">
-                        </Input>
-                        <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
-                            <FiPhoneCall className="bg-[#9C0B35] p-2 rounded-full " size={30} />
-                            <span>+998 77 308-88-88</span>
-                        </div>
-                    </div>
-
                 </div>
 
                 {/* Mobil menyu */}

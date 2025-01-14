@@ -11,8 +11,8 @@ export const Vacancies: React.FC = () => {
   return (
     <div>
       <div className='bg-[#111827]'>
-        <Header />
-        <div className='container mx-auto pb-20 '>
+        
+        <div className='mx-auto pb-20 '>
           <Hero slides={[{
             title: "Компания Well Tech:  Вакансии",
             description: "Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды.  ",

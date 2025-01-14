@@ -27,8 +27,8 @@ export const Partnership: React.FC = () => {
         <div>
             <div className='bg-[#111827]'>
                
-                <div className='container mx-auto '>
-                <Header />
+                <div className='mx-auto '>
+                
                     <Hero slides={[{
                         title: t('PartnershipHeroTitle'),
                         image: imgSplide, // Replace with your image path

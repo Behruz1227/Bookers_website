@@ -225,7 +225,7 @@ export const Login: React.FC = () => {
                     {status === 'Login' && (
                         <div className='my-8'>
                             <div className="flex justify-center w-[300px] sm:w-[500px] s ">
-                                <div className="phone-input-container w-full rounded-md">
+                                <div className="phone-input-w-full rounded-md">
                                     <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
                                         Номер телефона*
                                     </label>

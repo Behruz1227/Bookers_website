@@ -140,8 +140,8 @@ function Home() {
 
   return (
     <>
-      <div className='bg-[#111827] w-full container mx-auto '>
-        <Header />
+      <div className='bg-[#111827] w-full mx-auto '>
+        
         <Hero slides={[
           {
             title: t("sistema"),

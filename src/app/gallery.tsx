@@ -102,7 +102,7 @@ function Gallery() {
 
   return (
     <>
-      <Header />
+      
       <main className="w-full px-[7%] bg-[#21212E] pb-10">
         <section className="w-full py-20 flex flex-col gap-5">
           <div className="flex items-start flex-col w-full gap-20">

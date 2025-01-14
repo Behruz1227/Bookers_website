@@ -13,7 +13,7 @@ interface CardProps {
 export default function Blogcard({ image, date, title, description, id }: CardProps) {
   return (
     <div className="max-w-sm rounded-2xl bg-[#B9B9C9] overflow-hidden ">
-      {/* Image Container */}
+      {/* Image */}
       <div className="relative h-[289px] w-full">
         <img
           src={image}
@@ -22,7 +22,7 @@ export default function Blogcard({ image, date, title, description, id }: CardPr
         />
       </div>
 
-      {/* Content Container */}
+      {/* Content */}
       <div className="p-6 space-y-3 ">
         {/* Date */}
         <div className="flex items-center gap-2 ">

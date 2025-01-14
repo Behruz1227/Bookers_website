@@ -13,6 +13,7 @@ import Services from "./app/services";
 import MasterProfile from "./app/Profile/MasterProfile";
 import { LeaveFeedback } from "./components/leave-feedback-controller/LeaveFeedback";
 import './i18n'; 
+import Header from "./components/Header/Header";
 
 function App() {
   const [location, setLocation] = useState<any>();
@@ -33,8 +34,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <BrowserRouter>
+    <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/galereya" element={<Gallery />} />
@@ -49,7 +51,7 @@ function App() {
           <Route path="/otziv" element={<LeaveFeedback />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
