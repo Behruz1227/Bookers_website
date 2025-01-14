@@ -31,12 +31,12 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       `}
     >
       <div className="flex flex-col sm:flex-row items-center sm:items-center gap-5">
-        {/* Icon container */}
+        {/* Icon */}
         <div className="text-[#ffffff] text-4xl sm:text-5xl flex justify-center sm:justify-start">
           {icon}
         </div>
         
-        {/* Text container */}
+        {/* Text */}
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
           <span
             className="text-[40px] font-extrabold text-[#ffffff] leading-[56px] font-manrope"

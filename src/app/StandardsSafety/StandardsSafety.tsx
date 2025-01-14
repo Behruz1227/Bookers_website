@@ -9,8 +9,8 @@ export const StandardsSafety: React.FC = () => {
   return (
     <div>
       <div className='bg-[#111827]'>
-        <Header />
-        <div className='container mx-auto '>
+        
+        <div className='mx-auto '>
           <Hero slides={[{
             title: "Стандартизация и Безопасность",
             description: "Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды",

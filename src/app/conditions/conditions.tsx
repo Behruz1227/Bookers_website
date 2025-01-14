@@ -6,7 +6,7 @@ import TermsOfUse from "@/components/MenuBar"
 function Conditions() {
   return (
     <div>
-       <Header/>
+       
         <TermsOfUse/>
         <Footer/>
     </div>
@@ -51,7 +51,7 @@ export default Conditions
 
 //   return (
 //     <div>
-//       <Header/>
+//       
 //       <TermsOfUse menuData={menuData} />
 //       <Footer/>
 //     </div>

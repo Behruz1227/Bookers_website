@@ -93,7 +93,7 @@ export default Card;
 
 ///ishlatish
 
-{/* <div className='flex justify-between  gap-3 container mx-auto'>
+{/* <div className='flex justify-between  gap-3 mx-auto'>
      <MasterCard
         description="Повышение лояльности аудитории — создание условий для укрепления связи с текущими клиентами и привлечения новых."
       />

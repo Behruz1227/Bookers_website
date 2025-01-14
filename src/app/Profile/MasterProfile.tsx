@@ -84,8 +84,8 @@ function MasterProfile() {
 
   return (
     <div>
-      <div className="bg-[#111827] w-full container mx-auto">
-      <Header />
+      <div className="bg-[#111827] w-full mx-auto">
+      
       <main className="px-4">
         <section className="w-full flex flex-col gap-5">
           <div className="flex flex-col lg:flex-row items-center justify-start gap-10">
