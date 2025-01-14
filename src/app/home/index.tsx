@@ -62,7 +62,7 @@ const Logo = [
 
 
 const FirstCard = [
-  { text: 'xdfcggvhbjnkml,' },
+  { text:`" t("OfferCardLeft1")"` },
   { text: 'Гарантированные онлайн-записи' },
   { text: 'Большой выбор мастеров' },
   { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
@@ -161,9 +161,9 @@ function Home() {
         ]} />
         <Line />
         <section className='grid lg:grid-cols-3 gap-10 gris-cols-1 '>
-          <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} secondButtonTitle="Войти / Регистрация" />
-          <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} secondButtonTitle="Оформить подписку" />
-          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle="Интеграция" secondButtonTitle="Войти / Регистрация" />
+          <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
+          <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
+          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />
         </section>
         <Line />
         <section>
@@ -192,23 +192,21 @@ function Home() {
           <div className='w-full md:w-[60%]'>
             <Subtitle text={t("Subtitle1")} />
           </div>
-          <h2 className='font-manrope font-bold text-[30px] text-white'>Какую пользу вы получите с участием в программе <br /> “Мастер классы”</h2>
+          <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-5">
-            <Card description="Повышение лояльности аудитории — создание условий для укрепления связи с текущими клиентами и привлечения новых." />
-            <Card description="Увеличение узнаваемости бренда — активное продвижение вашего бренда через различные каналы, чтобы сделать его более известным и популярным." />
-            <Card description="Сбор целевой аудитории — привлечение и удержание клиентов, которые действительно заинтересованы в ваших услугах и продуктах." />
-            <Card description="Мониторинг интереса  — постоянный анализ и отслеживание предпочтений и интересов аудитории для более точного удовлетворения их потребностей." />
-            <Card description="Создание эффективного канала продвижения — разработка и внедрение стратегий, которые обеспечат максимальную эффективность в продвижении ваших услуг и продуктов." />
+            <Card description={t("MasterClasscard")}/>
+            <Card description={t("MasterClasscard2")}/>
+            <Card description={t("MasterClasscard3")}/>
+            <Card description={t("MasterClasscard4")}/>
+            <Card description={t("MasterClasscard5")}/>
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
             <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
-                Для создания объявления и обеспечения видимости <br className="hidden md:block" />
-                мероприятия в мобильном приложении и на сайте BOOKERS <br className="hidden md:block" />
-                отправьте заявку.
+                {t("Bookers")}
               </h2>
               <div>
-              <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>Отправить заявку</button>
+              <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>{t("SendApplication")}</button>
               <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
               </div>
             </div>
@@ -217,7 +215,7 @@ function Home() {
         <Line />
         <section>
           <div className='px-2'>
-            <HeaderTitles text='Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием' />
+            <HeaderTitles text={t("Headertitle3")} />
           </div>
           <TestimonialSlider />
           <div className='flex justify-center'>
@@ -225,51 +223,51 @@ function Home() {
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] hover:opacity-90"
               onClick={() => setOtzivHolat(true)}
             >
-              Оставить отзыв
+              {t("LeaveFeedback")}
             </Button>
           </div>
         </section>
         <Line />
         <section>
-          <HeaderTitles text='Статистика bookers' />
+          <HeaderTitles text={t("chart")} />
           <div className="grid grid-cols-1 gap-5 pt-10 sm:grid-cols-2 lg:grid-cols-4">
             <StatsCard
               icon={<PiGraduationCapDuotone style={{ fontSize: '5rem' }} />}
               count={statsData.masterCount}
-              title="Количество мастеров"
+              title={t("masters")}
             />
             <StatsCard
               icon={<HiOutlineUserGroup style={{ fontSize: '5rem' }} />}
               count={statsData.clientCount}
-              title="Количество клиентов"
+              title={t("customers")}
             />
             <StatsCard
               icon={<PiMapPinAreaBold style={{ fontSize: '5rem' }} />}
               count={statsData.locationCount}
-              title="Количество локаций"
+              title={t("locations")}
             />
             <StatsCard
               icon={<FiCheckCircle style={{ fontSize: '5rem' }} />}
               count={statsData.completedOrderCount}
-              title="Успешных бронирований"
+              title={t("Successful")}
             />
           </div>
 
         </section>
         <Line />
         <section>
-          <HeaderTitles text='Бизнес-партнеры мобильного приложения bookers' />
+          <HeaderTitles text={t("logo")} />
           <LogoSlider logos={Logo} />
         </section>
         <section>
-          <HeaderTitles text='Новости bookers' />
+          <HeaderTitles text={t("news")} />
           <BlogCardSlider />
           <div className='flex justify-center pb-20'  >
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
               onClick={() => alert("Скачать приложение")}
             >
-              Все новости
+              {t("AllNews")}
             </Button>
           </div>
         </section>

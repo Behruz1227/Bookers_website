@@ -12,6 +12,7 @@ import YouTube from "../../assets/footer/youtube.png";
 import APP from "../../assets/footer/Group (8).png";
 import Play from "../../assets/footer/Group 144.png";
 import LoginIndex from "@/Store";
+import { t } from "i18next";
 
 function Footer() {
   const { setLoginHolat, setLoginRole } = LoginIndex();
@@ -22,17 +23,17 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Documentation */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">Документация</h2>
-            <Link to="/conditions" className="text-[15px]">Условия использования</Link>
-            <Link to="/conditions" className="text-[15px]">Публичное соглашение</Link>
-            <Link to="/conditions" className="text-[15px]">Лицензионным соглашением</Link>
-            <Link to="/conditions" className="text-[15px]">Политикой конфиденциальности</Link>
+            <h2 className="text-[20px] font-bold">{t("Documentation")}</h2>
+            <Link to="/conditions" className="text-[15px]">{t("conditions")}</Link>
+            <Link to="/conditions" className="text-[15px]">{t("PublicAgreement")}</Link>
+            <Link to="/conditions" className="text-[15px]">{t("LicensedAgreement")}</Link>
+            <Link to="/conditions" className="text-[15px]">{t("PrivacyPolicy")}</Link>
           </div>
           {/* Main Links */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">Ссылки основных страниц</h2>
-            <Link to="#app" className="text-[15px]">Kлиентам</Link>
-            <Link to="/Home" className="text-[15px]">Mастерам</Link>
+            <h2 className="text-[20px] font-bold">{t("MainPageLinks")}</h2>
+            <Link to="#app" className="text-[15px]">{t("toClients")}</Link>
+            <Link to="/Home" className="text-[15px]">{t("ToMasters")}</Link>
             <Link to="/Home" className="text-[15px]">Бизнес-партнерство</Link>
             <Link to="/Home" className="text-[15px]">Мастерклассы / Обучение/ Тренинги</Link>
             <Link to="/Tariffs" className="text-[15px]">Пакеты для мастеров</Link>
