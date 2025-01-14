@@ -9,17 +9,20 @@ import React from 'react'
 import imgSplide from "@/assets/img/telegram-cloud-photo-size-2-5422467465163692948-y 1 (1).png"
 import { RefreshCcw } from 'lucide-react'
 import OfferCards from '@/components/cards/OfferCards'
+import { useTranslation } from 'react-i18next'
 
 //card
-const ThreeCard = [
-    { text: 'Модуль управления клиентами' },
-    { text: 'Модуль мониторинга и аналитики' },
-    { text: 'Модуль планирования и расписания' },
-    { text: 'Модуль маркетинга и продвижения' },
-    { text: 'Модуль управления персоналом' },
-    { text: 'Модуль комьюнити' },
-];
+
 export const Partnership: React.FC = () => {
+    const { t } = useTranslation()
+    const ThreeCard = [
+        { text: t('PartnershipOfferCardstext1') },
+        { text: t('PartnershipOfferCardstext2') },
+        { text: t('PartnershipOfferCardstext3')},
+        { text: t('PartnershipOfferCardstext4')},
+        { text: t('PartnershipOfferCardstext5')},
+        { text: t('PartnershipOfferCardstext6')},
+    ];
     return (
         <div>
             <div className='bg-[#111827]'>
@@ -27,33 +30,33 @@ export const Partnership: React.FC = () => {
                 <div className='mx-auto '>
                 
                     <Hero slides={[{
-                        title: "Мы предлагаем взаимовыгодное сотрудничество",
+                        title: t('PartnershipHeroTitle'),
                         image: imgSplide, // Replace with your image path
                     },
                     {
-                        title: "Мы предлагаем взаимовыгодное сотрудничество",
+                        title: t('PartnershipHeroTitle'),
                         image: imgSplide, // Replace with your image path
                     },
                     {
-                        title: "Мы предлагаем взаимовыгодное сотрудничество",
+                        title: t('PartnershipHeroTitle'),
                         image: imgSplide, // Replace with your image path
                     },]} />
                     <div className='py-10'>
-                        <HeaderTitles text='Web-кабинет bookers: управляйте бизнес процессами своего салона красоты эффективно и выгодно' size='' />
+                        <HeaderTitles text={t('PartnershipHeaderTitles')} size='' />
                         <div>
-                            <Subtitle text="Мы предлагаем взаимовыгодное партнерство владельцам салонов красоты с инструментами управления и мониторинга для обеспечения стабильного роста бизнеса. Вы можете интегрировать сразу несколько филиалов сети и в режиме онлайн управлять процессами с помощью адаптированного Web-кабинета bookers, разработанного под вашу бизнес-стратегию. bookers поможет создать эффективную воронку продаж и обрабатывать клиентов до сделки через модуль комьюнити." 
+                            <Subtitle text={t('PartnershipSubtitle1')}
                             size='max-w-[759px]  lg:text-left' />
                         </div>
                         <div className='mt-[20px]'>
-                            <Subtitle text="Web-кабинет bookers интегрирует ваш бизнес с модулями для повышения лояльности клиентов, увеличения доходов и анализа деятельности."
+                            <Subtitle text={t('PartnershipSubtitle2')}
                              size='max-w-[759px]  lg:text-left' />
                         </div>
                         <OfferCards
                         icon={RefreshCcw}
                         data={ThreeCard}
-                        title='Какую интеграцию предлагает BOOKERS бизнес-партнерам:'
-                        firstButtonTitle="Интеграция"
-                        secondButtonTitle='Войти / Регистрация'
+                        title={t('PartnershipOfferCardsTitle')}
+                        firstButtonTitle={t('PartnershipOfferCardsFirstButtonTitle')}
+                        secondButtonTitle={t('PartnershipOfferCardsSecondButtonTitle')}
                     />
                     </div>
                     

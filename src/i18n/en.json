@@ -43,7 +43,23 @@
     "PrivacyPolicy":"Privacy Policy",
     "toClients":"to clients",
     "ToMasters":"to the masters",
-    "MainPageLinks":"Main Page Links"
+    "MainPageLinks":"Main Page Links",
+
+    
+    "PartnershipHeroTitle": "We offer mutually beneficial cooperation",
+    "PartnershipHeaderTitles": "Bookers Web-cabinet: manage your beauty salon business processes efficiently and profitably",
+    "PartnershipSubtitle1": "We offer mutually beneficial partnerships to beauty salon owners with management and monitoring tools to ensure stable business growth. You can integrate several branches of the network at once and manage processes online using the adapted bookers Web-cabinet, developed for your business strategy. bookers will help create an effective sales funnel and process clients before the transaction through the community module.",
+    "PartnershipSubtitle2":"The bookers web-cabinet integrates your business with modules to increase customer loyalty, increase revenue and analyze activities.",
+    "PartnershipOfferCardsTitle": "What integration does BOOKERS offer to business partners:",
+    "PartnershipOfferCardsFirstButtonTitle": "Integration",
+    "PartnershipOfferCardsSecondButtonTitle": "Login / Register",
+    "onszmavjudodszDilshod": "Reactga code yozishdan olsin htmlni urganing uka",
+    "PartnershipOfferCardstext1": "Client Management Module",
+    "PartnershipOfferCardstext2": "Monitoring and analytics module",
+    "PartnershipOfferCardstext3": "Planning and Scheduling Module",
+    "PartnershipOfferCardstext4": "Marketing and Promotion Module",
+    "PartnershipOfferCardstext5": "HR Management Module",
+    "PartnershipOfferCardstext6": "Community module"
 
   }
   

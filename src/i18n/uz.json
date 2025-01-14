@@ -47,6 +47,24 @@
     "PrivacyPolicy":"Maxfiylik siyosati",
     "toClients":"mijozlarga",
     "ToMasters":"ustalarga",
-    "MainPageLinks":"Bosh sahifa havolalari"
+    "MainPageLinks":"Bosh sahifa havolalari",
+
+
+  
+  "PartnershipHeroTitle": "Biz o'zaro manfaatli hamkorlikni taklif qilamiz",
+  "PartnershipHeaderTitles": "Bookers veb-ofisi: go'zallik saloningizning biznes jarayonlarini samarali va foydali boshqaring",
+  "PartnershipSubtitle1": "Biz go'zallik salonlari egalariga biznesning barqaror rivojlanishini ta'minlash uchun boshqaruv va monitoring vositalari bilan o'zaro manfaatli hamkorlikni taklif qilamiz. Siz bir vaqtning o'zida tarmoqning bir nechta filiallarini birlashtirishingiz va biznes strategiyangizga mos ravishda ishlab chiqilgan moslashtirilgan Bookers veb-hisobidan foydalanib, jarayonlarni onlayn boshqarishingiz mumkin. bukerlar sizga samarali savdo hunisini yaratishda yordam beradi va tranzaksiyadan oldin mijozlarni jamoa moduli orqali qayta ishlaydi.",
+  "PartnershipSubtitle2":"Bookers veb-hisobi mijozlarning sodiqligini oshirish, daromadlarni oshirish va faoliyatni tahlil qilish uchun biznesingizni modullar bilan birlashtiradi.",
+  "PartnershipOfferCardsTitle": "BOOKERS biznes hamkorlariga qanday integratsiyani taklif qiladi:",
+    "PartnershipOfferCardsFirstButtonTitle": "Integratsiya",
+    "PartnershipOfferCardsSecondButtonTitle": "Kirish / Ro'yxatdan o'tish",
+    "onszmavjudodszDilshod": "Reactga code yozishdan olsin htmlni urganing opa",
+    "PartnershipOfferCardstext1": "Mijozlarni boshqarish moduli",
+    "PartnershipOfferCardstext2": "Monitoring va tahlil moduli",
+    "PartnershipOfferCardstext3": "Rejalashtirish va rejalashtirish moduli",
+    "PartnershipOfferCardstext4": "Marketing va reklama moduli",
+    "PartnershipOfferCardstext5": "HR moduli",
+    "PartnershipOfferCardstext6": "Jamiyat moduli"
+
   }
   
