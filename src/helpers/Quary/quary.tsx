@@ -59,7 +59,7 @@ export function useGlobalRequest<T>(
 
 export const getConfig = async () => {
     try {
-        const token = await sessionStorage.getItem("token");
+        const token = await localStorage.getItem("Token");
         if (token) {
             return {
                 headers: {
@@ -75,7 +75,7 @@ export const getConfig = async () => {
 };
 export const getConfigImg = async () => {
     try {
-        const token = await sessionStorage.getItem("token");
+        const token = await localStorage.getItem("Token");
         if (token) {
             return {
                 headers: {

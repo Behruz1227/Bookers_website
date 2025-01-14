@@ -18,7 +18,7 @@ import Header from "./components/Header/Header";
 function App() {
   const [location, setLocation] = useState<any>();
   const [error, setError] = useState<any>();
-  const userLocation: any = sessionStorage.getItem("userLocation");
+  const userLocation: any = localStorage.getItem("userLocation");
   useEffect(() => {
     if (!userLocation) {
       getLocationPermission(
