@@ -47,6 +47,25 @@
     "PrivacyPolicy":"Политикой конфиденциальности",
     "toClients":"клиентам",
     "ToMasters":"мастерам",
-    "MainPageLinks":"Main Page Links"
+    "MainPageLinks":"Main Page Links",
+
+
+    "PartnershipHeroTitle": "Мы предлагаем взаимовыгодное сотрудничество",
+    "PartnershipHeaderTitles": "Web-кабинет bookers: управляйте бизнес процессами своего салона красоты эффективно и выгодно",
+    "PartnershipSubtitle1": "Мы предлагаем взаимовыгодное партнерство владельцам салонов красоты с инструментами управления и мониторинга для обеспечения стабильного роста бизнеса. Вы можете интегрировать сразу несколько филиалов сети и в режиме онлайн управлять процессами с помощью адаптированного Web-кабинета bookers, разработанного под вашу бизнес-стратегию. bookers поможет создать эффективную воронку продаж и обрабатывать клиентов до сделки через модуль комьюнити.",
+    "PartnershipSubtitle2":"Web-кабинет bookers интегрирует ваш бизнес с модулями для повышения лояльности клиентов, увеличения доходов и анализа деятельности.",
+    "PartnershipOfferCardsTitle": "Какую интеграцию предлагает BOOKERS бизнес-партнерам:",
+    "PartnershipOfferCardsFirstButtonTitle": "Интеграция",
+    "PartnershipOfferCardsSecondButtonTitle": "Войти / Регистрация",
+    "PartnershipOfferCardstext1": "Модуль управления клиентами",
+    "PartnershipOfferCardstext2": "Модуль мониторинга и аналитики",
+    "PartnershipOfferCardstext3": "Модуль планирования и расписания",
+    "PartnershipOfferCardstext4": "Модуль маркетинга и продвижения",
+    "PartnershipOfferCardstext5": "Модуль управления персоналом",
+    "PartnershipOfferCardstext6": "Модуль комьюнити",
+
+
+
+    "AboutCompany"
   }
   
