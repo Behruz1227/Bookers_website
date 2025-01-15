@@ -12,7 +12,7 @@ import LoginIndex from "@/Store";
 import { t } from "i18next";
 import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { getMe } from "@/helpers/Url";
-import Typography from "antd/es/typography/Typography";
+
 import HeaderTitles from "../HeadTitle";
 
 
