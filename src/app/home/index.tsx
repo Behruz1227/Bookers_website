@@ -214,10 +214,10 @@ function Home() {
         </section>
         <Line />
         <section>
-          <div className="w-full md:w-[60%]">
+          <div className="w-full xl:w-[60%]">
             <HeaderTitles text={t("Headertitle2")} />
           </div>
-          <div className='w-full md:w-[60%]'>
+          <div className='w-full xl:w-[60%]'>
             <Subtitle text={t("Subtitle1")} />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
