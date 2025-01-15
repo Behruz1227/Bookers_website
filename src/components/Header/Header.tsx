@@ -30,7 +30,7 @@ const Header: React.FC = () => {
     return (
         <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
             <header className=" text-white relative ">
-                <div className="mx-auto flex justify-between items-center py-6">
+                <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}
                     <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
                         <Link to='/'>
