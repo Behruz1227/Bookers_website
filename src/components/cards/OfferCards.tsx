@@ -26,13 +26,13 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
     return (
         <div className='h-max w-full flex flex-col justify-center p-6 rounded-3xl bg-[#B9B9C9] mb-6 lg:mb-0'>
             <div className='text-center flex flex-col items-center mb-5 '>
-               {Icon && <Icon className='text-[70px] text-[#9C0B35] w-[82px] h-[82px]' />}
-                <p className='text-[#9C0B35] font-manrope font-extrabold  text-[26px]  lg:px-10 mt-2'>{title && title}</p>
+               {Icon && <Icon className=' text-[#9C0B35] w-[82px] h-[82px]' />}
+                <p className='text-[#9C0B35] font-manrope font-extrabold pt-5 text-[26px]'>{title && title}</p>
             </div>
             <div className='text-left text-[#000000] space-y-4 mb-5'>
                 {data && data.map((item, index) => (
-                    <div key={index} className='flex items-center'  >
-                        <FaRegCircleCheck size={24} className='text-[#9C0B35] mr-3' />
+                    <div key={index} className='flex items-start gap-3'  >
+                        <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                         <p className='flex-1 font-manrope font-medium text-[20px]'>{item.text}</p>
                     </div>
                 ))}
@@ -43,7 +43,7 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
            <div className='flex flex-col gap-3 justify-center items-center '>
            {firstButtonTitle && (
                 <Button
-                    className="w-full h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
+                    className="w-[100%] lg:w-[50%] sm:w-[50%] xl:w-[100%] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
                     onClick={onclickFirstButton}
                 >
                     {firstButtonTitle}
@@ -52,7 +52,7 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
 
             {secondButtonTitle && (
                 <Button
-                    className=" w-full h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]  "
+                    className="w-[100%] lg:w-[50%] sm:w-[50%] xl:w-[100%] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]  "
                     onClick={onclickSecondButton}
                 >
                     {secondButtonTitle}

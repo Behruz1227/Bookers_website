@@ -61,41 +61,68 @@ const Logo = [
   { src: sello, alt: 'Sello' },
   { src: click, alt: 'Click' },
 ];
+// const { t } = useTranslation()
 
+// const FirstCard = [
+//   { text:t("OfferCardLeft1") },
+//   { text: 'Гарантированные онлайн-записи' },
+//   { text: 'Большой выбор мастеров' },
+//   { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
+//   { text: 'Интеграция с календарем и напоминания' },
+//   { text: 'Программы лояльности и бонусы' },
+// ];
 
-const FirstCard = [
-  { text:`" t("OfferCardLeft1")"` },
-  { text: 'Гарантированные онлайн-записи' },
-  { text: 'Большой выбор мастеров' },
-  { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
-  { text: 'Интеграция с календарем и напоминания' },
-  { text: 'Программы лояльности и бонусы' },
-];
+// const TwoCard = [
+//   { text: 'Возможность настраивать услуги по полу, категориям,специализациям и процедурам' },
+//   { text: 'Управление графиком работы' },
+//   { text: 'Онлайн бронирование' },
+//   { text: 'Активация времени для VIP клиентов' },
+//   { text: 'Настройка приема онлайн оплаты и предоплаты' },
+//   { text: 'Учет расходов мастера' },
+// ];
 
-const TwoCard = [
-  { text: 'Возможность настраивать услуги по полу, категориям,специализациям и процедурам' },
-  { text: 'Управление графиком работы' },
-  { text: 'Онлайн бронирование' },
-  { text: 'Активация времени для VIP клиентов' },
-  { text: 'Настройка приема онлайн оплаты и предоплаты' },
-  { text: 'Учет расходов мастера' },
-];
-
-const ThreeCard = [
-  { text: 'Модуль управления клиентами' },
-  { text: 'Модуль мониторинга и аналитики' },
-  { text: 'Модуль планирования и расписания' },
-  { text: 'Модуль маркетинга и продвижения' },
-  { text: 'Модуль управления персоналом' },
-  { text: 'Модуль комьюнити' },
-];
+// const ThreeCard = [
+//   { text: 'Модуль управления клиентами' },
+//   { text: 'Модуль мониторинга и аналитики' },
+//   { text: 'Модуль планирования и расписания' },
+//   { text: 'Модуль маркетинга и продвижения' },
+//   { text: 'Модуль управления персоналом' },
+//   { text: 'Модуль комьюнити' },
+// ];
 
 
 
 
 function Home() {
-  const [isModalOpen, setModalOpen] = useState(false);
   const { t } = useTranslation()
+
+  const FirstCard = [
+    { text: t("OfferCardLeft1") },
+    { text: 'Гарантированные онлайн-записи' },
+    { text: 'Большой выбор мастеров' },
+    { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
+    { text: 'Интеграция с календарем и напоминания' },
+    { text: 'Программы лояльности и бонусы' },
+  ];
+
+  const TwoCard = [
+    { text: 'Возможность настраивать услуги по полу, категориям, специализациям и процедурам' },
+    { text: 'Управление графиком работы' },
+    { text: 'Онлайн бронирование' },
+    { text: 'Активация времени для VIP клиентов' },
+    { text: 'Настройка приема онлайн оплаты и предоплаты' },
+    { text: 'Учет расходов мастера' },
+  ];
+
+  const ThreeCard = [
+    { text: 'Модуль управления клиентами' },
+    { text: 'Модуль мониторинга и аналитики' },
+    { text: 'Модуль планирования и расписания' },
+    { text: 'Модуль маркетинга и продвижения' },
+    { text: 'Модуль управления персоналом' },
+    { text: 'Модуль комьюнити' },
+  ];
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -171,22 +198,23 @@ function Home() {
             image: HeroImg,
           },
           {
-            title:t("sistema"),
-            description:t("HeroDescription"),
+            title: t("sistema"),
+            description: t("HeroDescription"),
             image: HeroImg,
           }
         ]} />
         <Line />
-        <section className='grid lg:grid-cols-3 gap-10 gris-cols-1 '>
+        <section className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
           <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
           <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
           <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />
         </section>
+
         <Line />
         <section>
           <HeaderTitles text={t("Headertitle1")} />
           <div className='pt-10'>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-20">
               {categories.map((item: any) => (
                 <ServiceCard
                   key={item.id}
@@ -211,20 +239,20 @@ function Home() {
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-5">
-            <Card description={t("MasterClasscard")}/>
-            <Card description={t("MasterClasscard2")}/>
-            <Card description={t("MasterClasscard3")}/>
-            <Card description={t("MasterClasscard4")}/>
-            <Card description={t("MasterClasscard5")}/>
+            <Card description={t("MasterClasscard")} />
+            <Card description={t("MasterClasscard2")} />
+            <Card description={t("MasterClasscard3")} />
+            <Card description={t("MasterClasscard4")} />
+            <Card description={t("MasterClasscard5")} />
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
+            <div className="flex flex-col xl:flex-row justify-between items-center p-6 md:p-10 gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
                 {t("Bookers")}
               </h2>
               <div>
-              <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>{t("SendApplication")}</button>
-              <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
+                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>{t("SendApplication")}</button>
+                <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
               </div>
             </div>
           </div>
@@ -247,29 +275,28 @@ function Home() {
         <Line />
         <section>
           <HeaderTitles text={t("chart")} />
-          <div className="grid grid-cols-1 gap-5 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 pt-10 ">
             <StatsCard
-              icon={<PiGraduationCapDuotone style={{ fontSize: '5rem' }} />}
+              icon={<PiGraduationCapDuotone style={{ fontSize: '4rem' }} />}
               count={statsData.masterCount}
               title={t("masters")}
             />
             <StatsCard
-              icon={<HiOutlineUserGroup style={{ fontSize: '5rem' }} />}
+              icon={<HiOutlineUserGroup style={{ fontSize: '4rem' }} />}
               count={statsData.clientCount}
               title={t("customers")}
             />
             <StatsCard
-              icon={<PiMapPinAreaBold style={{ fontSize: '5rem' }} />}
+              icon={<PiMapPinAreaBold style={{ fontSize: '4rem' }} />}
               count={statsData.locationCount}
               title={t("locations")}
             />
             <StatsCard
-              icon={<FiCheckCircle style={{ fontSize: '5rem' }} />}
+              icon={<FiCheckCircle style={{ fontSize: '4rem' }} />}
               count={statsData.completedOrderCount}
               title={t("Successful")}
             />
           </div>
-
         </section>
         <Line />
         <section>
