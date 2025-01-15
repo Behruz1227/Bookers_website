@@ -25,7 +25,7 @@ import { LogoSlider } from '@/components/splide/LogoSlider';
 // icons 
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
-import { FiCheckCircle, FiRefreshCw } from 'react-icons/fi';
+import { FiCheckCircle, FiPhoneCall, FiRefreshCw } from 'react-icons/fi';
 import { PiGraduationCapDuotone, PiMapPinAreaBold } from "react-icons/pi";
 import { HiOutlineUserGroup } from "react-icons/hi";
 
@@ -42,6 +42,8 @@ import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
 import MasterClassModal from '@/components/Modal/master-class-modal';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
 
 
 
@@ -95,7 +97,7 @@ function Home() {
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-
+  const navigate = useNavigate()
   const {
     loading: statsLoading,
     error: statsError,
@@ -139,7 +141,22 @@ function Home() {
   return (
     <>
       <div className='bg-[#111827] w-full mx-auto '>
+      <div className=" w-full h-">
+          <div>
+          </div>
+          <div className="flex items-center gap-28 lg:justify-end justify-center  py-6">
+            <div
+              onClick={() => navigate('/Master/...')}
+              className="p-2 bg-[#9C0B35] rounded-full border">
+              <FaSearch color="white" />
+            </div>
+            <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
+              <FiPhoneCall color="white" className="bg-[#9C0B35] p-2 rounded-full " size={30} />
+              <span className='text-white'>+998 77 308-88-88</span>
+            </div>
+          </div>
 
+        </div>
         <Hero slides={[
           {
             title: t("sistema"),
@@ -185,10 +202,10 @@ function Home() {
         </section>
         <Line />
         <section>
-          <div className="w-full md:w-[60%]">
+          <div className="w-full xl:w-[60%]">
             <HeaderTitles text={t("Headertitle2")} />
           </div>
-          <div className='w-full lg:w-[60%]'>
+          <div className='w-full xl:w-[60%]'>
             <Subtitle text={t("Subtitle1")} />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
@@ -200,7 +217,7 @@ function Home() {
             <Card description={t("MasterClasscard5")} />
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
+            <div className="flex flex-col xl:flex-row justify-between items-center p-6 md:p-10 gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
                 {t("Bookers")}
               </h2>

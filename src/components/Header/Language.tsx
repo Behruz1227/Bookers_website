@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 export const Language: React.FC = () => {
   const [active, setActive] = useState<string>('uz')
   const { t, i18n } = useTranslation();
+  const lang = localStorage.getItem('i18nextLng');
+  
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng); // Tilni o‘zgartirish
@@ -34,7 +36,7 @@ export const Language: React.FC = () => {
   },
   {
     id: 3,
-    value: 'eng',
+    value: 'en',
     label: t('english'),
     img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
   }
@@ -45,6 +47,8 @@ export const Language: React.FC = () => {
       <div className="relative hidden lg:flex">
         <select
           name="language"
+          id="language"
+          value={lang || 'uz'}
           aria-label="Language"
           className="appearance-none outline-none bg-[#21212E] text-white p-3 pl-5 pr-10 border border-white rounded-[10px] cursor-pointer"
           onChange={(e) => {
@@ -77,8 +81,11 @@ export const Language: React.FC = () => {
         <div className='flex flex-row gap-2 items-center p-4'>
           {
             language.map((item, index) => (
-              <button key={index} onClick={() => setActive(item.value)} aria-label="language" className={`p-2 flex flex-row items-center border border-gray-300 text-sm font-medium text-gray-700 hover:bg-[#7f7f95] focus:outline-none"
-              ${active === item.value ? 'bg-[#9C0B35]' : ''}`}>
+              <button key={index} onClick={() => {
+                setActive(item.value)
+                 changeLanguage(item.value)
+                }} aria-label="language" className={`p-2 flex flex-row items-center border border-gray-300 text-sm font-medium text-gray-700 hover:bg-[#7f7f95] focus:outline-none"
+              ${lang === item.value ? 'bg-[#9C0B35]' : ''}`}>
                 <span className="text-md text-white">{item.label}</span>
                 <span className="ml-1"> <img src={item.img} alt='icon' className="w-5 h-5" /></span>
               </button>
