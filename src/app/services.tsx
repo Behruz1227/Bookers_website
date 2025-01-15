@@ -100,7 +100,7 @@ function Services() {
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
             <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
-              Услуги мастеров и салонов красоты: {categories.find(item => item.id === selectedCategory)?.name || "Все услуги"}
+              Услуги мастеров и салонов красоты: {categories.find((item: any) => item.id === selectedCategory)?.name || "Все услуги"}
             </h1>
             <img
               src={HeroImg}

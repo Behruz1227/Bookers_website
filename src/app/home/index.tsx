@@ -59,35 +59,6 @@ const Logo = [
   { src: sello, alt: 'Sello' },
   { src: click, alt: 'Click' },
 ];
-// const { t } = useTranslation()
-
-// const FirstCard = [
-//   { text:t("OfferCardLeft1") },
-//   { text: 'Гарантированные онлайн-записи' },
-//   { text: 'Большой выбор мастеров' },
-//   { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
-//   { text: 'Интеграция с календарем и напоминания' },
-//   { text: 'Программы лояльности и бонусы' },
-// ];
-
-// const TwoCard = [
-//   { text: 'Возможность настраивать услуги по полу, категориям,специализациям и процедурам' },
-//   { text: 'Управление графиком работы' },
-//   { text: 'Онлайн бронирование' },
-//   { text: 'Активация времени для VIP клиентов' },
-//   { text: 'Настройка приема онлайн оплаты и предоплаты' },
-//   { text: 'Учет расходов мастера' },
-// ];
-
-// const ThreeCard = [
-//   { text: 'Модуль управления клиентами' },
-//   { text: 'Модуль мониторинга и аналитики' },
-//   { text: 'Модуль планирования и расписания' },
-//   { text: 'Модуль маркетинга и продвижения' },
-//   { text: 'Модуль управления персоналом' },
-//   { text: 'Модуль комьюнити' },
-// ];
-
 
 
 
@@ -217,7 +188,7 @@ function Home() {
           <div className="w-full md:w-[60%]">
             <HeaderTitles text={t("Headertitle2")} />
           </div>
-          <div className='w-full md:w-[60%]'>
+          <div className='w-full lg:w-[60%]'>
             <Subtitle text={t("Subtitle1")} />
           </div>
           <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
