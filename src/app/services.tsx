@@ -16,7 +16,6 @@ import Button from "@/components/button/Button"
 import Footer from "@/components/footer/Footer"
 
 import MasterCard from "@/components/cards/Master"
-import Header from "@/components/Header/Header"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { Input } from "@/components/ui/input"
 
