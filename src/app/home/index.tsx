@@ -197,7 +197,7 @@ function Home() {
         <section>
           <HeaderTitles text={t("Headertitle1")} />
           <div className='pt-10'>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-20">
               {categories.map((item: any) => (
                 <ServiceCard
                   key={item.id}
@@ -258,29 +258,28 @@ function Home() {
         <Line />
         <section>
           <HeaderTitles text={t("chart")} />
-          <div className="grid grid-cols-1 gap-5 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 pt-10 ">
             <StatsCard
-              icon={<PiGraduationCapDuotone style={{ fontSize: '5rem' }} />}
+              icon={<PiGraduationCapDuotone style={{ fontSize: '4rem' }} />}
               count={statsData.masterCount}
               title={t("masters")}
             />
             <StatsCard
-              icon={<HiOutlineUserGroup style={{ fontSize: '5rem' }} />}
+              icon={<HiOutlineUserGroup style={{ fontSize: '4rem' }} />}
               count={statsData.clientCount}
               title={t("customers")}
             />
             <StatsCard
-              icon={<PiMapPinAreaBold style={{ fontSize: '5rem' }} />}
+              icon={<PiMapPinAreaBold style={{ fontSize: '4rem' }} />}
               count={statsData.locationCount}
               title={t("locations")}
             />
             <StatsCard
-              icon={<FiCheckCircle style={{ fontSize: '5rem' }} />}
+              icon={<FiCheckCircle style={{ fontSize: '4rem' }} />}
               count={statsData.completedOrderCount}
               title={t("Successful")}
             />
           </div>
-
         </section>
         <Line />
         <section>
