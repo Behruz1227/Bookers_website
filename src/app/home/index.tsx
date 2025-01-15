@@ -187,7 +187,7 @@ function Home() {
           }
         ]} />
         <Line />
-        <section className='grid grid-cols-1 lg:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
+        <section className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
           <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
           <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
           <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />

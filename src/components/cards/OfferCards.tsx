@@ -43,7 +43,7 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
            <div className='flex flex-col gap-3 justify-center items-center '>
            {firstButtonTitle && (
                 <Button
-                    className="w-[100%] sm:w-[50%] lg:w-[100%] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
+                    className="w-[100%] lg:w-[50%] sm:w-[50%] xl:w-[100%] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
                     onClick={onclickFirstButton}
                 >
                     {firstButtonTitle}
@@ -52,7 +52,7 @@ const OfferCards: React.FC<HomeOffersTypes> = ({ title, icon: Icon, data, firstB
 
             {secondButtonTitle && (
                 <Button
-                    className=" w-[100%] sm:w-[50%] lg:w-[100%] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]  "
+                    className="w-[100%] lg:w-[50%] sm:w-[50%] xl:w-[100%] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]  "
                     onClick={onclickSecondButton}
                 >
                     {secondButtonTitle}
