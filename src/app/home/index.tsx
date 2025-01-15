@@ -229,7 +229,7 @@ function Home() {
             <Card description={t("MasterClasscard5")} />
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-            <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-10 gap-6">
+            <div className="flex flex-col xl:flex-row justify-between items-center p-6 md:p-10 gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
                 {t("Bookers")}
               </h2>
