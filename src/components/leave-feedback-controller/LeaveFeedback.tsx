@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalModal } from "../Modal/UniversalModal"
 import FileInput from "../input/file-input";
-import { Input, Select } from "antd";
+import { Input, message, Select } from "antd";
 import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { useSendCode } from "@/hooks/useSendCode";
 import useSendCodeStore from "@/Store/SendCodeStore";
@@ -28,6 +28,13 @@ export const LeaveFeedback = () => {
     const [searchText, setSearchText] = useState<string>(''); // Qidiruv so'zi
     const { uploadFile } = useUploadFile();
     const { fileResponse, isLoading, setFileResponse } = useUploadFileStore();
+    const [messageApi, contextHolder] = message.useMessage();
+    const toastBtn = (text: string, type: "success" | "error") => {
+        messageApi.open({
+            type,
+            content: text,
+        });
+    };
     const apiUrl = `http://207.154.246.120:8080/api/leave/feedback/master/or/salon?name=${searchText}`;
     const { response, globalDataFunc } = useGlobalRequest(apiUrl, "GET");
     const data = {
@@ -156,15 +163,16 @@ export const LeaveFeedback = () => {
     }, [searchText]);
 
     useEffect(() => {
-        if (SendCode?.message === "Success" && SendCode?.success === true) {
+        if (SendCode?.message === "Success" && SendCode?.success === true && otzivHolat) {
             setStatus("OTPcode");
-alert(SendCode.body)
+
+            toastBtn(SendCode?.body, 'success');
             if (photo !== '') {
                 uploadFile(photo);
             }
             handleResendCode();
             setSendCode(null);
-        } else if (errorSendCode == 'Request failed with status code 400') {
+        } else if (errorSendCode == 'Request failed with status code 400' && otzivHolat) {
             setStatus("Error");
             setFirstName('');
             setEmail('');
@@ -180,12 +188,12 @@ alert(SendCode.body)
             setError(null);
             setTimer(null);
             setFileResponse(null);
-        } else if (CheckCode?.body === phone && CheckCode?.message === "Muvaffaqiyatli" && CheckCode?.success === true && status === "OTPcode") {
+        } else if (CheckCode?.body === phone && CheckCode?.message === "Muvaffaqiyatli" && CheckCode?.success === true && status === "OTPcode" && otzivHolat) {
             setCheckCode(null);
             globalDataFunc2()
-        } else if (CheckCode?.message == "Kod mos emas" && CheckCode?.success === false && status === "OTPcode") {
+        } else if (CheckCode?.message == "Kod mos emas" && CheckCode?.success === false && status === "OTPcode" && otzivHolat) {
             setCheckCode(null);
-        } else if (res?.message === "Sizning sharhingiz qabul qilindi. Rahmat!" && res?.success === true && status === "OTPcode") {
+        } else if (res?.message === "Sizning sharhingiz qabul qilindi. Rahmat!" && res?.success === true && status === "OTPcode" && otzivHolat) {
             setStatus("Ok");
             setPhoneNumber('+998');
             setSendCode(null);
@@ -196,6 +204,7 @@ alert(SendCode.body)
 
     return (
         <>
+            {contextHolder}
             <UniversalModal isOpen={otzivHolat} onClose={() => {
                 setOtzivHolat(false);
                 setMasterOrSalonStatus(false);

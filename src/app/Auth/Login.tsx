@@ -14,6 +14,7 @@ import FileInput from "@/components/input/file-input";
 import { useRegisterMaster } from "@/hooks/useRegister";
 import { saveAuthData } from "@/helpers/Token";
 import LoginIndex from "@/Store";
+import { useTranslation } from "react-i18next";
 interface FileState {
     file: File
     name: string
@@ -35,6 +36,7 @@ export const Login: React.FC = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
 
     const toastBtn = (text: string, type: "success" | "error") => {
+        const { t } = useTranslation()
         messageApi.open({
             type,
             content: text,

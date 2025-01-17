@@ -1,32 +1,33 @@
 import Footer from '@/components/footer/Footer'
-import Header from '@/components/Header/Header'
 import Hero from '@/components/Hero/Hero'
 import React from 'react'
 
 //hero img 
 import imgSplide from "@/assets/img/Mask group (8).png"
+import { useTranslation } from 'react-i18next'
 export const StandardsSafety: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <div>
       <div className='bg-[#111827]'>
-        
+
         <div className='mx-auto '>
           <Hero slides={[{
-            title: "Стандартизация и Безопасность",
-            description: "Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды",
-            description2:"В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.",
+            title: t('StandardsSafetyHeroTitle1'),
+            description: t('StandardsSafetyHeroDescription1Text1'),
+            description2: t('StandardsSafetyHeroDescription2Text1'),
             image: imgSplide, // Replace with your image path
           },
           {
-            title: "Стандартизация и Безопасность",
-            description: "Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды",
-            description2:"В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.",
+            title: t('StandardsSafetyHeroTitle2'),
+            description: t('StandardsSafetyHeroDescription1Text2'),
+            description2: t('StandardsSafetyHeroDescription2Text2'),
             image: imgSplide, // Replace with your image path
           },
           {
-            title: "Стандартизация и Безопасность",
-            description: "Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды",
-            description2:"В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.",
+            title: t('StandardsSafetyHeroTitle3'),
+            description: t('StandardsSafetyHeroDescription1Text3'),
+            description2: t('StandardsSafetyHeroDescription2Text3'),
             image: imgSplide, // Replace with your image path
           },]} />
         </div>

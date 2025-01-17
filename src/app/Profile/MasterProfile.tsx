@@ -1,13 +1,13 @@
 import  { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "@/components/button/Button";
-import Header from "@/components/Header/Header";
 import { MdArrowBackIos } from "react-icons/md";
 import { Galereya } from "@/components/Galereya/Galereya";
 import Footer from "@/components/footer/Footer";
 import { attachment, BASE_URL } from "@/helpers/Url";
 import { TestimonialSlider } from "@/components/splide/TestimonialSlider";
 import MasterCard from "@/components/cards/Master";
+import { useTranslation } from "react-i18next";
 
 interface AttachmentItem {
   attachmentId: string;
@@ -42,6 +42,7 @@ interface MasterDetails {
 }
 
 function MasterProfile() {
+   const { t } = useTranslation()
   const { id } = useParams();
   const navigate = useNavigate();
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
@@ -94,10 +95,10 @@ function MasterProfile() {
               className="border-white text-white border-[1px] rounded-xl flex items-center py-6 px-12 gap-2"
             >
               <MdArrowBackIos className="text-white" />
-              Назад
+              {t('MasterProfileBack')}
             </Button>
             <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center">
-              Подробности о мастере
+              {t('MasterProfileText1')}
             </h2>
           </div>
 
@@ -115,20 +116,20 @@ function MasterProfile() {
                 feedbackCount={masterDetails.rating || 0}
                 orderCount={masterDetails.orderCount || 0}
                 clientCount={masterDetails.clientCount || 0}
-                firstButtonTitle="Профиль"
-                secondButtonTitle="Записаться"
+                firstButtonTitle={t('MasterProfileProfile')}
+                secondButtonTitle={t('MasterProfileSignup')}
               />
             </div>
           )}
 
           <h2 className="text-white text-center font-medium text-[30px]">
-            Галерея
+            {t('MasterProfileGallery')}
           </h2>
         </section>
 
         <section>
           {loading ? (
-            <div className="text-white text-center">Загрузка...</div>
+            <div className="text-white text-center">{t('MasterProfileLoading')}...</div>
           ) : (
             gallery.map((album) => (
               <Galereya
@@ -146,7 +147,7 @@ function MasterProfile() {
 
         <section className="w-full mt-10">
           <h1 className="text-white text-center font-medium text-[30px]">
-            Отзывы
+            {t('MasterProfileReviews')}
           </h1>
           <TestimonialSlider />
         </section>
