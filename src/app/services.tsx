@@ -152,6 +152,7 @@ function Services() {
                           id={master.id}
                           attachmentId={master.mainPhoto}
                           avatar={master.mainPhoto}
+                          serviceId={master.serviceId}
                           name={master.fullName}
                           salon={master.salonName || ""}
                           role={master.masterSpecialization?.[0] || "Мастер"}

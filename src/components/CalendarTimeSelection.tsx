@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from './button/Button';
+import { BASE_URL } from "@/helpers/Url"
 
-
-//url 
-import {BASE_URL} from "@/helpers/Url"
 interface TimeSlot {
   time: string;
   available: boolean;
@@ -21,6 +19,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const today = new Date();
 
   const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
@@ -43,6 +42,11 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
 
     setIsLoading(true);
     try {
+      const Token = localStorage.getItem('Token');
+      if (!Token) {
+        throw new Error('No authentication token found');
+      }
+
       const formattedDate = selectedDate.toISOString().split('T')[0];
       const response = await fetch(
         `${BASE_URL}/api/order/free-time?date=${formattedDate}&masterId=${masterId}`,
@@ -50,10 +54,14 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
           method: 'GET',
           headers: {
             'Accept': '*/*',
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk4OTcwNzAzODM5LWNsaWVudCIsImlhdCI6MTczNjQwNTEzMCwiZXhwIjoxNzM4OTk3MTMwfQ.C8D_JNaqmeYsn2PIAJNoaQdOSyhupxQn5B-x0iBXr3foG5K8eIliYm4aPcUtPQpHm9wHsbf-j7EeB3OrMuPIjQ'
+            'Authorization': `Bearer ${Token}`
           }
         }
       );
+
+      if (response.status === 401) {
+        throw new Error('Unauthorized: Please log in again');
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -64,6 +72,11 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
     } catch (error) {
       console.error('Error fetching available time slots:', error);
       setAvailableTimeSlots([]);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unexpected error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -138,8 +151,9 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
             {daysOfWeek.map((day, index) => (
               <div
                 key={index}
-                className={`text-center text-sm font-medium mb-4 ${index >= 5 ? "text-[#9C0B35]" : "text-gray-600"
-                  }`}
+                className={`text-center text-sm font-medium mb-4 ${
+                  index >= 5 ? "text-[#9C0B35]" : "text-gray-600"
+                }`}
               >
                 {day}
               </div>
@@ -163,16 +177,16 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                   key={day}
                   onClick={() => !isPastDate && handleDateSelect(day)}
                   className={`
-        h-10 flex items-center justify-center text-sm cursor-pointer
-        transition-colors duration-200 rounded-full
-        ${isSelected
+                    h-10 flex items-center justify-center text-sm cursor-pointer
+                    transition-colors duration-200 rounded-full
+                    ${isSelected
                       ? "bg-[#9C0B35] text-white"
                       : isPastDate
                         ? "text-gray-400 cursor-not-allowed"
                         : "hover:bg-[#9C0B35] hover:text-white"
                     }
-        ${isWeekend && !isSelected ? "text-[#9C0B35]" : "text-gray-900"}
-      `}
+                    ${isWeekend && !isSelected ? "text-[#9C0B35]" : "text-gray-900"}
+                  `}
                 >
                   {day}
                 </div>
@@ -184,23 +198,26 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
         {/* Time Slots Section */}
         <div className="w-full max-w-lg">
           {selectedDate && (
-            <div className=" rounded-[20px] p-6">
+            <div className="rounded-[20px] p-6">
               <h3 className="text-lg font-medium mb-4 text-gray-900">
                 Свободное время
               </h3>
 
               {isLoading ? (
                 <div className="text-center py-4">Загрузка...</div>
+              ) : errorMessage ? (
+                <div className="text-center py-4 text-red-600">{errorMessage}</div>
               ) : availableTimeSlots.length > 0 ? (
                 <div className="grid grid-cols-4 gap-4">
                   {availableTimeSlots.map((time) => (
                     <Button
                       key={time}
                       onClick={() => handleTimeSelect(time)}
-                      className={`py-2 px-4 rounded-[5px] text-center transition-colors ${selectedTime === time
+                      className={`py-2 px-4 rounded-[5px] text-center transition-colors ${
+                        selectedTime === time
                           ? 'bg-[#9C0B35] text-white'
                           : 'bg-white hover:bg-[#9C0B35] hover:text-white text-gray-900'
-                        }`}
+                      }`}
                     >
                       {time}
                     </Button>
@@ -218,3 +235,4 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
     </div>
   );
 }
+

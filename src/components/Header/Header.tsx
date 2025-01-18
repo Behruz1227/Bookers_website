@@ -27,6 +27,7 @@ const Header: React.FC = () => {
     const res = response?.body;
     const { setLoginHolat } = LoginIndex();
     const token = localStorage.getItem('Token');
+    localStorage.setItem("phoneNumber", res?.phoneNumber || "")
     return (
         <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
             <header className=" text-white relative ">

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Home from "./app/home/index";
 import Gallery from "./app/gallery";
 import { AboutCompany } from "./app/AboutCompany/AboutCompany";
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <div className="container">
+      <ToastContainer />
       <BrowserRouter>
         <Header />
         <Routes>
