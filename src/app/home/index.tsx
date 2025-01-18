@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useGlobalRequest } from '@/helpers/Quary/quary';
 
 //components
-import Header from '@/components/Header/Header'; import Hero from '@/components/Hero/Hero';
+import Hero from '@/components/Hero/Hero';
 import OfferCards from '@/components/cards/OfferCards';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import Footer from '@/components/footer/Footer';
