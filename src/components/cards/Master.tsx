@@ -133,7 +133,7 @@ export default function MasterCard({
             <img
               src={imageUrl || "/placeholder.svg"}
               alt={`${name}'s service`}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-[20px]"
+              className="absolute top-0  left-0 w-full h-full object-cover rounded-[20px]"
             />
           </div>
         )}
