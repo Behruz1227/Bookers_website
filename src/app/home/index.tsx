@@ -69,29 +69,29 @@ function Home() {
 
   const FirstCard = [
     { text: t("OfferCardLeft1") },
-    { text: 'Гарантированные онлайн-записи' },
-    { text: 'Большой выбор мастеров' },
-    { text: 'Детальная информация о профилях мастеров и отзывы клиентов' },
-    { text: 'Интеграция с календарем и напоминания' },
-    { text: 'Программы лояльности и бонусы' },
+    { text: t("OfferCardLeft2") },
+    { text: t("OfferCardLeft3") },
+    { text: t("OfferCardLeft4") },
+    { text: t("OfferCardLeft5") },
+    { text: t("OfferCardLeft6") },
   ];
 
   const TwoCard = [
-    { text: 'Возможность настраивать услуги по полу, категориям, специализациям и процедурам' },
-    { text: 'Управление графиком работы' },
-    { text: 'Онлайн бронирование' },
-    { text: 'Активация времени для VIP клиентов' },
-    { text: 'Настройка приема онлайн оплаты и предоплаты' },
-    { text: 'Учет расходов мастера' },
+    { text: t("OfferCardMiddle1") },
+    { text: t("OfferCardMiddle2") },
+    { text: t("OfferCardMiddle3") },
+    { text: t("OfferCardMiddle4") },
+    { text: t("OfferCardMiddle5") },
+    { text: t("OfferCardMiddle6") },
   ];
 
   const ThreeCard = [
-    { text: 'Модуль управления клиентами' },
-    { text: 'Модуль мониторинга и аналитики' },
-    { text: 'Модуль планирования и расписания' },
-    { text: 'Модуль маркетинга и продвижения' },
-    { text: 'Модуль управления персоналом' },
-    { text: 'Модуль комьюнити' },
+    { text: t("OfferCardRight1") },
+    { text: t("OfferCardRight2") },
+    { text: t("OfferCardRight3") },
+    { text: t("OfferCardRight4") },
+    { text: t("OfferCardRight5") },
+    { text: t("OfferCardRight6") },
   ];
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -192,7 +192,7 @@ function Home() {
                   className='px-10'
                   attachmentId={item.attachmentId}
                   title={item.name}
-                  description="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat."
+                  description={t("descriptionn")}
                   id={item.id}
                 />
               ))}
