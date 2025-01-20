@@ -3,12 +3,13 @@ import Footer from '@/components/footer/Footer'
 import HeaderTitles from '@/components/HeadTitle'
 import Hero from '@/components/Hero/Hero'
 import Subtitle from '@/components/Subtitle'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 //imgs
 import imgSplide from '../../assets/img/Mask group (7).png'
 import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 
 //card 
@@ -16,6 +17,18 @@ import { useTranslation } from 'react-i18next'
 export const AboutCompany: React.FC = () => {
 
     const { t } = useTranslation()
+
+    const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace("#", "");
+    if (hash) {
+      const section = document.getElementById(hash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
     const FirstCard = [
         { text: t('AboutCompanyOfferCards3FirstCardText1') },
@@ -62,7 +75,7 @@ export const AboutCompany: React.FC = () => {
                     description: t('AboutCompanyHeroDescription3'),
                     image: imgSplide, // Replace with your image path
                 },]} />
-                <div>
+                <div id='about'>
                     <HeaderTitles text={t('AboutCompanyHeaderTitles1')} size='' />
                     <div className="flex flex-col lg:flex-row gap-10 justify-between py-20">
                         <OfferCards
@@ -75,7 +88,7 @@ export const AboutCompany: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div>
+                <div id='company1'>
                     <HeaderTitles text={t('AboutCompanyHeaderTitles2')} size='' />
                     <div className="flex flex-col lg:flex-row gap-10 justify-between py-20">
                         <OfferCards
@@ -89,7 +102,7 @@ export const AboutCompany: React.FC = () => {
                     </div>
 
                 </div>
-                <div>
+                <div id='company2'>
                     <HeaderTitles text={t('AboutCompanyHeaderTitles3')} size='' />
                     <Subtitle
                         text={t('AboutCompanySubtitle1')}

@@ -3,14 +3,26 @@ import Footer from '@/components/footer/Footer'
 import HeaderTitles from '@/components/HeadTitle'
 import img from "@/assets/img/telegram-cloud-photo-size-2-5422467465163692948-y 1 (3).png"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 //hero img
 
 import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 export const Vacancies: React.FC = () => {
     const { t } = useTranslation()
+    const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace("#", "");
+    if (hash) {
+      const section = document.getElementById(hash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   return (
     <div>
       <div className='bg-[#111827]'>
@@ -27,7 +39,7 @@ export const Vacancies: React.FC = () => {
               <img src={img} alt="" />
             </div>
           </div>
-          <div className="">
+          <div id='vacancies' className="">
             <HeaderTitles text={t('VacanciesHeaderTitles')} size="" />
             <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 py-20">
               <OfferCards

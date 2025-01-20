@@ -42,7 +42,7 @@ import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
 import MasterClassModal from '@/components/Modal/master-class-modal';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
 
@@ -66,6 +66,19 @@ const Logo = [
 
 function Home() {
   const { t } = useTranslation()
+
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace("#", "");
+    if (hash) {
+      const section = document.getElementById(hash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   const FirstCard = [
     { text: t("OfferCardLeft1") },
@@ -136,6 +149,8 @@ function Home() {
   const categories = categoryResponse?.body || [];
 
 
+  
+
 
 
   return (
@@ -175,7 +190,7 @@ function Home() {
           }
         ]} />
         <Line />
-        <section className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
+        <section  id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
           <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
           <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
           <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />

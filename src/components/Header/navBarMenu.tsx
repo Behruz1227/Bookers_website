@@ -6,7 +6,7 @@ export const Bookers: MenuProps['items'] = [
         key: '1',
         label: (
             <div>
-                <Link to="/Home" className="hover:text-[#9C0B35] text-[#21212E]">О продукте</Link>
+                <Link to="/#offer" className="hover:text-[#9C0B35] text-[#21212E]">О продукте</Link>
             </div>
         ),
     },
@@ -22,7 +22,7 @@ export const Bookers: MenuProps['items'] = [
                 key: '2-1',
                 label: (
                     <div>
-                        <Link to="/AboutCompany" className="hover:text-[#9C0B35] text-[#21212E]">Нормативные права</Link>
+                        <Link to="/AboutCompany#about" className="hover:text-[#9C0B35] text-[#21212E]">Нормативные права</Link>
                     </div>
                 ),
             },
@@ -30,7 +30,7 @@ export const Bookers: MenuProps['items'] = [
                 key: '2-2',
                 label: (
                     <div>
-                        <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Наша миссия</Link>
+                        <Link to="/AboutCompany#company1" className="hover:text-[#9C0B35] text-[#21212E]">Наша миссия</Link>
                     </div>
                 ),
             },
@@ -38,7 +38,7 @@ export const Bookers: MenuProps['items'] = [
                 key: '2-3',
                 label: (
                     <div>
-                        <Link to="/" className="hover:text-[#9C0B35] text-[#21212E]">Команда</Link>
+                        <Link to="/AboutCompany#company2" className="hover:text-[#9C0B35] text-[#21212E]">Команда</Link>
                     </div>
                 ),
             },
@@ -57,7 +57,7 @@ export const Bookers: MenuProps['items'] = [
         key: '4',
         label: (
             <div>
-                <Link to="/Vacancies" className="hover:text-[#9C0B35] text-[#21212E]">Вакансии</Link>
+                <Link to="/Vacancies#vacancies" className="hover:text-[#9C0B35] text-[#21212E]">Вакансии</Link>
             </div>
         ),
 
