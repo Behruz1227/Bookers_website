@@ -14,6 +14,8 @@ import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { getMe } from "@/helpers/Url";
 
 import HeaderTitles from "../HeadTitle";
+import useCategoryStore from "@/Store/Category";
+import { useCategory } from "@/hooks/useCategory";
 
 
 
@@ -28,6 +30,47 @@ const Header: React.FC = () => {
     const { setLoginHolat } = LoginIndex();
     const token = localStorage.getItem('Token');
     localStorage.setItem("phoneNumber", res?.phoneNumber || "")
+
+
+
+
+    const { fetchCategory } = useCategory(); // Custom hook to fetch categories
+    useEffect(() => {
+        fetchCategory();
+    }, [])
+
+    const { category } = useCategoryStore(); // Assuming `category` is typed correctly in the store
+
+    // Fallback item to be used when category.body is empty or undefined
+    const fallbackCategory = {
+        id: "",
+        name: "topilmadi",
+        categoryFatherId: null,
+        categoryFatherName: null,
+        attachmentId: "",
+        statusCategory: "APPROVED",
+        message: null,
+        isNew: false,
+    };
+
+    // If category.body is empty or undefined, use fallbackCategory
+    const categoriesToDisplay = category?.body && Array.isArray(category.body) && category.body.length > 0
+        ? category.body
+        : [fallbackCategory];
+
+    // Dynamically generate menu items
+    const menuItems: MenuProps['items'] = categoriesToDisplay.map((item) => ({
+        key: item.id, // Use `id` as the unique key
+        label: (
+            <Link
+                to={item.id ? `/Services/${item.id}` : "/Services"}
+                className="hover:text-[#9C0B35] text-[#21212E]"
+            >
+                {item.name} {/* Displaying ID and name */}
+            </Link>
+        ),
+    }));
+
     return (
         <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
             <header className=" text-white relative ">
@@ -61,7 +104,7 @@ const Header: React.FC = () => {
                     <div className="hidden lg:flex">
                         {/* Бронирование menyusi */}
                         <Dropdown
-                            menu={{ items: Бронирование }}
+                            menu={{ items: menuItems }} // Assign generated items to the menu
                             overlayClassName="bookers-dropdown"
                             trigger={["hover"]}
                             overlayStyle={{ minWidth: "300px" }}
