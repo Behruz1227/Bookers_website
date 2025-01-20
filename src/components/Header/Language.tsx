@@ -26,19 +26,19 @@ export const Language: React.FC = () => {
     id: 1,
     value: 'uz',
     label: t('uzbek'),
-    img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
+    img: 'https://img.icons8.com/color/48/uzbekistan.png',
   },
   {
     id: 2,
     value: 'ru',
     label: t('rus'),
-    img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
+    img: 'https://img.icons8.com/officel/80/russian-federation.png',
   },
   {
     id: 3,
     value: 'en',
     label: t('english'),
-    img: 'https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png',
+    img: 'https://img.icons8.com/color/48/great-britain.png',
   }
   ]
 

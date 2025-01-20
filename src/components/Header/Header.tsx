@@ -189,22 +189,22 @@ const Header: React.FC = () => {
                         <div>
                             {/* Бронирование menyusi mobil versiya */}
                             <Dropdown
-                                menu={{ items: Бронирование }}
-                                overlayClassName="bookers-dropdown"
-                                trigger={["click"]}
-                                overlayStyle={{ minWidth: "300px" }}
-                            >
-                                <a onClick={(e) => e.preventDefault()}>
-                                    <Space className="hover:text-[#9C0B35]">
-                                        Бронирование
-                                        <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
-                                    </Space>
-                                </a>
-                            </Dropdown>
+                            menu={{ items: menuItems }} // Assign generated items to the menu
+                            overlayClassName="bookers-dropdown"
+                            trigger={["hover"]}
+                            overlayStyle={{ minWidth: "300px" }}
+                        >
+                            <a onClick={(e) => e.preventDefault()}>
+                                <Space className="hover:text-[#9C0B35]">
+                                    Бронирование
+                                    <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
+                                </Space>
+                            </a>
+                        </Dropdown>
                         </div>
 
                         <div className="hover:text-[#9C0B35]">
-                            <Link to="/salom">Партнерство</Link>
+                            <Link to="/Partnership">Партнерство</Link>
 
                         </div>
                         <div className="flex items-center justify-center gap-2 border font-semibold border-white pl-2 pr-4 w-[250px] py-2 rounded-full">
