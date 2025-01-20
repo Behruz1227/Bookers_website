@@ -10,6 +10,7 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import Button from "@/components/button/Button"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
+import { MdCheckCircle } from "react-icons/md";
 
 interface MasterProps {
   id: string
@@ -123,7 +124,7 @@ export default function MasterCard({
 
   const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null
 
-  
+
 
   return (
     <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -143,7 +144,7 @@ export default function MasterCard({
             <img
               src={attachment + avatar || "/placeholder.svg"}
               alt={name}
-              className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
+              className="w-20 h-20 rounded-full object-cover border-2 border-white shadow-md"
             />
           )}
           <div>
@@ -263,7 +264,7 @@ export default function MasterCard({
                 width: '60%',
                 justifyContent: 'between',
                 gap: '20px',
-            }}
+              }}
             />
             <Button
               className=" w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -275,16 +276,20 @@ export default function MasterCard({
             </Button>
           </div>
         </div> : page === 3 ? <div className="p-6  rounded-[20px]">
-          <div className="flex flex-col items-center justify-center gap-20">
+          <div className="flex flex-col items-center justify-center gap-10 py-10">
+            <MdCheckCircle style={{ color: '#9C0B35', fontSize: '100px' }} />
             <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-              Мастер работает только по предоплате
+              Заявка принята
             </h2>
-            <Button
-              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
-              onClick={() => toast("Скачать приложение")}
+            <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] ">Ваша заявка принята. Cтатус вашей записи можно  <br />отслеживать в мобильном приложении bookers</p>
+           <div className="pt-10">
+           <Button
+              className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+              onClick={() => alert("Войти / Регистрация")}
             >
-              Перейти к оплате
+              Скачать приложение
             </Button>
+           </div>
           </div>
         </div> : null}
       </UniversalModal>
