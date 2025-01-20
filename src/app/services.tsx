@@ -66,7 +66,7 @@ function Services() {
       setSelectedCategory(id)
       fetchMastersByCategory(id)
     }
-  }, []) // search dependency olib tashlandi
+  }, [id]) // search dependency olib tashlandi
 
   useEffect(() => {
     if (selectedCategory) {
