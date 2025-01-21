@@ -19,6 +19,7 @@ import MasterCard from "@/components/cards/Master"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { Input } from "@/components/ui/input"
 import useCategoryStore from "@/Store/Category"
+import Loading from "@/components/Loading/Loading"
 
 
 
@@ -109,7 +110,7 @@ function Services() {
               className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] mt-6 lg:mt-0"
             />
           </div>
-          <section className="w-full py-10 flex flex-col md:flex-row justify-start md:gap-5 items-center">
+          <section className="w-full py-10 flex flex-col md:flex-row justify-start gap-5 items-center">
             <Select value={selectedCategory} onValueChange={handleCategoryChange}>
               <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/2 h-14 text-white rounded-[7px]">
                 <SelectValue placeholder="Выберите категорию" />
@@ -130,19 +131,19 @@ function Services() {
                 </SelectGroup>
               </SelectContent>
             </Select>
+            <div className="w-full md:w-1/2">
             <Input
               placeholder="Поиск мастеров/салонов/услуг"
               type="search"
               onChange={(e) => setSearch(e.target.value)}
-              className="border-white text-white w-full md:w-96 placeholder:text-white mt-5 md:mt-0"
+              className="border-white text-white w-full md:w-full placeholder:text-white  md:mt-0"
             />
- 
-      
+            </div>
           </section>
 
           <section className="flex justify-center items-center flex-col py-10 w-full">
             {loading ? (
-              <div className="text-white">Loading...</div>
+              <Loading />
             ) : (
               <>
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-10">
