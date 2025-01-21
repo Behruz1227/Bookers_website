@@ -18,6 +18,7 @@ import Footer from "@/components/footer/Footer"
 import MasterCard from "@/components/cards/Master"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { Input } from "@/components/ui/input"
+import useCategoryStore from "@/Store/Category"
 
 
 
@@ -33,7 +34,7 @@ function Services() {
   const [search, setSearch] = useState<string>("")
 
 
-  const { response: categoryResponse, globalDataFunc: fetchCategories } = useGlobalRequest(
+  const {  globalDataFunc: fetchCategories } = useGlobalRequest(
     `${BASE_URL}/api/category`,
     "GET"
   )
@@ -76,7 +77,7 @@ function Services() {
     }
   }, [selectedCategory, page, size, search])
 
-  const categories = categoryResponse?.body || []
+  
 
   const handleCategoryChange = (value: string) => {
     console.log('Selected category:', value)
@@ -92,7 +93,7 @@ function Services() {
   const handleMasterProfileClick = (masterId: string) => {
     navigate(`/Master/${masterId}`)
   }
-
+  const { category } = useCategoryStore();
   return (
     <div>
       <div className="bg-[#111827] w-full mx-auto ">
@@ -100,7 +101,7 @@ function Services() {
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
             <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
-              Услуги мастеров и салонов красоты: {categories.find((item: any) => item.id === selectedCategory)?.name || "Все услуги"}
+              Услуги мастеров и салонов красоты: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
             </h1>
             <img
               src={HeroImg}
@@ -115,7 +116,7 @@ function Services() {
               </SelectTrigger>
               <SelectContent className="bg-[#B9B9C9] rounded-2xl">
                 <SelectGroup className="font-manrope text-[#21212E] hover:text-[#9C0A35]">
-                  {categories.map((category: any) => (
+                  {category?.body.map((category: any) => (
                     <SelectItem
                       key={category.id}
                       value={category.id}
@@ -144,7 +145,7 @@ function Services() {
               <div className="text-white">Loading...</div>
             ) : (
               <>
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-10">
                   {Array.isArray(masters) &&
                     masters.map((master: any, index) => (
                       <div key={master.id || index}>

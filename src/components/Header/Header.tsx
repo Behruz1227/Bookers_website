@@ -4,7 +4,7 @@ import logoText from '../../assets/img/Мои записи.svg';
 import { Language } from "./Language";
 import { Dropdown, Space } from "antd";
 import { IoChevronDownOutline } from "react-icons/io5";
-import { Bookers, Бронирование } from "./navBarMenu";
+import { Bookers } from "./navBarMenu";
 import { Link } from "react-router-dom";
 import Button from "../button/Button";
 import { FiPhoneCall } from "react-icons/fi";
@@ -43,14 +43,7 @@ const Header: React.FC = () => {
 
     // Fallback item to be used when category.body is empty or undefined
     const fallbackCategory = {
-        id: "",
-        name: "topilmadi",
-        categoryFatherId: null,
-        categoryFatherName: null,
-        attachmentId: "",
-        statusCategory: "APPROVED",
-        message: null,
-        isNew: false,
+        
     };
 
     // If category.body is empty or undefined, use fallbackCategory

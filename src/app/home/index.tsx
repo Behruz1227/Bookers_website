@@ -44,6 +44,7 @@ import MasterClassModal from '@/components/Modal/master-class-modal';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
+import Loading from '@/components/Loading/Loading';
 
 
 
@@ -138,7 +139,7 @@ function Home() {
   }, []);
 
   if (statsLoading || categoryLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (statsError || categoryError) {
