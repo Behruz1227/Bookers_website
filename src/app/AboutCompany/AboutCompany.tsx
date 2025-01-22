@@ -10,6 +10,7 @@ import imgSplide from '../../assets/img/Mask group (7).png'
 import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import { FaRegCircleCheck } from 'react-icons/fa6'
 
 
 //card 
@@ -20,15 +21,15 @@ export const AboutCompany: React.FC = () => {
 
     const location = useLocation();
 
-  useEffect(() => {
-    const hash = location.hash.replace("#", "");
-    if (hash) {
-      const section = document.getElementById(hash);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [location]);
+    useEffect(() => {
+        const hash = location.hash.replace("#", "");
+        if (hash) {
+            const section = document.getElementById(hash);
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    }, [location]);
 
     const FirstCard = [
         { text: t('AboutCompanyOfferCards3FirstCardText1') },
@@ -46,14 +47,7 @@ export const AboutCompany: React.FC = () => {
         { text: t('AboutCompanyOfferCards3TwoCardCardText6') },
         { text: t('AboutCompanyOfferCards3TwoCardCardText7') }
     ]
-    const ThreeCard = [
-        { text: t('AboutCompanyOfferCards4ThreeCardText1') },
-        { text: t('AboutCompanyOfferCards4ThreeCardText2') },
-        { text: t('AboutCompanyOfferCards4ThreeCardText3') },
-        { text: t('AboutCompanyOfferCards4ThreeCardText4') },
-        { text: t('AboutCompanyOfferCards4ThreeCardText5') },
-        { text: t('AboutCompanyOfferCards4ThreeCardText6') },
-    ];
+
 
     return (
         <div className='bg-[#111827]'>
@@ -109,11 +103,44 @@ export const AboutCompany: React.FC = () => {
                         size="w-full max-w-[759px]  lg:text-left"
                     />
 
-                    <div>
+                    {/* <div>
                         <OfferCards
                             data={ThreeCard}
                             title={t('AboutCompanyOfferCards4Title')}
                         />
+                    </div> */}
+                    <div className='bg-[#B9B9C9] rounded-3xl p-10'>
+                        <h1 className='text-[#9C0B35] font-manrope font-extrabold text-[26px] text-center'>{t('AboutCompanyOfferCards4Title')}</h1>
+                        <div className='flex items-center justify-between'>
+                            <div className='text-left text-[#000000] space-y-4 mb-5'>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText1')}</p>
+                                </div>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText2')}</p>
+                                </div>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText3')}</p>
+                                </div>                               
+                            </div>
+                            <div className='text-left text-[#000000] space-y-4 mb-5'>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText4')}</p>
+                                </div>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText5')}</p>
+                                </div>
+                                <div  className='flex items-start gap-3'  >
+                                    <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText6')}</p>
+                                </div>                               
+                            </div>
+                        </div>
                     </div>
                     <Subtitle
                         text={t('AboutCompanySubtitle2')}

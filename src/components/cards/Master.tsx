@@ -281,7 +281,7 @@ export default function MasterCard({
             <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
               Заявка принята
             </h2>
-            <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] ">Ваша заявка принята. Cтатус вашей записи можно  <br />отслеживать в мобильном приложении bookers</p>
+            <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center ">Ваша заявка принята. Cтатус вашей записи можно  <br />отслеживать в мобильном приложении bookers</p>
            <div className="pt-10">
            <Button
               className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
