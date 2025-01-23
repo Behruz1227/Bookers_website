@@ -33,7 +33,7 @@ export const TestimonialSlider: React.FC = () => {
     width: '40px',
     height: '40px',
     display: 'flex',
-    justifyContent: 'justify-between ',
+    justifyContent: 'center',
     alignItems: 'center',
     color: '#ffffff',
     borderRadius: '50%',
@@ -42,13 +42,14 @@ export const TestimonialSlider: React.FC = () => {
     opacity: 0.7,
     transition: 'opacity 0.3s ease',
     cursor: 'pointer',
+    top: "-10px"
   };
 
-  const prevButtonStyles = { ...buttonStyles, left: '8px' }; // Chap tugma
-  const nextButtonStyles = { ...buttonStyles, right: '8px' }; // O‘ng tugma
+  const prevButtonStyles = { ...buttonStyles, left:"47%" }; // Chap tugma
+  const nextButtonStyles = { ...buttonStyles, right:"47%" }; // O‘ng tugma
 
   return (
-    <div className="max-w-7xl mx-auto  py-20 relative">
+    <div className=" py-20 relative">
       <Swiper
   modules={[Pagination, Navigation]}
   spaceBetween={24}
