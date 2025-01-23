@@ -1,28 +1,28 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
-import { category } from "@/helpers/Url";
-import useCategoryStore from "@/Store/Category";
+
+import useHelpTypeStore from "@/Store/HelpType";
 
 
-export function useCategory() {
-    const apiUrl = `${category}`;
+export function useHelpType() {
+    const apiUrl = `http://207.154.246.120:8080/api/help/web/site`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "GET");
-    const { setCategory, setError, setLoading } = useCategoryStore();
+    const { setHelpType, setError, setLoading } = useHelpTypeStore();
 
-    const fetchCategory = async () => {
+    const fetchHelpType = async () => {
         try {
             setLoading(true); // Set loading state
             const response = await globalDataFunc(); // API call
-            setCategory(response); // Save the result to Zustand store
+            setHelpType(response); // Save the result to Zustand store
             setError(null); // Clear any existing errors
         } catch (err) {
             setError(err); // Save the error to the store
-            console.error("Category fetch failed:", err);
+            console.error("error", err);
         } finally {
             setLoading(false); // Mark the loading as finished
         }
     };
 
     return {
-        fetchCategory
+        fetchHelpType
     };
 }

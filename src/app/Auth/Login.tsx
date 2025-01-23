@@ -14,6 +14,7 @@ import FileInput from "@/components/input/file-input";
 import { useRegisterMaster } from "@/hooks/useRegister";
 import { saveAuthData } from "@/helpers/Token";
 import LoginIndex from "@/Store";
+import Loading from "@/components/Loading/Loading";
 
 interface FileState {
     file: File
@@ -148,12 +149,14 @@ export const Login: React.FC = () => {
         if (userRole === null) {
             if (loginHolat === true) {
                 setModalOpen(true);
+
                 setStatus('Selection');
             }
         } else if (userRole !== null) {
             if (loginHolat === true) {
                 setModalOpen(true);
                 setStatus('Login');
+                setRole(userRole);
             }
         }
     }, [loginHolat])
@@ -166,6 +169,8 @@ export const Login: React.FC = () => {
                 registerMaster();
             }else {
                 toastBtn('malumotlarni to\'ldiring', 'error');
+                console.log(phoneNumberInput.length, userRole, firstName.length, lastName.length, nickname.length);
+                
             }
         } else {
             toastBtn('shartlarini tasdiqlang', 'error');
@@ -175,6 +180,11 @@ export const Login: React.FC = () => {
     return (
         <div>
             {contextHolder}
+            {
+                loading || loadingCheckCode || loadingSendCode || loadingLogin || registerMasterLoading
+                    ? <Loading />
+                    : null
+            }
             <UniversalModal
                 isOpen={isModalOpen}
                 onClose={() => {

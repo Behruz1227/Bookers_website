@@ -12,6 +12,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { useUploadFile } from "@/hooks/useUploadFile";
 import useUploadFileStore from "@/Store/UploadFileStore";
 import LoginIndex from "@/Store";
+import { leaveFeedbackMasterOrSalonSearch, leaveFeedbackSave } from "@/helpers/Url";
 
 export const LeaveFeedback = () => {
     const { setOtzivHolat, otzivHolat, setLoginRole, setLoginHolat } = LoginIndex();
@@ -35,7 +36,7 @@ export const LeaveFeedback = () => {
             content: text,
         });
     };
-    const apiUrl = `http://207.154.246.120:8080/api/leave/feedback/master/or/salon?name=${searchText}`;
+    const apiUrl = `${leaveFeedbackMasterOrSalonSearch}?name=${searchText}`;
     const { response, globalDataFunc } = useGlobalRequest(apiUrl, "GET");
     const data = {
         "clientName": firstName,
@@ -47,7 +48,7 @@ export const LeaveFeedback = () => {
         "master": masterOrSalonStatus,
         "agree": true
     }
-    const { response: res, globalDataFunc: globalDataFunc2 } = useGlobalRequest('http://207.154.246.120:8080/api/leave/feedback/save', "POST", data);
+    const { response: res, globalDataFunc: globalDataFunc2 } = useGlobalRequest(leaveFeedbackSave, "POST", data);
     const { SendCodeBtn } = useSendCode(phone, "CLIENT", false);
     const { setSendCode, setError, SendCode, loading: loadingSendCode, error: errorSendCode } = useSendCodeStore();
 

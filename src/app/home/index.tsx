@@ -137,22 +137,14 @@ function Home() {
     fetchStats();
     fetchCategories();
   }, []);
-
   if (statsLoading || categoryLoading) {
     return <Loading />;
   }
-
   if (statsError || categoryError) {
     return <div>Error: {statsError || categoryError}</div>;
   }
-
   const statsData = statsResponse?.body || {};
   const categories = categoryResponse?.body || [];
-
-
-  
-
-
 
   return (
     <>
@@ -202,7 +194,7 @@ function Home() {
           <HeaderTitles text={t("Headertitle1")} />
           <div className='pt-10'>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-20">
-              {categories.map((item: any) => (
+              {categories.map((item: {id: number, attachmentId: string, name: string }) => (
                 <ServiceCard
                   key={item.id}
                   className='px-10'

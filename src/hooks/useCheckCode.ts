@@ -1,10 +1,11 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { chekCode } from "@/helpers/Url";
 import useCheckCodeStore from "@/Store/CheckCodeStore";
 export function useCheckCode(phoneNumber: string, code: string|null ) {
     const data = {
         "phoneNumber": `${phoneNumber}`
     };
-    const apiUrl = `http://207.154.246.120:8080/api/auth/checkCode?code=${code}`;
+    const apiUrl = `${chekCode}?code=${code}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setCheckCode, setError, setLoading } = useCheckCodeStore();
     const CheckCodeBtn = async () => {

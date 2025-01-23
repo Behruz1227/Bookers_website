@@ -88,7 +88,7 @@ function MasterProfile() {
         const data = await response.json();
 
         if (data && data.body && data.body.object) {
-          const master = data.body.object.find((master: any) => master.id === id);
+          const master = data.body.object.find((master: {id : string}) => master.id === id);
           if (master) {
             setMasterDetails(master);
           } else {

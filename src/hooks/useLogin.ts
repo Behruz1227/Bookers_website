@@ -1,11 +1,12 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { login } from "@/helpers/Url";
 import useLoginCheckStore from "@/Store/LoginStore";
 export function useLogin(phoneNumber: string, role: string | null, code: string | null) {
     const data = {
         "phone": `${phoneNumber}`,
         "code": code,
     };
-    const apiUrl = `http://207.154.246.120:8080/api/auth/login?ROLE=${role}`;
+    const apiUrl = `${login}?ROLE=${role}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setLoginCheck, setError, setLoading } = useLoginCheckStore();
     const LoginBtn = async () => {

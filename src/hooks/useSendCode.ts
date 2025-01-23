@@ -1,10 +1,11 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { sendCode } from "@/helpers/Url";
 import useSendCodeStore from "@/Store/SendCodeStore";
 export function useSendCode(phoneNumber: string, role: string | null, purpose: boolean | null) {
     const data = {
         "phoneNumber": `${phoneNumber}`
     };
-    const apiUrl = `http://207.154.246.120:8080/api/auth/sendCode?purpose=${purpose}&ROLE=${role}`;
+    const apiUrl = `${sendCode}?purpose=${purpose}&ROLE=${role}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setSendCode, setError, setLoading } = useSendCodeStore();
     const SendCodeBtn = async () => {

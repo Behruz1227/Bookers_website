@@ -1,11 +1,12 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { phoneCheck } from "@/helpers/Url";
 import usePhoneCheckStore from "@/Store/PhoneCheckStore";
 
 export function usePhoneCheck(phoneNumber: string, role: string | null) {
     const data = {
         phoneNumber: `${phoneNumber}`,
     };
-    const apiUrl = `http://207.154.246.120:8080/api/user/checking/phone?ROLE=${role}`;
+    const apiUrl = `${phoneCheck}?ROLE=${role}`;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     // Zustand store’dan funksiyalar va state’larni chaqiramiz
     const { setPhoneCheck, setError, setLoading } = usePhoneCheckStore();

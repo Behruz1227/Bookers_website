@@ -16,6 +16,7 @@ import { getMe } from "@/helpers/Url";
 import HeaderTitles from "../HeadTitle";
 import useCategoryStore from "@/Store/Category";
 import { useCategory } from "@/hooks/useCategory";
+import { useHelpType } from "@/hooks/useHelpType";
 
 
 
@@ -33,10 +34,11 @@ const Header: React.FC = () => {
 
 
 
-
+    const { fetchHelpType } = useHelpType(); 
     const { fetchCategory } = useCategory(); // Custom hook to fetch categories
     useEffect(() => {
         fetchCategory();
+        fetchHelpType();
     }, [])
 
     const { category } = useCategoryStore(); // Assuming `category` is typed correctly in the store

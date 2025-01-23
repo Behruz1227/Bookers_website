@@ -13,9 +13,18 @@ import APP from "../../assets/footer/Group (8).png";
 import Play from "../../assets/footer/Group 144.png";
 import LoginIndex from "@/Store";
 import { t } from "i18next";
+import useHelpTypeStore from "@/Store/HelpType";
 
 function Footer() {
   const { setLoginHolat, setLoginRole } = LoginIndex();
+
+
+
+
+
+  const { HelpType } = useHelpTypeStore();
+
+
   return (
     <div className="bg-[#161621] w-full text-[#ffffff]">
       <div className="mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -24,10 +33,29 @@ function Footer() {
           {/* Documentation */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Documentation")}</h2>
-            <Link to="/conditions" className="text-[15px]">{t("conditions")}</Link>
-            <Link to="/conditions" className="text-[15px]">{t("PublicAgreement")}</Link>
-            <Link to="/conditions" className="text-[15px]">{t("LicensedAgreement")}</Link>
-            <Link to="/conditions" className="text-[15px]">{t("PrivacyPolicy")}</Link>
+            <div>
+              {HelpType?.body?.map((item: any) => {
+                const statusMap: Record<string, string> = {
+                  TERMS_OF_USE: "Условия использования",
+                  OFFER: "Публичное соглашение",
+                  LICENSE_AGREEMENT: "Лицензионное соглашение",
+                  PRIVACY_POLICY: "Политика конфиденциальности",
+                };
+
+                const displayText = statusMap[item.helpStatus] || "Unknown Status";
+
+                return (
+                  <Link
+                    key={item.id}
+                    to={`/conditions/#${item.id}`}
+                    className="text-[15px] e block mb-2"
+                  >
+                    {displayText}
+                  </Link>
+                );
+              })}
+            </div>
+
           </div>
           {/* Main Links */}
           <div className="flex flex-col gap-5 items-center md:items-start">

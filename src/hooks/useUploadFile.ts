@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import useUploadFileStore from "@/Store/UploadFileStore";
+import { AttachmentUpload } from "@/helpers/Url";
 // import useUploadFileStore from "@/store/UploadFileStore";
 
 export const useUploadFile = () => {
@@ -8,7 +9,7 @@ export const useUploadFile = () => {
   const [error, setError] = useState<string | null>(null);
   const setFileResponse = useUploadFileStore((state) => state.setFileResponse);
 
-  const uploadFile = async (file: File| '') => {
+  const uploadFile = async (file: File | '') => {
     setLoading(true);
     setError(null);
 
@@ -17,7 +18,7 @@ export const useUploadFile = () => {
 
     try {
       const res = await axios.post(
-        "http://207.154.246.120:8080/api/attachment/upload",
+        AttachmentUpload,
         formData,
         {
           headers: {

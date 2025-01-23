@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { register } from "@/helpers/Url";
 
 export function useRegisterMaster(
     firstName: string,
@@ -15,7 +16,7 @@ export function useRegisterMaster(
     const [response, setResponse] = useState<any>(null);
 
     // API URL with query parameters
-    const apiUrl = `http://207.154.246.120:8080/api/auth/master?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&phoneNumber=${encodeURIComponent(phoneNumber)}&ROLE=ROLE_${role}&lang=${encodeURIComponent(lang)}${role === 'MASTER' ? `&nickname=${encodeURIComponent(nickname)}` : ''}`;
+    const apiUrl = `${register}?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&phoneNumber=${encodeURIComponent(phoneNumber)}&ROLE=ROLE_${role}&lang=${encodeURIComponent(lang)}${role === 'MASTER' ? `&nickname=${encodeURIComponent(nickname)}` : ''}`;
 
 
 

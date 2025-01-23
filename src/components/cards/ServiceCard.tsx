@@ -6,7 +6,7 @@ interface ServiceCardProps {
   title: string;
   description: string;
   className?: string;
-  id: string; // Add id prop for navigation
+  id: number; // Add id prop for navigation
 }
 
 export function ServiceCard({
