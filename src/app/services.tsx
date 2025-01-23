@@ -21,6 +21,8 @@ import { Input } from "@/components/ui/input"
 import useCategoryStore from "@/Store/Category"
 import Loading from "@/components/Loading/Loading"
 
+//img
+import cardImg from "@/assets/cards/master.png"
 
 
 function Services() {
@@ -29,6 +31,8 @@ function Services() {
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [masters, setMasters] = useState<any[]>([])
+  console.log("masters", masters);
+  
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
@@ -152,8 +156,8 @@ function Services() {
                       <div key={master.id || index}>
                         <MasterCard
                           id={master.id}
-                          attachmentId={master.mainPhoto}
-                          avatar={master.mainPhoto}
+                          attachmentId={master.mainPhoto || cardImg}
+                          avatar={master.mainPhoto || cardImg}
                           serviceId={master.serviceId}
                           name={master.fullName}
                           salon={master.salonName || ""}

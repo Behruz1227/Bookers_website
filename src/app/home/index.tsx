@@ -238,10 +238,12 @@ function Home() {
         </section>
         <Line />
         <section>
-          <div className='px-2'>
+          <div className='pb-10'>
             <HeaderTitles text={t("Headertitle3")} />
           </div>
+          <div className='pt-10'>
           <TestimonialSlider />
+          </div>
           <div className='flex justify-center'>
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] hover:opacity-90"

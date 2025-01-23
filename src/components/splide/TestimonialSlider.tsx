@@ -43,13 +43,14 @@ export const TestimonialSlider: React.FC = () => {
     transition: 'opacity 0.3s ease',
     cursor: 'pointer',
     top: "-10px"
+    
   };
 
   const prevButtonStyles = { ...buttonStyles, left:"47%" }; // Chap tugma
   const nextButtonStyles = { ...buttonStyles, right:"47%" }; // O‘ng tugma
 
   return (
-    <div className=" py-20 relative">
+    <div className=" py-20 relative ">
       <Swiper
   modules={[Pagination, Navigation]}
   spaceBetween={24}
@@ -68,7 +69,7 @@ export const TestimonialSlider: React.FC = () => {
 >
   {response?.body?.length > 0 &&
     response?.body?.map((testimonial: any, index: number) => (
-      <SwiperSlide key={index}>
+      <SwiperSlide key={index} className='pb-20  '>
         <TestimonialCard {...testimonial} />
       </SwiperSlide>
     ))}
