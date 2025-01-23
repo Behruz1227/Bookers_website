@@ -11,6 +11,7 @@ import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { FaRegCircleCheck } from 'react-icons/fa6'
+import { Button } from 'antd'
 
 
 //card 
@@ -71,15 +72,29 @@ export const AboutCompany: React.FC = () => {
                 },]} />
                 <div id='about'>
                     <HeaderTitles text={t('AboutCompanyHeaderTitles1')} size='' />
-                    <div className="flex flex-col lg:flex-row gap-10 justify-between py-20">
-                        <OfferCards
-                            description={t('AboutCompanyOfferCards2Description')}
-                            secondButtonTitle={t('AboutCompanyOfferCards1SecondButtonTitle')}
-                        />
-                        <OfferCards
-                            description={t('AboutCompanyOfferCards2Description')}
-                            secondButtonTitle={t('AboutCompanyOfferCards1SecondButtonTitle')}
-                        />
+                    <div className="flex flex-col lg:flex-row gap-10 py-20">
+                        <div className='bg-[#B9B9C9] rounded-3xl p-10 w-full'>
+                            <p className='font-manrope font-medium text-[26px] text-center px-10'>{t("AboutCompanyOfferCards1Description")}</p>
+                            <div className='text-center pt-10'>
+                            <Button
+                                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                                onClick={() => alert("Скачать приложение")}
+                            >
+                                Подробнее
+                            </Button>
+                            </div>
+                        </div>
+                        <div className='bg-[#B9B9C9] rounded-3xl p-10 w-full'>
+                            <p className='font-manrope font-medium text-[26px] text-center'>{t("AboutCompanyOfferCards1Description")}</p>
+                            <div className='text-center pt-10'>
+                            <Button
+                                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                                onClick={() => alert("Скачать приложение")}
+                            >
+                                Подробнее
+                            </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id='company1'>
@@ -110,35 +125,35 @@ export const AboutCompany: React.FC = () => {
                         />
                     </div> */}
                     <div className='bg-[#B9B9C9] rounded-3xl p-10'>
-                        <h1 className='text-[#9C0B35] font-manrope font-extrabold text-[26px] text-center'>{t('AboutCompanyOfferCards4Title')}</h1>
+                        <h1 className='text-[#9C0B35] font-manrope font-extrabold text-[26px] text-center pb-10'>{t('AboutCompanyOfferCards4Title')}</h1>
                         <div className='flex items-center justify-between'>
                             <div className='text-left text-[#000000] space-y-4 mb-5'>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText1')}</p>
                                 </div>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText2')}</p>
                                 </div>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText3')}</p>
-                                </div>                               
+                                </div>
                             </div>
                             <div className='text-left text-[#000000] space-y-4 mb-5'>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText4')}</p>
                                 </div>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText5')}</p>
                                 </div>
-                                <div  className='flex items-start gap-3'  >
+                                <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
                                     <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText6')}</p>
-                                </div>                               
+                                </div>
                             </div>
                         </div>
                     </div>
