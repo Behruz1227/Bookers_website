@@ -17,7 +17,7 @@ import { t } from "i18next";
 function Footer() {
   const { setLoginHolat, setLoginRole } = LoginIndex();
   return (
-    <div className="bg-[#161621] w-full text-[#ffffff]">
+    <div className="bg-[#111827] w-full text-[#ffffff]">
       <div className="mx-auto py-10 px-4 sm:px-6 lg:px-8">
         {/* Top Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">

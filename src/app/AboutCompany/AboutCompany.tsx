@@ -3,7 +3,7 @@ import Footer from '@/components/footer/Footer'
 import HeaderTitles from '@/components/HeadTitle'
 import Hero from '@/components/Hero/Hero'
 import Subtitle from '@/components/Subtitle'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 //imgs
 import imgSplide from '../../assets/img/Mask group (7).png'
@@ -11,12 +11,16 @@ import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { FaRegCircleCheck } from 'react-icons/fa6'
-import { Button } from 'antd'
+import Button from '@/components/button/Button'
+import { UniversalModal } from '@/components/Modal/UniversalModal'
 
 
 //card 
 
 export const AboutCompany: React.FC = () => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const openModal = () => setModalOpen(true);
+    const closeModal = () => setModalOpen(false);
 
     const { t } = useTranslation()
 
@@ -76,23 +80,23 @@ export const AboutCompany: React.FC = () => {
                         <div className='bg-[#B9B9C9] rounded-3xl p-10 w-full'>
                             <p className='font-manrope font-medium text-[26px] text-center px-10'>{t("AboutCompanyOfferCards1Description")}</p>
                             <div className='text-center pt-10'>
-                            <Button
-                                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                                onClick={() => alert("Скачать приложение")}
-                            >
-                                Подробнее
-                            </Button>
+                                <Button
+                                    className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                                    onClick={openModal}
+                                >
+                                    Подробнее
+                                </Button>
                             </div>
                         </div>
                         <div className='bg-[#B9B9C9] rounded-3xl p-10 w-full'>
-                            <p className='font-manrope font-medium text-[26px] text-center'>{t("AboutCompanyOfferCards1Description")}</p>
+                            <p className='font-manrope font-medium text-[26px] text-center px-10'>{t("AboutCompanyOfferCards1Description")}</p>
                             <div className='text-center pt-10'>
-                            <Button
-                                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                                onClick={() => alert("Скачать приложение")}
-                            >
-                                Подробнее
-                            </Button>
+                                <Button
+                                    className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                                    onClick={openModal}
+                                >
+                                    Подробнее
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -163,6 +167,15 @@ export const AboutCompany: React.FC = () => {
                 </div>
             </div>
             <Footer />
+            <button onClick={openModal} >modal on</button>
+            <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
+                <div className="w-full text-center">
+                    <div>
+                        <h1>shu madalda sertificat bolishi kere </h1>
+                        <button type="button" className="mt-4 bg-[#9C0B35] text-white py-2 px-4 rounded" onClick={closeModal}>close</button>
+                    </div>
+                </div>
+            </UniversalModal>
         </div>
     )
 }

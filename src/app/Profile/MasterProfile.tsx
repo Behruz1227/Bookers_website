@@ -18,6 +18,9 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { useTranslation } from "react-i18next"
 
+//img
+import MasterProfileImg from "@/assets/cards/master.png"
+
 interface AttachmentItem {
   attachmentId: string
   attachmentStatus: string
@@ -63,8 +66,8 @@ export default function MasterProfile() {
   const navigate = useNavigate()
   const [gallery, setGallery] = useState<GalleryItem[]>([])
   const [masterDetails, setMasterDetails] = useState<MasterDetails | null>(null)
-  console.log(masterDetails)
-
+  console.log("asdfghsdrtf", masterDetails);
+  
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
@@ -107,37 +110,21 @@ export default function MasterProfile() {
     const fetchMasterDetails = async () => {
       try {
         const Token = localStorage.getItem("Token")
-        const categoryResponse = await fetch(`${BASE_URL}/api/category`, {
+        const response = await fetch(`${BASE_URL}/api/user/client/get-one/${id}`, {
           headers: {
             Authorization: `Bearer ${Token}`,
             "Content-Type": "application/json",
           },
         })
 
-        const categoryData = await categoryResponse.json()
-
-        // Fetch master details for all categories
-        const masterPromises =
-          categoryData?.body?.map(async (category: any) => {
-            const response = await fetch(`${BASE_URL}/api/service/website-master?categoryId=${category.id}`, {
-              headers: {
-                Authorization: `Bearer ${Token}`,
-                "Content-Type": "application/json",
-              },
-            })
-            if (!response.ok) return null
-            const data = await response.json()
-            console.log("aesdfg", data)
-            return data?.body?.object?.find((master: any) => master.id === id)
-          }) || []
-
-        const results = await Promise.all(masterPromises)
-        const master = results.find((result) => result !== null)
-
-        if (master) {
-          setMasterDetails(master)
+        if (!response.ok) {
+          throw new Error('Failed to fetch master details')
+        }
+        const data = await response.json()
+        if (data?.body) {
+          setMasterDetails(data.body)
         } else {
-          console.error("error")
+          console.error("Master not found")
         }
       } catch (error) {
         console.error("Error fetching master details:", error)
@@ -200,6 +187,7 @@ export default function MasterProfile() {
   if (loading || !masterDetails) {
     return <div className="text-[#B9B9C9] text-center py-10">{t("MasterProfileLoading")}...</div>
   }
+
   const imageUrl = masterDetails.attachmentId
     ? attachment + masterDetails.attachmentId
     : masterDetails.mainPhoto
@@ -209,47 +197,45 @@ export default function MasterProfile() {
   return (
     <div className="min-h-screen bg-[#111827]">
       <main className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex items-center mb-10 gap-10`">
         <Button
           onClick={() => navigate(-1)}
-          className="border-[#B9B9C9] text-[#B9B9C9] border rounded-xl flex items-center py-3 px-6 gap-2 mb-8"
+          className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-3 px-6 gap-2 "
         >
-          <MdArrowBackIos className="text-[#B9B9C9]" />
+          <MdArrowBackIos className="text-[#FFFFFF]" />
           {t("MasterProfileBack")}
         </Button>
-
-        {/* Updated Card Design */}
+        <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">Подробности о мастере </h2>
+        </div>
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full">
-          {/* Header Image */}
           <div className="relative h-[440px] w-full rounded-[20px]">
             <img
-              src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : ""}
+              src={masterDetails.mainPhoto ? `${attachment}${masterDetails.mainPhoto}` : MasterProfileImg}
               alt="Service environment"
-              className="w-full h-full object-cover rounded-2xl"
+              className="w-full h-[440px] p-10 rounded-[20px]"
             />
+            
           </div>
 
-          {/* Profile Content */}
           <div className="p-6">
-            <div className="flex items-start gap-6">
-              {/* Profile Image */}
+            <div className="flex items-center gap-6">
               <img
-                src={imageUrl || ""}
+                src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : ""}
                 alt={masterDetails.fullName}
-                className="w-24 h-24 rounded-full object-cover border-4 border-[#B9B9C9] shadow-lg"
+                className="w-[153px] h-[153px]  rounded-full object-cover border-4 border-[#B9B9C9] shadow-lg"
               />
 
-              {/* Name and Rating */}
               <div className="flex-1">
                 <div className="flex justify-between items-start">
                   <div>
                     <h1 className="text-2xl font-semibold text-gray-900">{masterDetails.fullName}</h1>
-                    <p className="font-medium font-manrope text-[24px] text-gray-600">{masterDetails.specialization}</p>
+                    <p className="font-medium font-manrope text-[24px] text-gray-600">{masterDetails.salonName}</p>
                   </div>
                   <div className="flex flex-col items-center">
                     <div className=" ">
                       <Rate
                         disabled
-                        value={masterDetails.rating}
+                        value={masterDetails.feedbackCount}
                         className="text-[#9C0B35] w-[41px] h-[45px]"
                         style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
                       />
@@ -262,27 +248,24 @@ export default function MasterProfile() {
               </div>
             </div>
 
-            {/* Location and Contact */}
             <div className="flex align-center justify-between py-10">
               <div className="flex items-center gap-3 text-gray-600">
                 <MapPin className="text-[#9C0B35] w-[40px] h-[45px] flex-shrink-0" />
-                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.address}</span>
+                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.district} {masterDetails.street} {masterDetails.house}</span>
               </div>
               <div className="flex items-center gap-3 ">
                 <Phone className="text-[#9C0B35] w-[44px] h-[44px] flex-shrink-0" />
-                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.phoneNumber}</span>
+                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.phone}</span>
               </div>
             </div>
 
-            {/* Appointment and Price */}
             <div className="flex justify-between items-center py-3">
               <p className="font-medium font-manrope text-[24px]">
                 Ближайшая запись: <span className="font-medium">Сегодня</span>
               </p>
-              <p className="text-[#9C0B35] font-bold text-[22px]">от {masterDetails.price}</p>
+              <p className="text-[#9C0B35] font-bold text-[22px]">от {masterDetails.masterServicePrice}</p>
             </div>
 
-            {/* Book Button */}
             <div className="flex justify-center">
               <Button
                 onClick={() => setIsModalOpen(true)}
@@ -294,7 +277,6 @@ export default function MasterProfile() {
           </div>
         </div>
 
-        {/* Keep existing Gallery and Reviews sections */}
         <section className="mt-12">
           <h2 className="text-white text-center font-medium text-3xl mb-8">{t("MasterProfileGallery")}</h2>
           {gallery.map((album) => (
@@ -316,7 +298,6 @@ export default function MasterProfile() {
         </section>
       </main>
 
-      {/* Keep existing Modal code */}
       <UniversalModal isOpen={isModalOpen} onClose={closeModal}>
         {page === 1 ? (
           <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
@@ -399,4 +380,3 @@ export default function MasterProfile() {
     </div>
   )
 }
-

@@ -11,7 +11,7 @@ export const StandardsSafety: React.FC = () => {
     <div>
       <div className='bg-[#111827]'>
 
-        <div className='mx-auto '>
+        <div className='mx-auto  h-[100vh]'>
           <Hero slides={[{
             title: t('StandardsSafetyHeroTitle1'),
             description: t('StandardsSafetyHeroDescription1Text1'),
