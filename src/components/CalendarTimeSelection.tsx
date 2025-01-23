@@ -8,7 +8,7 @@ interface TimeSlot {
 }
 
 interface CalendarTimeSelectionProps {
-  masterId: string;
+  masterId: any;
   onTimeSelect?: (date: string, time: string) => void;
 }
 
