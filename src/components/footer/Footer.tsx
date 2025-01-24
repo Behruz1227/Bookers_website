@@ -27,13 +27,13 @@ function Footer() {
 
   return (
     <div className="bg-[#111827] w-full text-[#ffffff]">
-      <div className="mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div className="">
         {/* Top Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Documentation */}
-          <div className="flex flex-col gap-5 items-center md:items-start">
+          <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Documentation")}</h2>
-            <div>
+            <div className="flex flex-col gap-2 text-base">
               {HelpType?.body?.map((item: any) => {
                 const statusMap: Record<string, string> = {
                   TERMS_OF_USE: "Условия использования",
@@ -48,7 +48,6 @@ function Footer() {
                   <Link
                     key={item.id}
                     to={`/conditions/#${item.id}`}
-                    className="text-[15px] e block mb-2"
                   >
                     {displayText}
                   </Link>
@@ -58,43 +57,49 @@ function Footer() {
 
           </div>
           {/* Main Links */}
-          <div className="flex flex-col gap-5 items-center md:items-start">
+          <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("MainPageLinks")}</h2>
-            <Link to="#app" className="text-[15px]">{t("toClients")}</Link>
-            <Link to="/Home" className="text-[15px]">{t("ToMasters")}</Link>
-            <Link to="/Home" className="text-[15px]">Бизнес-партнерство</Link>
-            <Link to="/Home" className="text-[15px]">Мастерклассы / Обучение/ Тренинги</Link>
-            <Link to="/Tariffs" className="text-[15px]">Пакеты для мастеров</Link>
-            <Link to="/#" className="text-[15px]">FAQ</Link>
+            <div className="flex flex-col gap-2 text-base">
+              <Link to="#app">{t("toClients")}</Link>
+              <Link to="/Home">{t("ToMasters")}</Link>
+              <Link to="/Home">Бизнес-партнерство</Link>
+              <Link to="/Home">Мастерклассы / Обучение/ Тренинги</Link>
+              <Link to="/Tariffs">Пакеты для мастеров</Link>
+              <Link to="/#">FAQ</Link>
+            </div>
           </div>
           {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">Вход / Регистрация</h2>
-            <p onClick={() => {
-              setLoginHolat(true);
-              setLoginRole("CLIENT");
-            }} className="text-[15px]">Kлиент</p>
-            <p onClick={() => {
-              setLoginHolat(true);
-              setLoginRole("MASTER");
-            }} className="text-[15px]">Mастер</p>
-            <Link to="/Home" className="text-[15px]">Бизнес-партнер</Link>
+            <div className="flex flex-col gap-2 text-base">
+              <p onClick={() => {
+                setLoginHolat(true);
+                setLoginRole("CLIENT");
+              }} >Kлиент</p>
+              <p onClick={() => {
+                setLoginHolat(true);
+                setLoginRole("MASTER");
+              }}>Mастер</p>
+              <Link to="/Home">Бизнес-партнер</Link>
+            </div>
           </div>
           {/* Contacts */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">Kонтактные данные</h2>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Pin} alt="Pin" />
-              <p className="text-[15px]">Республика Узбекистан, город Ташкент</p>
-            </a>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Phone} alt="Phone" />
-              <p className="text-[15px]">+998 77 308-88-88</p>
-            </a>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Messege} alt="Message" />
-              <p className="text-[15px]">info@welltech.uz</p>
-            </a>
+            <div className="flex flex-col gap-2 text-base">
+              <a href="#" className="flex items-start gap-3">
+                <img src={Pin} alt="Pin" />
+                <p>Республика Узбекистан, город Ташкент</p>
+              </a>
+              <a href="#" className="flex items-start gap-3">
+                <img src={Phone} alt="Phone" />
+                <p>+998 77 308-88-88</p>
+              </a>
+              <a href="#" className="flex items-start gap-3">
+                <img src={Messege} alt="Message" />
+                <p>info@welltech.uz</p>
+              </a>
+            </div>
           </div>
         </div>
 
