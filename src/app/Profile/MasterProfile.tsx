@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Input, Rate } from "antd"
-import { MapPin, Phone } from 'lucide-react'
+import { MapPin, Phone } from "lucide-react"
 import { MdArrowBackIos, MdCheckCircle } from "react-icons/md"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -12,7 +12,8 @@ import Button from "@/components/button/Button"
 import { UniversalModal } from "@/components/Modal/UniversalModal"
 import { Galereya } from "@/components/Galereya/Galereya"
 import Footer from "@/components/footer/Footer"
-import { MasterReviews } from "@/components/master-reviews"
+import { TestimonialSlider } from "@/components/splide/TestimonialSlider2"
+
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { attachment, BASE_URL } from "@/helpers/Url"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
@@ -104,50 +105,39 @@ export default function MasterProfile() {
     { phoneNumber },
   )
 
+
+
+  const { response: masterResponse, globalDataFunc: fetchMasterDetails } = useGlobalRequest(
+    `${BASE_URL}/api/user/client/get-one/${id}`,
+    "GET"
+  )
+
+  const { response: galleryResponse, globalDataFunc: fetchGallery } = useGlobalRequest(
+    `${BASE_URL}/api/gallery/user/${id}`,
+    "GET"
+  )
+
   useEffect(() => {
-    const fetchMasterDetails = async () => {
-      try {
-        const Token = localStorage.getItem("Token")
-        const response = await fetch(`${BASE_URL}/api/user/client/get-one/${id}`, {
-          headers: {
-            Authorization: `Bearer ${Token}`,
-            "Content-Type": "application/json",
-          },
-        })
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch master details")
-        }
-        const data = await response.json()
-        if (data?.body) {
-          setMasterDetails(data.body)
-        } else {
-          console.error("Master not found")
-        }
-      } catch (error) {
-        console.error("Error fetching master details:", error)
-      }
-      setLoading(false)
-    }
-
-    const fetchGallery = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/gallery/user/${id}`)
-        const data = await response.json()
-        if (data && data.body) {
-          setGallery(data.body)
-        }
-      } catch (error) {
-        console.error("Error fetching gallery:", error)
-      }
-      setLoading(false)
-    }
-
     if (id) {
       fetchMasterDetails()
       fetchGallery()
     }
   }, [id])
+
+  useEffect(() => {
+    if (masterResponse?.body) {
+      setMasterDetails(masterResponse.body)
+    }
+    setLoading(false)
+  }, [masterResponse])
+
+  useEffect(() => {
+    if (galleryResponse?.body) {
+      setGallery(galleryResponse.body)
+    }
+    setLoading(false)
+  }, [galleryResponse])
+
 
   useEffect(() => {
     if (responseCode?.success) {
@@ -189,8 +179,8 @@ export default function MasterProfile() {
   const imageUrl = masterDetails.attachmentId
     ? attachment + masterDetails.attachmentId
     : masterDetails.mainPhoto
-    ? attachment + masterDetails.mainPhoto
-    : null
+      ? attachment + masterDetails.mainPhoto
+      : null
 
   return (
     <div className="min-h-screen bg-[#111827]">
@@ -295,7 +285,7 @@ export default function MasterProfile() {
 
         <section className="mt-12">
           <h2 className="text-white text-center font-medium text-3xl mb-8">{t("MasterProfileReviews")}</h2>
-          <MasterReviews masterId={id} reviews={masterDetails?.reviews} />
+          <TestimonialSlider masterId={id} />
         </section>
       </main>
 
@@ -354,7 +344,7 @@ export default function MasterProfile() {
               </Button>
             </div>
           </div>
-        ) : (
+        ) : response?.status === "CREATED" ? (
           <div className="p-6 rounded-[20px]">
             <div className="flex flex-col items-center justify-center gap-10 py-10">
               <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
@@ -374,10 +364,51 @@ export default function MasterProfile() {
               </div>
             </div>
           </div>
-        )}
+        ) : response?.status === "WAIT" ? (
+          <div className="p-6 rounded-[20px]">
+            <div className="flex flex-col items-center justify-center gap-10 py-10">
+              <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">Ваша запись отправленана утверждение мастеру</h2>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                Ваша заявка принята. Cтатус вашей записи можно отслеживать в мобильном приложении bookers
+                <br />
+                отслеживать в мобильном приложении bookers
+              </p>
+              <div className="pt-10">
+                <Button
+                  className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                  onClick={() => alert("Войти / Регистрация")}
+                >
+                  Скачать приложение
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : response?.status === false ? (
+          <div className="p-6 rounded-[20px]">
+            <div className="flex flex-col items-center justify-center gap-10 py-10">
+              <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">Вы не можете записаться на услугу мастера</h2>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                Что бы записаться необходимо пройти регистрацию клиента
+                <br />
+                регистрацию клиента
+              </p>
+              <div className="pt-10">
+                <Button
+                  className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                  onClick={() => alert("Войти / Регистрация")}
+                >
+                  Зарегистрироваться
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </UniversalModal>
 
       <Footer />
     </div>
   )
 }
+

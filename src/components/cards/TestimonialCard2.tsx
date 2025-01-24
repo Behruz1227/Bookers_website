@@ -1,29 +1,41 @@
-import type React from "react"
-import { Card, Avatar } from "antd"
-import line from "../../assets/cards/Rectangle.svg"
-import { attachment } from "@/helpers/Url"
+import React from 'react';
+import { Card, Avatar } from 'antd';
+import line from "../../assets/cards/Rectangle.svg";
+import { attachment } from '@/helpers/Url';
 
 interface TestimonialCardProps {
-  clientAttachmentId: string
-  text: string
-  masterName: string
-  salonName: string
+  clientAttachmentId: string;
+  text: string;
+  masterName: string;
+  salonName: string;
 }
 
 export const TestimonialCard: React.FC<TestimonialCardProps> = ({
   clientAttachmentId,
   text,
   masterName,
-  salonName,
+  salonName
 }) => {
   return (
-    <Card className="max-w-md py-5 rounded-3xl shadow-lg bg-[#B9B9C9] border-none">
+    <Card
+      className="max-w-md  py-5 rounded-3xl shadow-lg  bg-[#B9B9C9] border-none"
+    >
       <div className="relative">
         <div className="flex items-start gap-4">
           <div className="relative mb-3">
-            <Avatar src={attachment + clientAttachmentId} size={48} className="shadow-sm" />
+            <Avatar
+              src={attachment + clientAttachmentId} 
+              size={48}
+              className="shadow-sm "
+            />
             <div className="absolute -top-1 -right-1">
-              <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="19"
+                viewBox="0 0 24 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -41,25 +53,26 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
           </div>
         </div>
         <div>
-          <p className="mt-2 text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal">
+          <p
+            className="mt-2  text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal"
+
+          >
             {text}
           </p>
           <div className="py-5">
-            <img src={line || "/placeholder.svg"} alt="line" />
+            <img src={line} alt="line" />
           </div>
         </div>
         <div
-          className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium"
-          style={{ fontFamily: "Manrope, sans-serif" }}
+          className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium "
+          style={{ fontFamily: 'Manrope, sans-serif' }}
         >
-          <span className="font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]">{masterName}</span>
+          <span className='font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{masterName}</span>
           <span>/</span>
-          <span className="text-[#9C0B35] font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]">
-            {salonName}
-          </span>
+          <span className='text-[#9C0B35] font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{salonName}</span>
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};
 

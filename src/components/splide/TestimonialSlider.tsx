@@ -89,7 +89,6 @@ export const TestimonialSlider: React.FC = () => {
         slidesPerView={3}
         pagination={{
           clickable: true,
-          // Limit the number of bullets to 5
           renderBullet: (index, className) => {
             if (index >= 5) return ""
             return `<span class="${className}"></span>`

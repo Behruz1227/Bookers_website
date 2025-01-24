@@ -1,43 +1,38 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
 import { Pagination, Navigation } from "swiper/modules"
-import { TestimonialCard } from "@/components/cards/otviz"
+import { TestimonialCard } from "@/components/cards/TestimonialCard2"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { BASE_URL } from "@/helpers/Url"
 
-interface MasterReviewsProps {
+interface TestimonialSliderProps {
   masterId: string
-  reviews?: any[]
 }
 
-export const MasterReviews: React.FC<MasterReviewsProps> = ({ masterId, reviews }) => {
-  const [page, setPage] = useState(0)
-  const [size, setSize] = useState(10)
-
+export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }) => {
   const { loading, error, response, globalDataFunc } = useGlobalRequest(
-    `${BASE_URL}/api/leave/feedback/one/master?page=${page}&size=${size}&masterId=${masterId}`,
-    "GET",
+    `${BASE_URL}/api/leave/feedback/one/master?page=0&size=10&masterId=${masterId}`,
+    "GET"
   )
-  console.log("masterone", response)
+  console.log("response", response);
+  
 
   useEffect(() => {
     globalDataFunc()
-  }, [globalDataFunc, page, size, masterId])
+  }, [])
 
   if (loading) {
-    return <div className="text-center py-10 text-white">Loading reviews...</div>
+    return <div>Loading...</div>
   }
 
   if (error) {
-    return <div className="text-center py-10 text-red-500">Error loading reviews: {error}</div>
+    return <div>Error: {error}</div>
   }
-
-  const reviewsToDisplay = reviews || response?.content || []
 
   const buttonStyles = {
     width: "40px",
@@ -89,6 +84,7 @@ export const MasterReviews: React.FC<MasterReviewsProps> = ({ masterId, reviews 
             transform: scale(1.2);
           }
 
+          /* Hide all pagination bullets beyond the first 5 */
           .swiper-pagination-bullet:nth-child(n+6) {
             display: none;
           }
@@ -117,8 +113,8 @@ export const MasterReviews: React.FC<MasterReviewsProps> = ({ masterId, reviews 
           480: { slidesPerView: 1, spaceBetween: 8 },
         }}
       >
-        {reviewsToDisplay.length > 0 &&
-          reviewsToDisplay.map((testimonial: any, index: number) => (
+        {response?.body?.object?.length > 0 &&
+          response?.body?.object?.map((testimonial: any, index: number) => (
             <SwiperSlide key={index} className="pb-20">
               <TestimonialCard {...testimonial} />
             </SwiperSlide>
