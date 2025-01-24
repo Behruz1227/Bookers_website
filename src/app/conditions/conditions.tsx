@@ -18,10 +18,10 @@ function Conditions() {
     setSection(hash ? parseInt(hash, 10) : 1);
   }, [location, hash]);
   const statusMap: Record<string, string> = {
-    TERMS_OF_USE: "Условия использования",
-    OFFER: "Публичное соглашение",
-    LICENSE_AGREEMENT: "Лицензионное соглашение",
-    PRIVACY_POLICY: "Политика конфиденциальности",
+    TERMS_OF_USE_WEB: "Условия использования",
+    OFFER_WEB: "Публичное соглашение",
+    LICENSE_AGREEMENT_WEB: "Лицензионное соглашение",
+    PRIVACY_POLICY_WEB: "Политика конфиденциальности",
   };
 
   const displayText1 = statusMap[filteredData?.helpStatus] || "Unknown Status";
@@ -32,7 +32,7 @@ function Conditions() {
           <HeaderTitles text={displayText1} />
         </div>
         <div className="flex flex-col lg:flex-row gap-10">
-          <div className="border-r-2 w-max h-max grid gap-y-3 pr-4">
+          <div className="border-r-0 lg:border-r-2 lg:border-b-0 border-b-2 w-max h-max grid gap-y-3 pr-4">
             {HelpType?.body?.length ? (
               HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const displayText = statusMap[item.helpStatus] || "Unknown Status";

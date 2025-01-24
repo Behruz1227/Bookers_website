@@ -34,12 +34,12 @@ function Footer() {
           <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Documentation")}</h2>
             <div className="flex flex-col gap-2 text-base">
-              {HelpType?.body?.map((item: any) => {
+              {HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const statusMap: Record<string, string> = {
-                  TERMS_OF_USE: "Условия использования",
-                  OFFER: "Публичное соглашение",
-                  LICENSE_AGREEMENT: "Лицензионное соглашение",
-                  PRIVACY_POLICY: "Политика конфиденциальности",
+                  TERMS_OF_USE_WEB: "Условия использования",
+                  OFFER_WEB: "Публичное соглашение",
+                  LICENSE_AGREEMENT_WEB: "Лицензионное соглашение",
+                  PRIVACY_POLICY_WEB: "Политика конфиденциальности",
                 };
 
                 const displayText = statusMap[item.helpStatus] || "Unknown Status";
