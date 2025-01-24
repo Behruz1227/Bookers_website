@@ -17,38 +17,30 @@ import useHelpTypeStore from "@/Store/HelpType";
 
 function Footer() {
   const { setLoginHolat, setLoginRole } = LoginIndex();
-
-
-
-
-
   const { HelpType } = useHelpTypeStore();
-
-
   return (
     <div className="bg-[#111827] w-full text-[#ffffff]">
-      <div className="mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div className="">
         {/* Top Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Documentation */}
-          <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("Documentation")}</h2>
-            <div>
-              {HelpType?.body?.map((item: any) => {
+          <div className="flex flex-col gap-5  items-center md:items-start">
+            <h2 className="text-[20px] font-bold">{t("FooterDocumentation")}</h2>
+            <div className="flex flex-col gap-2 text-base">
+              {HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const statusMap: Record<string, string> = {
-                  TERMS_OF_USE: "Условия использования",
-                  OFFER: "Публичное соглашение",
-                  LICENSE_AGREEMENT: "Лицензионное соглашение",
-                  PRIVACY_POLICY: "Политика конфиденциальности",
+                  TERMS_OF_USE_WEB: t('FooterTermsofUse'),
+                  OFFER_WEB: t('FooterPublicagreement'),
+                  LICENSE_AGREEMENT_WEB: t('FooterLicenseAgreement'),
+                  PRIVACY_POLICY_WEB: t('FooterPrivacyPolicy'),
                 };
 
-                const displayText = statusMap[item.helpStatus] || "Unknown Status";
+                const displayText = statusMap[item.helpStatus] || "";
 
                 return (
                   <Link
                     key={item.id}
                     to={`/conditions/#${item.id}`}
-                    className="text-[15px] e block mb-2"
                   >
                     {displayText}
                   </Link>
@@ -58,43 +50,49 @@ function Footer() {
 
           </div>
           {/* Main Links */}
-          <div className="flex flex-col gap-5 items-center md:items-start">
+          <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("MainPageLinks")}</h2>
-            <Link to="#app" className="text-[15px]">{t("toClients")}</Link>
-            <Link to="/Home" className="text-[15px]">{t("ToMasters")}</Link>
-            <Link to="/Home" className="text-[15px]">Бизнес-партнерство</Link>
-            <Link to="/Home" className="text-[15px]">Мастерклассы / Обучение/ Тренинги</Link>
-            <Link to="/Tariffs" className="text-[15px]">Пакеты для мастеров</Link>
-            <Link to="/#" className="text-[15px]">FAQ</Link>
+            <div className="flex flex-col gap-2 text-base">
+              <Link to="/#offer">{t("FooterToclients")}</Link>
+              <Link to="/#offer">{t("Footertothemasters")}</Link>
+              <Link to="/#offer">{t('FooterBusinesspartnership')}</Link>
+              <Link to="/#masterClass">{t('FooterMasterclassesEducationTrainings')}</Link>
+              <Link to="/Tariffs">{t('FooterPackagesforMasters')}</Link>
+              <Link to="/#">{t('FooterFAQ')}</Link>
+            </div>
           </div>
           {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">Вход / Регистрация</h2>
-            <p onClick={() => {
-              setLoginHolat(true);
-              setLoginRole("CLIENT");
-            }} className="text-[15px]">Kлиент</p>
-            <p onClick={() => {
-              setLoginHolat(true);
-              setLoginRole("MASTER");
-            }} className="text-[15px]">Mастер</p>
-            <Link to="/Home" className="text-[15px]">Бизнес-партнер</Link>
+            <h2 className="text-[20px] font-bold">{t("LoginRegister")}</h2>
+            <div className="flex flex-col gap-2 text-base">
+              <p onClick={() => {
+                setLoginHolat(true);
+                setLoginRole("CLIENT");
+              }} >{t("FooterToclients")}</p>
+              <p onClick={() => {
+                setLoginHolat(true);
+                setLoginRole("MASTER");
+              }}>{t("Footertothemasters")}</p>
+              <Link to="/">{t('FooterBusinesspartner')}</Link>
+            </div>
           </div>
           {/* Contacts */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">Kонтактные данные</h2>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Pin} alt="Pin" />
-              <p className="text-[15px]">Республика Узбекистан, город Ташкент</p>
-            </a>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Phone} alt="Phone" />
-              <p className="text-[15px]">+998 77 308-88-88</p>
-            </a>
-            <a href="#" className="flex items-start gap-3">
-              <img src={Messege} alt="Message" />
-              <p className="text-[15px]">info@welltech.uz</p>
-            </a>
+            <h2 className="text-[20px] font-bold">{t("ContactDetails")}</h2>
+            <div className="flex flex-col gap-2 text-base">
+              <a href="#" className="flex items-start gap-3">
+                <img src={Pin} alt="Pin" />
+                <p>Республика Узбекистан, город Ташкент</p>
+              </a>
+              <a href="#" className="flex items-start gap-3">
+                <img src={Phone} alt="Phone" />
+                <p>+998 77 308-88-88</p>
+              </a>
+              <a href="#" className="flex items-start gap-3">
+                <img src={Messege} alt="Message" />
+                <p>info@welltech.uz</p>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -102,7 +100,7 @@ function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-10 py-10">
           {/* Logo */}
           <div className="flex flex-col items-center">
-            <Link to="/Home">
+            <Link to="/">
               <img src={logo} width={60} alt="Logo" />
               <p>bookers</p>
             </Link>
@@ -110,7 +108,7 @@ function Footer() {
           {/* Social and App Links */}
           <div className="flex flex-col sm:flex-row gap-10">
             <div className="flex flex-col items-center sm:items-start gap-5">
-              <p className="text-[20px] font-bold">Мы в социальных сетях</p>
+              <p className="text-[20px] font-bold">{t('Weareonsocialnetworks')}</p>
               <div className="flex gap-4">
                 <a href="#"><img src={Facebook} alt="Facebook" /></a>
                 <a href="#"><img src={Instagram} alt="Instagram" /></a>
@@ -119,7 +117,7 @@ function Footer() {
               </div>
             </div>
             <div className="flex flex-col items-center sm:items-start gap-5">
-              <p className="text-[20px] font-bold">Загрузите наше приложение на</p>
+              <p className="text-[20px] font-bold">{t('Downloadourappat')}</p>
               <div className="flex gap-4">
                 <a href="#"><img src={APP} alt="App Store" /></a>
                 <a href="#"><img src={Play} alt="Google Play" /></a>
@@ -129,8 +127,8 @@ function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="text-center pt-5">
-          <p className="text-[15px]">© 2024 Bookers. Все права защищены.</p>
+        <div className="text-center pb-10">
+          <p className="text-[15px]">{t("Bookersreserved")}</p>
         </div>
       </div>
     </div>

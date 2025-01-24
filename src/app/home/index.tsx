@@ -210,7 +210,7 @@ function Home() {
 
         </section>
         <Line />
-        <section>
+        <section id="masterClass">
           <div className="w-full xl:w-[60%]">
             <HeaderTitles text={t("Headertitle2")} />
           </div>

@@ -287,7 +287,7 @@ export const LeaveFeedback = () => {
                                                 }
                                             }}
                                             onChange={(value: string) => {
-                                                const selectedOption = options.find((option: any) => option.value === value);
+                                            const selectedOption = options.find((option: { value: string; roleName: string | null;}) => option.value === value);
                                                 setMasterOrSalon(selectedOption?.value);
                                                 setMasterOrSalonStatus(selectedOption?.roleName == null ? false : true);
                                             }}
