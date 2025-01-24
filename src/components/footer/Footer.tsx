@@ -53,10 +53,10 @@ function Footer() {
           <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("MainPageLinks")}</h2>
             <div className="flex flex-col gap-2 text-base">
-              <Link to="#app">{t("FooterToclients")}</Link>
-              <Link to="/">{t("Footertothemasters")}</Link>
-              <Link to="/">{t('FooterBusinesspartnership')}</Link>
-              <Link to="/">{t('FooterMasterclassesEducationTrainings')}</Link>
+              <Link to="/#offer">{t("FooterToclients")}</Link>
+              <Link to="/#offer">{t("Footertothemasters")}</Link>
+              <Link to="/#offer">{t('FooterBusinesspartnership')}</Link>
+              <Link to="/#masterClass">{t('FooterMasterclassesEducationTrainings')}</Link>
               <Link to="/Tariffs">{t('FooterPackagesforMasters')}</Link>
               <Link to="/#">{t('FooterFAQ')}</Link>
             </div>

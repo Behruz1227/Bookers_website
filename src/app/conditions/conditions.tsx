@@ -4,6 +4,7 @@ import Loading from "@/components/Loading/Loading";
 import useHelpTypeStore from "@/Store/HelpType";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { t } from "i18next";
 
 function Conditions() {
   const location = useLocation();
@@ -18,13 +19,13 @@ function Conditions() {
     setSection(hash ? parseInt(hash, 10) : 1);
   }, [location, hash]);
   const statusMap: Record<string, string> = {
-    TERMS_OF_USE_WEB: "Условия использования",
-    OFFER_WEB: "Публичное соглашение",
-    LICENSE_AGREEMENT_WEB: "Лицензионное соглашение",
-    PRIVACY_POLICY_WEB: "Политика конфиденциальности",
+    TERMS_OF_USE_WEB: t('FooterTermsofUse'),
+    OFFER_WEB: t('FooterPublicagreement'),
+    LICENSE_AGREEMENT_WEB: t('FooterLicenseAgreement'),
+    PRIVACY_POLICY_WEB: t('FooterPrivacyPolicy'),
   };
 
-  const displayText1 = statusMap[filteredData?.helpStatus] || "Unknown Status";
+  const displayText1 = statusMap[filteredData?.helpStatus] || "";
   return (
     <div>
       <div className="py-14">
