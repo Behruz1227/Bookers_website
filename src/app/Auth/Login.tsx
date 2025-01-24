@@ -15,6 +15,7 @@ import { useRegisterMaster } from "@/hooks/useRegister";
 import { saveAuthData } from "@/helpers/Token";
 import LoginIndex from "@/Store";
 import Loading from "@/components/Loading/Loading";
+import { useTranslation } from "react-i18next";
 
 interface FileState {
     file: File
@@ -35,7 +36,7 @@ export const Login: React.FC = () => {
     const [nickname, setNickname] = useState("");
     const [lang, setLang] = useState(userLang);
     const [imageFile, setImageFile] = useState<File | null>(null);
-
+    const { t } = useTranslation()
     const toastBtn = (text: string, type: "success" | "error") => {
        
         messageApi.open({
@@ -206,12 +207,12 @@ export const Login: React.FC = () => {
                     setLoginHolat(false);
                     setLoginRole(null);
                 }}
-                style="max-h-[90vh] w-[90%] "
+                style={`max-h-[90vh] ${status === 'Login' || status === 'Selection' ? 'w-[70%]' : 'w-[90%]'} `}
             >
                 <div className="w-full grid place-items-center my-5 mb-16">
                     {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
                     <h1 className="text-3xl font-semibold my-5">
-                        {status === 'Login' && "Регистрация / Вход"}
+                        {status === 'Login' && t('LoginRegister')}
                         {status === 'OTPcode' && "ОТП код"}
                         {status === 'Selection' && "Выберите роль"}
                         {status === 'Ok' && response?.success && "Спасибо за регистрацию"}

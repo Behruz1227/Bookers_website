@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import logo from '../../assets/img/Layer_1.png';
 import logoText from '../../assets/img/Мои записи.svg';
 import { Language } from "./Language";
-import { Dropdown, Space } from "antd";
+import { Dropdown, MenuProps, Space } from "antd";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { Bookers } from "./navBarMenu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import { FiPhoneCall } from "react-icons/fi";
 import LoginIndex from "@/Store";
 import { t } from "i18next";
 import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { getMe } from "@/helpers/Url";
-
-import HeaderTitles from "../HeadTitle";
 import useCategoryStore from "@/Store/Category";
 import { useCategory } from "@/hooks/useCategory";
 import { useHelpType } from "@/hooks/useHelpType";
@@ -32,7 +30,7 @@ const Header: React.FC = () => {
     const token = localStorage.getItem('Token');
     localStorage.setItem("phoneNumber", res?.phoneNumber || "")
 
-
+    const navigate = useNavigate();
 
     const { fetchHelpType } = useHelpType(); 
     const { fetchCategory } = useCategory(); // Custom hook to fetch categories
@@ -54,7 +52,7 @@ const Header: React.FC = () => {
         : [fallbackCategory];
 
     // Dynamically generate menu items
-    const menuItems: MenuProps['items'] = categoriesToDisplay.map((item) => ({
+    const menuItems: MenuProps['items'] = categoriesToDisplay.map((item: {name: string, id: string}) => ({
         key: item.id, // Use `id` as the unique key
         label: (
             <Link
@@ -135,10 +133,13 @@ const Header: React.FC = () => {
                             {/* <h1 className="text-[#9c0a1b] ">
                                 {`${res?.firstName || ''} ${res?.lastName || 'ds'}`}
                             </h1> */}
-                            <HeaderTitles size="text-2xl" text={res?.firstName || ''} />
-                            <p className="text-sm">
-                                {res?.phoneNumber || ''}
-                            </p>
+                            <Button onClick={() => {
+                                navigate("/#offer")
+                            }}
+                                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+                            >
+                                <span className="hover:opacity-90">{t("Personalaccount")}</span>
+                            </Button>
                         </div>
                     }
                     {/* Mobil menyu tugmasi */}
