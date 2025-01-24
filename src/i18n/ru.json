@@ -154,5 +154,22 @@
   "Weareonsocialnetworks": "Мы в социальных сетях",
   "Downloadourappat": "Загрузите наше приложение на",
   "Bookersreserved": "© 2024 Bookers. Все права защищены.",
-  "Personalaccount": "Личный кабинет"
+  "Personalaccount": "Личный кабинет",
+  "LeavefeedbackText": "Заполните форму заявки для оформления отзыва и обеспечения видимости в мобильном приложении и на сайте bookers отправьте заявку.",
+  "ClientName": "Имя клиента*",
+  "Email": "Электронная почта",
+  "PhoneNumber": "Номер телефона*",
+  "NameOfTheMasterOrBeautySalon": "Название мастера или салона красоты*",
+  "Review": "Отзыв*",
+  "AttachPhoto": "Прикрепить ваши фото",
+  "LeavefeedbackText1": "Я согласен(на) на публикацию моего отзыва на сайте и в мобильном приложении bookers.",
+  "OTPcode": "OTP -код",
+  "LeavefeedbackSMS": "Мы отправили вам SMS с кодом подтверждения.",
+  "ResendCode": "Отправить код заново",
+  "Resend": "Отправить заново",
+  "Youcantleaveareview": "Вы не можете оставить отзыв",
+  "FeedbackAccepted": "Отзыв принят",
+  "LeavefeedbackOK": "Спасибо что помогаете улучшить наш сервис",
+  "SendFeedback": "Отправить отзыв",
+  "Register": "Зарегистрироваться"
 }

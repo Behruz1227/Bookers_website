@@ -154,5 +154,22 @@
   "Weareonsocialnetworks": "We are on social networks",
   "Downloadourappat": "Download our application to",
   "Bookersreserved": "© 2024 Bookers. ",
-  "Personalaccount": "Personal account"
+  "Personalaccount": "Personal account",
+  "LeavefeedbackText": "Fill out the form of the application for registration and provision of visibility in the mobile application and send an application on the Bookers website.",
+  "ClientName": "Client's name*",
+  "Email": "E-mail",
+  "PhoneNumber": "Phone number*",
+  "NameOfTheMasterOrBeautySalon": "The name of the master or beauty salon*",
+  "Review": "Review*",
+  "AttachPhoto": "Attach your photos",
+  "LeavefeedbackText1": "I agree to the publication of my review on the bookers website and mobile application.",
+  "OTPcode": "OTP Code",
+  "LeavefeedbackSMS": "We sent you an SMS with a confirmation code.",
+  "ResendCode": "Send the code again",
+  "Resend": "Send again",
+  "Youcantleaveareview": "You can't leave a review",
+  "FeedbackAccepted": "Review accepted",
+  "LeavefeedbackOK": "Thank you for helping to improve our service",
+  "SendFeedback": "Send feedback",
+  "Register": "Register"
 }

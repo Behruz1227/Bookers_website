@@ -13,6 +13,7 @@ import { useUploadFile } from "@/hooks/useUploadFile";
 import useUploadFileStore from "@/Store/UploadFileStore";
 import LoginIndex from "@/Store";
 import { leaveFeedbackMasterOrSalonSearch, leaveFeedbackSave } from "@/helpers/Url";
+import { useTranslation } from "react-i18next";
 
 export const LeaveFeedback = () => {
     const { setOtzivHolat, otzivHolat, setLoginRole, setLoginHolat } = LoginIndex();
@@ -106,7 +107,7 @@ export const LeaveFeedback = () => {
             SendCodeBtn();
         }
     };
-
+    const { t } = useTranslation()
 
 
     //-------------------------------------
@@ -228,26 +229,26 @@ export const LeaveFeedback = () => {
                     {
                         status === 'otziv' && (
                             <div className="px-[6%]">
-                                <h1 className="font-bold text-xl lg:text-3xl px-[14%] text-center">Заполните форму заявки для оформления отзыва и обеспечения видимости в мобильном приложении и на сайте bookers отправьте заявку.</h1>
+                                <h1 className="font-bold text-xl lg:text-3xl px-[14%] text-center">{t('LeavefeedbackText')}</h1>
                                 <div className="grid grid-cols-1 lg:grid-cols-2 justify-center  gap-y-4 lg:gap-6 w-full my-6">
                                     <div className="col-start-1 col-end-2">
-                                        <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">Имя клиента*</label>
+                                        <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">{t('ClientName')}</label>
                                         <input
                                             type="text"
                                             id="firstName"
                                             value={firstName}
-                                            placeholder="Имя"
+                                            placeholder={t('First Name')}
                                             onChange={(e) => setFirstName(e.target.value)}
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                         />
                                     </div>
                                     <div className="col-start-1 lg:col-start-2 col-end-2 lg:col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="email">Электронная почта</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="email">{t('Email')}</label>
                                         <input
                                             type="email"
                                             id="email"
                                             value={email}
-                                            placeholder="Электронная почта"
+                                            placeholder={t('Email')}
                                             onChange={(e) => setEmail(e.target.value)}
 
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
@@ -255,7 +256,7 @@ export const LeaveFeedback = () => {
                                     </div>
                                     <div className="col-start-1 col-end-2">
                                         <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
-                                            Номер телефона*
+                                           {t('PhoneNumber')}
                                         </label>
                                         <input
                                             type="text"
@@ -267,11 +268,11 @@ export const LeaveFeedback = () => {
                                         />
                                     </div>
                                     <div className="col-start-1 lg:col-start-2 col-end-2 lg:col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="phone">Название мастера или салона красоты*</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="phone">{t('NameOfTheMasterOrBeautySalon')}</label>
                                         <Select
                                             showSearch
                                             allowClear
-                                            placeholder="Search to Select"
+                                            placeholder={t('NameOfTheMasterOrBeautySalon')}
                                             optionFilterProp="children"
                                             value={masterOrSalon || undefined} // Tanlangan qiymat
                                             filterOption={(input, option) =>
@@ -287,7 +288,7 @@ export const LeaveFeedback = () => {
                                                 }
                                             }}
                                             onChange={(value: string) => {
-                                            const selectedOption = options.find((option: { value: string; roleName: string | null;}) => option.value === value);
+                                                const selectedOption = options.find((option: { value: string; roleName: string | null; }) => option.value === value);
                                                 setMasterOrSalon(selectedOption?.value);
                                                 setMasterOrSalonStatus(selectedOption?.roleName == null ? false : true);
                                             }}
@@ -298,10 +299,10 @@ export const LeaveFeedback = () => {
                                         />
                                     </div>
                                     <div className="col-start-1 col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="review">Отзыв*</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="review">{t('Review')}</label>
                                         <textarea
                                             id="review"
-                                            placeholder="Отзыв"
+                                            placeholder={t('Review')}
 
                                             onChange={(e) => setReview(e.target.value)}
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
@@ -309,7 +310,7 @@ export const LeaveFeedback = () => {
                                     </div>
                                     <div className="col-start-1 col-end-2 grid justify-start ">
 
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="file">Прикрепить фото</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="file">{t('AttachPhoto')}</label>
                                         <FileInput onFileSelect={handlePhotoUpload} />
 
                                     </div>
@@ -325,7 +326,7 @@ export const LeaveFeedback = () => {
                                                 </svg>
                                             </span>
                                         </label>
-                                    </div>Я согласен(на) на публикацию моего отзыва на сайте и в мобильном приложении bookers.</p>
+                                    </div>{t('LeavefeedbackText1')}</p>
                                 </div>
 
                             </div>
@@ -334,9 +335,9 @@ export const LeaveFeedback = () => {
                     {
                         status === 'OTPcode' && (
                             <div className="w-full grid place-items-center">
-                                <h1 className="font-bold text-4xl">ОТП код</h1>
+                                <h1 className="font-bold text-4xl">{t('OTPcode')}</h1>
                                 <p className="font-bold text-2xl my-5">{phone}</p>
-                                <p className="text-[#59595c]">Мы отправили вам SMS с кодом подтверждения.</p>
+                                <p className="text-[#59595c]">{t('LeavefeedbackSMS')}</p>
                                 <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                     <Input.OTP
                                         length={4}
@@ -358,11 +359,11 @@ export const LeaveFeedback = () => {
                                 </div>
 
                                 {timer !== null && timer > 0
-                                    ? <p className="text-[#59595c]">Отправить код заново {timer} сек</p>
+                                    ? <p className="text-[#59595c]">{t('ResendCode')}{timer} сек</p>
                                     : <p className="text-[#9C0B35]" onClick={() => {
                                         handleResendCode()
                                         SendCodeBtn()
-                                    }}>Отправить заново</p>}
+                                    }}>{}{t('Resend')}</p>}
 
                             </div>
                         )
@@ -371,8 +372,8 @@ export const LeaveFeedback = () => {
                         status === 'Error' && (
                             <div className="grid place-items-center">
                                 <MdOutlineErrorOutline size={100} color="#9C0B35" />
-                                <h1 className="font-bold text-4xl text-center my-3">Вы не можете оставить отзыв</h1>
-                                <p className="text-center text-xl">Что бы оставить отзыв, необходимо пройти регистрацию клиента</p>
+                                <h1 className="font-bold text-4xl text-center my-3">{t('Youcantleaveareview')}</h1>
+                                <p className="text-center text-xl">{t('LeavefeedbackError')}</p>
                             </div>
                         )
                     }
@@ -380,8 +381,8 @@ export const LeaveFeedback = () => {
                         status === 'Ok' && (
                             <div className="grid place-items-center">
                                 <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />
-                                <h1 className="font-bold text-4xl text-center my-3">Отзыв принят</h1>
-                                <p className="text-center text-xl">Спасибо что помогаете улучшить наш сервис</p>
+                                <h1 className="font-bold text-4xl text-center my-3">{t('FeedbackAccepted')}</h1>
+                                <p className="text-center text-xl">{t('LeavefeedbackOK')}</p>
                             </div>
                         )
                     }
@@ -391,7 +392,7 @@ export const LeaveFeedback = () => {
                                 onClick={handleSubmit}
                                 className={`mt-4  py-4 px-16 rounded-full  ${isFormValid ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={!isFormValid || loadingSendCode}>
-                                Отправить отзыв
+                                {t('SendFeedback')}
                             </button>
                         )
                     }
@@ -402,7 +403,7 @@ export const LeaveFeedback = () => {
                                 className={`mt-4  py-4 px-16 rounded-full  ${!loadingCheckCode ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={loadingCheckCode || isLoading}
                             >
-                                Отправить отзыв
+                                {t('SendFeedback')}
                             </button>
                         )
                     }
@@ -433,7 +434,7 @@ export const LeaveFeedback = () => {
                                 className={`mt-4  py-4 px-16 rounded-full  ${!loadingCheckCode ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={loadingCheckCode || isLoading}
                             >
-                                Зарегистрироваться
+                                {t('Register')}
                             </button>
                         )
                     }

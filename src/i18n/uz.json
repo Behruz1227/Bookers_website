@@ -153,5 +153,22 @@
   "Weareonsocialnetworks": "Biz ijtimoiy tarmoqlardamiz",
   "Downloadourappat": "Arizani yuklab oling",
   "Bookersreserved": "© 2024 Bokerlar. ",
-  "Personalaccount": "Shaxsiy kabinet"
+  "Personalaccount": "Shaxsiy kabinet",
+  "LeavefeedbackText": "Mobil ilovada ro'yxatdan o'tish va ko'rinishni ta'minlash uchun ariza shaklini to'ldiring va stiperlar veb-saytida ariza yuboring.",
+    "ClientName": "Mijoz nomi*",
+    "Email": "E-mail",
+    "PhoneNumber": "Telefon raqami *",
+    "NameOfTheMasterOrBeautySalon": "Sartarosh yoki go'zallik salonining nomi*",
+    "Review": "Ko'rib chiqish*",
+    "AttachPhoto": "Rasmlaringizni ilova qiling",
+    "LeavefeedbackText1": "Men o'z sharhimni bookers veb-saytida va mobil ilovasida chop etishga roziman.",
+    "OTPcode": "OTP kodi",
+    "LeavefeedbackSMS": "Biz sizga tasdiqlash kodi bilan SMS yubordik.",
+    "ResendCode": "Kodni qayta yuborish",
+    "Resend": "Yana yuborish",
+    "Youcantleaveareview": "Siz sharh qoldirolmaysiz",
+    "FeedbackAccepted": "Tekshiruv qabul qilindi",
+    "LeavefeedbackOK": "Xizmatni yaxshilashda yordam berganingiz uchun tashakkur",
+    "SendFeedback": "Sharhni yuboring",
+    "Register": "Ro'yxatga olmoq"
 }
