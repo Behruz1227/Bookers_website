@@ -60,7 +60,6 @@
   "PrivacyPolicy": "Политикой конфиденциальности",
   "toClients": "клиентам",
   "ToMasters": "мастерам",
-  "MainPageLinks": "Main Page Links",
   "PartnershipHeroTitle": "Мы предлагаем взаимовыгодное сотрудничество",
   "PartnershipHeaderTitles": "Web-кабинет bookers: управляйте бизнес процессами своего салона красоты эффективно и выгодно",
   "PartnershipSubtitle1": "Мы предлагаем взаимовыгодное партнерство владельцам салонов красоты с инструментами управления и мониторинга для обеспечения стабильного роста бизнеса. Вы можете интегрировать сразу несколько филиалов сети и в режиме онлайн управлять процессами с помощью адаптированного Web-кабинета bookers, разработанного под вашу бизнес-стратегию. bookers поможет создать эффективную воронку продаж и обрабатывать клиентов до сделки через модуль комьюнити.",
@@ -134,6 +133,24 @@
   "VacanciesDescription": "Коммьюнити-менеджеры отвечают за создание, развитие, управление и общение с участниками сообщества",
   "VacanciesSecondButtonTitle": "Подробнее",
   "modaltitle":"Менеджер по работе с агентами",
-  "opisanie":"Описание"
+  "opisanie":"Описание",
+  "FooterDocumentation": "Документация",
+    "MainPageLinks": "Ссылки основных страниц",
+    "FooterTermsofUse": "Условия использования",
+    "FooterPublicagreement": "Публичное соглашение",
+    "FooterLicenseAgreement": "Лицензионным соглашением",
+    "FooterPrivacyPolicy": "Политикой конфиденциальности",
+    "FooterToclients": "клиентам",
+    "Footertothemasters": "мастерам",
+    "FooterBusinesspartnership": "Бизнес-партнерство",
+    "FooterMasterclassesEducationTrainings": "Мастерклассы \/ Обучение\/ Тренинги",
+    "FooterPackagesforMasters": "Пакеты для мастеров",
+    "FooterFAQ": "Часто задаваемые вопросы",
+    "LoginRegister": "Вход \/ Регистрация",
+    "FooterBusinesspartner": "Бизнес-партнер",
+    "ContactDetails": "контактные данные",
+    "Weareonsocialnetworks": "Мы в социальных сетях",
+    "Downloadourappat": "Загрузите наше приложение на",
+    "Bookersreserved": "© 2024 Bookers. Все права защищены."
   
 }
