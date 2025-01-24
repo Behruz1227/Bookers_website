@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Input, Rate } from "antd"
-import { MapPin, Phone } from "lucide-react"
+import { MapPin, Phone } from 'lucide-react'
 import { MdArrowBackIos, MdCheckCircle } from "react-icons/md"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -12,14 +12,11 @@ import Button from "@/components/button/Button"
 import { UniversalModal } from "@/components/Modal/UniversalModal"
 import { Galereya } from "@/components/Galereya/Galereya"
 import Footer from "@/components/footer/Footer"
-import { TestimonialSlider } from "@/components/splide/TestimonialSlider"
+import { MasterReviews } from "@/components/master-reviews"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { attachment, BASE_URL } from "@/helpers/Url"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { useTranslation } from "react-i18next"
-
-//img
-import MasterProfileImg from "@/assets/cards/master.png"
 
 interface AttachmentItem {
   attachmentId: string
@@ -58,6 +55,7 @@ interface MasterDetails {
   phoneNumber: string
   price: number
   specialization: string
+  reviews: any[] | null
 }
 
 export default function MasterProfile() {
@@ -66,8 +64,8 @@ export default function MasterProfile() {
   const navigate = useNavigate()
   const [gallery, setGallery] = useState<GalleryItem[]>([])
   const [masterDetails, setMasterDetails] = useState<MasterDetails | null>(null)
-  console.log("asdfghsdrtf", masterDetails);
-  
+  console.log("asdfghsdrtf", masterDetails)
+
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
@@ -118,7 +116,7 @@ export default function MasterProfile() {
         })
 
         if (!response.ok) {
-          throw new Error('Failed to fetch master details')
+          throw new Error("Failed to fetch master details")
         }
         const data = await response.json()
         if (data?.body) {
@@ -191,30 +189,31 @@ export default function MasterProfile() {
   const imageUrl = masterDetails.attachmentId
     ? attachment + masterDetails.attachmentId
     : masterDetails.mainPhoto
-      ? attachment + masterDetails.mainPhoto
-      : null
+    ? attachment + masterDetails.mainPhoto
+    : null
 
   return (
     <div className="min-h-screen bg-[#111827]">
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex items-center mb-10 gap-10`">
-        <Button
-          onClick={() => navigate(-1)}
-          className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-3 px-6 gap-2 "
-        >
-          <MdArrowBackIos className="text-[#FFFFFF]" />
-          {t("MasterProfileBack")}
-        </Button>
-        <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">Подробности о мастере </h2>
+          <Button
+            onClick={() => navigate(-1)}
+            className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-3 px-6 gap-2 "
+          >
+            <MdArrowBackIos className="text-[#FFFFFF]" />
+            {t("MasterProfileBack")}
+          </Button>
+          <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">
+            Подробности о мастере{" "}
+          </h2>
         </div>
-        <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full">
+        <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
           <div className="relative h-[440px] w-full rounded-[20px]">
             <img
-              src={masterDetails.mainPhoto ? `${attachment}${masterDetails.mainPhoto}` : MasterProfileImg}
+              src={masterDetails.mainPhoto || "/placeholder.svg"}
               alt="Service environment"
               className="w-full h-[440px] p-10 rounded-[20px]"
             />
-            
           </div>
 
           <div className="p-6">
@@ -251,7 +250,9 @@ export default function MasterProfile() {
             <div className="flex align-center justify-between py-10">
               <div className="flex items-center gap-3 text-gray-600">
                 <MapPin className="text-[#9C0B35] w-[40px] h-[45px] flex-shrink-0" />
-                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.district} {masterDetails.street} {masterDetails.house}</span>
+                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">
+                  {masterDetails.district} {masterDetails.street} {masterDetails.house}
+                </span>
               </div>
               <div className="flex items-center gap-3 ">
                 <Phone className="text-[#9C0B35] w-[44px] h-[44px] flex-shrink-0" />
@@ -294,7 +295,7 @@ export default function MasterProfile() {
 
         <section className="mt-12">
           <h2 className="text-white text-center font-medium text-3xl mb-8">{t("MasterProfileReviews")}</h2>
-          <TestimonialSlider />
+          <MasterReviews masterId={id} reviews={masterDetails?.reviews} />
         </section>
       </main>
 

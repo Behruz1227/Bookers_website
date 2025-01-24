@@ -21,6 +21,7 @@
   "OfferCardMiddle4": "VIP mijozlar uchun vaqt aktivatsiyasi",
   "OfferCardMiddle5": "Onlayn to'lov va oldindan to'lovni sozlash",
   "OfferCardMiddle6": "Usta xarajatlari hisob-kitobini hisoblash",
+  "OfferCardMiddle7": "Oylik oldin yozuvlarini yaratish va boshqalar",
   "OfferCardRight1": "Mijozlarni boshqarish moduli",
   "OfferCardRight2": "Monitoring va tahlil moduli",
   "OfferCardRight3": "Rejalashtirish va rejalashtirish moduli",
@@ -133,5 +134,6 @@
   "VacanciesHeaderTitles": "Bo'sh ish o'rinlari",
   "VacanciesOfferCardsTitle": "Jamiyat menejeri",
   "VacanciesDescription": "Jamiyat menejerlari jamiyat a'zolarini yaratish, rivojlantirish, boshqarish va muloqot qilish uchun javobgardir",
-  "VacanciesSecondButtonTitle": "Batafsil ma'lumot"
+  "VacanciesSecondButtonTitle": "Batafsil ma'lumot",
+  "CodeSent": "Kod jo'natildi"
 }

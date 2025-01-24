@@ -1,98 +1,132 @@
-import React, { useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
-import { TestimonialCard } from '@/components/cards/TestimonialCard';
-import { useGlobalRequest } from '@/helpers/Quary/quary';
-//url
-import {BASE_URL} from "@/helpers/Url"
+"use client"
+
+import type React from "react"
+import { useEffect } from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
+import "swiper/css/navigation"
+import { Pagination, Navigation } from "swiper/modules"
+import { TestimonialCard } from "@/components/cards/TestimonialCard"
+import { useGlobalRequest } from "@/helpers/Quary/quary"
+import { BASE_URL } from "@/helpers/Url"
 
 export const TestimonialSlider: React.FC = () => {
-  const { loading, error, response, globalDataFunc } = useGlobalRequest(
-    `${BASE_URL}/api/leave/feedback/list`,
-    'GET',
-  );
+  const { loading, error, response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/leave/feedback/list`, "GET")
 
   useEffect(() => {
-    globalDataFunc();
-  }, []);
+    globalDataFunc()
+  }, [])
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error}</div>
   }
 
- 
-
   const buttonStyles = {
-    width: '40px',
-    height: '40px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#ffffff',
-    borderRadius: '50%',
-    position: 'absolute' as const,
+    width: "40px",
+    height: "40px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#ffffff",
+    borderRadius: "50%",
+    position: "absolute" as const,
     zIndex: 10,
     opacity: 0.7,
-    transition: 'opacity 0.3s ease',
-    cursor: 'pointer',
-    top: "-10px"
-    
-  };
+    transition: "opacity 0.3s ease",
+    cursor: "pointer",
+    top: "-10px",
+  }
 
-  const prevButtonStyles = { ...buttonStyles, left:"47%" }; // Chap tugma
-  const nextButtonStyles = { ...buttonStyles, right:"47%" }; // O‘ng tugma
+  const prevButtonStyles = { ...buttonStyles, left: "47%" }
+  const nextButtonStyles = { ...buttonStyles, right: "47%" }
 
   return (
-    <div className=" py-20 relative ">
+    <div className="py-20 relative">
+      <style>
+        {`
+          .swiper-pagination {
+            position: absolute;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+
+          .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            background: white;
+            opacity: 1;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+          }
+
+          .swiper-pagination-bullet-active {
+            background: #FF0066;
+            transform: scale(1.2);
+          }
+
+          /* Hide all pagination bullets beyond the first 5 */
+          .swiper-pagination-bullet:nth-child(n+6) {
+            display: none;
+          }
+        `}
+      </style>
+
       <Swiper
-  modules={[Pagination, Navigation]}
-  spaceBetween={24}
-  slidesPerView={3} // Default
-  pagination={{ clickable: true }}
-  navigation={{
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  }}
-  breakpoints={{
-    1280: { slidesPerView: 3 }, // Desktop
-    1024: { slidesPerView: 2, spaceBetween: 16 }, // Tablet landscape
-    768: { slidesPerView: 1, spaceBetween: 12 }, // Tablet portrait
-    480: { slidesPerView: 1, spaceBetween: 8 }, // Mobile
-  }}
->
-  {response?.body?.length > 0 &&
-    response?.body?.map((testimonial: any, index: number) => (
-      <SwiperSlide key={index} className='pb-20  '>
-        <TestimonialCard {...testimonial} />
-      </SwiperSlide>
-    ))}
-</Swiper>
+        modules={[Pagination, Navigation]}
+        spaceBetween={24}
+        slidesPerView={3}
+        pagination={{
+          clickable: true,
+          // Limit the number of bullets to 5
+          renderBullet: (index, className) => {
+            if (index >= 5) return ""
+            return `<span class="${className}"></span>`
+          },
+        }}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+        breakpoints={{
+          1280: { slidesPerView: 3 },
+          1024: { slidesPerView: 2, spaceBetween: 16 },
+          768: { slidesPerView: 1, spaceBetween: 12 },
+          480: { slidesPerView: 1, spaceBetween: 8 },
+        }}
+      >
+        {response?.body?.length > 0 &&
+          response?.body?.map((testimonial: any, index: number) => (
+            <SwiperSlide key={index} className="pb-20">
+              <TestimonialCard {...testimonial} />
+            </SwiperSlide>
+          ))}
+      </Swiper>
 
-
-      {/* Tugmalar */}
       <div
         className="swiper-button-prev"
         style={prevButtonStyles}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.7')}
-      >
-      
-      </div>
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
+      />
       <div
         className="swiper-button-next"
         style={nextButtonStyles}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.7')}
-      >
-
-      </div>
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
+      />
     </div>
-  );
-};
+  )
+}
+

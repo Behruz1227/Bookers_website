@@ -14,7 +14,7 @@ import { ServiceCard } from '@/components/cards/ServiceCard';
 import Footer from '@/components/footer/Footer';
 import HeaderTitles from '@/components/HeadTitle';
 import Button from '@/components/button/Button';
-import { BlogCardSlider } from '@/components/splide/BlogCardSlider';
+import { BlogSlider } from '@/components/splide/BlogCardSlider';
 import { TestimonialSlider } from '@/components/splide/TestimonialSlider';
 import { StatsCard } from '@/components/cards/stats-card';
 import { Line } from '@/components/Line/Line';
@@ -97,6 +97,7 @@ function Home() {
     { text: t("OfferCardMiddle4") },
     { text: t("OfferCardMiddle5") },
     { text: t("OfferCardMiddle6") },
+    { text: t("OfferCardMiddle7") },
   ];
 
   const ThreeCard = [
@@ -230,7 +231,7 @@ function Home() {
                 {t("Bookers")}
               </h2>
               <div>
-                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90" onClick={openModal}>{t("SendApplication")}</button>
+                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]" onClick={openModal}>{t("SendApplication")}</button>
                 <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
               </div>
             </div>
@@ -246,7 +247,7 @@ function Home() {
           </div>
           <div className='flex justify-center'>
             <Button
-              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] hover:opacity-90"
+              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] "
               onClick={() => setOtzivHolat(true)}
             >
               {t("LeaveFeedback")}
@@ -285,11 +286,13 @@ function Home() {
           <LogoSlider logos={Logo} />
         </section>
         <section>
+          <div className='pb-20'>
           <HeaderTitles text={t("news")} />
-          <BlogCardSlider />
+          </div>
+          <BlogSlider page={0} size={5} />
           <div className='flex justify-center pb-20'  >
             <Button
-              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
               onClick={() => alert("Скачать приложение")}
             >
               {t("AllNews")}

@@ -22,6 +22,7 @@
   "OfferCardMiddle4": "Activation of time for VIP clients",
   "OfferCardMiddle5": "Setting up online payment and prepayment",
   "OfferCardMiddle6": "Accounting for the master's expenses",
+  "OfferCardMiddle7": "Create records for a month ahead and others",
   "OfferCardRight1": "Customer Management Module",
   "OfferCardRight2": "Monitoring and Analytics Module",
   "OfferCardRight3": "Planning and Scheduling Module",
@@ -134,5 +135,6 @@
   "VacanciesHeaderTitles": "Vacancies",
   "VacanciesOfferCardsTitle": "Community Manager",
   "VacanciesDescription": "Community managers are responsible for creating, developing, managing and communicating with community members",
-  "VacanciesSecondButtonTitle": "More details"
+  "VacanciesSecondButtonTitle": "More details",
+  "CodeSent": "Code sent"
 }

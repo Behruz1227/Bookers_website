@@ -11,6 +11,10 @@ import Button from "@/components/button/Button"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { MdCheckCircle } from "react-icons/md";
+import cardImg from "@/assets/cards/master.png"
+import { useTranslation } from 'react-i18next';
+import { FaRegUser } from "react-icons/fa6";
+
 
 interface MasterProps {
   id: string
@@ -33,6 +37,7 @@ interface MasterProps {
 }
 
 export default function MasterCard({
+  
   id,
   serviceId, // Add serviceId to props
   attachmentId,
@@ -51,6 +56,7 @@ export default function MasterCard({
   mainPhoto,
   masterId, // Add masterId to props
 }: MasterProps) {
+  const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -72,6 +78,7 @@ export default function MasterCard({
     setIsModalOpen(false)
     setPage(1)
   }
+  
   const phoneNumber = localStorage.getItem("phoneNumber")
   const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
@@ -90,7 +97,7 @@ export default function MasterCard({
   useEffect(() => {
     if (responseCode?.success) {
       setPage(2)
-      toast(responseCode?.message)
+      toast.success(t("CodeSent"))
     }
   }, [responseCode])
 
@@ -132,7 +139,7 @@ export default function MasterCard({
         {imageUrl && (
           <div className="relative pb-[56.25%]">
             <img
-              src={imageUrl || "/placeholder.svg"}
+              src={imageUrl ? imageUrl : cardImg}
               alt={`${name}'s service`}
               className="absolute top-0  left-0 w-full h-full object-cover rounded-[20px]"
             />
@@ -140,12 +147,16 @@ export default function MasterCard({
         )}
 
         <div className="flex items-center gap-4 mt-4 mb-3">
-          {avatar && (
+        {avatar ? (
             <img
-              src={attachment + avatar || "/placeholder.svg"}
+              src={attachment + avatar}
               alt={name}
-              className="w-20 h-20 rounded-full object-cover border-2 border-white shadow-md"
+              className="w-20 h-20 rounded-full object-cover  shadow-md"
             />
+          ) : (
+            <div className="w-20 h-20 rounded-full  bg-gray-300 flex items-center justify-center">
+              <FaRegUser size={30} className="text-[#9c0b35]" />
+            </div>
           )}
           <div>
             <div className="flex items-center gap-2">
@@ -177,7 +188,7 @@ export default function MasterCard({
 
           {address && (
             <div className="flex items-center gap-2">
-              <HiOutlineLocationMarker className="text-[#9C0B35] w-5 h-5 flex-shrink-0" />
+              <HiOutlineLocationMarker className="text-[#9C0B35] flex-shrink-0" size={25} />
               <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{address}</span>
             </div>
           )}
@@ -197,13 +208,13 @@ export default function MasterCard({
         <div className="mt-4 flex gap-3">
           <Button
             onClick={onProfileClick}
-            className="flex-1 bg-[#9C0B35] rounded-[40px] py-3 px-6 text-base font-medium text-white hover:bg-[#7d092a] transition-colors"
+            className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
           >
             {firstButtonTitle}
           </Button>
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="flex-1 bg-[#9C0B35] rounded-[40px] py-3 px-6 text-base font-medium text-white hover:bg-[#7d092a] transition-colors"
+            className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
           >
             {secondButtonTitle}
           </Button>
@@ -284,7 +295,7 @@ export default function MasterCard({
             <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center ">Ваша заявка принята. Cтатус вашей записи можно  <br />отслеживать в мобильном приложении bookers</p>
            <div className="pt-10">
            <Button
-              className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+              className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
               onClick={() => alert("Войти / Регистрация")}
             >
               Скачать приложение

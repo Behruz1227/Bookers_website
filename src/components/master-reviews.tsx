@@ -1,61 +1,43 @@
 "use client"
 
-import type React from "react"
 import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination, Navigation } from "swiper/modules"
-import Blogcard from "@/components/cards/blog-card"
-import { BASE_URL } from "@/helpers/Url"
-
-// Import Swiper styles
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
+import { Pagination, Navigation } from "swiper/modules"
+import { TestimonialCard } from "@/components/cards/otviz"
+import { useGlobalRequest } from "@/helpers/Quary/quary"
+import { BASE_URL } from "@/helpers/Url"
 
-//img
-import cardImg from "@/assets/cards/card.png"
-
-interface BlogPost {
-  id: number
-  image?: string
-  date: string
-  title: string
-  description: string
+interface MasterReviewsProps {
+  masterId: string
+  reviews?: any[]
 }
 
-interface BlogSliderProps {
-  page?: number
-  size?: number
-}
+export const MasterReviews: React.FC<MasterReviewsProps> = ({ masterId, reviews }) => {
+  const [page, setPage] = useState(0)
+  const [size, setSize] = useState(10)
 
-export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) => {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const { loading, error, response, globalDataFunc } = useGlobalRequest(
+    `${BASE_URL}/api/leave/feedback/one/master?page=${page}&size=${size}&masterId=${masterId}`,
+    "GET",
+  )
+  console.log("masterone", response)
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/newsletters/web-site?page=${page}&size=${size}`)
-        const result = await response.json()
-        const apiData = result.body?.object || []
-        const formattedPosts = apiData.map((item: any) => ({
-          id: item.id,
-          image: item.image || cardImg,
-          date: item.date,
-          title: item.subject,
-          description: item.content,
-        }))
-        setPosts(formattedPosts)
-        setLoading(false)
-      } catch (err) {
-        setError("Failed to fetch data")
-        setLoading(false)
-      }
-    }
+    globalDataFunc()
+  }, [globalDataFunc, page, size, masterId])
 
-    fetchPosts()
-  }, [page, size])
+  if (loading) {
+    return <div className="text-center py-10 text-white">Loading reviews...</div>
+  }
+
+  if (error) {
+    return <div className="text-center py-10 text-red-500">Error loading reviews: {error}</div>
+  }
+
+  const reviewsToDisplay = reviews || response?.content || []
 
   const buttonStyles = {
     width: "40px",
@@ -76,21 +58,13 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
   const prevButtonStyles = { ...buttonStyles, left: "47%" }
   const nextButtonStyles = { ...buttonStyles, right: "47%" }
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
-
   return (
-    <div className="py-10 relative">
+    <div className="py-20 relative">
       <style>
         {`
           .swiper-pagination {
-             position: absolute;
-            bottom: -30px !important;  
+            position: absolute;
+            bottom: 0 !important;
             left: 0 !important;
             right: 0 !important;
             transform: none !important;
@@ -115,7 +89,9 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
             transform: scale(1.2);
           }
 
-          
+          .swiper-pagination-bullet:nth-child(n+6) {
+            display: none;
+          }
         `}
       </style>
 
@@ -140,20 +116,13 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
           768: { slidesPerView: 1, spaceBetween: 12 },
           480: { slidesPerView: 1, spaceBetween: 8 },
         }}
-        loop={true}
-        className="py-8 mb-10"
       >
-        {posts.map((post) => (
-          <SwiperSlide key={post.id} className="pb-20">
-            <Blogcard
-              id={post.id}
-              image={post.image ? post.image : cardImg}
-              date={post.date}
-              title={post.title}
-              description={post.description}
-            />
-          </SwiperSlide>
-        ))}
+        {reviewsToDisplay.length > 0 &&
+          reviewsToDisplay.map((testimonial: any, index: number) => (
+            <SwiperSlide key={index} className="pb-20">
+              <TestimonialCard {...testimonial} />
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       <div
@@ -171,4 +140,3 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
     </div>
   )
 }
-
