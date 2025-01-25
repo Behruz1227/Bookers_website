@@ -1,6 +1,6 @@
-'use client'
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+"use client"
+import { toast, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import { useEffect, useState } from "react"
 import { Input, Rate } from "antd"
@@ -10,11 +10,11 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import Button from "@/components/button/Button"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
-import { MdCheckCircle } from "react-icons/md";
+import { MdCheckCircle } from "react-icons/md"
 import cardImg from "@/assets/cards/master.png"
-import { useTranslation } from 'react-i18next';
-import { FaRegUser } from "react-icons/fa6";
-
+import { useTranslation } from "react-i18next"
+import { FaRegUser } from "react-icons/fa6"
+import { IoAlertCircleOutline } from "react-icons/io5"
 
 interface MasterProps {
   id: string
@@ -37,7 +37,6 @@ interface MasterProps {
 }
 
 export default function MasterCard({
-  
   id,
   serviceId, // Add serviceId to props
   attachmentId,
@@ -61,59 +60,99 @@ export default function MasterCard({
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [status, setStatus] = useState<string | null>('null')
+  const [status, setStatus] = useState<string | null>("null")
   const [page, setPage] = useState<number | null>(1)
-  const [otpCodeInput, setOtpCodeInput] = useState<string | null>(null)
+  const [otpCodeInput, setOtpCodeInput] = useState<string>("") // Added state to clear OTP input
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
-
+  const [hasToken, setHasToken] = useState(false) // Added state for token
+  const [otpError, setOtpError] = useState<string | null>(null) // Added OTP error state
 
   const roleGet = localStorage.getItem("Role")
   const handleAppointmentClick = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setIsModalOpen(true)
-    setErrorMessage(null)
+    if (hasToken) {
+      // Check for token before opening modal
+      setIsModalOpen(true)
+      setErrorMessage(null)
+    } else {
+      setIsModalOpen(true)
+      setPage(3)
+    }
   }
   const closeModal = () => {
     setIsModalOpen(false)
     setPage(1)
   }
-  
+
   const phoneNumber = localStorage.getItem("phoneNumber")
   const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
     date: selectedDateTime?.date,
-    timeHour: selectedDateTime?.time.split(':')[0],
-    timeMin: selectedDateTime?.time.split(':')[1],
+    timeHour: selectedDateTime?.time.split(":")[0],
+    timeMin: selectedDateTime?.time.split(":")[1],
     clientId: id,
-    comment: " "
+    comment: " ",
   })
-  const { response: responseCheck, globalDataFunc: globalDataFuncCheck, error: errorCheck } = useGlobalRequest(`${BASE_URL}/api/auth/checkCode?code=${otpCodeInput}`, "POST", {
+  const {
+    response: responseCheck,
+    globalDataFunc: globalDataFuncCheck,
+    error: errorCheck,
+  } = useGlobalRequest(`${BASE_URL}/api/auth/checkCode?code=${otpCodeInput}`, "POST", {
     phoneNumber,
   })
-  const { response: responseCode, globalDataFunc: globalDataFuncCode, error: errorCode } = useGlobalRequest(`${BASE_URL}/api/auth/sendCode?purpose=false&ROLE=${roleGet === "ROLE_CLIENT" ? "CLIENT" : "MASTER"}`, "POST", {
-    phoneNumber,
-  })
+  const {
+    response: responseCode,
+    globalDataFunc: globalDataFuncCode,
+    error: errorCode,
+  } = useGlobalRequest(
+    `${BASE_URL}/api/auth/sendCode?purpose=false&ROLE=${roleGet === "ROLE_CLIENT" ? "CLIENT" : "MASTER"}`,
+    "POST",
+    {
+      phoneNumber,
+    },
+  )
+
   useEffect(() => {
     if (responseCode?.success) {
       setPage(2)
-      toast.success(t("CodeSent"))
+      toast.success(t("CodeSent"), {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }, [responseCode])
 
   const HandleSubmit = async () => {
+    if (isSubmitting) return
+    setIsSubmitting(true)
     await globalDataFuncCheck()
+    if (!responseCheck?.success) {
+      toast.error(responseCheck?.message, {
+        position: "top-right",
+        autoClose: 3000,
+      })
+    } else {
+      setOtpError(null)
+      await globalDataFunc()
+    }
+    setIsSubmitting(false)
   }
   useEffect(() => {
     if (responseCheck?.success) {
-      // alert('check code success!')
-      globalDataFunc();
+      setOtpCodeInput("") // Clear OTP input after successful submission
+      globalDataFunc()
     } else if (!responseCheck?.success && errorCheck) {
       setErrorMessage(errorCheck?.message)
     }
   }, [responseCheck, errorCheck])
   const SendCode = () => {
-    globalDataFuncCode();
+    globalDataFuncCode()
   }
   useEffect(() => {
     if (response?.success) {
@@ -131,7 +170,10 @@ export default function MasterCard({
 
   const imageUrl = attachmentId ? attachment + attachmentId : mainPhoto ? attachment + mainPhoto : null
 
-
+  useEffect(() => {
+    const token = localStorage.getItem("Token")
+    setHasToken(!!token)
+  }, [])
 
   return (
     <div className="bg-[#B9B9C9] w-full rounded-[20px] text-gray-800 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -147,9 +189,9 @@ export default function MasterCard({
         )}
 
         <div className="flex items-center gap-4 mt-4 mb-3">
-        {avatar ? (
+          {avatar ? (
             <img
-              src={attachment + avatar}
+              src={attachment + avatar || "/placeholder.svg"}
               alt={name}
               className="w-20 h-20 rounded-full object-cover  shadow-md"
             />
@@ -168,21 +210,15 @@ export default function MasterCard({
                 </>
               )}
             </div>
-            {
-              role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>
-            }
+            {role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>}
           </div>
         </div>
 
         <div className="space-y-3">
           <div className="flex justify-between items-center py-3">
-            <Rate
-              disabled
-              value={feedbackCount}
-              className="text-[#9C0B35] text-lg"
-            />
+            <Rate disabled value={feedbackCount} className="text-[#9C0B35] text-lg" />
             <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">
-              {orderCount} заказа, {clientCount} клиентов
+              {orderCount} {t("order")}, {clientCount} {t("clients")}
             </span>
           </div>
 
@@ -195,11 +231,11 @@ export default function MasterCard({
 
           <div className="flex justify-between items-center py-3">
             <span className="font-medium font-manrope text-[22px]">
-              Ближайшая запись: Сегодня
+              {t("NextEntry")}: {t("Today")}
             </span>
             {masterServicePrice && (
               <span className="text-[#9C0B35] font-semibold text-lg">
-                от {masterServicePrice}
+                {t("from")} {masterServicePrice}
               </span>
             )}
           </div>
@@ -213,7 +249,7 @@ export default function MasterCard({
             {firstButtonTitle}
           </Button>
           <Button
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleAppointmentClick} // Use the updated handleAppointmentClick function
             className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
           >
             {secondButtonTitle}
@@ -221,89 +257,135 @@ export default function MasterCard({
         </div>
       </div>
 
-      <UniversalModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      >
-        {page === 1 ? <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
-          <div className="text-center mb-6">
-            <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">
-              Записаться к мастеру
-            </h2>
-          </div>
-          <div>
-            <CalendarTimeSelection
-              masterId={masterId || id}
-              onTimeSelect={handleTimeSelect}
-            />
-          </div>
-          {errorMessage && (
-            <div className="text-red-600 text-center mt-4 mb-2">
-              {errorMessage}
+      <UniversalModal isOpen={isModalOpen} onClose={closeModal}>
+        {page === 1 ? (
+          <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
+            <div className="text-center mb-6">
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("Signup")}</h2>
             </div>
-          )}
-          <div className="flex justify-center mt-6">
-            <Button
-              className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              onClick={() => {
-                SendCode()
-                setPage(2)
-              }}
-              disabled={!selectedDateTime || isSubmitting}
-            >
-              {isSubmitting ? 'Создание записи...' : selectedDateTime ? 'Записаться' : 'Выберите дату и время'}
-            </Button>
+            <div>
+              <CalendarTimeSelection masterId={masterId || id} onTimeSelect={handleTimeSelect} />
+            </div>
+            {errorMessage && <div className="text-red-600 text-center mt-4 mb-2">{errorMessage}</div>}
+            <div className="flex justify-center mt-6">
+              <Button
+                className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => {
+                  SendCode()
+                  setPage(2)
+                }}
+                disabled={!selectedDateTime || isSubmitting}
+              >
+                {isSubmitting ? t("Signup") : selectedDateTime ? t("Signup") : t("Signup")}
+              </Button>
+            </div>
           </div>
-        </div> : page === 2 ? <div className="p-6  rounded-[20px]">
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="font-manrope font-extrabold text-[44px] leading-[54px]">ОТП код</h1>
-            <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
-              {localStorage.getItem('phoneNumber')}
-            </h2>
-            <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">Мы отправили вам SMS с кодом подтверждения.</p>
+        ) : page === 2 ? (
+          <div className="p-6  rounded-[20px]">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="font-manrope font-extrabold text-[44px] leading-[54px]">{t("OTPCode")}</h1>
+              <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
+                {localStorage.getItem("phoneNumber")}
+              </h2>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">
+                {t("sentCode")}
+              </p>
+            </div>
+            <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
+              <Input.OTP
+                length={4}
+                onInput={(value: any) => {
+                  setOtpCodeInput(value.join(""))
+                  setLoginCheck(null)
+                  setCheckCode(null)
+                  setOtpError(null) // Clear error when user types
+                }}
+                value={otpCodeInput} // Added value prop to clear input after submission
+                style={{
+                  display: "flex",
+                  width: "60%",
+                  justifyContent: "between",
+                  gap: "20px",
+                }}
+              />
+              <Button
+                className=" w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => {
+                  HandleSubmit()
+                }}
+              >
+                {t("Signup")}
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
-            <Input.OTP
-              length={4}
-              onInput={(value: any) => {
-                setOtpCodeInput(value.join(''))
-                setLoginCheck(null);
-                setCheckCode(null);
-              }}
-              style={{
-                display: 'flex',
-                width: '60%',
-                justifyContent: 'between',
-                gap: '20px',
-              }}
-            />
-            <Button
-              className=" w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              onClick={() => {
-                HandleSubmit()
-              }}
-            >
-              Записаться
-            </Button>
-          </div>
-        </div> : page === 3 ? <div className="p-6  rounded-[20px]">
-          <div className="flex flex-col items-center justify-center gap-10 py-10">
-            <MdCheckCircle style={{ color: '#9C0B35', fontSize: '100px' }} />
-            <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-              Заявка принята
-            </h2>
-            <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center ">Ваша заявка принята. Cтатус вашей записи можно  <br />отслеживать в мобильном приложении bookers</p>
-           <div className="pt-10">
-           <Button
-              className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
-              onClick={() => alert("Войти / Регистрация")}
-            >
-              Скачать приложение
-            </Button>
-           </div>
-          </div>
-        </div> : null}
+        ) : page === 3 ? (
+          response?.status === "CREATED" ? (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("ApplicationAccepted")}</h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                  {t("Yourequest")}
+                  <br />
+                 {t("bookersmobile")}
+                </p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Downloadapp")}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : response?.status === "WAIT" ? (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+                  {t("approval")}
+                </h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                  {t("Yourequest")}
+                  <br />
+                  {t("bookersmobile")}
+                </p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Downloadapp")}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <IoAlertCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+                  {t("technician")}
+                </h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                  {t("Tosignup")}
+                  
+                </p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Register")}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )
+        ) : null}
       </UniversalModal>
+      <ToastContainer />
     </div>
   )
 }

@@ -19,12 +19,16 @@ import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { Input } from "@/components/ui/input"
 import useCategoryStore from "@/Store/Category"
 import Loading from "@/components/Loading/Loading"
+import { useTranslation } from 'react-i18next';
 
 function Services() {
+  const { t } = useTranslation()
   const { id } = useParams()
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [masters, setMasters] = useState<any[]>([])
+  
+  
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
@@ -91,7 +95,7 @@ function Services() {
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
             <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
-              Услуги мастеров и салонов красоты: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
+             {t("beautysalons")}: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
             </h1>
             <img
               src={HeroImg}
@@ -120,7 +124,7 @@ function Services() {
             </Select>
             <div className="w-full md:w-1/2">
               <Input
-                placeholder="Поиск мастеров/салонов/услуг"
+                placeholder={t("search")}
                 type="search"
                 onChange={(e) => setSearch(e.target.value)}
                 className="border-white text-white w-full md:w-full placeholder:text-white  md:mt-0"
@@ -150,8 +154,8 @@ function Services() {
                           feedbackCount={master.feedbackCount || 0}
                           orderCount={master.orderCount || 0}
                           clientCount={master.clientCount || 0}
-                          firstButtonTitle="Профиль"
-                          secondButtonTitle="Записаться"
+                          firstButtonTitle={t("MasterProfileProfile")}
+                          secondButtonTitle={t("Signup")}
                           onProfileClick={() => handleMasterProfileClick(master.id)}
                         />
                       </div>
@@ -163,7 +167,7 @@ function Services() {
                       className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                       onClick={handleLoadMore}
                     >
-                      Показать больше
+                      {t("koproq")}
                     </Button>
                   )}
                 </div>

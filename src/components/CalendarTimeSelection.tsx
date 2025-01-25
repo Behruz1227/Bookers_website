@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Button from './button/Button';
 import { BASE_URL } from "@/helpers/Url"
+import { useTranslation } from 'react-i18next';
+
 
 interface TimeSlot {
   time: string;
@@ -8,6 +10,7 @@ interface TimeSlot {
 }
 
 interface CalendarTimeSelectionProps {
+  
   masterId: any;
   onTimeSelect?: (date: string, time: string) => void;
 }
@@ -30,7 +33,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
-
+  const { t } = useTranslation()
   useEffect(() => {
     if (selectedDate && masterId) {
       fetchAvailableTimeSlots();
@@ -121,7 +124,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4 flex justify-center text-gray-900">
-        {selectedDate ? formatDate(selectedDate) : 'Выберите дату'}
+        {selectedDate ? formatDate(selectedDate) : t("SelectDate")}
       </h2>
       <div className="flex justify-center">
         {/* Calendar Section */}
@@ -200,11 +203,11 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
           {selectedDate && (
             <div className="rounded-[20px] p-6">
               <h3 className="text-lg font-medium mb-4 text-gray-900">
-                Свободное время
+                {t("FreeTime")}
               </h3>
 
               {isLoading ? (
-                <div className="text-center py-4">Загрузка...</div>
+                <div className="text-center py-4">{t("Loading")}...</div>
               ) : errorMessage ? (
                 <div className="text-center py-4 text-red-600">{errorMessage}</div>
               ) : availableTimeSlots.length > 0 ? (
@@ -225,7 +228,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                 </div>
               ) : (
                 <div className="text-center py-4 text-gray-600">
-                  Нет свободного времени на выбранную дату
+                  {t("noFreeTime")}
                 </div>
               )}
             </div>

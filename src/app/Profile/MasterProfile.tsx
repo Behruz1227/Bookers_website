@@ -194,7 +194,7 @@ export default function MasterProfile() {
             {t("MasterProfileBack")}
           </Button>
           <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">
-            Подробности о мастере{" "}
+           {t("Detailsaboutthemaster")}
           </h2>
         </div>
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
@@ -230,7 +230,7 @@ export default function MasterProfile() {
                       />
                     </div>
                     <p className="font-medium font-manrope text-[24px] text-gray-600">
-                      {masterDetails.orderCount} заказа, {masterDetails.clientCount} клиентов
+                      {masterDetails.orderCount} {t("order")}, {masterDetails.clientCount} {t("clients")}
                     </p>
                   </div>
                 </div>
@@ -252,9 +252,9 @@ export default function MasterProfile() {
 
             <div className="flex justify-between items-center py-3">
               <p className="font-medium font-manrope text-[24px]">
-                Ближайшая запись: <span className="font-medium">Сегодня</span>
+                {t("NextEntry")}: <span className="font-medium">{t("Today")}</span>
               </p>
-              <p className="text-[#9C0B35] font-bold text-[22px]">от {masterDetails.masterServicePrice}</p>
+              <p className="text-[#9C0B35] font-bold text-[22px]">{t("from")} {masterDetails.masterServicePrice}</p>
             </div>
 
             <div className="flex justify-center">
@@ -262,7 +262,7 @@ export default function MasterProfile() {
                 onClick={() => setIsModalOpen(true)}
                 className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
               >
-                Записаться
+                {t("Signup")}
               </Button>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function MasterProfile() {
         {page === 1 ? (
           <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
             <div className="text-center mb-6">
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">Записаться к мастеру</h2>
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("Signup")}</h2>
             </div>
             <div>
               <CalendarTimeSelection masterId={id} onTimeSelect={(date, time) => setSelectedDateTime({ date, time })} />
@@ -308,7 +308,7 @@ export default function MasterProfile() {
                 }}
                 disabled={!selectedDateTime || isSubmitting}
               >
-                {isSubmitting ? "Создание записи..." : selectedDateTime ? "Записаться" : "Выберите дату и время"}
+                {isSubmitting ? t("Signup") : selectedDateTime ? t("Signup") : t("Signup")}
               </Button>
             </div>
           </div>
