@@ -12,7 +12,9 @@ import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import Button from '@/components/button/Button'
 import { UniversalModal } from '@/components/Modal/UniversalModal'
+import LoginIndex from '@/Store'
 export const Vacancies: React.FC = () => {
+  const { setVacanciesHolat } = LoginIndex();
   const { t } = useTranslation()
   const location = useLocation();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -131,7 +133,10 @@ export const Vacancies: React.FC = () => {
             <div className='text-center mt-10'>
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
-              onClick={() => alert("Скачать приложение")}
+              onClick={() => {
+                setVacanciesHolat(true);
+                setModalOpen(false);
+              }}
             >
               Отправить резюме
             </Button>
