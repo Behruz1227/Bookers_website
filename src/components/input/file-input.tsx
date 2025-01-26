@@ -68,6 +68,8 @@ export default function FileInput({ onFileSelect }: FileInputProps) {
         
         {fileState && (
           <button
+            type="button"
+            aria-label='Remove file'
             onClick={handleRemove}
             className="ml-2 text-gray-400 hover:text-gray-600"
           >
@@ -78,6 +80,7 @@ export default function FileInput({ onFileSelect }: FileInputProps) {
       
       <input
         id="fileInput"
+        placeholder='Rasm yuklash'
         type="file"
         accept="image/*"
         onChange={handleFileSelect}
