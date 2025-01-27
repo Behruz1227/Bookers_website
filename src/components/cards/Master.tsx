@@ -86,7 +86,7 @@ export default function MasterCard({
   }
 
   const phoneNumber = localStorage.getItem("phoneNumber")
-  const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
+  const { response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
     date: selectedDateTime?.date,
     timeHour: selectedDateTime?.time.split(":")[0],

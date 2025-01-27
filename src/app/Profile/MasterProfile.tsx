@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Input, Rate } from "antd"
 import { MapPin, Phone } from "lucide-react"
-import { MdArrowBackIos, MdCheckCircle } from "react-icons/md"
+import { MdArrowBackIos } from "react-icons/md"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -19,6 +19,9 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { useTranslation } from "react-i18next"
 import { FaRegUser } from "react-icons/fa6"
+import { IoAlertCircleOutline } from "react-icons/io5"
+import { IoMdCheckmarkCircleOutline } from "react-icons/io"
+import useMasterCategoryStore from "@/Store/MasterCategoryStore"
 
 interface AttachmentItem {
   attachmentId: string
@@ -58,6 +61,7 @@ interface MasterDetails {
   price: number
   specialization: string
   reviews: any[] | null
+  serviceId: string
 }
 
 export default function MasterProfile() {
@@ -65,7 +69,29 @@ export default function MasterProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [gallery, setGallery] = useState<GalleryItem[]>([])
-  const [masterDetails, setMasterDetails] = useState<MasterDetails | null>(null)
+  const [masterDetails, setMasterDetails] = useState<MasterDetails | null>({
+    attachmentId: "",
+    id: "",
+    fullName: "",
+    mainPhoto: "",
+    salonName: "",
+    masterSpecialization: [],
+    district: "",
+    phone: "",
+    street: "",
+    house: "",
+    masterServicePrice: 0,
+    feedbackCount: 0,
+    orderCount: 0,
+    clientCount: 0,
+    rating: 0,
+    address: "",
+    phoneNumber: "",
+    price: 0,
+    specialization: "",
+    reviews: null,
+    serviceId: "",
+  })
   console.log("asdfghsdrtf", masterDetails)
 
   const [loading, setLoading] = useState(true)
@@ -74,7 +100,7 @@ export default function MasterProfile() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
-  const [otpCodeInput, setOtpCodeInput] = useState<string | null>(null)
+  const [otpCodeInput, setOtpCodeInput] = useState<string>("")
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
 
@@ -82,13 +108,16 @@ export default function MasterProfile() {
   const phoneNumber = localStorage.getItem("phoneNumber")
 
   const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
-    serviceId: id,
+    serviceId: masterDetails.serviceId,
     date: selectedDateTime?.date,
     timeHour: selectedDateTime?.time.split(":")[0],
     timeMin: selectedDateTime?.time.split(":")[1],
     clientId: id,
     comment: " ",
   })
+
+  const { MasterCategory } = useMasterCategoryStore()
+  console.log(MasterCategory, "MasterCategory")
 
   const {
     response: responseCheck,
@@ -106,31 +135,16 @@ export default function MasterProfile() {
     { phoneNumber },
   )
 
-
-
-  const { response: masterResponse, globalDataFunc: fetchMasterDetails } = useGlobalRequest(
-    `${BASE_URL}/api/user/client/get-one/${id}`,
-    "GET"
-  )
-
   const { response: galleryResponse, globalDataFunc: fetchGallery } = useGlobalRequest(
     `${BASE_URL}/api/gallery/user/${id}`,
-    "GET"
+    "GET",
   )
 
   useEffect(() => {
     if (id) {
-      fetchMasterDetails()
       fetchGallery()
     }
   }, [id])
-
-  useEffect(() => {
-    if (masterResponse?.body) {
-      setMasterDetails(masterResponse.body)
-    }
-    setLoading(false)
-  }, [masterResponse])
 
   useEffect(() => {
     if (galleryResponse?.body) {
@@ -139,16 +153,59 @@ export default function MasterProfile() {
     setLoading(false)
   }, [galleryResponse])
 
+  useEffect(() => {
+    if (id && MasterCategory) {
+      const master = MasterCategory.find((m: any) => m.id === id)
+      if (master) {
+        setMasterDetails(master)
+      }
+    }
+    setLoading(false)
+  }, [id, MasterCategory])
 
   useEffect(() => {
     if (responseCode?.success) {
       setPage(2)
-      toast(responseCode?.message)
+      toast.dismiss()
+      toast.success(t("CodeSent"), {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }, [responseCode])
 
+  const HandleSubmit = async () => {
+    if (isSubmitting) return
+    setIsSubmitting(true)
+    await globalDataFuncCheck()
+    if (!responseCheck?.success) {
+      toast.dismiss()
+      if (!toast.isActive("error-toast")) {
+        toast.error(responseCheck?.message, {
+          toastId: "error-toast",
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }
+    } else {
+      await globalDataFunc()
+    }
+    setIsSubmitting(false)
+  }
+
   useEffect(() => {
     if (responseCheck?.success) {
+      setOtpCodeInput("")
       globalDataFunc()
     } else if (!responseCheck?.success && errorCheck) {
       setErrorMessage(errorCheck?.message)
@@ -159,10 +216,21 @@ export default function MasterProfile() {
     if (response?.success) {
       setSelectedDateTime(null)
       setPage(3)
-    } else if (!response?.success && error) {
-      setErrorMessage(error?.message || response?.message)
+    } else if (!response?.success) {
+      toast.dismiss()
+      toast.error(response?.message, {
+        toastId: "unique-id",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      setPage(1)
     }
-  }, [response, error])
+  }, [response])
 
   const handleTimeSelect = (date: string, time: string) => {
     setSelectedDateTime({ date, time })
@@ -171,6 +239,12 @@ export default function MasterProfile() {
   const closeModal = () => {
     setIsModalOpen(false)
     setPage(1)
+  }
+
+  const handleAppointmentClick = () => {
+    setIsModalOpen(true)
+    setPage(1)
+    setErrorMessage(null)
   }
 
   if (loading || !masterDetails) {
@@ -261,12 +335,14 @@ export default function MasterProfile() {
               <p className="font-medium font-manrope text-[24px]">
                 {t("NextEntry")}: <span className="font-medium">{t("Today")}</span>
               </p>
-              <p className="text-[#9C0B35] font-bold text-[22px]">{t("from")} {masterDetails.masterServicePrice}</p>
+              <p className="text-[#9C0B35] font-bold text-[22px]">
+                {t("from")} {masterDetails.masterServicePrice}
+              </p>
             </div>
 
             <div className="flex justify-center">
               <Button
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleAppointmentClick}
                 className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
               >
                 {t("Signup")}
@@ -303,7 +379,7 @@ export default function MasterProfile() {
               <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("Signup")}</h2>
             </div>
             <div>
-              <CalendarTimeSelection masterId={id} onTimeSelect={(date, time) => setSelectedDateTime({ date, time })} />
+              <CalendarTimeSelection masterId={id} onTimeSelect={handleTimeSelect} />
             </div>
             {errorMessage && <div className="text-red-600 text-center mt-4 mb-2">{errorMessage}</div>}
             <div className="flex justify-center mt-6">
@@ -311,7 +387,6 @@ export default function MasterProfile() {
                 className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => {
                   globalDataFuncCode()
-                  setPage(2)
                 }}
                 disabled={!selectedDateTime || isSubmitting}
               >
@@ -320,13 +395,13 @@ export default function MasterProfile() {
             </div>
           </div>
         ) : page === 2 ? (
-          <div className="p-6 rounded-[20px]">
+          <div className="p-6  rounded-[20px]">
             <div className="flex flex-col items-center justify-center">
-              <h1 className="font-manrope font-extrabold text-[44px] leading-[54px]">ОТП код</h1>
-              <h2 className="font-bold font-manrope text-[30px] leading-[36px] pt-5">{phoneNumber}</h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">
-                Мы отправили вам SMS с кодом подтверждения.
-              </p>
+              <h1 className="font-manrope font-extrabold text-[44px] leading-[54px]">{t("OTPCode")}</h1>
+              <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
+                {localStorage.getItem("phoneNumber")}
+              </h2>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">{t("sentCode")}</p>
             </div>
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
@@ -336,6 +411,7 @@ export default function MasterProfile() {
                   setLoginCheck(null)
                   setCheckCode(null)
                 }}
+                value={otpCodeInput}
                 style={{
                   display: "flex",
                   width: "60%",
@@ -344,73 +420,77 @@ export default function MasterProfile() {
                 }}
               />
               <Button
-                className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                onClick={() => globalDataFuncCheck()}
+                className=" w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => {
+                  HandleSubmit()
+                }}
               >
-                Записаться
+                {t("Signup")}
               </Button>
             </div>
           </div>
-        ) : response?.status === "CREATED" ? (
-          <div className="p-6 rounded-[20px]">
-            <div className="flex flex-col items-center justify-center gap-10 py-10">
-              <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">Заявка принята</h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                Ваша заявка принята. Cтатус вашей записи можно
-                <br />
-                отслеживать в мобильном приложении bookers
-              </p>
-              <div className="pt-10">
-                <Button
-                  className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                  onClick={() => alert("Войти / Регистрация")}
-                >
-                  Скачать приложение
-                </Button>
+        ) : page === 3 ? (
+          response?.status === "CREATED" ? (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+                  {t("ApplicationAccepted")}
+                </h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                  {t("Yourequest")}
+                  <br />
+                  {t("bookersmobile")}
+                </p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Downloadapp")}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : response?.status === "WAIT" ? (
-          <div className="p-6 rounded-[20px]">
-            <div className="flex flex-col items-center justify-center gap-10 py-10">
-              <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">Ваша запись отправленана утверждение мастеру</h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                Ваша заявка принята. Cтатус вашей записи можно отслеживать в мобильном приложении bookers
-                <br />
-                отслеживать в мобильном приложении bookers
-              </p>
-              <div className="pt-10">
-                <Button
-                  className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                  onClick={() => alert("Войти / Регистрация")}
-                >
-                  Скачать приложение
-                </Button>
+          ) : response?.status === "WAIT" ? (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("approval")}</h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                  {t("Yourequest")}
+                  <br />
+                  {t("bookersmobile")}
+                </p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Downloadapp")}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : response?.status === false ? (
-          <div className="p-6 rounded-[20px]">
-            <div className="flex flex-col items-center justify-center gap-10 py-10">
-              <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">Вы не можете записаться на услугу мастера</h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                Что бы записаться необходимо пройти регистрацию клиента
-                <br />
-                регистрацию клиента
-              </p>
-              <div className="pt-10">
-                <Button
-                  className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                  onClick={() => alert("Войти / Регистрация")}
-                >
-                  Зарегистрироваться
-                </Button>
+          ) : (
+            <div className="p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-10 py-10">
+                <IoAlertCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+                  {t("technician")}
+                </h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Tosignup")}</p>
+                <div className="pt-10">
+                  <Button
+                    className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                    onClick={() => alert("Войти / Регистрация")}
+                  >
+                    {t("Signup")}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
+          )
         ) : null}
       </UniversalModal>
 
@@ -418,3 +498,4 @@ export default function MasterProfile() {
     </div>
   )
 }
+
