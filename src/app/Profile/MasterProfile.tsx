@@ -18,6 +18,7 @@ import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { attachment, BASE_URL } from "@/helpers/Url"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { useTranslation } from "react-i18next"
+import { FaRegUser } from "react-icons/fa6"
 
 interface AttachmentItem {
   attachmentId: string
@@ -194,25 +195,31 @@ export default function MasterProfile() {
             {t("MasterProfileBack")}
           </Button>
           <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">
-           {t("Detailsaboutthemaster")}
+            {t("Detailsaboutthemaster")}
           </h2>
         </div>
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
-          <div className="relative h-[440px] w-full rounded-[20px]">
+          <div className="relative h-[440px] w-full p-10">
             <img
-              src={masterDetails.mainPhoto || "/placeholder.svg"}
+              src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : ""}
               alt="Service environment"
-              className="w-full h-[440px] p-10 rounded-[20px]"
+              className="w-full h-full object-cover rounded-[20px]"
             />
           </div>
 
           <div className="p-6">
             <div className="flex items-center gap-6">
-              <img
-                src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : ""}
-                alt={masterDetails.fullName}
-                className="w-[153px] h-[153px]  rounded-full object-cover border-4 border-[#B9B9C9] shadow-lg"
-              />
+              {masterDetails.mainPhoto ? (
+                <img
+                  src={`${attachment}${masterDetails.mainPhoto}`}
+                  alt={masterDetails.fullName}
+                  className="w-[153px] h-[153px] rounded-full object-cover  shadow-lg"
+                />
+              ) : (
+                <div className="w-[153px] h-[153px] rounded-full  shadow-lg bg-gray-300 flex items-center justify-center">
+                  <FaRegUser size={50} className="text-[#9c0b35]" />
+                </div>
+              )}
 
               <div className="flex-1">
                 <div className="flex justify-between items-start">
@@ -411,4 +418,3 @@ export default function MasterProfile() {
     </div>
   )
 }
-

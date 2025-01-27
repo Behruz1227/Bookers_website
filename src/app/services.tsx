@@ -108,13 +108,13 @@ function Services() {
               <SelectTrigger className="placeholder:text-white border border-white w-full md:w-1/2 h-14 text-white rounded-[7px] font-medium font-manrope text-[22px]">
                 <SelectValue placeholder="Выберите категорию" className="text-white font-manrope text-[22px]" />
               </SelectTrigger>
-              <SelectContent className="bg-white rounded-2xl ">
+              <SelectContent className="bg-[#B9B9C9] rounded-2xl border-none">
                 <SelectGroup>
                   {category?.body.map((category: any) => (
                     <SelectItem
                       key={category.id}
                       value={category.id}
-                      className={`font-manrope text-[22px] cursor-pointer transition-colors hover:text-[#9C0A35] hover:bg-[#9c9ba8] ${selectedCategory === category.id ? 'text-[#9C0A35] bg-gray-50' : 'text-black'}`}
+                      className={`font-manrope text-[22px] cursor-pointer transition-colors hover:text-[#9C0A35] hover:bg-[#B2B1C2] ${selectedCategory === category.id ? 'text-[#9C0A35] bg-[#B2B1C2]' : 'text-black'}`}
                     >
                       {category.name}
                     </SelectItem>

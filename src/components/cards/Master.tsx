@@ -1,5 +1,5 @@
 "use client"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 import { useEffect, useState } from "react"
@@ -10,11 +10,11 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import Button from "@/components/button/Button"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
-import { MdCheckCircle } from "react-icons/md"
 import cardImg from "@/assets/cards/master.png"
 import { useTranslation } from "react-i18next"
 import { FaRegUser } from "react-icons/fa6"
 import { IoAlertCircleOutline } from "react-icons/io5"
+import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 
 interface MasterProps {
   id: string
@@ -116,6 +116,7 @@ export default function MasterCard({
   useEffect(() => {
     if (responseCode?.success) {
       setPage(2)
+      toast.dismiss() // Dismiss any existing toasts
       toast.success(t("CodeSent"), {
         position: "top-right",
         autoClose: 3000,
@@ -133,10 +134,19 @@ export default function MasterCard({
     setIsSubmitting(true)
     await globalDataFuncCheck()
     if (!responseCheck?.success) {
-      toast.error(responseCheck?.message, {
-        position: "top-right",
-        autoClose: 3000,
-      })
+      toast.dismiss() // Dismiss any existing toasts
+      if (!toast.isActive("error-toast")) {
+        toast.error(responseCheck?.message, {
+          toastId: "error-toast",
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }
     } else {
       setOtpError(null)
       await globalDataFunc()
@@ -156,13 +166,23 @@ export default function MasterCard({
   }
   useEffect(() => {
     if (response?.success) {
-      // alert('Запись успешно создана!')
       setSelectedDateTime(null)
       setPage(3)
-    } else if (!response?.success && error) {
-      setErrorMessage(error?.message && response?.message)
+    } else if (!response?.success) {
+      toast.dismiss() // Dismiss any existing toasts
+      toast.error(response?.message, {
+        toastId: 'unique-id', 
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      setPage(1) // Return to the first modal
     }
-  }, [response, error])
+  }, [response])
 
   const handleTimeSelect = (date: string, time: string) => {
     setSelectedDateTime({ date, time })
@@ -287,9 +307,7 @@ export default function MasterCard({
               <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
                 {localStorage.getItem("phoneNumber")}
               </h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">
-                {t("sentCode")}
-              </p>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">{t("sentCode")}</p>
             </div>
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
@@ -322,12 +340,14 @@ export default function MasterCard({
           response?.status === "CREATED" ? (
             <div className="p-6 rounded-[20px]">
               <div className="flex flex-col items-center justify-center gap-10 py-10">
-                <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("ApplicationAccepted")}</h2>
+                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+                  {t("ApplicationAccepted")}
+                </h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
                   {t("Yourequest")}
                   <br />
-                 {t("bookersmobile")}
+                  {t("bookersmobile")}
                 </p>
                 <div className="pt-10">
                   <Button
@@ -342,10 +362,8 @@ export default function MasterCard({
           ) : response?.status === "WAIT" ? (
             <div className="p-6 rounded-[20px]">
               <div className="flex flex-col items-center justify-center gap-10 py-10">
-                <MdCheckCircle style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-                  {t("approval")}
-                </h2>
+                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("approval")}</h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
                   {t("Yourequest")}
                   <br />
@@ -368,16 +386,13 @@ export default function MasterCard({
                 <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
                   {t("technician")}
                 </h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                  {t("Tosignup")}
-                  
-                </p>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Tosignup")}</p>
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                     onClick={() => alert("Войти / Регистрация")}
                   >
-                    {t("Register")}
+                    {t("Signup")}
                   </Button>
                 </div>
               </div>
@@ -385,7 +400,7 @@ export default function MasterCard({
           )
         ) : null}
       </UniversalModal>
-      <ToastContainer />
+      
     </div>
   )
 }

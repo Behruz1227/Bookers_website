@@ -1,6 +1,7 @@
-'use client'
+"use client"
 
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 interface CalendarData {
   // Add API response type here when available
@@ -8,6 +9,7 @@ interface CalendarData {
 }
 
 export default function Calendar() {
+  const { t } = useTranslation()
   const [selectedDate, setSelectedDate] = useState<number | null>(null)
   const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth())
   const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear())
@@ -15,8 +17,8 @@ export default function Calendar() {
 
   const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
   const monthNames = [
-    "Январь",
-    "Февраль", 
+    t("yanvar"),
+    "Февраль",
     "Март",
     "Апрель",
     "Май",
@@ -26,7 +28,7 @@ export default function Calendar() {
     "Сентябрь",
     "Октябрь",
     "Ноябрь",
-    "Декабрь"
+    "Декабрь",
   ]
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
@@ -37,18 +39,18 @@ export default function Calendar() {
       try {
         const localDate = new Date(currentYear, currentMonth, 1)
         const endDate = new Date(currentYear, currentMonth + 1, 0)
-        
+
         const params = new URLSearchParams({
-          localDate: localDate.toISOString().split('T')[0],
-          endDate: endDate.toISOString().split('T')[0],
-          isMonth: 'true'
+          localDate: localDate.toISOString().split("T")[0],
+          endDate: endDate.toISOString().split("T")[0],
+          isMonth: "true",
         })
 
         const response = await fetch(`/api/workday/time/web/calendar?${params}`)
         const data = await response.json()
         setCalendarData(data)
       } catch (error) {
-        console.error('Error fetching calendar data:', error)
+        console.error("Error fetching calendar data:", error)
       }
     }
 
@@ -85,9 +87,7 @@ export default function Calendar() {
             &#8249;
           </button>
           <div className="text-center">
-            <h2 className="text-xl font-medium text-gray-900">
-              {monthNames[currentMonth]}
-            </h2>
+            <h2 className="text-xl font-medium text-gray-900">{monthNames[currentMonth]}</h2>
             <span className="text-sm text-gray-500">{currentYear}</span>
           </div>
           <button
@@ -104,9 +104,7 @@ export default function Calendar() {
           {daysOfWeek.map((day, index) => (
             <div
               key={index}
-              className={`text-center text-sm font-medium mb-4 ${
-                index >= 5 ? "text-[#9C0B35]" : "text-gray-600"
-              }`}
+              className={`text-center text-sm font-medium mb-4 ${index >= 5 ? "text-[#9C0B35]" : "text-gray-600"}`}
             >
               {day}
             </div>
@@ -121,6 +119,11 @@ export default function Calendar() {
           {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
             const dayIndex = (new Date(currentYear, currentMonth, day).getDay() + 6) % 7
             const isWeekend = dayIndex === 5 || dayIndex === 6
+            const currentDate = new Date()
+            const cellDate = new Date(currentYear, currentMonth, day)
+            const isPastDate = cellDate < new Date(currentDate.setHours(0, 0, 0, 0))
+
+            const textColorClass = isPastDate ? "text-gray-400" : isWeekend ? "text-[#9C0B35]" : "text-gray-900"
 
             return (
               <div
@@ -129,11 +132,8 @@ export default function Calendar() {
                 className={`
                   h-10 flex items-center justify-center text-sm cursor-pointer
                   transition-colors duration-200 rounded-full
-                  ${selectedDate === day 
-                    ? "bg-[#9C0B35] text-white" 
-                    : "hover:bg-[#9C0B35] "
-                  }
-                  ${isWeekend && selectedDate !== day ? "text-[#9C0B35]" : "text-gray-900"}
+                  ${selectedDate === day ? "bg-[#9C0B35] text-white" : "hover:bg-[#9C0B35] hover:text-white"}
+                  ${textColorClass}
                 `}
               >
                 {day}
