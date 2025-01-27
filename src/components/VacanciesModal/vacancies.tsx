@@ -10,8 +10,6 @@ import img from '../../assets/img/File_dock_add (1).png'
 import { useEffect, useState } from "react";
 import useVacanciesStore from "@/Store/VacanciesStore";
 import { useVacancies } from "@/hooks/useVacancies";
-import Loading from "../Loading/Loading";
-
 interface FormData {
     fullName: string;
     email: string;
@@ -392,9 +390,7 @@ export const VacanciesModal = () => {
                 </div>
 
             </UniversalModal>
-            {status && (
-                <Loading />
-            )}
+            
         </div>
     );
 };
