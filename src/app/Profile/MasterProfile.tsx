@@ -95,7 +95,7 @@ export default function MasterProfile() {
   })
   console.log("asdfghsdrtf", masterDetails)
 
-  const [loading, setLoading] = useState(true) // Update 4: Initialize loading to true
+  const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -104,6 +104,7 @@ export default function MasterProfile() {
   const [otpCodeInput, setOtpCodeInput] = useState<string>("")
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
+  const [imageLoading, setImageLoading] = useState(true) // Added image loading state
 
   const roleGet = localStorage.getItem("Role")
   const phoneNumber = localStorage.getItem("phoneNumber")
@@ -150,7 +151,7 @@ export default function MasterProfile() {
   useEffect(() => {
     if (galleryResponse?.body) {
       setGallery(galleryResponse.body)
-      setLoading(false) // Update 3: Set loading to false after fetching gallery data
+      setLoading(false)
     }
   }, [galleryResponse])
 
@@ -159,7 +160,7 @@ export default function MasterProfile() {
       const master = MasterCategory.find((m: any) => m.id === id)
       if (master) {
         setMasterDetails(master)
-        setLoading(false) // Update 2: Set loading to false after fetching master details
+        setLoading(false)
       }
     }
   }, [id, MasterCategory])
@@ -249,7 +250,6 @@ export default function MasterProfile() {
   }
 
   if (loading || !masterDetails) {
-    // Update 1: Use loading state to show Loading component
     return <Loading />
   }
 
@@ -276,21 +276,47 @@ export default function MasterProfile() {
         </div>
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
           <div className="relative h-[440px] w-full p-10">
+            {imageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-[20px]">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#9C0B35]"></div>
+              </div>
+            )}
             <img
-              src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : ""}
+              src={
+                masterDetails.attachmentId
+                  ? `${attachment}${masterDetails.attachmentId}`
+                  : "https://picsum.photos/200/300.jpg"
+              }
               alt="Service environment"
-              className="w-full h-full object-cover rounded-[20px]"
+              className={`w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${
+                imageLoading ? "opacity-0" : "opacity-100"
+              }`}
+              onLoad={() => setImageLoading(false)}
+              onError={(e) => {
+                ;(e.currentTarget as HTMLImageElement).src = "https://picsum.photos/200/300.jpg"
+                setImageLoading(false)
+              }}
             />
           </div>
 
           <div className="p-6">
             <div className="flex items-center gap-6">
               {masterDetails.mainPhoto ? (
-                <img
-                  src={`${attachment}${masterDetails.mainPhoto}`}
-                  alt={masterDetails.fullName}
-                  className="w-[153px] h-[153px] rounded-full object-cover  shadow-lg"
-                />
+                <div className="relative w-[153px] h-[153px]">
+                  {imageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-full">
+                      <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#9C0B35]"></div>
+                    </div>
+                  )}
+                  <img
+                    src={`${attachment}${masterDetails.mainPhoto}`}
+                    alt={masterDetails.fullName}
+                    className={`w-[153px] h-[153px] rounded-full object-cover shadow-lg transition-opacity duration-300 ${
+                      imageLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => setImageLoading(false)}
+                  />
+                </div>
               ) : (
                 <div className="w-[153px] h-[153px] rounded-full  shadow-lg bg-gray-300 flex items-center justify-center">
                   <FaRegUser size={50} className="text-[#9c0b35]" />
@@ -363,6 +389,15 @@ export default function MasterProfile() {
                 id: index + 1,
                 url: `${attachment}${item.attachmentId}`,
                 title: `${index + 1}`,
+                loading: true,
+                onLoad: () => {
+                  const updatedGallery = [...gallery]
+                  const albumIndex = updatedGallery.findIndex((a) => a.id === album.id)
+                  if (albumIndex !== -1) {
+                    updatedGallery[albumIndex].resGalleryAttachments[index].loading = false
+                    setGallery(updatedGallery)
+                  }
+                },
               }))}
             />
           ))}
