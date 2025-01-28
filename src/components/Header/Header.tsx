@@ -70,31 +70,34 @@ const Header: React.FC = () => {
 
 
     const [showHeader, setShowHeader] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY) {
-        // Scroll pastga bo'lsa, header yashiringan bo'ladi
-        setShowHeader(false);
-      } else {
-        // Scroll yuqoriga bo'lsa, header ko'rinadi
-        setShowHeader(true);
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
+    const [lastScrollY, setLastScrollY] = useState(0);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+  
+        if (currentScrollY > 0) {
+          // Scroll 500px dan ko'proq pastga tushsa, header umuman yashiringan bo'ladi
+          setShowHeader(false);
+        } else {
+          // Scroll 500px dan kam bo'lsa, headerni ko'rsatish
+          setShowHeader(true);
+        }
+  
+        // Skroll holatini saqlash
+        setLastScrollY(currentScrollY);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [lastScrollY]);
 
     return (
-        <div className={`sticky top-0 left-0 right-0 z-[222] transition-transform duration-300   bg-[#111827] ${showHeader ? "translate-y-0" : "-translate-y-[130%]"}`}>
-            <header className=" text-white relative ">
+        <div className={`sticky top-0 bg-[#111827] left-0 right-0 z-[6] `}>
+            <header className="bg-[#111827]  text-white relative z-[5] ">
                 <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}
                     <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
@@ -241,8 +244,10 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {/*  */}
-                <div className={`flex  items-center gap-28 lg:justify-end justify-center   py-6`}>
+            </header>
+            {
+                showHeader && (
+                    <div className={`flex items-center gap-28 lg:justify-end justify-center   bg-[#111827] z-[5] py-6`}>
             <div
               onClick={() => navigate('/Master/...')}
               className="p-2 bg-[#9C0B35] rounded-full border">
@@ -253,10 +258,8 @@ const Header: React.FC = () => {
               <span className='text-white'>+998 77 308-88-88</span>
             </div>
           </div>
-
-
-        
-            </header>
+                )
+            }
         </div>
     );
 };
