@@ -5,7 +5,7 @@ import Subtitle from '@/components/Subtitle'
 
 
 //hero img
-import imgSplide from "@/assets/img/telegram-cloud-photo-size-2-5422467465163692948-y 1 (1).png"
+import imgSplide from "@/assets/cards/img.png"
 import { RefreshCcw } from 'lucide-react'
 
 import { useTranslation } from 'react-i18next'
@@ -48,13 +48,6 @@ export const Partnership: React.FC = () => {
                             <Subtitle text={t('PartnershipSubtitle2')}
                                 size='max-w-[759px]  lg:text-left' />
                         </div>
-                        {/* <OfferCards
-                            icon={RefreshCcw}
-                            data={ThreeCard}
-                            title={t('PartnershipOfferCardsTitle')}
-                            firstButtonTitle={t('PartnershipOfferCardsFirstButtonTitle')}
-                            secondButtonTitle={t('PartnershipOfferCardsSecondButtonTitle')}
-                        /> */}
                         <div className='h-max w-full flex flex-col justify-center p-10 rounded-3xl bg-[#B9B9C9] mb-6 lg:mb-0'>
                             <div className='  flex items-center gap-10 w-[65%]'>
                                 {<RefreshCcw className=' text-[#9C0B35] w-[82px] h-[82px]' />}
