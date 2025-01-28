@@ -2,7 +2,7 @@
 import { category, dashboard } from '@/helpers/Url';
 
 // Hooks
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 //Quary
 import { useGlobalRequest } from '@/helpers/Quary/quary';
@@ -40,7 +40,6 @@ import oson from "@/assets/logo/oson.png"
 import sello from "@/assets/logo/sello.png"
 import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
-import MasterClassModal from '@/components/Modal/master-class-modal';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
@@ -108,10 +107,7 @@ function Home() {
     { text: t("OfferCardRight5") },
     { text: t("OfferCardRight6") },
   ];
-  const [isModalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
   const navigate = useNavigate()
   const {
     loading: statsLoading,
@@ -122,7 +118,7 @@ function Home() {
     `${dashboard}`,
     'GET',
   );
-  const { setOtzivHolat } = LoginIndex();
+  const { setOtzivHolat, setMasterClassHolat } = LoginIndex();
 
   const {
     loading: categoryLoading,
@@ -231,8 +227,9 @@ function Home() {
                 {t("Bookers")}
               </h2>
               <div>
-                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]" onClick={openModal}>{t("SendApplication")}</button>
-                <MasterClassModal isOpen={isModalOpen} onClose={closeModal} />
+                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]" onClick={()=>{
+                  setMasterClassHolat(true)
+                }}>{t("SendApplication")}</button>
               </div>
             </div>
           </div>

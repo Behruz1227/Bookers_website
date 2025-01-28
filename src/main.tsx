@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { Login } from './app/Auth/Login.tsx'
 import { LeaveFeedback } from './components/leave-feedback-controller/LeaveFeedback.tsx'
 import { VacanciesModal } from './components/VacanciesModal/vacancies.tsx'
+import { MasterClassModal } from './components/MasterClassModal/MasterClass.tsx'
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
       <Login/>
       <LeaveFeedback/>
       <VacanciesModal/>
+      <MasterClassModal/>
     </QueryClientProvider>
   </StrictMode>,
 )
