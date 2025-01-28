@@ -58,7 +58,7 @@ function Footer() {
               <Link to="/#offer">{t('FooterBusinesspartnership')}</Link>
               <Link to="/#masterClass">{t('FooterMasterclassesEducationTrainings')}</Link>
               <Link to="/Tariffs">{t('FooterPackagesforMasters')}</Link>
-              <Link to="/#">{t('FooterFAQ')}</Link>
+              <Link to="">{t('FooterFAQ')}</Link>
             </div>
           </div>
           {/* Registration */}
@@ -80,18 +80,18 @@ function Footer() {
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("ContactDetails")}</h2>
             <div className="flex flex-col gap-2 text-base">
-              <a href="#" className="flex items-start gap-3">
+              <p  className="flex items-start gap-3">
                 <img src={Pin} alt="Pin" />
                 <p>Республика Узбекистан, город Ташкент</p>
-              </a>
-              <a href="#" className="flex items-start gap-3">
+              </p>
+              <p  className="flex items-start gap-3">
                 <img src={Phone} alt="Phone" />
                 <p>+998 77 308-88-88</p>
-              </a>
-              <a href="#" className="flex items-start gap-3">
+              </p>
+              <p  className="flex items-start gap-3">
                 <img src={Messege} alt="Message" />
                 <p>info@welltech.uz</p>
-              </a>
+              </p>
             </div>
           </div>
         </div>
