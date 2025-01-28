@@ -209,9 +209,8 @@ export default function MasterCard({
             <img
               src={imageUrl || "/placeholder.svg"}
               alt={`${name}'s service`}
-              className={`absolute top-0 left-0 w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${
-                imageLoading ? "opacity-0" : "opacity-100"
-              }`}
+              className={`absolute top-0 left-0 w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${imageLoading ? "opacity-0" : "opacity-100"
+                }`}
               onLoad={() => setImageLoading(false)}
             />
           </div>
@@ -228,9 +227,8 @@ export default function MasterCard({
               <img
                 src={attachment + avatar || "/placeholder.svg"}
                 alt={name}
-                className={`w-20 h-20 rounded-full object-cover shadow-md transition-opacity duration-300 ${
-                  imageLoading ? "opacity-0" : "opacity-100"
-                }`}
+                className={`w-20 h-20 rounded-full object-cover shadow-md transition-opacity duration-300 ${imageLoading ? "opacity-0" : "opacity-100"
+                  }`}
                 onLoad={() => setImageLoading(false)}
               />
             </div>
@@ -370,8 +368,8 @@ export default function MasterCard({
                 </p>
                 <div className="pt-10">
                   <Button
-                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
-                    onClick={() => alert("Войти / Регистрация")}
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Downloadapp")}
                   </Button>
@@ -391,7 +389,7 @@ export default function MasterCard({
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                    onClick={() => alert("Войти / Регистрация")}
+                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Downloadapp")}
                   </Button>

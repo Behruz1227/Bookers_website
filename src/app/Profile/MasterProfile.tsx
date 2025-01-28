@@ -8,6 +8,7 @@ import { MdArrowBackIos } from "react-icons/md"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
+
 import Button from "@/components/button/Button"
 import { UniversalModal } from "@/components/Modal/UniversalModal"
 import { Galereya } from "@/components/Galereya/Galereya"
@@ -95,7 +96,7 @@ export default function MasterProfile() {
   })
   console.log("asdfghsdrtf", masterDetails)
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) // Update 4: Initialize loading to true
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -104,7 +105,6 @@ export default function MasterProfile() {
   const [otpCodeInput, setOtpCodeInput] = useState<string>("")
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
-  const [imageLoading, setImageLoading] = useState(true) // Added image loading state
 
   const roleGet = localStorage.getItem("Role")
   const phoneNumber = localStorage.getItem("phoneNumber")
@@ -151,7 +151,7 @@ export default function MasterProfile() {
   useEffect(() => {
     if (galleryResponse?.body) {
       setGallery(galleryResponse.body)
-      setLoading(false)
+      setLoading(false) // Update 3: Set loading to false after fetching gallery data
     }
   }, [galleryResponse])
 
@@ -160,7 +160,7 @@ export default function MasterProfile() {
       const master = MasterCategory.find((m: any) => m.id === id)
       if (master) {
         setMasterDetails(master)
-        setLoading(false)
+        setLoading(false) // Update 2: Set loading to false after fetching master details
       }
     }
   }, [id, MasterCategory])
@@ -250,6 +250,7 @@ export default function MasterProfile() {
   }
 
   if (loading || !masterDetails) {
+    // Update 1: Use loading state to show Loading component
     return <Loading />
   }
 
@@ -276,47 +277,22 @@ export default function MasterProfile() {
         </div>
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
           <div className="relative h-[440px] w-full p-10">
-            {imageLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-[20px]">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#9C0B35]"></div>
-              </div>
-            )}
             <img
-              src={
-                masterDetails.attachmentId
-                  ? `${attachment}${masterDetails.attachmentId}`
-                  : "https://picsum.photos/200/300.jpg"
-              }
+              src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : 'https://picsum.photos/200/300.jpg'}
               alt="Service environment"
-              className={`w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${
-                imageLoading ? "opacity-0" : "opacity-100"
-              }`}
-              onLoad={() => setImageLoading(false)}
-              onError={(e) => {
-                ;(e.currentTarget as HTMLImageElement).src = "https://picsum.photos/200/300.jpg"
-                setImageLoading(false)
-              }}
+              className="w-full h-full object-cover rounded-[20px]"
+              onError={(e) => (e.currentTarget.src = 'https://picsum.photos/200/300.jpg')}
             />
           </div>
 
           <div className="p-6">
             <div className="flex items-center gap-6">
               {masterDetails.mainPhoto ? (
-                <div className="relative w-[153px] h-[153px]">
-                  {imageLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-full">
-                      <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#9C0B35]"></div>
-                    </div>
-                  )}
-                  <img
-                    src={`${attachment}${masterDetails.mainPhoto}`}
-                    alt={masterDetails.fullName}
-                    className={`w-[153px] h-[153px] rounded-full object-cover shadow-lg transition-opacity duration-300 ${
-                      imageLoading ? "opacity-0" : "opacity-100"
-                    }`}
-                    onLoad={() => setImageLoading(false)}
-                  />
-                </div>
+                <img
+                  src={`${attachment}${masterDetails.mainPhoto}`}
+                  alt={masterDetails.fullName}
+                  className="w-[153px] h-[153px] rounded-full object-cover  shadow-lg"
+                />
               ) : (
                 <div className="w-[153px] h-[153px] rounded-full  shadow-lg bg-gray-300 flex items-center justify-center">
                   <FaRegUser size={50} className="text-[#9c0b35]" />
@@ -380,7 +356,9 @@ export default function MasterProfile() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl mb-8">{t("MasterProfileGallery")}</h2>
+          <h2 className="text-white text-center font-medium text-3xl mb-8">{gallery.map((item) => (
+            item.id ? t("MasterProfileGallery") : " "
+          ))}</h2>
           {gallery.map((album) => (
             <Galereya
               key={album.id}
@@ -389,23 +367,14 @@ export default function MasterProfile() {
                 id: index + 1,
                 url: `${attachment}${item.attachmentId}`,
                 title: `${index + 1}`,
-                loading: true,
-                onLoad: () => {
-                  const updatedGallery = [...gallery]
-                  const albumIndex = updatedGallery.findIndex((a) => a.id === album.id)
-                  if (albumIndex !== -1) {
-                    updatedGallery[albumIndex].resGalleryAttachments[index].loading = false
-                    setGallery(updatedGallery)
-                  }
-                },
               }))}
             />
           ))}
         </section>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl mb-8">{t("MasterProfileReviews")}</h2>
-          <TestimonialSlider masterId={id} />
+          <h2 className="text-white text-center font-medium text-3xl mb-8">{masterDetails.reviews && masterDetails.reviews.length > 0 ? t("MasterProfileReviews") : ""}</h2>
+          <TestimonialSlider masterId={id || ""} />
         </section>
       </main>
 
@@ -481,8 +450,8 @@ export default function MasterProfile() {
                 </p>
                 <div className="pt-10">
                   <Button
-                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] "
-                    onClick={() => alert("Войти / Регистрация")}
+                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Downloadapp")}
                   </Button>
@@ -502,7 +471,7 @@ export default function MasterProfile() {
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                    onClick={() => alert("Войти / Регистрация")}
+                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Downloadapp")}
                   </Button>

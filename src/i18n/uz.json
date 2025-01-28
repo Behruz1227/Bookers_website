@@ -176,9 +176,9 @@
   "koproq": "Ko'proq ko'rsatish",
   "clients": "mijozlar",
   "order": "buyurtma",
-  "NextEntry": "Keyingi kirish",
+  "NextEntry": "Keyingi yozilish",
   "Today": "Bugun",
-  "Signup": "Ro'yxatdan o'tish",
+  "Signup": "Band qilish",
   "from": "dan",
   "Detailsaboutthemaster": "Usta haqida batafsil ma'lumot",
   "SelectDate": "Sanani tanlang",
@@ -194,5 +194,7 @@
   "approval": "Sizning arizangiz tasdiqlash uchun ustaga yuborildi",
   "technician": "Siz texnik bilan uchrashuvga yoza olmaysiz",
   "Tosignup": "Ro'yxatdan o'tish uchun siz mijoz sifatida ro'yxatdan o'tishingiz kerak.",
-  "yanvar": "yanvar"
+  "yanvar": "yanvar",
+  "nimadir":"Bookers biznes hamkoriga aylaning va boshqaruv va monitoring tizimining afzalliklarini qadrlang.",
+  "PartnershipTerms":"Hamkorlik shartlari"
 }
