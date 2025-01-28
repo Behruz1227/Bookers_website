@@ -93,7 +93,7 @@ const Header: React.FC = () => {
   }, [lastScrollY]);
 
     return (
-        <div className={`sticky top-0 left-0 right-0 z-[222] transition-transform duration-300   bg-[#111827] ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className={`sticky top-0 left-0 right-0 z-[222] transition-transform duration-300   bg-[#111827] ${showHeader ? "translate-y-0" : "-translate-y-[130%]"}`}>
             <header className=" text-white relative ">
                 <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}
