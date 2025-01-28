@@ -25,7 +25,7 @@ import { LogoSlider } from '@/components/splide/LogoSlider';
 // icons 
 import { Gift } from 'lucide-react';
 import { HandCoins } from 'lucide-react';
-import { FiCheckCircle, FiPhoneCall, FiRefreshCw } from 'react-icons/fi';
+import { FiCheckCircle, FiRefreshCw } from 'react-icons/fi';
 import { PiGraduationCapDuotone, PiMapPinAreaBold } from "react-icons/pi";
 import { HiOutlineUserGroup } from "react-icons/hi";
 
@@ -41,8 +41,8 @@ import sello from "@/assets/logo/sello.png"
 import click from "@/assets/logo/click.png"
 import LoginIndex from '@/Store';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
+
 import Loading from '@/components/Loading/Loading';
 
 
@@ -108,7 +108,7 @@ function Home() {
     { text: t("OfferCardRight6") },
   ];
 
-  const navigate = useNavigate()
+ 
   const {
     loading: statsLoading,
     error: statsError,
@@ -149,18 +149,6 @@ function Home() {
       <div className=" w-full h-">
           <div>
           </div>
-          <div className="flex items-center gap-28 lg:justify-end justify-center  py-6">
-            <div
-              onClick={() => navigate('/Master/...')}
-              className="p-2 bg-[#9C0B35] rounded-full border">
-              <FaSearch color="white" />
-            </div>
-            <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
-              <FiPhoneCall color="white" className="bg-[#9C0B35] p-2 rounded-full " size={30} />
-              <span className='text-white'>+998 77 308-88-88</span>
-            </div>
-          </div>
-
         </div>
         <Hero slides={[
           {

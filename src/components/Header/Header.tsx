@@ -15,6 +15,7 @@ import { getMe } from "@/helpers/Url";
 import useCategoryStore from "@/Store/Category";
 import { useCategory } from "@/hooks/useCategory";
 import { useHelpType } from "@/hooks/useHelpType";
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -64,8 +65,35 @@ const Header: React.FC = () => {
         ),
     }));
 
+
+
+
+
+    const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        // Scroll pastga bo'lsa, header yashiringan bo'ladi
+        setShowHeader(false);
+      } else {
+        // Scroll yuqoriga bo'lsa, header ko'rinadi
+        setShowHeader(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
     return (
-        <div className="sticky top-0 left-0 right-0 z-[222] bg-[#111827]">
+        <div className={`sticky top-0 left-0 right-0 z-[222] transition-transform duration-300   bg-[#111827] ${showHeader ? "translate-y-0" : "-translate-y-[130%]"}`}>
             <header className=" text-white relative ">
                 <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}
@@ -77,7 +105,7 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* Asosiy navigatsiya */}
-                    <div className="hidden lg:flex">
+                    <div className="hidden lg:flex ml-32 md:ml-14 ">
                         {/* Bookers menyusi */}
                         <Dropdown
                             menu={{ items: Bookers }}
@@ -213,6 +241,21 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                 </div>
+                {/*  */}
+                <div className={`flex  items-center gap-28 lg:justify-end justify-center   py-6`}>
+            <div
+              onClick={() => navigate('/Master/...')}
+              className="p-2 bg-[#9C0B35] rounded-full border">
+              <FaSearch color="white" />
+            </div>
+            <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
+              <FiPhoneCall color="white" className="bg-[#9C0B35] p-2 rounded-full " size={30} />
+              <span className='text-white'>+998 77 308-88-88</span>
+            </div>
+          </div>
+
+
+        
             </header>
         </div>
     );
