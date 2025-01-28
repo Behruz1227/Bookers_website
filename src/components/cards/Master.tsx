@@ -286,7 +286,7 @@ export default function MasterCard({
             {firstButtonTitle}
           </Button>
           <Button
-            onClick={handleAppointmentClick} // Use the updated handleAppointmentClick function
+             onClick={handleAppointmentClick} 
             className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
           >
             {secondButtonTitle}

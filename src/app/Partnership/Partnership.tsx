@@ -17,14 +17,7 @@ import Button from '@/components/button/Button'
 
 export const Partnership: React.FC = () => {
     const { t } = useTranslation()
-    const ThreeCard = [
-        { text: t('PartnershipOfferCardstext1') },
-        { text: t('PartnershipOfferCardstext2') },
-        { text: t('PartnershipOfferCardstext3') },
-        { text: t('PartnershipOfferCardstext4') },
-        { text: t('PartnershipOfferCardstext5') },
-        { text: t('PartnershipOfferCardstext6') },
-    ];
+ 
     return (
         <div>
             <div className='bg-[#111827]'>

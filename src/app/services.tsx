@@ -41,14 +41,25 @@ function Services() {
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
   const [search, setSearch] = useState<string>("")
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("")
 
   const { globalDataFunc: fetchCategories } = useGlobalRequest(
     `${BASE_URL}/api/category`,
     "GET"
   )
 
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const { globalDataFunc: fetchMastersByCategory } = useGlobalRequest(
-    `${BASE_URL}/api/service/website-master?categoryId=${selectedCategory}&page=${page}&size=${size}&info=${search}`,
+    `${BASE_URL}/api/service/website-master?categoryId=${selectedCategory}&page=${page}&size=${size}&info=${debouncedSearch}`,
     "GET"
   )
 
@@ -137,11 +148,12 @@ function Services() {
               </SelectContent>
             </Select>
             <div className="w-full md:w-1/2">
-              <Input
+            <Input
                 placeholder={t("search")}
                 type="search"
+                value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="border-white text-white w-full md:w-full placeholder:text-white  md:mt-0"
+                className="border-white text-white w-full md:w-full placeholder:text-white md:mt-0"
               />
             </div>
           </section>

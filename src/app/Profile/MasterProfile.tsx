@@ -110,7 +110,7 @@ export default function MasterProfile() {
   const phoneNumber = localStorage.getItem("phoneNumber")
 
   const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
-    serviceId: masterDetails.serviceId,
+    serviceId: masterDetails?.serviceId,
     date: selectedDateTime?.date,
     timeHour: selectedDateTime?.time.split(":")[0],
     timeMin: selectedDateTime?.time.split(":")[1],
