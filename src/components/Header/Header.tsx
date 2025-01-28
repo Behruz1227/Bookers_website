@@ -108,7 +108,7 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* Asosiy navigatsiya */}
-                    <div className="hidden lg:flex ml-32 md:ml-14 ">
+                    <div className="hidden lg:flex ml-[5%] 2xl:ml-[10%] xl:ml-[16%] lg:ml-[7%] ">
                         {/* Bookers menyusi */}
                         <Dropdown
                             menu={{ items: Bookers }}
