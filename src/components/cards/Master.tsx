@@ -10,7 +10,7 @@ import { attachment, BASE_URL } from "@/helpers/Url"
 import Button from "@/components/button/Button"
 import CalendarTimeSelection from "@/components/CalendarTimeSelection"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
-import cardImg from "@/assets/cards/master.png"
+
 import { useTranslation } from "react-i18next"
 import { FaRegUser } from "react-icons/fa6"
 import { IoAlertCircleOutline } from "react-icons/io5"
@@ -67,6 +67,7 @@ export default function MasterCard({
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
   const [hasToken, setHasToken] = useState(false) // Added state for token
   const [otpError, setOtpError] = useState<string | null>(null) // Added OTP error state
+  const [imageLoading, setImageLoading] = useState(true) // Added image loading state
 
   const roleGet = localStorage.getItem("Role")
   const handleAppointmentClick = (e: React.MouseEvent) => {
@@ -86,7 +87,7 @@ export default function MasterCard({
   }
 
   const phoneNumber = localStorage.getItem("phoneNumber")
-  const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
+  const { response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
     date: selectedDateTime?.date,
     timeHour: selectedDateTime?.time.split(":")[0],
@@ -171,7 +172,7 @@ export default function MasterCard({
     } else if (!response?.success) {
       toast.dismiss() // Dismiss any existing toasts
       toast.error(response?.message, {
-        toastId: 'unique-id', 
+        toastId: "unique-id",
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -200,23 +201,41 @@ export default function MasterCard({
       <div className="p-4">
         {imageUrl && (
           <div className="relative pb-[56.25%]">
+            {imageLoading && (
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-200 rounded-[20px]">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#9C0B35]"></div>
+              </div>
+            )}
             <img
-              src={imageUrl ? imageUrl : cardImg}
+              src={imageUrl || "/placeholder.svg"}
               alt={`${name}'s service`}
-              className="absolute top-0  left-0 w-full h-full object-cover rounded-[20px]"
+              className={`absolute top-0 left-0 w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${
+                imageLoading ? "opacity-0" : "opacity-100"
+              }`}
+              onLoad={() => setImageLoading(false)}
             />
           </div>
         )}
 
-        <div className="flex items-center gap-4 mt-4 mb-3">
+        <div className="flex  items-center gap-4 mt-4 mb-3">
           {avatar ? (
-            <img
-              src={attachment + avatar || "/placeholder.svg"}
-              alt={name}
-              className="w-20 h-20 rounded-full object-cover  shadow-md"
-            />
+            <div className="relative w-20 h-20">
+              {imageLoading && (
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-200 rounded-full">
+                  <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#9C0B35]"></div>
+                </div>
+              )}
+              <img
+                src={attachment + avatar || "/placeholder.svg"}
+                alt={name}
+                className={`w-20 h-20 rounded-full object-cover shadow-md transition-opacity duration-300 ${
+                  imageLoading ? "opacity-0" : "opacity-100"
+                }`}
+                onLoad={() => setImageLoading(false)}
+              />
+            </div>
           ) : (
-            <div className="w-20 h-20 rounded-full  bg-gray-300 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center">
               <FaRegUser size={30} className="text-[#9c0b35]" />
             </div>
           )}
@@ -400,7 +419,6 @@ export default function MasterCard({
           )
         ) : null}
       </UniversalModal>
-      
     </div>
   )
 }

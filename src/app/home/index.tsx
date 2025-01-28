@@ -293,7 +293,7 @@ function Home() {
               onClick={() => alert("Скачать приложение")}
             >
               {t("AllNews")}
-            </Button>
+            </Button>  
           </div>
         </section>
       </div>

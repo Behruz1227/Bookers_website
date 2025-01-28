@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper/modules"
 import Blogcard from "@/components/cards/blog-card"
-import { BASE_URL } from "@/helpers/Url"
+import { attachment, BASE_URL } from "@/helpers/Url"
 
 // Import Swiper styles
 import "swiper/css"
@@ -41,12 +41,13 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
         const apiData = result.body?.object || []
         const formattedPosts = apiData.map((item: any) => ({
           id: item.id,
-          image: item.image || cardImg,
+          image: item.attachmentId ? `${attachment}${item.attachmentId}` : cardImg,
           date: item.date,
           title: item.subject,
           description: item.content,
         }))
         setPosts(formattedPosts)
+        
         setLoading(false)
       } catch (err) {
         setError("Failed to fetch data")

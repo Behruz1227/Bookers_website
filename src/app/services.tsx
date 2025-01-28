@@ -20,6 +20,8 @@ import { Input } from "@/components/ui/input"
 import useCategoryStore from "@/Store/Category"
 import Loading from "@/components/Loading/Loading"
 import { useTranslation } from 'react-i18next';
+import useMasterCategoryStore from "@/Store/MasterCategoryStore"
+
 
 function Services() {
   const { t } = useTranslation()
@@ -27,8 +29,14 @@ function Services() {
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [masters, setMasters] = useState<any[]>([])
+  console.log(masters);
   
   
+  
+  
+  const { setMasterCategory } = useMasterCategoryStore();
+
+
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
@@ -46,11 +54,15 @@ function Services() {
 
   useEffect(() => {
     fetchCategories()
+    
     if (id) {
       setSelectedCategory(id)
     }
   }, [id])
 
+  useEffect(() => {
+    setMasterCategory(masters)
+  }, [masters])
   useEffect(() => {
     if (selectedCategory) {
       setLoading(true)
@@ -88,6 +100,8 @@ function Services() {
   }
 
   const { category } = useCategoryStore();
+  
+  
 
   return (
     <div>
