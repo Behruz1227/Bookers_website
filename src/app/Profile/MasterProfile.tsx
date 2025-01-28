@@ -22,6 +22,7 @@ import { FaRegUser } from "react-icons/fa6"
 import { IoAlertCircleOutline } from "react-icons/io5"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import useMasterCategoryStore from "@/Store/MasterCategoryStore"
+import Loading from "@/components/Loading/Loading"
 
 interface AttachmentItem {
   attachmentId: string
@@ -94,7 +95,7 @@ export default function MasterProfile() {
   })
   console.log("asdfghsdrtf", masterDetails)
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) // Update 4: Initialize loading to true
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -149,8 +150,8 @@ export default function MasterProfile() {
   useEffect(() => {
     if (galleryResponse?.body) {
       setGallery(galleryResponse.body)
+      setLoading(false) // Update 3: Set loading to false after fetching gallery data
     }
-    setLoading(false)
   }, [galleryResponse])
 
   useEffect(() => {
@@ -158,9 +159,9 @@ export default function MasterProfile() {
       const master = MasterCategory.find((m: any) => m.id === id)
       if (master) {
         setMasterDetails(master)
+        setLoading(false) // Update 2: Set loading to false after fetching master details
       }
     }
-    setLoading(false)
   }, [id, MasterCategory])
 
   useEffect(() => {
@@ -248,7 +249,8 @@ export default function MasterProfile() {
   }
 
   if (loading || !masterDetails) {
-    return <div className="text-[#B9B9C9] text-center py-10">{t("MasterProfileLoading")}...</div>
+    // Update 1: Use loading state to show Loading component
+    return <Loading />
   }
 
   const imageUrl = masterDetails.attachmentId
