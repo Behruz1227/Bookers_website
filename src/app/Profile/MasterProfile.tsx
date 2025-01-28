@@ -356,9 +356,7 @@ export default function MasterProfile() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl mb-8">{gallery.map((item) => (
-            item.id ? t("MasterProfileGallery") : " "
-          ))}</h2>
+          <h2 className="text-white text-center font-medium text-3xl mb-8">{gallery.length > 0 ? t("MasterProfileGallery") :""}</h2>
           {gallery.map((album) => (
             <Galereya
               key={album.id}
@@ -373,7 +371,6 @@ export default function MasterProfile() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl mb-8">{masterDetails.reviews && masterDetails.reviews.length > 0 ? t("MasterProfileReviews") : ""}</h2>
           <TestimonialSlider masterId={id || ""} />
         </section>
       </main>

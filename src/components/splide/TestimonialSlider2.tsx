@@ -88,7 +88,7 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
         `}
       </style>
 
-      {response?.body?.object?.length > 0 ? (
+      {response?.body?.object?.length > 0 ? ( 
         <>
           <Swiper
             modules={[Pagination, Navigation]}
