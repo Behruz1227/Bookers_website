@@ -1,6 +1,6 @@
 import LoginIndex from "@/Store";
 import { UniversalModal } from "../Modal/UniversalModal";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSendCode } from "@/hooks/useSendCode";
 import useSendCodeStore from "@/Store/SendCodeStore";
 import { Input, message } from "antd";
@@ -49,7 +49,7 @@ export const MasterClassModal = () => {
     const [selectedHour, setSelectedHour] = useState<null | number | string>(null); // Boshlang'ich holat null
     const [selectedMinute, setSelectedMinute] = useState<null | number | string>(null); // Boshlang'ich holat null
     const [showDropdown, setShowDropdown] = useState(false);
-
+    const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference for dropdown
     const hours = [1, 2]; // Soatlar
     const minutes = [0, 5, 10, 45, 15]; // Daqiqalar
     const [messageApi, contextHolder] = message.useMessage();
@@ -259,7 +259,19 @@ export const MasterClassModal = () => {
 
 
 
+useEffect(() => {
+    // Close dropdown if click is outside of the dropdown
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false); // Close the dropdown
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside); // Listen for click events
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside); // Cleanup the event listener
+    };
+  }, []);
 
 
     return (
@@ -330,7 +342,7 @@ export const MasterClassModal = () => {
                                     <label className="block font-medium mb-2">Время проведения*</label>
                                     <div className="flex gap-2">
 
-                                        <div  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
+                                        <div ref={dropdownRef}  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
                                             {/* Input */}
                                             <div onClick={() => setShowDropdown(!showDropdown)} 
                                                 className="flex items-center justify-between"
