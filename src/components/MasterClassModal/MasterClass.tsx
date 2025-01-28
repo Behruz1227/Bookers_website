@@ -137,6 +137,7 @@ export const MasterClassModal = () => {
         setPhoneNumber("+998");
         setSelectedHour(null);
         setSelectedMinute(null);
+        setShowDropdown(false);
         setFormData({
             nameSalonOrMaster: "",
             eventType: "",
