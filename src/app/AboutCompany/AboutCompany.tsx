@@ -84,7 +84,7 @@ export const AboutCompany: React.FC = () => {
                                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                                     onClick={openModal}
                                 >
-                                    Подробнее
+                                    {t('AboutCompanyOfferCards1SecondButtonTitle')}
                                 </Button>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ export const AboutCompany: React.FC = () => {
                                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                                     onClick={openModal}
                                 >
-                                    Подробнее
+                                    {t('AboutCompanyOfferCards1SecondButtonTitle')}
                                 </Button>
                             </div>
                         </div>

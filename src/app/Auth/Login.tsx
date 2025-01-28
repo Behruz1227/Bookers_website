@@ -213,7 +213,7 @@ export const Login: React.FC = () => {
                     {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
                     <h1 className="text-3xl font-semibold my-5">
                         {status === 'Login' && t('LoginRegister')}
-                        {status === 'OTPcode' && "ОТП код"}
+                        {status === 'OTPcode' && t('OTPcode')}
                         {status === 'Selection' && "Выберите роль"}
                         {status === 'Ok' && response?.success && "Спасибо за регистрацию"}
                         {status === 'Ok' && !response?.success && "Вы вошли в свой аккаунт"}
@@ -240,7 +240,7 @@ export const Login: React.FC = () => {
                             <div className="flex justify-center w-[300px] sm:w-[500px] s ">
                                 <div className="phone-input-w-full rounded-md">
                                     <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
-                                        Номер телефона*
+                                        {t('PhoneNumber')}
                                     </label>
                                     <input
                                         type="text"
@@ -259,7 +259,7 @@ export const Login: React.FC = () => {
                             <h2 className='text-2xl font-semibold my-5'>
                                 {phoneNumberInput.length === 13 ? `${phoneNumberInput}` : '+998 (__) ___ __ __'}
                             </h2>
-                            <p className='text-slate-600 mb-6'>Мы отправили вам SMS с кодом подтверждения.</p>
+                            <p className='text-slate-600 mb-6'>{t('LeavefeedbackSMS')}</p>
                             <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                 <Input.OTP
                                     length={4}
