@@ -3,11 +3,14 @@ import { UniversalModal } from "../Modal/UniversalModal";
 import { useEffect, useState } from "react";
 import { useSendCode } from "@/hooks/useSendCode";
 import useSendCodeStore from "@/Store/SendCodeStore";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import useCheckCodeStore from "@/Store/CheckCodeStore";
 import { useCheckCode } from "@/hooks/useCheckCode";
 import { useMasterClass } from "@/hooks/useMasterClass";
 import useMasterClassStore from "@/Store/MasterClassStore";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { MdOutlineErrorOutline } from "react-icons/md";
+import clock from '../../assets/img/Clock.svg'
 interface FormData {
     nameSalonOrMaster: string;
     eventType: string;
@@ -38,13 +41,24 @@ interface Errors {
     active: boolean;
 }
 export const MasterClassModal = () => {
-    const { masterClassHolat, setMasterClassHolat } = LoginIndex();
+    const { masterClassHolat, setMasterClassHolat, setLoginHolat } = LoginIndex();
     const [status, setStatus] = useState<'MasterClass' | 'OTPcode' | 'Ok' | 'Error'>('MasterClass');
     const [phoneNumber, setPhoneNumber] = useState<string>("+998");
     const [OTPcode, setOTPcode] = useState<null | string>(null);
     const [btnStatus, setBtnStatus] = useState<boolean>(false);
+    const [selectedHour, setSelectedHour] = useState<null | number | string>(null); // Boshlang'ich holat null
+    const [selectedMinute, setSelectedMinute] = useState<null | number | string>(null); // Boshlang'ich holat null
+    const [showDropdown, setShowDropdown] = useState(false);
 
-
+    const hours = [1, 2]; // Soatlar
+    const minutes = [0, 5, 10, 45, 15]; // Daqiqalar
+    const [messageApi, contextHolder] = message.useMessage();
+    const toastBtn = (text: string, type: "success" | "error") => {
+        messageApi.open({
+            type,
+            content: text,
+        });
+    };
     const [formData, setFormData] = useState<FormData>({
         nameSalonOrMaster: "",
         eventType: "",
@@ -121,7 +135,8 @@ export const MasterClassModal = () => {
     });
     const resetForm = () => {
         setPhoneNumber("+998");
-
+        setSelectedHour(null);
+        setSelectedMinute(null);
         setFormData({
             nameSalonOrMaster: "",
             eventType: "",
@@ -176,7 +191,7 @@ export const MasterClassModal = () => {
             eventName: !formData.eventName,
             eventDate: !formData.eventDate,
             hour: !formData.hour,
-            minute: !formData.minute,
+            minute: formData.minute < 0 || formData.minute > 60,
             eventDescription: !formData.eventDescription,
             contactInformation: formData.contactInformation.length !== 13,
             eventLocation: !formData.eventLocation,
@@ -241,35 +256,42 @@ export const MasterClassModal = () => {
         }));
     }
 
+
+
+
+
+
     return (
         <div>
+            {contextHolder}
             <UniversalModal isOpen={masterClassHolat} onClose={() => {
                 setMasterClassHolat(false)
                 setStatus('MasterClass')
                 resetForm()
             }}
-                style="max-h-[90vh] lg:w-[60%] w-[85%]"
+                style="max-h-[90vh] xl:w-[60%] w-[85%]"
             >
                 <div className="w-full grid place-items-center my-5 px-11 mb-16">
                     <h1 className="text-3xl font-bold text-center mb-3">
                         {status === 'MasterClass' && 'Форма заявки'}
                         {status === 'OTPcode' && 'ОТП код'}
+                        {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
+                        {status === 'Error' && <MdOutlineErrorOutline size={100} color="#9C0B35" />}
                     </h1>
                     {
                         status === 'MasterClass' && (
-                            <div className="w-full grid grid-cols-2 gap-4">
-                                <div className="col-start-1 col-end-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 justify-center  gap-y-4 md:gap-6 w-full ">
+                                <div className="col-start-1 col-end-3 md:col-end-2">
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">Имя мастера или название салона*</label>
                                     <input
                                         type="text"
                                         id="firstName"
                                         name="nameSalonOrMaster"
                                         value={formData.nameSalonOrMaster}
-                                        placeholder='Full Name'
                                         onChange={handleChange}
                                         className={`border-2 ${errors.nameSalonOrMaster ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-2 col-end-3">
+                                <div className="col-start-1 md:col-start-2 col-end-3">
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Тип мероприятия*</label>
                                     <select
                                         id="lastName"
@@ -289,12 +311,11 @@ export const MasterClassModal = () => {
                                     <textarea
                                         id="lastName"
                                         name="eventName"
-                                        placeholder='Event Name'
                                         value={formData.eventName}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventName ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-1 col-end-2">
+                                <div className="col-start-1 col-end-3 md:col-end-2">
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Дата проведения*</label>
                                     <input
                                         type="date"
@@ -304,33 +325,71 @@ export const MasterClassModal = () => {
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventDate ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-2 col-end-3">
-                                    <label className="block font-medium mb-1">Время проведения*</label>
+                                <div className="col-start-1 md:col-start-2 col-end-3">
+                                    <label className="block font-medium mb-2">Время проведения*</label>
                                     <div className="flex gap-2">
-                                        <select
-                                            aria-label="select"
-                                            name="hour"
-                                            value={formData.hour}
-                                            onChange={handleChange}
-                                            className="w-1/2 p-3 border rounded focus:outline-blue-500"
-                                            required
-                                        >
-                                            {Array.from({ length: 24 }, (_, i) => (
-                                                <option key={i} value={i}>{`${i} ч.`}</option>
-                                            ))}
-                                        </select>
-                                        <select
-                                            aria-label="select"
-                                            name="minute"
-                                            value={formData.minute}
-                                            onChange={handleChange}
-                                            className="w-1/2 p-3 border rounded focus:outline-blue-500"
-                                            required
-                                        >
-                                            {Array.from({ length: 60 }, (_, i) => (
-                                                <option key={i} value={i}>{`${i} мин.`}</option>
-                                            ))}
-                                        </select>
+
+                                        <div  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
+                                            {/* Input */}
+                                            <div onClick={() => setShowDropdown(!showDropdown)} 
+                                                className="flex items-center justify-between"
+                                                
+                                            >
+                                                <span className="text-gray-600">
+                                                    {selectedHour !== null && selectedMinute !== null
+                                                        ? `${selectedHour} ч. ${selectedMinute} мин.`
+                                                        : ""}
+                                                </span>
+                                                <img src={clock} className="w-6 h-6" alt="icon" />
+                                            </div>
+
+                                            {/* Dropdown menyu */}
+                                            {showDropdown && (
+                                                <div className="absolute md:w-[50%] w-[100%] top-[4.5rem] right-0 bg-[#B9B9C9] border rounded-xl shadow-lg z-10 ">
+                                                    <div className="grid grid-cols-2 justify-center p-[5%] gap-x-[5%]">
+                                                        {/* Hours Column */}
+                                                        <div className="border-none">
+                                                            {hours.map((hour) => (
+                                                                <button
+                                                                    key={hour}
+                                                                    className={`w-full px-4  py-2 text-left text-sm rounded-[10px] hover:text-white ${selectedHour === hour ? "bg-[#9C0B35] text-white" : "text-gray-800"
+                                                                        }`}
+                                                                    onClick={() => {
+                                                                        setSelectedHour(hour);
+                                                                        setFormData((prev) => ({
+                                                                            ...prev,
+                                                                            hour: hour,
+                                                                        }));
+                                                                    }}
+                                                                >
+                                                                    {`${hour} ч.`}
+                                                                </button>
+                                                            ))}
+                                                        </div >
+
+                                                        {/* Minutes Column */}
+                                                        <div className="border-none">
+                                                            {minutes.map((minute) => (
+                                                                <button
+                                                                    key={minute}
+                                                                    className={`w-full px-4 py-2 text-left text-sm rounded-[10px]  hover:text-white ${selectedMinute === minute ? "bg-[#9C0B35] text-white" : "text-gray-800"
+                                                                        }`}
+                                                                    onClick={() => {
+                                                                        setSelectedMinute(minute);
+                                                                        setFormData((prev) => ({
+                                                                            ...prev,
+                                                                            minute: minute,
+                                                                        }));
+                                                                    }}
+                                                                >
+                                                                    {`${minute} мин.`}
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-start-1 col-end-3">
@@ -339,13 +398,12 @@ export const MasterClassModal = () => {
 
                                     <textarea
                                         id="lastName"
-                                        name="eventDescription"
-                                        placeholder='Event Description'
+                                        name="eventDescription"                                      
                                         value={formData.eventDescription}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventDescription ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-1 col-end-2">
+                                <div className="col-start-1 col-end-3 md:col-end-2">
 
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Контактная информация*</label>
 
@@ -353,12 +411,11 @@ export const MasterClassModal = () => {
                                         type="text"
                                         id="lastName"
                                         name="contactInformation"
-                                        placeholder='Contact Information'
                                         value={phoneNumber}
                                         onChange={handleInputChange}
                                         className={`border-2 ${errors.contactInformation ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-2 col-end-3">
+                                <div className="col-start-1 md:col-start-2 col-end-3">
 
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Место проведения*</label>
 
@@ -366,23 +423,21 @@ export const MasterClassModal = () => {
                                         type="text"
                                         id="lastName"
                                         name="eventLocation"
-                                        placeholder='Event Location'
                                         value={formData.eventLocation}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventLocation ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-1 col-end-2">
+                                <div className="col-start-1 col-end-3 md:col-end-2">
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Дополнительная информация</label>
                                     <input
                                         type="text"
                                         id="lastName"
                                         name="additionalInformation"
-                                        placeholder='Event Location'
                                         value={formData.additionalInformation}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.additionalInformation ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
-                                <div className="col-start-2 col-end-3">
+                                <div className="col-start-1 md:col-start-2 col-end-3">
 
                                     <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Стоимость участия</label>
 
@@ -390,10 +445,10 @@ export const MasterClassModal = () => {
                                         type="number"
                                         id="lastName"
                                         name="participationFee"
-                                        placeholder='Participation Fee'
                                         value={formData.participationFee}
                                         onChange={handleChange}
-                                        className={`border-2 ${errors.participationFee ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
+                                        
+                                        className={`border-2 focus:none ${errors.participationFee ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                             </div>
                         )
@@ -423,15 +478,17 @@ export const MasterClassModal = () => {
                     }
                     {
                         status === 'Error' && (
-                            <div>
-                                error
+                            <div className="grid place-items-center">
+                                <h1 className="text-3xl font-bold text-center">Отклонено</h1>
+                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">Что бы оставить заявку на мастеркласс  необходимо пройти регистрацию мастера</p>
                             </div>
                         )
                     }
                     {
                         status === 'Ok' && (
-                            <div>
-                                ok
+                            <div className="grid place-items-center">
+                                <h1 className="text-3xl font-bold text-center">Принято</h1>
+                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">Ваша заявка принята и скоро будет опубликована на этом сайте в разделе “НОВОСТИ”</p>
                             </div>
                         )
                     }
@@ -446,14 +503,17 @@ export const MasterClassModal = () => {
                                         CheckCodeBtn()
                                         setBtnStatus(true)
                                     } else {
-                                        alert("Iltimos Kod ni to'liq kiriting")
+                                        toastBtn('Please enter a valid OTP code', 'error');
                                     }
+                                } else if (status === 'Error') {
+                                    setLoginHolat(true)
+                                    setMasterClassHolat(false)
+                                    setStatus('MasterClass')
                                 }
                             }}
                             disabled={btnStatus} // Tugma faqat status false bo'lganda bosiladi
                             className={`mt-4  py-4 px-16 rounded-full 
                                 ${status !== 'Ok' ? '' : 'hidden'} 
-                                ${status !== 'Error' ? '' : 'hidden'} 
                                 ${!btnStatus ? "bg-[#9C0B35] text-white" : "bg-[#d12253] text-white0"}`}
                         >
                             {status === 'OTPcode' && (
@@ -461,6 +521,9 @@ export const MasterClassModal = () => {
                             )}
                             {status === 'MasterClass' && (
                                 btnStatus ? "Loading..." : "Отправить заявку"
+                            )}
+                            {status === 'Error' && (
+                                "Зарегистрироваться"
                             )}
                         </button>
                     </div>

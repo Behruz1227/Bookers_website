@@ -33,3 +33,9 @@ body{
     background-color:#9C0B35!important;
   }
   
+  input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Webkit brauzerlari uchun */
+  
+}
+
