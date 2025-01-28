@@ -6,7 +6,7 @@ import Subtitle from '@/components/Subtitle'
 import React, { useEffect, useState } from 'react'
 
 //imgs
-import imgSplide from '../../assets/img/Mask group (7).png'
+import imgSplide from '../../assets/cards/heroo.png'
 import OfferCards from '@/components/cards/OfferCards'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'

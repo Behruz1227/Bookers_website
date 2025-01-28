@@ -74,60 +74,57 @@ export const Vacancies: React.FC = () => {
       <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
         <div className="w-full p-10">
           <div>
-            <h1 className='font-manrope text-center font-bold text-[36px]'>Менеджер по работе с агентами</h1>
-            <p className="mt-4 font-bold text-[32px] font-manrope ">Описание:</p>
+            <h1 className='font-manrope text-center font-bold text-[36px]'>{t('madal')}</h1>
+            <p className="mt-4 font-bold text-[32px] font-manrope ">{t('opisanie')}:</p>
             <p className="mt-2 font-semibold text-[26px] font-manrope">
-              Менеджер по работе с агентами будет отвечать за взаимодействие с мастерами и салонами красоты, которые
-              интегрируются в систему бронирования bookars.Основная задача – обеспечение успешной интеграции агентов, поддержка и развитие взаимоотношений с ними.
+              {t('madal1')}
             </p>
             <p className="mt-2">
 
             </p>
 
             <div className="mt-4">
-              <p className="font-bold text-[32px] font-manrope">Обязанности:</p>
+              <p className="font-bold text-[32px] font-manrope">{t('madal2')}:</p>
               <ul className="list-disc pl-5 mt-2 space-y-2 font-semibold text-[26px] font-manrope ">
-                <li>Поиск и привлечение новых мастеров и салонов красоты для интеграции в систему bookars;</li>
-                <li>Обеспечение качественной поддержки агентов на всех этапах интеграции;</li>
-                <li>Проведение обучения России и тренингов по использованию платформы;</li>
-                <li>Консультирование агентов по вопросам работы с системой бронирования и решению возникающих проблем;</li>
-                <li>Анализ потребностей агентов и внесение предложений по улучшению платформы;</li>
-                <li>Постоянное взаимодействие с действующими агентами для поддержания долгосрочных отношений;</li>
-                <li>Мониторинг и анализ эффективности работы агентов в системе;</li>
-                <li>Подготовка отчетности по результатам работы с агентами.</li>
+                <li>{t('madal3')}</li>
+                <li>{t('madal4')}</li>
+                <li>{t('madal5')}</li>
+                <li>{t('madal6')}</li>
+                <li>{t('madal7')}</li>
+                <li>{t('madal8')}</li>
+                <li>{t('madal9')}</li>
+                <li>{t('madal10')}</li>
               </ul>
             </div>
 
             <div className="mt-4">
-              <p className="font-bold text-[32px] font-manrope">Требования:</p>
+              <p className="font-bold text-[32px] font-manrope">{t('madal11')}:</p>
               <ul className="list-disc pl-5 mt-2 space-y-2 font-semibold text-[26px] font-manrope">
-                <li>Опыт работы в сфере продаж, клиентского сервиса или управления аккаунтами;</li>
-                <li>Понимание специфики индустрии красоты;</li>
-                <li>Отличные коммуникативные навыки и способность устанавливать контакты;</li>
-                <li>Умение работать в команде и самостоятельно;</li>
-                <li>Стремление к достижению поставленных целей и ориентированность на результат;</li>
-                <li>Опыт проведения презентаций и обучения клиентов;</li>
-                <li>Высшее образование (предпочтительно в области маркетинга, менеджмента или смежных дисциплин);</li>
-                <li>Владение русским и узбекским языками (знание английского будет преимуществом);</li>
-                <li>Навыки работы с CRM-системами и базовое понимание IT-инструментов.</li>
+                <li>{t('madal12')}</li>
+                <li>{t('madal13')}</li>
+                <li>{t('madal14')}</li>
+                <li>{t('madal15')}</li>
+                <li>{t('madal16')}</li>
+                <li>{t('madal17')}</li>
+                <li>{t('madal18')}</li>
+                <li>{t('madal19')}</li>
+                <li>{t('madal20')}</li>
               </ul>
             </div>
 
             <div className="mt-4">
-              <p className="font-bold text-[32px] font-manrope">Условия:</p>
+              <p className="font-bold text-[32px] font-manrope">{t('madal21')}: </p>
               <ul className="list-disc pl-5 mt-2 space-y-2 font-semibold text-[26px] font-manrope">
-                <li>Работа в динамично развивающейся компании;</li>
-                <li>Возможность профессионального и карьерного роста;</li>
-                <li>Конкурентоспособная заработная плата;</li>
-                <li>Социальный пакет (медицинское страхование, оплачиваемый отпуск и т.д.);</li>
-                <li>Комфортный офис и дружный коллектив.</li>
+                <li>{t('madal22')}</li>
+                <li>{t('madal23')}</li>
+                <li>{t('madal24')}</li>
+                <li>{t('madal25')}</li>
+                <li>{t('madal26')}</li>
               </ul>
             </div>
 
             <p className="mt-4 font-semibold text-[26px] font-manrope">
-              Если вы готовы стать частью нашей команды и помочь мастерам и салонам красоты эффективно интегрироваться в
-              систему бронирования bookars, отправьте свое резюме и сопроводительное письмо нажав на кнопку "Отправить
-              резюме"
+              {t('madal27')}
             </p>
 
             <div className='text-center mt-10'>
@@ -138,7 +135,7 @@ export const Vacancies: React.FC = () => {
                 setModalOpen(false);
               }}
             >
-              Отправить резюме
+              {t('madal28')}
             </Button>
             </div>
           </div>
