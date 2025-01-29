@@ -274,7 +274,7 @@ function Home() {
           <div className='pb-20'>
           <HeaderTitles text={t("Новости bookers")} />
           </div>
-          <BlogSlider page={0} size={5} />
+          <BlogSlider page={0} size={5} /> 
           <div className='flex justify-center pb-20'  >
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
