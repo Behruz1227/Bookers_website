@@ -11,6 +11,7 @@ import useMasterClassStore from "@/Store/MasterClassStore";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import clock from '../../assets/img/Clock.svg'
+import { useTranslation } from "react-i18next";
 interface FormData {
     nameSalonOrMaster: string;
     eventType: string;
@@ -41,6 +42,7 @@ interface Errors {
     active: boolean;
 }
 export const MasterClassModal = () => {
+    const { t } = useTranslation()
     const { masterClassHolat, setMasterClassHolat, setLoginHolat } = LoginIndex();
     const [status, setStatus] = useState<'MasterClass' | 'OTPcode' | 'Ok' | 'Error'>('MasterClass');
     const [phoneNumber, setPhoneNumber] = useState<string>("+998");
@@ -138,6 +140,7 @@ export const MasterClassModal = () => {
         setSelectedHour(null);
         setSelectedMinute(null);
         setShowDropdown(false);
+        setBtnStatus(false);
         setFormData({
             nameSalonOrMaster: "",
             eventType: "MASTER_CLASS",
@@ -203,8 +206,6 @@ export const MasterClassModal = () => {
         setErrors(newErrors);
 
         if (Object.values(newErrors).includes(true)) {
-            console.log('malumot yoz');
-
             return false;
         }
 
@@ -286,8 +287,8 @@ useEffect(() => {
             >
                 <div className="w-full grid place-items-center my-5 px-11 mb-16">
                     <h1 className="text-3xl font-bold text-center mb-3">
-                        {status === 'MasterClass' && 'Форма заявки'}
-                        {status === 'OTPcode' && 'ОТП код'}
+                        {status === 'MasterClass' && t('Форма заявки')}
+                        {status === 'OTPcode' && t('ОТП код')}
                         {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
                         {status === 'Error' && <MdOutlineErrorOutline size={100} color="#9C0B35" />}
                     </h1>
@@ -295,7 +296,7 @@ useEffect(() => {
                         status === 'MasterClass' && (
                             <div className="grid grid-cols-1 md:grid-cols-2 justify-center  gap-y-4 md:gap-6 w-full ">
                                 <div className="col-start-1 col-end-3 md:col-end-2">
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">Имя мастера или название салона*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">{t('Имя мастера или название салона*')}</label>
                                     <input
                                         type="text"
                                         id="firstName"
@@ -305,22 +306,22 @@ useEffect(() => {
                                         className={`border-2 ${errors.nameSalonOrMaster ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                                 <div className="col-start-1 md:col-start-2 col-end-3">
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Тип мероприятия*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Тип мероприятия*')}</label>
                                     <select
                                         id="lastName"
                                         name="eventType"
                                         value={formData.eventType}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventType ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `}>
-                                        <option value="MASTER_CLASS">Мастер-класс</option>
-                                        <option value="COURSE">Курс</option>
-                                        <option value="TRAINING">Тренинг</option>
-                                        <option value="OTHER">Другое обучающее мероприятие</option>
+                                        <option value="MASTER_CLASS">{t('Мастер-класс')}</option>
+                                        <option value="COURSE">{t('Курс')}</option>
+                                        <option value="TRAINING">{t('Тренинг')}</option>
+                                        <option value="OTHER">{t('Другое обучающее мероприятие')}</option>
                                     </select>
 
                                 </div>
                                 <div className="col-start-1 col-end-3">
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Название мероприятия*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Название мероприятия*')}</label>
                                     <textarea
                                         id="lastName"
                                         name="eventName"
@@ -329,7 +330,7 @@ useEffect(() => {
                                         className={`border-2 ${errors.eventName ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                                 <div className="col-start-1 col-end-3 md:col-end-2">
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Дата проведения*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Дата проведения*')}</label>
                                     <input
                                         type="date"
                                         id="lastName"
@@ -339,7 +340,7 @@ useEffect(() => {
                                         className={`border-2 ${errors.eventDate ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                                 <div className="col-start-1 md:col-start-2 col-end-3">
-                                    <label className="block text-gray-700 font-medium  mb-2">Время проведения*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2">{t('время проведения*')}</label>
                                     <div className="flex gap-2">
 
                                         <div ref={dropdownRef}  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
@@ -407,7 +408,7 @@ useEffect(() => {
                                 </div>
                                 <div className="col-start-1 col-end-3">
 
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Описание мероприятия*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Описание мероприятия*')}</label>
 
                                     <textarea
                                         id="lastName"
@@ -418,7 +419,7 @@ useEffect(() => {
                                 </div>
                                 <div className="col-start-1 col-end-3 md:col-end-2">
 
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Контактная информация*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Контактная информация*')}</label>
 
                                     <input
                                         type="text"
@@ -430,7 +431,7 @@ useEffect(() => {
                                 </div>
                                 <div className="col-start-1 md:col-start-2 col-end-3">
 
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Место проведения*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Место проведения*')}</label>
 
                                     <input
                                         type="text"
@@ -441,7 +442,7 @@ useEffect(() => {
                                         className={`border-2 ${errors.eventLocation ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                                 <div className="col-start-1 col-end-3 md:col-end-2">
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Дополнительная информация</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Дополнительная информация')}</label>
                                     <input
                                         type="text"
                                         id="lastName"
@@ -452,7 +453,7 @@ useEffect(() => {
                                 </div>
                                 <div className="col-start-1 md:col-start-2 col-end-3">
 
-                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">Стоимость участия</label>
+                                    <label className="block text-gray-700 font-medium  mb-2" htmlFor="lastName">{t('Стоимость участия')}</label>
 
                                     <input
                                         type="number"
@@ -492,16 +493,16 @@ useEffect(() => {
                     {
                         status === 'Error' && (
                             <div className="grid place-items-center">
-                                <h1 className="text-3xl font-bold text-center">Отклонено</h1>
-                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">Что бы оставить заявку на мастеркласс  необходимо пройти регистрацию мастера</p>
+                                <h1 className="text-3xl font-bold text-center">{t('Отклонено')}</h1>
+                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">{t('Что бы оставить заявку на мастеркласс  необходимо пройти регистрацию мастера')}</p>
                             </div>
                         )
                     }
                     {
                         status === 'Ok' && (
                             <div className="grid place-items-center">
-                                <h1 className="text-3xl font-bold text-center">Принято</h1>
-                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">Ваша заявка принята и скоро будет опубликована на этом сайте в разделе “НОВОСТИ”</p>
+                                <h1 className="text-3xl font-bold text-center">{t('Принято')}</h1>
+                                <p className="text-xl w-[80%] mt-6 text-slate-600 text-center">{t('Ваша заявка принята и скоро будет опубликована на этом сайте в разделе “НОВОСТИ”')}</p>
                             </div>
                         )
                     }
@@ -516,7 +517,7 @@ useEffect(() => {
                                         CheckCodeBtn()
                                         setBtnStatus(true)
                                     } else {
-                                        toastBtn('Please enter a valid OTP code', 'error');
+                                        toastBtn(t('Введите действительный одноразовый пароль'), 'error');
                                     }
                                 } else if (status === 'Error') {
                                     setLoginHolat(true)
@@ -530,13 +531,13 @@ useEffect(() => {
                                 ${!btnStatus ? "bg-[#9C0B35] text-white" : "bg-[#d12253] text-white0"}`}
                         >
                             {status === 'OTPcode' && (
-                                btnStatus ? "Loading..." : "Отправить отзыв"
+                                btnStatus ? t('Загрузка') : t('Отправить заявку')
                             )}
                             {status === 'MasterClass' && (
-                                btnStatus ? "Loading..." : "Отправить заявку"
+                                btnStatus ? t('Загрузка') : t('Отправить заявку')
                             )}
                             {status === 'Error' && (
-                                "Зарегистрироваться"
+                                t("Зарегистрироваться")
                             )}
                         </button>
                     </div>

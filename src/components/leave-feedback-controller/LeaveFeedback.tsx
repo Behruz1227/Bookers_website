@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalModal } from "../Modal/UniversalModal"
 import FileInput from "../input/file-input";
-import { Input, message, Select } from "antd";
+import { Input, Select } from "antd";
 import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { useSendCode } from "@/hooks/useSendCode";
 import useSendCodeStore from "@/Store/SendCodeStore";
@@ -30,13 +30,7 @@ export const LeaveFeedback = () => {
     const [searchText, setSearchText] = useState<string>(''); // Qidiruv so'zi
     const { uploadFile } = useUploadFile();
     const { fileResponse, isLoading, setFileResponse } = useUploadFileStore();
-    const [messageApi, contextHolder] = message.useMessage();
-    const toastBtn = (text: string, type: "success" | "error") => {
-        messageApi.open({
-            type,
-            content: text,
-        });
-    };
+
     const apiUrl = `${leaveFeedbackMasterOrSalonSearch}?name=${searchText}`;
     const { response, globalDataFunc } = useGlobalRequest(apiUrl, "GET");
     const data = {
@@ -167,8 +161,6 @@ export const LeaveFeedback = () => {
     useEffect(() => {
         if (SendCode?.message === "Success" && SendCode?.success === true && otzivHolat) {
             setStatus("OTPcode");
-
-            toastBtn(SendCode?.body, 'success');
             if (photo !== '') {
                 uploadFile(photo);
             }
@@ -206,7 +198,6 @@ export const LeaveFeedback = () => {
 
     return (
         <>
-            {contextHolder}
             <UniversalModal isOpen={otzivHolat} onClose={() => {
                 setOtzivHolat(false);
                 setMasterOrSalonStatus(false);
@@ -224,31 +215,29 @@ export const LeaveFeedback = () => {
                 setCheckCode(null);
                 setFileResponse(null);
                 setPhoneNumber('+998');
-            }} style="max-h-[90vh] w-[90%] ">
+            }} style="max-h-[90vh] w-[90%] lg:w-[65%]">
                 <div className="w-full grid place-items-center my-5 mb-16">
                     {
                         status === 'otziv' && (
-                            <div className="px-[6%]">
-                                <h1 className="font-bold text-xl lg:text-3xl px-[14%] text-center">{t('LeavefeedbackText')}</h1>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 justify-center  gap-y-4 lg:gap-6 w-full my-6">
+                            <div className="px-[4%]">
+                                <h1 className="font-bold text-xl lg:text-3xl px-[14%] text-center">{t('Заполните форму заявки для оформления отзыва и обеспечения видимости в мобильном приложении и на сайте bookers отправьте заявку.')}</h1>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 justify-center  gap-y-4 lg:gap-6 w-full my-6 px-6">
                                     <div className="col-start-1 col-end-2">
-                                        <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">{t('ClientName')}</label>
+                                        <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">{t('Имя клиента*')}</label>
                                         <input
                                             type="text"
                                             id="firstName"
                                             value={firstName}
-                                            placeholder={t('First Name')}
                                             onChange={(e) => setFirstName(e.target.value)}
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                         />
                                     </div>
                                     <div className="col-start-1 lg:col-start-2 col-end-2 lg:col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="email">{t('Email')}</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="email">{t('Электронная почта')}</label>
                                         <input
                                             type="email"
                                             id="email"
                                             value={email}
-                                            placeholder={t('Email')}
                                             onChange={(e) => setEmail(e.target.value)}
 
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
@@ -256,7 +245,7 @@ export const LeaveFeedback = () => {
                                     </div>
                                     <div className="col-start-1 col-end-2">
                                         <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
-                                           {t('PhoneNumber')}
+                                            {t('Телефон*')}
                                         </label>
                                         <input
                                             type="text"
@@ -268,11 +257,10 @@ export const LeaveFeedback = () => {
                                         />
                                     </div>
                                     <div className="col-start-1 lg:col-start-2 col-end-2 lg:col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="phone">{t('NameOfTheMasterOrBeautySalon')}</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="phone">{t('Название мастера или салона красоты*')}</label>
                                         <Select
                                             showSearch
                                             allowClear
-                                            placeholder={t('NameOfTheMasterOrBeautySalon')}
                                             optionFilterProp="children"
                                             value={masterOrSalon || undefined} // Tanlangan qiymat
                                             filterOption={(input, option) =>
@@ -299,25 +287,23 @@ export const LeaveFeedback = () => {
                                         />
                                     </div>
                                     <div className="col-start-1 col-end-3">
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="review">{t('Review')}</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="review">{t('Отзыв*')}</label>
                                         <textarea
                                             id="review"
-                                            placeholder={t('Review')}
-
                                             onChange={(e) => setReview(e.target.value)}
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                         ></textarea>
                                     </div>
                                     <div className="col-start-1 col-end-2 grid justify-start ">
 
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="file">{t('AttachPhoto')}</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="file">{t('Прикрепить ваши фото')}</label>
                                         <FileInput onFileSelect={handlePhotoUpload} />
 
                                     </div>
                                 </div>
 
                                 <div className="text-center flex justify-center ">
-                                    <p className="text-slate-600 my-8"><div className="inline-flex items-center pr-5 ">
+                                    <p className="text-slate-600 my-4"><div className="inline-flex items-center pr-5 ">
                                         <label className="flex items-center cursor-pointer relative">
                                             <input onChange={(e) => setConsentGiven(e.target.checked)} type="checkbox" className="peer h-4 w-4 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-500 checked:bg-[#9C0B35] checked:border-[#9C0B35]" placeholder="." />
                                             <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -326,7 +312,7 @@ export const LeaveFeedback = () => {
                                                 </svg>
                                             </span>
                                         </label>
-                                    </div>{t('LeavefeedbackText1')}</p>
+                                    </div>{t('Я согласен(на) на публикацию моего отзыва на сайте и в мобильном приложении bookers.')}</p>
                                 </div>
 
                             </div>
@@ -335,9 +321,9 @@ export const LeaveFeedback = () => {
                     {
                         status === 'OTPcode' && (
                             <div className="w-full grid place-items-center">
-                                <h1 className="font-bold text-4xl">{t('OTPcode')}</h1>
+                                <h1 className="font-bold text-4xl">{t('ОТП код')}</h1>
                                 <p className="font-bold text-2xl my-5">{phone}</p>
-                                <p className="text-[#59595c]">{t('LeavefeedbackSMS')}</p>
+                                <p className="text-[#59595c]">{t('Мы отправили вам SMS с кодом подтверждения.')}</p>
                                 <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                     <Input.OTP
                                         length={4}
@@ -359,11 +345,11 @@ export const LeaveFeedback = () => {
                                 </div>
 
                                 {timer !== null && timer > 0
-                                    ? <p className="text-[#59595c]">{t('ResendCode')}{timer} сек</p>
+                                    ? <p className="text-[#59595c]">{t('Отправить код заново')}{timer} {t('сек')}</p>
                                     : <p className="text-[#9C0B35]" onClick={() => {
                                         handleResendCode()
                                         SendCodeBtn()
-                                    }}>{}{t('Resend')}</p>}
+                                    }}>{ }{t('Отправить повторно')}</p>}
 
                             </div>
                         )
@@ -372,8 +358,8 @@ export const LeaveFeedback = () => {
                         status === 'Error' && (
                             <div className="grid place-items-center">
                                 <MdOutlineErrorOutline size={100} color="#9C0B35" />
-                                <h1 className="font-bold text-4xl text-center my-3">{t('Youcantleaveareview')}</h1>
-                                <p className="text-center text-xl">{t('LeavefeedbackError')}</p>
+                                <h1 className="font-bold text-4xl text-center my-3">{t('Вы не можете оставить отзыв')}</h1>
+                                <p className="text-center text-xl">{t('Что бы оставить отзыв, необходимо пройти регистрацию клиента')}</p>
                             </div>
                         )
                     }
@@ -381,8 +367,8 @@ export const LeaveFeedback = () => {
                         status === 'Ok' && (
                             <div className="grid place-items-center">
                                 <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />
-                                <h1 className="font-bold text-4xl text-center my-3">{t('FeedbackAccepted')}</h1>
-                                <p className="text-center text-xl">{t('LeavefeedbackOK')}</p>
+                                <h1 className="font-bold text-4xl text-center my-3">{t('Отзыв принят')}</h1>
+                                <p className="text-center text-xl">{t('Спасибо что помогаете улучшить наш сервис')}</p>
                             </div>
                         )
                     }
@@ -392,7 +378,7 @@ export const LeaveFeedback = () => {
                                 onClick={handleSubmit}
                                 className={`mt-4  py-4 px-16 rounded-full  ${isFormValid ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={!isFormValid || loadingSendCode}>
-                                {t('SendFeedback')}
+                                {t('Отправить отзыв')}
                             </button>
                         )
                     }
@@ -403,7 +389,7 @@ export const LeaveFeedback = () => {
                                 className={`mt-4  py-4 px-16 rounded-full  ${!loadingCheckCode ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={loadingCheckCode || isLoading}
                             >
-                                {t('SendFeedback')}
+                                {t('Отправить отзыв')}
                             </button>
                         )
                     }
@@ -434,7 +420,7 @@ export const LeaveFeedback = () => {
                                 className={`mt-4  py-4 px-16 rounded-full  ${!loadingCheckCode ? "bg-[#9C0B35] text-white" : "bg-gray-300 text-gray-700"}`}
                                 disabled={loadingCheckCode || isLoading}
                             >
-                                {t('Register')}
+                                {t('Зарегистрироваться')}
                             </button>
                         )
                     }

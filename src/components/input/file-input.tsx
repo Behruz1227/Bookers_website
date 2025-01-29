@@ -5,6 +5,7 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import img  from'../../assets/img/imgInput.svg'
+import { useTranslation } from 'react-i18next'
 
 interface FileState {
   file: File
@@ -18,7 +19,7 @@ interface FileInputProps {
 
 export default function FileInput({ onFileSelect }: FileInputProps) {
   const [fileState, setFileState] = useState<FileState | null>(null)
-
+const { t } = useTranslation()
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
@@ -62,7 +63,7 @@ export default function FileInput({ onFileSelect }: FileInputProps) {
         <div className="flex items-center  gap-2 flex-1 min-w-0">
           <img src={img} alt="" />
           <span className="truncate text-[#9C0B35] pb-3">
-            {fileState ? fileState.name : 'Rasm yuklash'}
+            {fileState ? fileState.name : t('Выбрать фото')}
           </span>
         </div>
         
@@ -80,7 +81,7 @@ export default function FileInput({ onFileSelect }: FileInputProps) {
       
       <input
         id="fileInput"
-        placeholder='Rasm yuklash'
+        placeholder={t('Выбрать фото')}
         type="file"
         accept="image/*"
         onChange={handleFileSelect}
