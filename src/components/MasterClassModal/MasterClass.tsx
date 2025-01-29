@@ -61,7 +61,7 @@ export const MasterClassModal = () => {
     };
     const [formData, setFormData] = useState<FormData>({
         nameSalonOrMaster: "",
-        eventType: "",
+        eventType: "MASTER_CLASS",
         eventName: "",
         eventDate: "",
         hour: 0,
@@ -140,7 +140,7 @@ export const MasterClassModal = () => {
         setShowDropdown(false);
         setFormData({
             nameSalonOrMaster: "",
-            eventType: "MASTER_CLASS",
+            eventType: "",
             eventName: "",
             eventDate: "",
             hour: 0,
