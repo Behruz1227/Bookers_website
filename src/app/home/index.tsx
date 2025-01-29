@@ -118,7 +118,7 @@ function Home() {
     `${dashboard}`,
     'GET',
   );
-  const { setOtzivHolat, setMasterClassHolat } = LoginIndex();
+  const { setOtzivHolat, setMasterClassHolat,setLoginHolat } = LoginIndex();
 
   const {
     loading: categoryLoading,
@@ -169,9 +169,9 @@ function Home() {
         ]} />
         <Line />
         <section  id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
-          <OfferCards icon={Gift} data={FirstCard} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
+          <OfferCards icon={Gift} data={FirstCard} onclickSecondButton={() => setLoginHolat(true)} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
           <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
-          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />
+          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} onclickSecondButton={() => setLoginHolat(true)} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />
         </section>
 
         <Line />
