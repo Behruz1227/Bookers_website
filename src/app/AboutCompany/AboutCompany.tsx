@@ -118,9 +118,9 @@ export const AboutCompany: React.FC = () => {
 
                 </div>
                 <div id='company2'>
-                    <HeaderTitles text={t('AboutCompanyHeaderTitles3')} size='' />
+                    <HeaderTitles text={t('Компания Well Tech:  Наша команда')} size='' />
                     <Subtitle
-                        text={t('AboutCompanySubtitle1')}
+                        text={t('Well Tech объединяет талантливых разработчиков, дизайнеров, проектных менеджеров, маркетологов и аналитиков и квалифицированных специалистов своего направления. Каждый из нас вносит уникальный вклад в создание  IT-решений и ведение успешных проектов.')}
                         size="w-full max-w-[759px]  lg:text-left"
                     />
 
@@ -131,40 +131,40 @@ export const AboutCompany: React.FC = () => {
                         />
                     </div> */}
                     <div className='bg-[#B9B9C9] rounded-3xl p-10'>
-                        <h1 className='text-[#9C0B35] font-manrope font-extrabold text-[26px] text-center pb-10'>{t('AboutCompanyOfferCards4Title')}</h1>
+                        <h1 className='text-[#9C0B35] font-manrope font-extrabold text-[26px] text-center pb-10'>{t('Мы ценим')}</h1>
                         <div className='flex items-center justify-between'>
                             <div className='text-left text-[#000000] space-y-4 mb-5'>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText1')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Сотрудничество')}</p>
                                 </div>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText2')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Доверие и уважение')}</p>
                                 </div>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText3')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Прозрачность и открытость')}</p>
                                 </div>
                             </div>
                             <div className='text-left text-[#000000] space-y-4 mb-5'>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText4')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Обучение и развитие')}</p>
                                 </div>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText5')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Гибкость и адаптивность')}</p>
                                 </div>
                                 <div className='flex items-start gap-3'  >
                                     <FaRegCircleCheck size={24} className='text-[#9C0B35] mt-1 ' />
-                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('AboutCompanyOfferCards4ThreeCardText6')}</p>
+                                    <p className='flex-1 font-manrope font-medium text-[20px]'>{t('Ответственность и самоорганизация')}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <Subtitle
-                        text={t('AboutCompanySubtitle2')}
+                        text={t('Благодаря слаженной работе нашей команды, мы успешно реализовали множество проектов, которые получили высокую оценку от наших клиентов и пользователей. Мы гордимся нашими достижениями и продолжаем стремиться к новым высотам, улучшая качество наших продуктов и услуг.')}
                         size='max-w-[759px]  lg:text-left' />
                 </div>
             </div>
