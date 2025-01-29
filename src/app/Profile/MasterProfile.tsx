@@ -391,6 +391,7 @@ export default function MasterProfile() {
         </section>
 
         <section className="mt-12">
+          <h2 className="text-white text-center ">dfghjkl</h2>
           {contentLoading ? (
             <div className="animate-pulse">
               <div className="h-48 bg-gray-300 rounded-[20px]"></div>

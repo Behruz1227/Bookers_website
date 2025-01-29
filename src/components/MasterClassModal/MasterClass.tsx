@@ -61,7 +61,7 @@ export const MasterClassModal = () => {
     };
     const [formData, setFormData] = useState<FormData>({
         nameSalonOrMaster: "",
-        eventType: "",
+        eventType: "MASTER_CLASS",
         eventName: "",
         eventDate: "",
         hour: 0,
@@ -339,7 +339,7 @@ useEffect(() => {
                                         className={`border-2 ${errors.eventDate ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                                 <div className="col-start-1 md:col-start-2 col-end-3">
-                                    <label className="block font-medium mb-2">Время проведения*</label>
+                                    <label className="block text-gray-700 font-medium  mb-2">Время проведения*</label>
                                     <div className="flex gap-2">
 
                                         <div ref={dropdownRef}  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
