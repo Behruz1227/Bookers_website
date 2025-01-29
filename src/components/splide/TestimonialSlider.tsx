@@ -26,7 +26,7 @@ export const TestimonialSlider: React.FC = () => {
     return <div>Error: {error}</div>
   }
 
-  const buttonStyles = {
+  const buttonStyles = { 
     width: "40px",
     height: "40px",
     display: "flex",

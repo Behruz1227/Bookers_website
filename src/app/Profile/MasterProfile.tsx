@@ -270,20 +270,21 @@ export default function MasterProfile() {
   return (
     <div className="min-h-screen bg-[#111827]">
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center mb-10 gap-10`">
+        <div className="flex flex-col md:flex-row items-center mb-10 gap-5 md:gap-10">
           <Button
             onClick={() => navigate(-1)}
-            className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-3 px-6 gap-2 "
+            className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-2 px-4 md:py-3 md:px-6 gap-2 text-sm md:text-base"
           >
             <MdArrowBackIos className="text-[#FFFFFF]" />
             {t("MasterProfileBack")}
           </Button>
-          <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl ml-10">
+          <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-2xl md:text-4xl text-center md:text-left">
             {t("Detailsaboutthemaster")}
           </h2>
         </div>
-        <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
-          <div className="relative h-[440px] w-full p-10">
+
+        <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full">
+          <div className="relative h-[220px] sm:h-[300px] md:h-[360px] lg:h-[440px] w-full p-4 sm:p-6 md:p-8 lg:p-10">
             <img
               src={
                 masterDetails.attachmentId
@@ -296,36 +297,38 @@ export default function MasterProfile() {
             />
           </div>
 
-          <div className="p-6">
-            <div className="flex items-center gap-6">
+          <div className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               {masterDetails.mainPhoto ? (
                 <img
                   src={`${attachment}${masterDetails.mainPhoto}`}
                   alt={masterDetails.fullName}
-                  className="w-[153px] h-[153px] rounded-full object-cover  shadow-lg"
+                  className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] lg:w-[153px] lg:h-[153px] rounded-full object-cover shadow-lg"
                 />
               ) : (
-                <div className="w-[153px] h-[153px] rounded-full  shadow-lg bg-gray-300 flex items-center justify-center">
-                  <FaRegUser size={50} className="text-[#9c0b35]" />
+                <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] lg:w-[153px] lg:h-[153px] rounded-full shadow-lg bg-gray-300 flex items-center justify-center">
+                  <FaRegUser size={30} className="text-[#9c0b35] sm:text-[40px] md:text-[50px]" />
                 </div>
               )}
 
-              <div className="flex-1">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h1 className="text-2xl font-semibold text-gray-900">{masterDetails.fullName}</h1>
-                    <p className="font-medium font-manrope text-[24px] text-gray-600">{masterDetails.salonName}</p>
+              <div className="flex-1 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-0">
+                  <div className="text-center sm:text-left">
+                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">{masterDetails.fullName}</h1>
+                    <p className="font-medium font-manrope text-lg sm:text-xl md:text-2xl text-gray-600">
+                      {masterDetails.salonName}
+                    </p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <div className=" ">
+                    <div>
                       <Rate
                         disabled
                         value={masterDetails.feedbackCount}
-                        className="text-[#9C0B35] w-[41px] h-[45px]"
+                        className="text-[#9C0B35] text-lg sm:text-xl md:text-2xl"
                         style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
                       />
                     </div>
-                    <p className="font-medium font-manrope text-[24px] text-gray-600">
+                    <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 text-center sm:text-right">
                       {masterDetails.orderCount} {t("order")}, {masterDetails.clientCount} {t("clients")}
                     </p>
                   </div>
@@ -333,32 +336,34 @@ export default function MasterProfile() {
               </div>
             </div>
 
-            <div className="flex align-center justify-between py-10">
+            <div className="flex flex-col sm:flex-row align-center justify-between py-6 sm:py-8 md:py-10 gap-4 sm:gap-0">
               <div className="flex items-center gap-3 text-gray-600">
-                <MapPin className="text-[#9C0B35] w-[40px] h-[45px] flex-shrink-0" />
-                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">
+                <MapPin className="text-[#9C0B35] w-[30px] h-[35px] sm:w-[35px] sm:h-[40px] md:w-[40px] md:h-[45px] flex-shrink-0" />
+                <span className="font-manrope font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-[#4F4F4F]">
                   {masterDetails.district} {masterDetails.street} {masterDetails.house}
                 </span>
               </div>
-              <div className="flex items-center gap-3 ">
-                <Phone className="text-[#9C0B35] w-[44px] h-[44px] flex-shrink-0" />
-                <span className="font-manrope font-medium text-[24px] text-[#4F4F4F]">{masterDetails.phone}</span>
+              <div className="flex items-center gap-3">
+                <Phone className="text-[#9C0B35] w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[44px] lg:h-[44px] flex-shrink-0" />
+                <span className="font-manrope font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-[#4F4F4F]">
+                  {masterDetails.phone}
+                </span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center py-3">
-              <p className="font-medium font-manrope text-[24px]">
+            <div className="flex flex-col sm:flex-row justify-between items-center py-3 gap-2 sm:gap-0">
+              <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-center sm:text-left">
                 {t("NextEntry")}: <span className="font-medium">{t("Today")}</span>
               </p>
-              <p className="text-[#9C0B35] font-bold text-[22px]">
+              <p className="text-[#9C0B35] font-bold text-lg sm:text-xl md:text-2xl">
                 {t("from")} {masterDetails.masterServicePrice}
               </p>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4 sm:mt-6">
               <Button
                 onClick={handleAppointmentClick}
-                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+                className="w-full sm:w-[280px] md:w-[320px] lg:w-[340px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
               >
                 {t("Signup")}
               </Button>
