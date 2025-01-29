@@ -157,7 +157,7 @@ const Header: React.FC = () => {
                             <Button onClick={() => setLoginHolat(true)}
                                 className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
                             >
-                                <span className="hover:opacity-90">{t("auth")}</span>
+                                <span className="hover:opacity-90">{t("Войти / Регистрация")}</span>
                             </Button>
                         </div> :
                         <div className="flex flex-col items-end justify-end">

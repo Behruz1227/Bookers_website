@@ -81,31 +81,31 @@ function Home() {
   }, [location]);
 
   const FirstCard = [
-    { text: t("OfferCardLeft1") },
-    { text: t("OfferCardLeft2") },
-    { text: t("OfferCardLeft3") },
-    { text: t("OfferCardLeft4") },
-    { text: t("OfferCardLeft5") },
-    { text: t("OfferCardLeft6") },
+    { text: t("Быстрое и удобное бронирование") },
+    { text: t("Гарантированные онлайн-записи") },
+    { text: t("Большой выбор мастеров") },
+    { text: t("Детальная информация о профилях мастеров и отзывы клиентов") },
+    { text: t("Интеграция с календарем и напоминания") },
+    { text: t("Программы лояльности и бонусы") },
   ];
 
   const TwoCard = [
-    { text: t("OfferCardMiddle1") },
-    { text: t("OfferCardMiddle2") },
-    { text: t("OfferCardMiddle3") },
-    { text: t("OfferCardMiddle4") },
-    { text: t("OfferCardMiddle5") },
-    { text: t("OfferCardMiddle6") },
-    { text: t("OfferCardMiddle7") },
+    { text: t("Возможность настраивать услуги по полу, категориям, специализациям и процедурам") },
+    { text: t("Управление графиком работы") },
+    { text: t("Онлайн бронирование") },
+    { text: t("Активация времени для VIP клиентов") },
+    { text: t("Настройка приема онлайн оплаты и и предоплаты") },
+    { text: t("Учет расходов мастера") },
+    { text: t("Создать записи на месяц вперед и другие") },
   ];
 
   const ThreeCard = [
-    { text: t("OfferCardRight1") },
-    { text: t("OfferCardRight2") },
-    { text: t("OfferCardRight3") },
-    { text: t("OfferCardRight4") },
-    { text: t("OfferCardRight5") },
-    { text: t("OfferCardRight6") },
+    { text: t("Модуль управления клиентами") },
+    { text: t("Модуль мониторинга и аналитики") },
+    { text: t("Модуль планирования и расписания") },
+    { text: t("Модуль маркетинга и продвижения") },
+    { text: t("Модуль управления персоналом") },
+    { text: t("Модуль комьюнити") },
   ];
 
  
@@ -152,31 +152,31 @@ function Home() {
         </div>
         <Hero slides={[
           {
-            title: t("sistema"),
-            description: t("HeroDescription"),
+            title: t("Система бронирования для мастеров, салонов красоты и их клиентов"),
+            description: t("Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров."),
             image: HeroImg,
           },
           {
-            title: t("sistema"),
-            description: t("HeroDescription"),
+            title: t("Система бронирования для мастеров, салонов красоты и их клиентов"),
+            description: t("Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров."),
             image: HeroImg,
           },
           {
-            title: t("sistema"),
-            description: t("HeroDescription"),
+            title: t("Система бронирования для мастеров, салонов красоты и их клиентов"),
+            description: t("Мы создаем систему взаимодействия между мастерами, бизнес-партнерами (салонами красоты) и клиентами, что является основной миссией данной системы бронирования. Платформа BOOKERS создает комфортные и выгодные условия для каждого клиента, предоставляя квалифицированные услуги мастеров."),
             image: HeroImg,
           }
         ]} />
         <Line />
         <section  id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
-          <OfferCards icon={Gift} data={FirstCard} onclickSecondButton={() => setLoginHolat(true)} title={t("OfferCardsTitle")} firstButtonTitle={t("Download")} secondButtonTitle={t("auth")} />
-          <OfferCards icon={HandCoins} data={TwoCard} title={t("OfferCardsTitle1")} firstButtonTitle={t("Download")} secondButtonTitle={t("follow")} />
-          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("OfferCardsTitle2")} onclickSecondButton={() => setLoginHolat(true)} firstButtonTitle={t("Integration")} secondButtonTitle={t("auth")} />
+          <OfferCards icon={Gift} data={FirstCard} onclickSecondButton={() => setLoginHolat(true)} title={t("Что предлагает BOOKERS клиентам услуг красоты? ")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Войти / Регистрация")} />
+          <OfferCards icon={HandCoins} data={TwoCard} title={t("Что предлагает BOOKERS мастерам?")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Оформить подписку")} />
+          <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("Какую интеграцию предлагает BOOKERS бизнес-партнерам:")} onclickSecondButton={() => setLoginHolat(true)} firstButtonTitle={t("Интеграция")} secondButtonTitle={t("Войти / Регистрация")} />
         </section>
 
         <Line />
         <section>
-          <HeaderTitles text={t("Headertitle1")} />
+          <HeaderTitles text={t("Выберите категорию услуг красоты в bookers")} />
           <div className='pt-10'>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-20">
               {categories.map((item: {id: number, attachmentId: string, name: string }) => (
@@ -185,7 +185,7 @@ function Home() {
                   className='px-10'
                   attachmentId={item.attachmentId}
                   title={item.name}
-                  description={t("descriptionn")}
+                  description={t("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.")}
                   id={item.id}
                 />
               ))}
@@ -196,28 +196,28 @@ function Home() {
         <Line />
         <section id="masterClass">
           <div className="w-full xl:w-[60%]">
-            <HeaderTitles text={t("Headertitle2")} />
+            <HeaderTitles text={t("Продвигайте свои мастер-классы, тренинги и обучения на платформах bookers")} />
           </div>
           <div className='w-full xl:w-[60%]'>
-            <Subtitle text={t("Subtitle1")} />
+            <Subtitle text={t("Мы предлагаем мастерам внедрение кросс-маркетинговых проектов в рамках программы “Мастер класс”. Данная программа предназначена для мастеров, которые проводят мастер-классы, тренинги и обучения по своей специальности.")} />
           </div>
-          <h2 className='font-manrope font-bold text-[30px] text-white'>{t("MasterClass")}</h2>
+          <h2 className='font-manrope font-bold text-[30px] text-white'>{t("Какую пользу вы получите с участием в программе “Мастер классы”")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-5">
-            <Card description={t("MasterClasscard")} />
-            <Card description={t("MasterClasscard2")} />
-            <Card description={t("MasterClasscard3")} />
-            <Card description={t("MasterClasscard4")} />
-            <Card description={t("MasterClasscard5")} />
+            <Card description={t("Повышение лояльности аудитории — создание условий для укрепления связи с текущими клиентами и привлечения новых.")} />
+            <Card description={t("Увеличение узнаваемости бренда — активное продвижение вашего бренда через различные каналы, чтобы сделать его более известным и популярным.")} />
+            <Card description={t("Сбор целевой аудитории — привлечение и удержание клиентов, которые действительно заинтересованы в ваших услугах и продуктах.")} />
+            <Card description={t("Мониторинг интереса  — постоянный анализ и отслеживание предпочтений и интересов аудитории для более точного удовлетворения их потребностей.")} />
+            <Card description={t("Создание эффективного канала продвижения — разработка и внедрение стратегий, которые обеспечат максимальную эффективность в продвижении ваших услуг и продуктов.")} />
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px]">
             <div className="flex flex-col xl:flex-row justify-between items-center p-6 md:p-10 gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
-                {t("Bookers")}
+                {t("Для  создания объявления и обеспечения видимости мероприятия в мобильном приложении и на сайте BOOKERS отправьте заявку.")}
               </h2>
               <div>
                 <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]" onClick={()=>{
                   setMasterClassHolat(true)
-                }}>{t("SendApplication")}</button>
+                }}>{t("Отправить заявку")}</button>
               </div>
             </div>
           </div>
@@ -225,7 +225,7 @@ function Home() {
         <Line />
         <section>
           <div className='pb-10'>
-            <HeaderTitles text={t("Headertitle3")} />
+            <HeaderTitles text={t("Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием")} />
           </div>
           <div className='pt-10'>
           <TestimonialSlider />
@@ -235,44 +235,44 @@ function Home() {
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] "
               onClick={() => setOtzivHolat(true)}
             >
-              {t("LeaveFeedback")}
+              {t("Оставить отзыв")}
             </Button>
           </div>
         </section>
         <Line />
         <section>
-          <HeaderTitles text={t("chart")} />
+          <HeaderTitles text={t("Статистика bookers")} />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 pt-10 ">
             <StatsCard
               icon={<PiGraduationCapDuotone style={{ fontSize: '4rem' }} />}
               count={statsData.masterCount}
-              title={t("masters")}
+              title={t("Количество мастеров")}
             />
             <StatsCard
               icon={<HiOutlineUserGroup style={{ fontSize: '4rem' }} />}
               count={statsData.clientCount}
-              title={t("customers")}
+              title={t("Количество клиентов")}
             />
             <StatsCard
               icon={<PiMapPinAreaBold style={{ fontSize: '4rem' }} />}
               count={statsData.locationCount}
-              title={t("locations")}
+              title={t("Количество локаций")}
             />
             <StatsCard
               icon={<FiCheckCircle style={{ fontSize: '4rem' }} />}
               count={statsData.completedOrderCount}
-              title={t("Successful")}
+              title={t("успешных бронирований")}
             />
           </div>
         </section>
         <Line />
         <section>
-          <HeaderTitles text={t("logo")} />
+          <HeaderTitles text={t("Бизнес-партнеры мобильного приложения bookers")} />
           <LogoSlider logos={Logo} />
         </section>
         <section>
           <div className='pb-20'>
-          <HeaderTitles text={t("news")} />
+          <HeaderTitles text={t("Новости bookers")} />
           </div>
           <BlogSlider page={0} size={5} /> 
           <div className='flex justify-center pb-20'  >
@@ -280,7 +280,7 @@ function Home() {
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
               onClick={() => alert("Скачать приложение")}
             >
-              {t("AllNews")}
+              {t("Все новости")}
             </Button>  
           </div>
         </section>
