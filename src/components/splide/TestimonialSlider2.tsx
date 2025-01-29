@@ -32,27 +32,8 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
     return <div>Error: {error}</div>
   }
 
-  const buttonStyles = {
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "#ffffff",
-    borderRadius: "50%",
-    position: "absolute" as const,
-    zIndex: 10,
-    opacity: 0.7,
-    transition: "opacity 0.3s ease",
-    cursor: "pointer",
-    top: "-10px",
-  }
-
-  const prevButtonStyles = { ...buttonStyles, left: "47%" }
-  const nextButtonStyles = { ...buttonStyles, right: "47%" }
-
   return (
-    <div className="py-20 relative">
+    <div className="py-10 relative">
       <style>
         {`
           .swiper-pagination {
@@ -90,6 +71,7 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
 
       {response?.body?.object?.length > 0 ? ( 
         <>
+        
           <Swiper
             modules={[Pagination, Navigation]}
             spaceBetween={24}
@@ -101,15 +83,13 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
                 return `<span class="${className}"></span>`
               },
             }}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
+            
             breakpoints={{
               1280: { slidesPerView: 3 },
               1024: { slidesPerView: 2, spaceBetween: 16 },
               768: { slidesPerView: 1, spaceBetween: 12 },
-              480: { slidesPerView: 1, spaceBetween: 8 },
+              0: { slidesPerView: 1, spaceBetween: 8 },
+              
             }}
           >
             {response.body.object.map((testimonial: any, index: number) => (
@@ -119,18 +99,7 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
             ))}
           </Swiper>
 
-          <div
-            className="swiper-button-prev"
-            style={prevButtonStyles}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-          />
-          <div
-            className="swiper-button-next"
-            style={nextButtonStyles}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-          />
+          
         </>
       ) : (
         ''

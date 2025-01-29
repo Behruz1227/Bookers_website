@@ -409,7 +409,7 @@ export default function MasterCard({
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                     onClick={() => alert("Войти / Регистрация")}
                   >
-                    {t("Signup")}
+                    {t("Register")}
                   </Button>
                 </div>
               </div>

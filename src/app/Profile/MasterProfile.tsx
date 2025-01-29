@@ -8,7 +8,6 @@ import { MdArrowBackIos } from "react-icons/md"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-
 import Button from "@/components/button/Button"
 import { UniversalModal } from "@/components/Modal/UniversalModal"
 import { Galereya } from "@/components/Galereya/Galereya"
@@ -96,7 +95,7 @@ export default function MasterProfile() {
   })
   console.log("asdfghsdrtf", masterDetails)
 
-  const [loading, setLoading] = useState(true) // Update 4: Initialize loading to true
+  const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -105,6 +104,8 @@ export default function MasterProfile() {
   const [otpCodeInput, setOtpCodeInput] = useState<string>("")
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
+  const [imageLoading, setImageLoading] = useState(true)
+  const [contentLoading, setContentLoading] = useState(true)
 
   const roleGet = localStorage.getItem("Role")
   const phoneNumber = localStorage.getItem("phoneNumber")
@@ -151,7 +152,7 @@ export default function MasterProfile() {
   useEffect(() => {
     if (galleryResponse?.body) {
       setGallery(galleryResponse.body)
-      setLoading(false) // Update 3: Set loading to false after fetching gallery data
+      setLoading(false)
     }
   }, [galleryResponse])
 
@@ -160,7 +161,8 @@ export default function MasterProfile() {
       const master = MasterCategory.find((m: any) => m.id === id)
       if (master) {
         setMasterDetails(master)
-        setLoading(false) // Update 2: Set loading to false after fetching master details
+        setLoading(false)
+        setContentLoading(false)
       }
     }
   }, [id, MasterCategory])
@@ -244,13 +246,18 @@ export default function MasterProfile() {
   }
 
   const handleAppointmentClick = () => {
-    setIsModalOpen(true)
-    setPage(1)
-    setErrorMessage(null)
+    const token = localStorage.getItem("token")
+    if (!token) {
+      setIsModalOpen(true)
+      setPage(3) // Set to page 3 which shows the login required modal
+    } else {
+      setIsModalOpen(true)
+      setPage(1)
+      setErrorMessage(null)
+    }
   }
 
   if (loading || !masterDetails) {
-    // Update 1: Use loading state to show Loading component
     return <Loading />
   }
 
@@ -278,10 +285,14 @@ export default function MasterProfile() {
         <div className="bg-[#B9B9C9] rounded-[20px] overflow-hidden shadow-lg w-full ">
           <div className="relative h-[440px] w-full p-10">
             <img
-              src={masterDetails.attachmentId ? `${attachment}${masterDetails.attachmentId}` : 'https://picsum.photos/200/300.jpg'}
+              src={
+                masterDetails.attachmentId
+                  ? `${attachment}${masterDetails.attachmentId}`
+                  : "https://picsum.photos/200/300.jpg"
+              }
               alt="Service environment"
               className="w-full h-full object-cover rounded-[20px]"
-              onError={(e) => (e.currentTarget.src = 'https://picsum.photos/200/300.jpg')}
+              onError={(e) => (e.currentTarget.src = "https://picsum.photos/200/300.jpg")}
             />
           </div>
 
@@ -356,22 +367,38 @@ export default function MasterProfile() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl mb-8">{gallery.length > 0 ? t("MasterProfileGallery") :""}</h2>
-          {gallery.map((album) => (
-            <Galereya
-              key={album.id}
-              name={album.albumName}
-              imgData={album.resGalleryAttachments.map((item, index) => ({
-                id: index + 1,
-                url: `${attachment}${item.attachmentId}`,
-                title: `${index + 1}`,
-              }))}
-            />
-          ))}
+          <h2 className="text-white text-center font-medium text-3xl mb-8">
+            {gallery.length > 0 ? t("MasterProfileGallery") : ""}
+          </h2>
+          {contentLoading ? (
+            <div className="animate-pulse">
+              <div className="h-64 bg-gray-300 rounded-[20px] mb-6"></div>
+              <div className="h-64 bg-gray-300 rounded-[20px] mb-6"></div>
+            </div>
+          ) : (
+            gallery.map((album) => (
+              <Galereya
+                key={album.id}
+                name={album.albumName}
+                imgData={album.resGalleryAttachments.map((item, index) => ({
+                  id: index + 1,
+                  url: `${attachment}${item.attachmentId}`,
+                  title: `${index + 1}`,
+                }))}
+              />
+            ))
+          )}
         </section>
 
         <section className="mt-12">
-          <TestimonialSlider masterId={id || ""} />
+          <h2 className="text-white text-center font-medium text-3xl ">{t("MasterProfileReviews")}</h2>
+          {contentLoading ? (
+            <div className="animate-pulse">
+              <div className="h-48 bg-gray-300 rounded-[20px]"></div>
+            </div>
+          ) : (
+            <TestimonialSlider masterId={id || ""} />
+          )}
         </section>
       </main>
 
@@ -448,7 +475,12 @@ export default function MasterProfile() {
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
+                    onClick={() =>
+                      window.open(
+                        "https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200",
+                        "_blank",
+                      )
+                    }
                   >
                     {t("Downloadapp")}
                   </Button>
@@ -468,7 +500,12 @@ export default function MasterProfile() {
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
-                    onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
+                    onClick={() =>
+                      window.open(
+                        "https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200",
+                        "_blank",
+                      )
+                    }
                   >
                     {t("Downloadapp")}
                   </Button>
@@ -488,7 +525,7 @@ export default function MasterProfile() {
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                     onClick={() => alert("Войти / Регистрация")}
                   >
-                    {t("Signup")}
+                    {t("Register")}
                   </Button>
                 </div>
               </div>
@@ -496,7 +533,6 @@ export default function MasterProfile() {
           )
         ) : null}
       </UniversalModal>
-
       <Footer />
     </div>
   )

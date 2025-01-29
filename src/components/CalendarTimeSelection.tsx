@@ -117,7 +117,14 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('ru-RU ', {
+    const language = localStorage.getItem('i18nextLng');
+    const localeMap = {
+      'uz': 'uz-UZ',
+      'ru': 'ru-RU',
+      'en': 'en-US'
+    };
+    
+    return date.toLocaleDateString(localeMap[language as keyof typeof localeMap], {
       weekday: 'long',
       day: 'numeric',
       month: 'long'

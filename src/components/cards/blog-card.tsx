@@ -12,7 +12,7 @@ interface CardProps {
 
 export default function Blogcard({ image, date, title, description, id }: CardProps) {
   return (
-    <div className="max-w-sm rounded-2xl bg-[#B9B9C9] overflow-hidden ">
+    <div className="w-full rounded-2xl bg-[#B9B9C9] overflow-hidden ">
       {/* Image */}
       <div className="relative h-[289px] w-full">
         <img
