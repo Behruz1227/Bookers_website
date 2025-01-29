@@ -24,16 +24,19 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const today = new Date();
-
-  const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+  const { t } = useTranslation()
+  
+  const daysOfWeek = [t("du"), t("se"), t("ch"), t("pa"), t("ju"), t("sha"), t("yak")];
   const monthNames = [
-    "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+    t("yanvar"), t("fevral"), t("mart"), t("aprel"), t("may"), t("iyun"),
+    t("iyul"), t("avgust"), t("sentyabr"), t("oktyabr"), t("noyabr"), t("dekabr")
   ];
+
+
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
-  const { t } = useTranslation()
+  
   useEffect(() => {
     if (selectedDate && masterId) {
       fetchAvailableTimeSlots();
@@ -114,7 +117,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('ru-RU', {
+    return date.toLocaleDateString('ru-RU ', {
       weekday: 'long',
       day: 'numeric',
       month: 'long'

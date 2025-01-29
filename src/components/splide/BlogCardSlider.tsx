@@ -67,7 +67,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
     color: "#ffffff",
     borderRadius: "50%",
     position: "absolute" as const,
-    zIndex: 10,
+    zIndex: 2,
     opacity: 0.7,
     transition: "opacity 0.3s ease",
     cursor: "pointer",
