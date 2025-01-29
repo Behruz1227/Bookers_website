@@ -140,7 +140,7 @@ export const MasterClassModal = () => {
         setShowDropdown(false);
         setFormData({
             nameSalonOrMaster: "",
-            eventType: "",
+            eventType: "MASTER_CLASS",
             eventName: "",
             eventDate: "",
             hour: 0,

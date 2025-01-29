@@ -37,20 +37,22 @@ export const AboutCompany: React.FC = () => {
     }, [location]);
 
     const FirstCard = [
-        { text: t('AboutCompanyOfferCards3FirstCardText1') },
-        { text: t('AboutCompanyOfferCards3FirstCardText2') },
-        { text: t('AboutCompanyOfferCards3FirstCardText3') },
-        { text: t('AboutCompanyOfferCards3FirstCardText4') },
-        { text: t('AboutCompanyOfferCards3FirstCardText5') },]
+        { text: t('Разработка передовых IT-решений и программного обеспечения') },
+        { text: t('Создание инновационных платформ для обеспечения комфорта и эффективности') },
+        { text: t('Повышение качества услуг в разных сферах деятельности') },
+        { text: t('Улучшение пользовательского опыта') },
+        { text: t('Создание выгодных условий для всех участников экосистемы') },]
 
     const TwoCard = [
-        { text: t('AboutCompanyOfferCards3TwoCardCardText1') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText2') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText3') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText4') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText5') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText6') },
-        { text: t('AboutCompanyOfferCards3TwoCardCardText7') }
+        { text: t('Инновации') },
+        { text: t('Качество') },
+        { text: t('Безопасность') },
+        { text: t('Клиентоориентированность') },
+        { text: t('Партнерство') },
+        { text: t('Командная рzабота') },
+        { text: t('Гибкость') },
+        { text: t('Устойчивое развитие') }
+        
     ]
 
 
@@ -59,23 +61,23 @@ export const AboutCompany: React.FC = () => {
             <div className='mx-auto '>
 
                 <Hero slides={[{
-                    title: t('AboutCompanyHeroTitle1'),
-                    description: t('AboutCompanyHeroDescription1'),
+                    title: t('Компания Well Tech предлагает продукты программных обеспечений для создания автоматизации процессов и улучшения эффективности бизнес процессов'),
+                    description: t('Компания Well Tech ведет свою деятельность в сфере информационных технологий и активно участвует в развитии IT-инфраструктуры нашей страны. За короткий срок своего существования наша компания реализовала ряд успешных проектов, включая bookers'),
                     image: imgSplide, // Replace with your image path
                 },
                 {
-                    title: t('AboutCompanyHeroTitle2'),
-                    description: t('AboutCompanyHeroDescription2'),
+                    title: t('Компания Well Tech предлагает продукты программных обеспечений для создания автоматизации процессов и улучшения эффективности бизнес процессов'),
+                    description: t('Компания Well Tech ведет свою деятельность в сфере информационных технологий и активно участвует в развитии IT-инфраструктуры нашей страны. За короткий срок своего существования наша компания реализовала ряд успешных проектов, включая bookers'),
 
                     image: imgSplide, // Replace with your image path
                 },
                 {
-                    title: t('AboutCompanyHeroTitle3'),
-                    description: t('AboutCompanyHeroDescription3'),
+                    title: t('Компания Well Tech предлагает продукты программных обеспечений для создания автоматизации процессов и улучшения эффективности бизнес процессов'),
+                    description: t('Компания Well Tech ведет свою деятельность в сфере информационных технологий и активно участвует в развитии IT-инфраструктуры нашей страны. За короткий срок своего существования наша компания реализовала ряд успешных проектов, включая bookers'),
                     image: imgSplide, // Replace with your image path
                 },]} />
                 <div id='about'>
-                    <HeaderTitles text={t('AboutCompanyHeaderTitles1')} size='' />
+                    <HeaderTitles text={t('Свидетельства и сертификатdbookers')} size='' />
                     <div className="flex flex-col lg:flex-row gap-10 py-20">
                         <div className='bg-[#B9B9C9] rounded-3xl p-10 w-full'>
                             <p className='font-manrope font-medium text-[26px] text-center px-10'>{t("AboutCompanyOfferCards1Description")}</p>
@@ -102,15 +104,15 @@ export const AboutCompany: React.FC = () => {
                     </div>
                 </div>
                 <div id='company1'>
-                    <HeaderTitles text={t('AboutCompanyHeaderTitles2')} size='' />
+                    <HeaderTitles text={t('Компания Well Tech:  Наша миссия и ценности')} size='' />
                     <div className="flex flex-col lg:flex-row gap-10 justify-between py-20">
                         <OfferCards
                             data={FirstCard}
-                            title={t('AboutCompanyOfferCards3Title1')}
+                            title={t('Наша миссия')}
                         />
                         <OfferCards
                             data={TwoCard}
-                            title={t('AboutCompanyOfferCards3Title2')}
+                            title={t('Наши ценности')}
                         />
                     </div>
 
