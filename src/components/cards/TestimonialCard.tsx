@@ -18,7 +18,7 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
 }) => {
   return (
     <Card
-      className="max-w-md  py-5 rounded-3xl shadow-lg  bg-[#B9B9C9] border-none"
+      className=" w-full py-5 rounded-3xl shadow-lg h-[339px]  bg-[#B9B9C9] border-none"
     >
       <div className="relative">
         <div className="flex items-start gap-4">
@@ -54,17 +54,17 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
         </div>
         <div>
           <p
-            className="mt-2  text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal"
+            className="mt-2 h-[120px] text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal "
 
           >
             {text}
           </p>
-          <div className="py-5">
-            <img src={line} alt="line" />
+          <div className="py-5 ">
+            <img className='w-full' src={line} alt="line " />
           </div>
         </div>
         <div
-          className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium "
+          className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium   "
           style={{ fontFamily: 'Manrope, sans-serif' }}
         >
           <span className='font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{masterName}</span>

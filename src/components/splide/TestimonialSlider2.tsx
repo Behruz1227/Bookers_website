@@ -48,8 +48,8 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
     top: "-10px",
   }
 
-  const prevButtonStyles = { ...buttonStyles, left: "47%" }
-  const nextButtonStyles = { ...buttonStyles, right: "47%" }
+  const prevButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(-50%)" };
+  const nextButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(50%)" };
 
   return (
     <div className="py-20 relative">
@@ -109,7 +109,8 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
               1280: { slidesPerView: 3 },
               1024: { slidesPerView: 2, spaceBetween: 16 },
               768: { slidesPerView: 1, spaceBetween: 12 },
-              480: { slidesPerView: 1, spaceBetween: 8 },
+              0: { slidesPerView: 1, spaceBetween: 8 },
+              
             }}
           >
             {response.body.object.map((testimonial: any, index: number) => (

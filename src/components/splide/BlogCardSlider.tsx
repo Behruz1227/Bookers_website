@@ -47,7 +47,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
           description: item.content,
         }))
         setPosts(formattedPosts)
-        
+
         setLoading(false)
       } catch (err) {
         setError("Failed to fetch data")
@@ -74,8 +74,9 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
     top: "-10px",
   }
 
-  const prevButtonStyles = { ...buttonStyles, left: "47%" }
-  const nextButtonStyles = { ...buttonStyles, right: "47%" }
+  const prevButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(-50%)" };
+  const nextButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(50%)" };
+
 
   if (loading) {
     return <div>Loading...</div>
@@ -139,7 +140,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = ({ page = 0, size = 10 }) =
           1280: { slidesPerView: 3 },
           1024: { slidesPerView: 2, spaceBetween: 16 },
           768: { slidesPerView: 1, spaceBetween: 12 },
-          480: { slidesPerView: 1, spaceBetween: 8 },
+          0: { slidesPerView: 1, spaceBetween: 8 },
         }}
         loop={true}
         className="py-8 mb-10"

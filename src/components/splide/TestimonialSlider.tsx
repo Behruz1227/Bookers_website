@@ -42,8 +42,8 @@ export const TestimonialSlider: React.FC = () => {
     top: "-10px",
   }
 
-  const prevButtonStyles = { ...buttonStyles, left: "47%" }
-  const nextButtonStyles = { ...buttonStyles, right: "47%" }
+  const prevButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(-50%)" };
+  const nextButtonStyles = { ...buttonStyles, left: "50%", transform: "translateX(50%)" };
 
   return (
     <div className="py-20 relative">
@@ -78,21 +78,16 @@ export const TestimonialSlider: React.FC = () => {
 
           /* Hide all pagination bullets beyond the first 5 */
           .swiper-pagination-bullet:nth-child(n+6) {
-            display: none;
+            display: fle;
           }
         `}
       </style>
-
       <Swiper
         modules={[Pagination, Navigation]}
         spaceBetween={24}
         slidesPerView={3}
         pagination={{
           clickable: true,
-          renderBullet: (index, className) => {
-            if (index >= 5) return ""
-            return `<span class="${className}"></span>`
-          },
         }}
         navigation={{
           nextEl: ".swiper-button-next",
@@ -102,15 +97,14 @@ export const TestimonialSlider: React.FC = () => {
           1280: { slidesPerView: 3 },
           1024: { slidesPerView: 2, spaceBetween: 16 },
           768: { slidesPerView: 1, spaceBetween: 12 },
-          480: { slidesPerView: 1, spaceBetween: 8 },
+          0: { slidesPerView: 1, spaceBetween: 8 }, // 480px dan kichik bo'lsa 1 ta card chiqadi
         }}
       >
-        {response?.body?.length > 0 &&
-          response?.body?.map((testimonial: any, index: number) => (
-            <SwiperSlide key={index} className="pb-20">
-              <TestimonialCard {...testimonial} />
-            </SwiperSlide>
-          ))}
+        {response?.body?.map((testimonial: any, index: number) => (
+          <SwiperSlide key={index} className="pb-20">
+            <TestimonialCard {...testimonial} />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <div
