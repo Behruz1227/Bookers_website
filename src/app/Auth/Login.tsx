@@ -90,21 +90,19 @@ export const Login: React.FC = () => {
         } else if (LoginCheck?.success === true && status === 'OTPcode') {
             setStatus('Ok');
             saveAuthData(LoginCheck?.body, LoginCheck?.message);
-            toastBtn('Muvaffaqiyatli', 'success')
         } else if (CheckCode?.body === phoneNumberInput && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode') {
             setStatus('Registration');
         } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && LoginCheck?.message === "Kod mos emas") {
-            toastBtn('Kod mos emas', 'error');
+            toastBtn(t('Код неправильный'), 'error');
         } else if (CheckCode?.success === false && CheckCode?.status === "OK" && CheckCode?.message === "Kod mos emas") {
-            toastBtn('Kod mos emas', 'error');
+            toastBtn(t('Код неправильный'), 'error');
         } else if (LoginCheck?.success === false && LoginCheck?.status === "OK") {
-            toastBtn('Tel Raqam bloklangan', 'error');
+            toastBtn(t('Номер телефона заблокирован'), 'error');
         } if (response?.success === true && response?.message === "Muvaffaqiyatli" && status === "Registration") {
-            toastBtn('Muvaffaqiyatli', 'success');
             saveAuthData(response?.body, role ? role : '');
             setStatus('Ok');
         } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration") {
-            toastBtn('Telefon raqami allaqachon mavjud', 'error');
+            toastBtn(t('Номер телефона уже существует'), 'error');
         }
     }, [PhoneCheck, SendCode, LoginCheck, CheckCode, response]);
 

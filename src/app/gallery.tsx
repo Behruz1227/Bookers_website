@@ -1,6 +1,5 @@
 import Button from "@/components/button/Button";
 import Master from "@/components/cards/Master";
-import Header from "@/components/Header/Header";
 import { MdArrowBackIos } from "react-icons/md";
 import avatar from "../assets/img/Mask group.png";
 import { Galereya } from "@/components/Galereya/Galereya";
