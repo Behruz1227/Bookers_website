@@ -65,8 +65,7 @@ export const AboutCompany: React.FC = () => {
                     <HeaderTitles text={t('Свидетельства и сертификатdbookers')} size='' />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 py-10 sm:py-16 md:py-20">
                         {[
-                            "AboutCompanyOfferCards1Description",
-                            "AboutCompanyOfferCards1Description",
+                            "Свидетельство о регистрации базы персональных данных в Государственном реестре баз персональных данных",
                         ].map((desc, index) => (
                             <div key={index} className="bg-[#B9B9C9] rounded-3xl p-6 sm:p-8 md:p-10 w-full">
                                 <p className="font-manrope font-medium text-[20px] sm:text-[22px] md:text-[26px] text-center px-4 sm:px-8 md:px-10">
@@ -77,7 +76,7 @@ export const AboutCompany: React.FC = () => {
                                         className="w-full max-w-[340px] h-[56px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[28px] sm:leading-[30px]"
                                         onClick={openModal}
                                     >
-                                        {t('AboutCompanyOfferCards1SecondButtonTitle')}
+                                        {t('Подробнее')}
                                     </Button>
                                 </div>
                             </div>
