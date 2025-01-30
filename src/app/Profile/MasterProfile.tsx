@@ -292,7 +292,7 @@ export default function MasterProfile() {
                   : "https://picsum.photos/200/300.jpg"
               }
               alt="Service environment"
-              className="w-full h-full object-cover rounded-[20px]"
+              className="w-full h-full rounded-[20px] "
               onError={(e) => (e.currentTarget.src = "https://picsum.photos/200/300.jpg")}
             />
           </div>
@@ -312,14 +312,15 @@ export default function MasterProfile() {
               )}
 
               <div className="flex-1 w-full sm:w-auto">
-                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-0">
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-6">
                   <div className="text-center sm:text-left">
                     <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">{masterDetails.fullName}</h1>
                     <p className="font-medium font-manrope text-lg sm:text-xl md:text-2xl text-gray-600">
                       {masterDetails.salonName}
                     </p>
                   </div>
-                  <div className="flex flex-col items-center">
+
+                  <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-4">
                     <div>
                       <Rate
                         disabled
@@ -328,7 +329,7 @@ export default function MasterProfile() {
                         style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
                       />
                     </div>
-                    <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 text-center sm:text-right">
+                    <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 text-center sm:text-left">
                       {masterDetails.orderCount} {t("order")}, {masterDetails.clientCount} {t("clients")}
                     </p>
                   </div>
@@ -336,13 +337,15 @@ export default function MasterProfile() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row align-center justify-between py-6 sm:py-8 md:py-10 gap-4 sm:gap-0">
+
+            <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:gap-6 py-6 sm:py-8 md:py-10">
               <div className="flex items-center gap-3 text-gray-600">
                 <MapPin className="text-[#9C0B35] w-[30px] h-[35px] sm:w-[35px] sm:h-[40px] md:w-[40px] md:h-[45px] flex-shrink-0" />
                 <span className="font-manrope font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-[#4F4F4F]">
                   {masterDetails.district} {masterDetails.street} {masterDetails.house}
                 </span>
               </div>
+
               <div className="flex items-center gap-3">
                 <Phone className="text-[#9C0B35] w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[44px] lg:h-[44px] flex-shrink-0" />
                 <span className="font-manrope font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-[#4F4F4F]">
@@ -350,6 +353,7 @@ export default function MasterProfile() {
                 </span>
               </div>
             </div>
+
 
             <div className="flex flex-col sm:flex-row justify-between items-center py-3 gap-2 sm:gap-0">
               <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-center sm:text-left">
@@ -363,7 +367,7 @@ export default function MasterProfile() {
             <div className="flex justify-center mt-4 sm:mt-6">
               <Button
                 onClick={handleAppointmentClick}
-                className="w-full sm:w-[280px] md:w-[320px] lg:w-[340px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
+                className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
               >
                 {t("Signup")}
               </Button>
