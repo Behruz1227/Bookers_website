@@ -10,6 +10,7 @@ import img from '../../assets/img/File_dock_add (1).png'
 import { useEffect, useState } from "react";
 import useVacanciesStore from "@/Store/VacanciesStore";
 import { useVacancies } from "@/hooks/useVacancies";
+import { useTranslation } from "react-i18next";
 interface FormData {
     fullName: string;
     email: string;
@@ -92,12 +93,12 @@ export const VacanciesModal = () => {
             resetForm();
         } else if (Response?.success === true) {
             setStatus(false);
-            toastBtn('Muvaffaqiyatli yuklandi', 'success');
+            toastBtn(t('Загружено успешно'), 'success');
             setVacanciesHolat(false)
             setResponse(null);
         } else if (Response?.success === false) {
             setStatus(false);
-            toastBtn('Xatolik yuz berdi', 'error');
+            toastBtn(t('Произошла ошибка'), 'error');
             setResponse(null);
         }
     }, [fileResponse, resumeIds, documentIds, setFileResponse, Response]);
@@ -146,7 +147,7 @@ export const VacanciesModal = () => {
 
     ////////////////////////////////////////////////////////////////
 
-
+    const { t } = useTranslation()
 
 
     const formatPhoneNumber = (value: string) => {
@@ -189,13 +190,13 @@ export const VacanciesModal = () => {
             email: !isEmailValid(formData.email),
             phone: formData.phone.length !== 13,
             type: !formData.type,
-            file1:!file1,
-            file2:!file2,
+            file1: !file1,
+            file2: !file2,
         };
         setErrors(newErrors);
 
         if (Object.values(newErrors).includes(true)) {
-            toastBtn('malamotlarni to\'ldiring', 'error');
+            toastBtn(t('заполните детали'), 'error');
             return false;
         }
 
@@ -246,39 +247,36 @@ export const VacanciesModal = () => {
                     setVacanciesHolat(false)
                     resetForm();
                     setStatus(false);
-
                 }}
                 style="max-h-[90vh] lg:w-[60%] w-[80%]"
             >
 
                 <div className="w-full grid place-items-center my-5 mb-16" >
-                    <h1 className="font-semibold md:text-1xl text-xl text-center px-12 pb-8">Пожалуйста, заполните форму ниже для рассмотрения вашей кандидатуры. Прикрепите ваше резюме и, при необходимости, другие документы, подтверждающие вашу квалификацию.</h1>
+                    <h1 className="font-semibold md:text-1xl text-xl text-center px-12 pb-8">{t('Пожалуйста, заполните форму ниже для рассмотрения вашей кандидатуры. Прикрепите ваше резюме и, при необходимости, другие документы, подтверждающие вашу квалификацию.')}</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 justify-center  gap-y-4 md:gap-6 w-full px-12 my-6">
                         <div className="col-start-1 col-end-2">
-                            <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">Имя и фамилия*</label>
+                            <label className="block text-gray-700 font-medium  mb-2" htmlFor="firstName">{t('Имя и фамилия*')}</label>
                             <input
                                 type="text"
                                 id="firstName"
                                 name="fullName"
                                 value={formData.fullName}
-                                placeholder='Full Name'
                                 onChange={handleChange}
                                 className={`border-2 ${errors.fullName ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                         </div>
                         <div className="col-start-1 md:col-start-2 col-end-2 md:col-end-3">
-                            <label className="block text-gray-700 font-medium  mb-2" htmlFor="email">Email*</label>
+                            <label className="block text-gray-700 font-medium  mb-2" htmlFor="email">{t('Email*')}</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
                                 value={formData.email}
-                                placeholder='Email'
                                 onChange={handleChange}
                                 className={`border-2 ${errors.email ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                         </div>
                         <div className="col-start-1 col-end-2">
                             <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
-                                Телефон*
+                                {t('Телефон*')}
                             </label>
                             <input
                                 type="text"
@@ -291,11 +289,11 @@ export const VacanciesModal = () => {
                             />
                         </div>
                         <div className="col-start-1 col-end-3 flex flex-col md:flex-row gap-3">
-                           
+
                             <div className=" mx-auto md:mx-0 flex flex-col md:items-start items-center">
-                            <label htmlFor="phoneNumber" className={`block  ${errors.file1 ? "text-red-500" : "text-gray-700"} font-medium mb-2`}>
-                            Резюме*
-                            </label>
+                                <label htmlFor="phoneNumber" className={`block  ${errors.file1 ? "text-red-500" : "text-gray-700"} font-medium mb-2`}>
+                                  {t('Резюме*')}
+                                </label>
                                 <div className="max-w-[200px] px-6 py-2  border-2 border-[#9C0B35] rounded-full flex items-center justify-between"
                                     onClick={() => document.getElementById('fileInput1')?.click()}>
                                     <input className="hidden" type="file" id="fileInput1" placeholder="." onChange={(e) => {
@@ -303,7 +301,7 @@ export const VacanciesModal = () => {
                                     }} />
                                     <img src={img} alt="" className="w-8 h-8" />
                                     <span className="truncate text-[#9C0B35] font-semibold">
-                                        {file1 ? file1.name : 'Выбрать файл'}
+                                        {file1 ? file1.name : t('Выбрать файл')}
                                     </span>
                                     {file1 && (
                                         <button
@@ -321,9 +319,9 @@ export const VacanciesModal = () => {
                             </div>
 
                             <div className=" mx-auto md:mx-0 flex flex-col md:items-start  items-center">
-                            <label htmlFor="phoneNumber" className={`block ${errors.file2 ? "text-red-500" : "text-gray-700"} font-medium mb-2`}>
-                            Дополнительные документы
-                            </label>
+                                <label htmlFor="phoneNumber" className={`block ${errors.file2 ? "text-red-500" : "text-gray-700"} font-medium mb-2`}>
+                                    {t('Дополнительные документы')}
+                                </label>
                                 <div className="px-6 py-2 max-w-[200px] border-2 border-[#9C0B35] rounded-full flex items-center justify-between"
                                     onClick={() => document.getElementById('fileInput2')?.click()}>
                                     <input className="hidden" type="file" id="fileInput2" placeholder="." onChange={(e) => {
@@ -331,7 +329,7 @@ export const VacanciesModal = () => {
                                     }} />
                                     <img src={img} alt="" className="w-8 h-8" />
                                     <span className="truncate text-[#9C0B35] font-semibold">
-                                        {file2 ? file2.name : 'Выбрать файл'}
+                                        {file2 ? file2.name : t('Выбрать файл')}
                                     </span>
                                     {file2 && (
                                         <button
@@ -347,7 +345,7 @@ export const VacanciesModal = () => {
 
                                 </div>
                             </div>
-                            
+
                         </div>
                         {/*  */}
 
@@ -372,7 +370,7 @@ export const VacanciesModal = () => {
                                 </span>
                             </label>
                             <span className="ml-2">
-                                Я согласен на обработку моих персональных данных в соответствии с политикой конфиденциальности.
+                                {t('Я согласен на обработку моих персональных данных в соответствии с политикой конфиденциальности.')}
                             </span>
                         </p>
                     </div>
@@ -382,7 +380,7 @@ export const VacanciesModal = () => {
                             disabled={status} // Tugma faqat status false bo'lganda bosiladi
                             className={`mt-4  py-4 px-16 rounded-full  ${!status ? "bg-[#9C0B35] text-white" : "bg-[#d12253] text-white0"}`}
                         >
-                            {status ? "Loading..." : "Отправить резюме"}
+                            {status ? t('Загрузка') : t('Отправить резюме')}
                         </button>
 
                     </div>
@@ -390,7 +388,7 @@ export const VacanciesModal = () => {
                 </div>
 
             </UniversalModal>
-            
+
         </div>
     );
 };
