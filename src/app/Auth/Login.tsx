@@ -68,7 +68,7 @@ export const Login: React.FC = () => {
     );
     const handleOtpSubmit = () => {
         if (otpCodeInput?.length !== 4) {
-            toastBtn('Please enter a valid OTP code', 'error');
+            toastBtn(t('Введите действительный одноразовый пароль'), 'error');
             return;
         }
         if (PhoneCheck === null) {
@@ -86,7 +86,6 @@ export const Login: React.FC = () => {
             setPhoneCheck(null);
         } else if (SendCode?.success === true && SendCode?.message === "Success" && status === 'Login') {
             setStatus('OTPcode');
-            toastBtn(SendCode?.body, 'success');
             setSendCode(null)
         } else if (LoginCheck?.success === true && status === 'OTPcode') {
             setStatus('Ok');
@@ -169,12 +168,12 @@ export const Login: React.FC = () => {
             } else if (role === 'CLIENT'&& phoneNumberInput.length === 13 && firstName.length > 0 && lastName.length > 0) {
                 registerMaster();
             }else {
-                toastBtn('malumotlarni to\'ldiring', 'error');
+                toastBtn(t('заполните информацию'), 'error');
                 console.log(phoneNumberInput.length, userRole, firstName.length, lastName.length, nickname.length);
                 
             }
         } else {
-            toastBtn('shartlarini tasdiqlang', 'error');
+            toastBtn(t('подтвердить условия'), 'error');
             return;
         }
     }
@@ -212,12 +211,12 @@ export const Login: React.FC = () => {
                 <div className="w-full grid place-items-center my-5 mb-16">
                     {status === 'Ok' && <IoMdCheckmarkCircleOutline size={130} color="#9C0B35" className='mx-auto' />}
                     <h1 className="text-3xl font-semibold my-5">
-                        {status === 'Login' && t('LoginRegister')}
-                        {status === 'OTPcode' && t('OTPcode')}
-                        {status === 'Selection' && "Выберите роль"}
-                        {status === 'Ok' && response?.success && "Спасибо за регистрацию"}
-                        {status === 'Ok' && !response?.success && "Вы вошли в свой аккаунт"}
-                        {status === 'Registration' && "Регистрация"}
+                        {status === 'Login' && t('Регистрация / Вход')}
+                        {status === 'OTPcode' && t('ОТП код')}
+                        {status === 'Selection' && t('Выберите роль')}
+                        {status === 'Ok' && response?.success && t('Спасибо за регистрацию !')}
+                        {status === 'Ok' && !response?.success && t('Вы вошли в свой аккаунт')}
+                        {status === 'Registration' && t('Регистрация')}
                     </h1>
                     {status === 'Selection' && (
                         <div className="my-6">
@@ -227,10 +226,10 @@ export const Login: React.FC = () => {
                                     allowClear
                                     onChange={handleChange}
                                     options={[
-                                        { value: 'MASTER', label: 'MASTER' },
-                                        { value: 'CLIENT', label: 'CLIENT' }
+                                        { value: 'MASTER', label: t('Мастер') },
+                                        { value: 'CLIENT', label: t('Клиент') }
                                     ]}
-                                    placeholder="ROLE TANLASH"
+                                    placeholder={t('Выберите роль')}
                                 />
                             </Space>
                         </div>
@@ -240,7 +239,7 @@ export const Login: React.FC = () => {
                             <div className="flex justify-center w-[300px] sm:w-[500px] s ">
                                 <div className="phone-input-w-full rounded-md">
                                     <label htmlFor="phoneNumber" className="block text-gray-700 font-medium mb-2">
-                                        {t('PhoneNumber')}
+                                        {t('Номер телефона*')}
                                     </label>
                                     <input
                                         type="text"
@@ -259,7 +258,7 @@ export const Login: React.FC = () => {
                             <h2 className='text-2xl font-semibold my-5'>
                                 {phoneNumberInput.length === 13 ? `${phoneNumberInput}` : '+998 (__) ___ __ __'}
                             </h2>
-                            <p className='text-slate-600 mb-6'>{t('LeavefeedbackSMS')}</p>
+                            <p className='text-slate-600 mb-6'>{t('Мы отправили вам SMS с кодом подтверждения.')}</p>
                             <div className="w-[60%] lg:w-[50%] otp-input p-6">
                                 <Input.OTP
                                     length={4}
@@ -285,50 +284,47 @@ export const Login: React.FC = () => {
                     {status === 'Ok' && (
                         <div className='text-center px-[10%]'>
                             <div className='text-xl text-slate-600 text-center'>
-                                <p className=' '>Личный кабинет веб сайта находится на стадии разработки</p>
-                                <p>Полный доступ к личному кабинету</p>
-                                <p>Вы можете получить в мобильном приложении Bookers</p>
+                                <p className=' '>{t('Личный кабинет веб сайта находится на стадии разработки')}</p>
+                                <p>{t('Полный доступ к личному кабинету')}</p>
+                                <p>{t('Вы можете получить в мобильном приложении Bookers')}</p>
                             </div>
                             <div className='text-4xl font-semibold my-4 text-center'>
-                                <p>Мы уведомим вас о готовности веб кабинета</p>
-                                <p>в ближайшее время</p>
+                                <p>{t('Мы уведомим вас о готовности веб кабинета')}</p>
+                                <p>{t('в ближайшее время')}</p>
                             </div>
                         </div>
                     )}
                     {
                         status === 'Registration' && (
                             <div className="w-full grid place-items-center px-16">
-                                <h1 className="text-3xl font-semibold my-5">Форма регистрации мастера</h1>
+                                <h1 className="text-3xl font-semibold my-5">{t('Форма регистрации мастера')}</h1>
                                 <div className="grid sm:grid-cols-2 grid-cols-1 justify-between w-full gap-4">
                                     <div>
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="firstName">Имя *</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="firstName">{t('Имя*')}</label>
                                         <input
                                             type="text"
                                             id="firstName"
-                                            placeholder="Имя"
                                             onChange={(e) => setFirstName(e.target.value)}
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="lastName">Фамилия</label>
+                                        <label className="block text-gray-700 font-medium mb-2" htmlFor="lastName">{t('Фамилия')}</label>
                                         <input
                                             type="text"
                                             id="lastName"
                                             onChange={(e) => setLastName(e.target.value)}
-                                            placeholder="Фамилия"
                                             className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                         />
                                     </div>
                                     {
                                         role === "MASTER" && (
                                             <div>
-                                                <label className="block text-gray-700 font-medium mb-2" htmlFor="lastName">Nickname</label>
+                                                <label className="block text-gray-700 font-medium mb-2" htmlFor="lastName">{t('Псевдоним')}</label>
                                                 <input
                                                     type="text"
                                                     id="lastName"
                                                     onChange={(e) => setNickname(e.target.value)}
-                                                    placeholder="Фамилия"
                                                     className="border-2 border-gray-700  bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 "
                                                 />
                                             </div>
@@ -336,7 +332,7 @@ export const Login: React.FC = () => {
                                     }
                                     <div className="">
                                         <div className=" ">
-                                            <label className="block text-gray-700 font-medium mb-2" htmlFor="file">Прикрепить фото</label>
+                                            <label className="block text-gray-700 font-medium mb-2" htmlFor="file">{t('Прикрепить фото')}</label>
                                             <FileInput onFileSelect={handleFileSelect} />
                                         </div>
                                     </div>
@@ -351,7 +347,7 @@ export const Login: React.FC = () => {
                                                 </svg>
                                             </span>
                                         </label>
-                                    </div>Я соглашаюсь с условиями пользовательского соглашения и политикой конфиденцциальности.</p>
+                                    </div>{t('Я соглашаюсь с условиями пользовательского соглашения и политикой конфиденцциальности.')}</p>
                                 </div>
                             </div>
                         )
@@ -363,7 +359,7 @@ export const Login: React.FC = () => {
                         onClick={() => {
                             if (status === 'Selection') {
                                 if (!role) {
-                                    toastBtn('Please select a role', 'error');
+                                    toastBtn(t('Выберите роль'), 'error');
                                 } else {
                                     setStatus('Login');
                                 }
@@ -371,7 +367,7 @@ export const Login: React.FC = () => {
                                 if (phoneNumberInput.length === 13) {
                                     checkPhoneNumberBtn();
                                 } else {
-                                    toastBtn('Please enter a valid phone number', 'error');
+                                    toastBtn(t('Пожалуйста, введите действительный номер телефона.'), 'error');
                                 }
                             } else if (status === 'OTPcode') {
                                 handleOtpSubmit();
@@ -380,11 +376,11 @@ export const Login: React.FC = () => {
                             }
                         }}
                         disabled={loading || loadingSendCode || loadingLogin || loadingCheckCode || registerMasterLoading}>
-                        {status === 'Selection' && (loading ? 'Yuklanmoqda...' : 'Продолжить')}
-                        {status === 'Login' && (loading || loadingSendCode ? 'Yuklanmoqda...' : 'Продолжить')}
-                        {status === 'OTPcode' && (loadingLogin || loadingCheckCode ? 'Yuklanmoqda....' : 'Отправить отзыв')}
-                        {status === 'Ok' && 'Скачать приложение'}
-                        {status === 'Registration' && (registerMasterLoading ? 'Yuklanmoqda....' : 'Зарегистрироваться')}
+                        {status === 'Selection' && (loading ? t('Загрузка') : t('Продолжить'))}
+                        {status === 'Login' && (loading || loadingSendCode ? t('Загрузка') : t('Продолжить'))}
+                        {status === 'OTPcode' && (loadingLogin || loadingCheckCode ? t('Загрузка') : t('Отправить отзыв'))}
+                        {status === 'Ok' && t('Скачать приложение')}
+                        {status === 'Registration' && (registerMasterLoading ? t('Загрузка') : t('Зарегистрироваться'))}
                     </button>
                 </div>
             </UniversalModal>

@@ -25,14 +25,14 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Documentation */}
           <div className="flex flex-col gap-5  items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("FooterDocumentation")}</h2>
+            <h2 className="text-[20px] font-bold">{t("Документация")}</h2>
             <div className="flex flex-col gap-2 text-base">
               {HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const statusMap: Record<string, string> = {
-                  TERMS_OF_USE_WEB: t('FooterTermsofUse'),
-                  OFFER_WEB: t('FooterPublicagreement'),
-                  LICENSE_AGREEMENT_WEB: t('FooterLicenseAgreement'),
-                  PRIVACY_POLICY_WEB: t('FooterPrivacyPolicy'),
+                  TERMS_OF_USE_WEB: t('Условия использования'),
+                  OFFER_WEB: t('Публичное соглашение'),
+                  LICENSE_AGREEMENT_WEB: t('Лицензионным соглашением'),
+                  PRIVACY_POLICY_WEB: t('Политикой конфиденциальности'),
                 };
 
                 const displayText = statusMap[item.helpStatus] || "";
@@ -51,34 +51,34 @@ function Footer() {
           </div>
           {/* Main Links */}
           <div className="flex flex-col gap-5  items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("MainPageLinks")}</h2>
+            <h2 className="text-[20px] font-bold">{t("Ссылки основных страниц")}</h2>
             <div className="flex flex-col gap-2 text-base">
-              <Link to="/#offer">{t("FooterToclients")}</Link>
-              <Link to="/#offer">{t("Footertothemasters")}</Link>
-              <Link to="/#offer">{t('FooterBusinesspartnership')}</Link>
-              <Link to="/#masterClass">{t('FooterMasterclassesEducationTrainings')}</Link>
-              <Link to="/Tariffs">{t('FooterPackagesforMasters')}</Link>
-              <Link to="">{t('FooterFAQ')}</Link>
+              <Link to="/#offer">{t("клиентам")}</Link>
+              <Link to="/#offer">{t("мастерам")}</Link>
+              <Link to="/#offer">{t('Бизнес-партнерство')}</Link>
+              <Link to="/#masterClass">{t('Мастерклассы / Обучение/ Тренинги')}</Link>
+              <Link to="/Tariffs">{t('Пакеты для мастеров')}</Link>
+              <Link to="">{t('Часто задаваемые вопросы')}</Link>
             </div>
           </div>
           {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("LoginRegister")}</h2>
+            <h2 className="text-[20px] font-bold">{t("Вход / Регистрация")}</h2>
             <div className="flex flex-col gap-2 text-base">
               <p onClick={() => {
                 setLoginHolat(true);
                 setLoginRole("CLIENT");
-              }} >{t("FooterToclients")}</p>
+              }} >{t("клиент")}</p>
               <p onClick={() => {
                 setLoginHolat(true);
                 setLoginRole("MASTER");
-              }}>{t("Footertothemasters")}</p>
-              <Link to="/">{t('FooterBusinesspartner')}</Link>
+              }}>{t("мастер")}</p>
+              <Link to="/">{t('Бизнес-партнер')}</Link>
             </div>
           </div>
           {/* Contacts */}
           <div className="flex flex-col gap-5 items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("ContactDetails")}</h2>
+            <h2 className="text-[20px] font-bold">{t("контактные данные")}</h2>
             <div className="flex flex-col gap-2 text-base">
               <p  className="flex items-start gap-3">
                 <img src={Pin} alt="Pin" />
@@ -99,16 +99,16 @@ function Footer() {
         {/* Middle Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-10 py-10">
           {/* Logo */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col justify-center items-center">
             <Link to="/">
-              <img src={logo} width={60} alt="Logo" />
-              <p>bookers</p>
+              <img src={logo} width={50} alt="Logo" />
+              <p className="text-[13px]">bookers</p>
             </Link>
           </div>
           {/* Social and App Links */}
           <div className="flex flex-col sm:flex-row gap-10">
             <div className="flex flex-col items-center sm:items-start gap-5">
-              <p className="text-[20px] font-bold">{t('Weareonsocialnetworks')}</p>
+              <p className="text-[20px] font-bold">{t('Мы в социальных сетях')}</p>
               <div className="flex gap-4">
                 <a href="#"><img src={Facebook} alt="Facebook" /></a>
                 <a href="#"><img src={Instagram} alt="Instagram" /></a>
@@ -117,7 +117,7 @@ function Footer() {
               </div>
             </div>
             <div className="flex flex-col items-center sm:items-start gap-5">
-              <p className="text-[20px] font-bold">{t('Downloadourappat')}</p>
+              <p className="text-[20px] font-bold">{t('Загрузите наше приложение на')}</p>
               <div className="flex gap-4">
                 <a href="#"><img src={APP} alt="App Store" /></a>
                 <a href="#"><img src={Play} alt="Google Play" /></a>
@@ -128,7 +128,7 @@ function Footer() {
 
         {/* Bottom Section */}
         <div className="text-center pb-10">
-          <p className="text-[15px]">{t("Bookersreserved")}</p>
+          <p className="text-[15px]">{t("© 2024 Bookers. Все права защищены.")}</p>
         </div>
       </div>
     </div>

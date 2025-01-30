@@ -19,10 +19,10 @@ function Conditions() {
     setSection(hash ? parseInt(hash, 10) : 1);
   }, [location, hash]);
   const statusMap: Record<string, string> = {
-    TERMS_OF_USE_WEB: t('FooterTermsofUse'),
-    OFFER_WEB: t('FooterPublicagreement'),
-    LICENSE_AGREEMENT_WEB: t('FooterLicenseAgreement'),
-    PRIVACY_POLICY_WEB: t('FooterPrivacyPolicy'),
+    TERMS_OF_USE_WEB: t('Условия использования'),
+    OFFER_WEB: t('Публичное соглашение'),
+    LICENSE_AGREEMENT_WEB: t('Лицензионным соглашением'),
+    PRIVACY_POLICY_WEB: t('Политикой конфиденциальности'),
   };
 
   const displayText1 = statusMap[filteredData?.helpStatus] || "";
@@ -36,7 +36,7 @@ function Conditions() {
           <div className="border-r-0 lg:border-r-2 lg:border-b-0 border-b-2 w-max h-max grid gap-y-3 pr-4">
             {HelpType?.body?.length ? (
               HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
-                const displayText = statusMap[item.helpStatus] || "Unknown Status";
+                const displayText = statusMap[item.helpStatus] || null;
                 return (
                   <div
                     key={item.id}
@@ -60,7 +60,7 @@ function Conditions() {
                   null}
               </p>
             ) : (
-              <p className="">Please select a section to view details.</p>
+              null
             )}
           </div>
         </div>
