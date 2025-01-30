@@ -7,13 +7,13 @@ import { useEffect, useState } from 'react'
 
 //imgs
 import imgSplide from '../../assets/cards/heroo.png'
+import guvohnoma from "@/assets/img/guvohnoma.png"
 
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { FaRegCircleCheck } from 'react-icons/fa6'
 import Button from '@/components/button/Button'
 import { UniversalModal } from '@/components/Modal/UniversalModal'
-
 
 
 //card 
@@ -169,10 +169,9 @@ export const AboutCompany: React.FC = () => {
             <Footer />
             <button onClick={openModal} >modal on</button>
             <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
-                <div className="w-full text-center">
-                    <div>
-                        <h1>shu madalda sertificat bolishi kere </h1>
-                        <button type="button" className="mt-4 bg-[#9C0B35] text-white py-2 px-4 rounded" onClick={closeModal}>close</button>
+                <div >
+                    <div className='flex justify-center items-center'>
+                        <img src={guvohnoma} alt="guvohnoma"  className='text-center border-none w-full py-20 pl-20 pr-10'/>
                     </div>
                 </div>
             </UniversalModal>
