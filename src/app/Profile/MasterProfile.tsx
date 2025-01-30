@@ -292,7 +292,7 @@ export default function MasterProfile() {
                   : "https://picsum.photos/200/300.jpg"
               }
               alt="Service environment"
-              className="w-full h-full rounded-[20px] "
+              className="w-full h-full object-cover rounded-[20px] "
               onError={(e) => (e.currentTarget.src = "https://picsum.photos/200/300.jpg")}
             />
           </div>

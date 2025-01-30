@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     const token = localStorage.getItem('Token');
     localStorage.setItem("phoneNumber", res?.phoneNumber || "")
 
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
     const { fetchHelpType } = useHelpType(); 
     const { fetchCategory } = useCategory(); // Custom hook to fetch categories
