@@ -169,7 +169,7 @@ const Header: React.FC = () => {
                             }}
                                 className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
                             >
-                                <span className="hover:opacity-90">{t("Personalaccount")}</span>
+                                <span className="hover:opacity-90">{t("Личный кабинет")}</span>
                             </Button>
                         </div>
                     }
