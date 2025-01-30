@@ -166,7 +166,6 @@ export const AboutCompany: React.FC = () => {
                 </div>
             </div>
             <Footer />
-            <button onClick={openModal} >modal on</button>
             <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
                 <div >
                     <div className='flex justify-center items-center'>
