@@ -1,7 +1,7 @@
 
 import Footer from '@/components/footer/Footer'
 import HeaderTitles from '@/components/HeadTitle'
-import Hero from '@/components/Hero/Hero'
+
 import Subtitle from '@/components/Subtitle'
 import { useEffect, useState } from 'react'
 
@@ -37,24 +37,7 @@ export const AboutCompany: React.FC = () => {
         }
     }, [location]);
 
-    const FirstCard = [
-        { text: t('Разработка передовых IT-решений и программного обеспечения') },
-        { text: t('Создание инновационных платформ для обеспечения комфорта и эффективности') },
-        { text: t('Повышение качества услуг в разных сферах деятельности') },
-        { text: t('Улучшение пользовательского опыта') },
-        { text: t('Создание выгодных условий для всех участников экосистемы') },]
-
-    const TwoCard = [
-        { text: t('Инновации') },
-        { text: t('Качество') },
-        { text: t('Безопасность') },
-        { text: t('Клиентоориентированность') },
-        { text: t('Партнерство') },
-        { text: t('Командная рzабота') },
-        { text: t('Гибкость') },
-        { text: t('Устойчивое развитие') }
-
-    ]
+    
 
 
     return (
