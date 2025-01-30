@@ -96,7 +96,7 @@ const Header: React.FC = () => {
     }, [lastScrollY]);
 
     return (
-        <div className={`sticky top-0 bg-[#111827] left-0 right-0 z-[6] `}>
+        <div className={`sticky top-0 select-none bg-[#111827] left-0 right-0 z-[6] `}>
             <header className="bg-[#111827]  text-white relative z-[5] ">
                 <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}

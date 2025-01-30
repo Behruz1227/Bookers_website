@@ -209,7 +209,7 @@ export default function MasterCard({
             <img
               src={imageUrl || "/placeholder.svg"}
               alt={`${name}'s service`}
-              className={`absolute top-0 left-0 w-full h-full object-cover rounded-[20px] transition-opacity duration-300 ${imageLoading ? "opacity-0" : "opacity-100"
+              className={`absolute top-0 left-0 w-full h-full rounded-[20px] transition-opacity duration-300 ${imageLoading ? "opacity-0" : "opacity-100"
                 }`}
               onLoad={() => setImageLoading(false)}
             />
