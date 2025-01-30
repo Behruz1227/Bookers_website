@@ -1,7 +1,7 @@
 import Footer from '@/components/footer/Footer'
 
 
-import img from "@/assets/img/Mask group (8).png"
+import img from "@/assets/cards/Mask group (12).png"
 
 import React, { useEffect, useState } from 'react'
 
@@ -35,7 +35,7 @@ export const Vacancies: React.FC = () => {
       <div className='bg-[#111827]'>
 
         <div className='mx-auto pb-20 '>
-          <div className='flex justify-between items-center gap-10'>
+          <div className='flex justify-between items-center gap-10 pb-20'>
             <div className='w-[50%]'>
               <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl'>{t("VacanciesText1")}</h1>
               <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t("VacanciesText2")}</p>
