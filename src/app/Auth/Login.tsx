@@ -38,7 +38,7 @@ export const Login: React.FC = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
     const { t } = useTranslation()
     const toastBtn = (text: string, type: "success" | "error") => {
-       
+
         messageApi.open({
             type,
             content: text,
@@ -78,30 +78,30 @@ export const Login: React.FC = () => {
         }
     };
     useEffect(() => {
-        if (PhoneCheck?.message === "Telefon raqami allaqachon mavjud" && PhoneCheck?.status === 'OK' && status === 'Login') {
+        if (PhoneCheck?.message === "Telefon raqami allaqachon mavjud" && PhoneCheck?.status === 'OK' && status === 'Login' && loginHolat) {
             SendCodeBtn();
             setPhoneCheck(true);
-        } else if (PhoneCheck?.message === "Phone number bazada topilmadi." && PhoneCheck?.status === 'OK' && status === 'Login') {
+        } else if (PhoneCheck?.message === "Phone number bazada topilmadi." && PhoneCheck?.status === 'OK' && status === 'Login' && loginHolat) {
             SendCodeBtn();
             setPhoneCheck(null);
-        } else if (SendCode?.success === true && SendCode?.message === "Success" && status === 'Login') {
+        } else if (SendCode?.success === true && SendCode?.message === "Success" && status === 'Login' && loginHolat) {
             setStatus('OTPcode');
             setSendCode(null)
-        } else if (LoginCheck?.success === true && status === 'OTPcode') {
+        } else if (LoginCheck?.success === true && status === 'OTPcode' && loginHolat) {
             setStatus('Ok');
             saveAuthData(LoginCheck?.body, LoginCheck?.message);
-        } else if (CheckCode?.body === phoneNumberInput && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode') {
+        } else if (CheckCode?.body === phoneNumberInput && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode' && loginHolat) {
             setStatus('Registration');
-        } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && LoginCheck?.message === "Kod mos emas") {
+        } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && LoginCheck?.message === "Kod mos emas" && loginHolat) {
             toastBtn(t('Код неправильный'), 'error');
-        } else if (CheckCode?.success === false && CheckCode?.status === "OK" && CheckCode?.message === "Kod mos emas") {
+        } else if (CheckCode?.success === false && CheckCode?.status === "OK" && CheckCode?.message === "Kod mos emas" && loginHolat) {
             toastBtn(t('Код неправильный'), 'error');
-        } else if (LoginCheck?.success === false && LoginCheck?.status === "OK") {
+        } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && loginHolat) {
             toastBtn(t('Номер телефона заблокирован'), 'error');
-        } if (response?.success === true && response?.message === "Muvaffaqiyatli" && status === "Registration") {
+        } if (response?.success === true && response?.message === "Muvaffaqiyatli" && status === "Registration" && loginHolat) {
             saveAuthData(response?.body, role ? role : '');
             setStatus('Ok');
-        } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration") {
+        } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration" && loginHolat) {
             toastBtn(t('Номер телефона уже существует'), 'error');
         }
     }, [PhoneCheck, SendCode, LoginCheck, CheckCode, response]);
@@ -161,14 +161,14 @@ export const Login: React.FC = () => {
 
     function RegisterBtn() {
         if (checkBox) {
-            if (role === 'MASTER' &&  phoneNumberInput.length === 13 && firstName.length > 0 && lastName.length > 0 && nickname.length >= 2) {
+            if (role === 'MASTER' && phoneNumberInput.length === 13 && firstName.length > 0 && lastName.length > 0 && nickname.length >= 2) {
                 registerMaster();
-            } else if (role === 'CLIENT'&& phoneNumberInput.length === 13 && firstName.length > 0 && lastName.length > 0) {
+            } else if (role === 'CLIENT' && phoneNumberInput.length === 13 && firstName.length > 0 && lastName.length > 0) {
                 registerMaster();
-            }else {
+            } else {
                 toastBtn(t('заполните информацию'), 'error');
                 console.log(phoneNumberInput.length, userRole, firstName.length, lastName.length, nickname.length);
-                
+
             }
         } else {
             toastBtn(t('подтвердить условия'), 'error');

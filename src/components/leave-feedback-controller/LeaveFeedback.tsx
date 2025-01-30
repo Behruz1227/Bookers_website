@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalModal } from "../Modal/UniversalModal"
 import FileInput from "../input/file-input";
-import { Input, Select } from "antd";
+import { Input, message, Select } from "antd";
 import { useGlobalRequest } from "@/helpers/Quary/quary";
 import { useSendCode } from "@/hooks/useSendCode";
 import useSendCodeStore from "@/Store/SendCodeStore";
@@ -30,7 +30,13 @@ export const LeaveFeedback = () => {
     const [searchText, setSearchText] = useState<string>(''); // Qidiruv so'zi
     const { uploadFile } = useUploadFile();
     const { fileResponse, isLoading, setFileResponse } = useUploadFileStore();
-
+    const [messageApi, contextHolder] = message.useMessage();
+    const toastBtn = (text: string, type: "success" | "error") => {
+        messageApi.open({
+            type,
+            content: text,
+        });
+    };
     const apiUrl = `${leaveFeedbackMasterOrSalonSearch}?name=${searchText}`;
     const { response, globalDataFunc } = useGlobalRequest(apiUrl, "GET");
     const data = {
@@ -187,6 +193,7 @@ export const LeaveFeedback = () => {
             globalDataFunc2()
         } else if (CheckCode?.message == "Kod mos emas" && CheckCode?.success === false && status === "OTPcode" && otzivHolat) {
             setCheckCode(null);
+            toastBtn(t('Код неправильный'), 'error');
         } else if (res?.message === "Sizning sharhingiz qabul qilindi. Rahmat!" && res?.success === true && status === "OTPcode" && otzivHolat) {
             setStatus("Ok");
             setPhoneNumber('+998');
@@ -198,6 +205,7 @@ export const LeaveFeedback = () => {
 
     return (
         <>
+        {contextHolder}
             <UniversalModal isOpen={otzivHolat} onClose={() => {
                 setOtzivHolat(false);
                 setMasterOrSalonStatus(false);

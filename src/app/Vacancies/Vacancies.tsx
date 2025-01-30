@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom'
 import Button from '@/components/button/Button'
 import { UniversalModal } from '@/components/Modal/UniversalModal'
 import LoginIndex from '@/Store'
+import HeaderTitles from '@/components/HeadTitle'
 export const Vacancies: React.FC = () => {
   const { setVacanciesHolat } = LoginIndex();
   const { t } = useTranslation()
@@ -37,32 +38,32 @@ export const Vacancies: React.FC = () => {
         <div className='mx-auto pb-20 '>
           <div className='flex justify-between items-center gap-10 pb-20'>
             <div className='w-[50%]'>
-              <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl'>{t("VacanciesText1")}</h1>
-              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t("VacanciesText2")}</p>
-              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t('VacanciesText3')}
+              <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl'>{t("Компания Well Tech:  Вакансии")}</h1>
+              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t("Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды.")}</p>
+              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t('В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.')}
               </p>
             </div>
             <div className='w-[50%]'>
               <img src={img} alt="" />
             </div>
           </div>
-
+          <HeaderTitles text={t('Вакансии')}/>
           <div
             id="vacancies"
-            className="bg-[#B9B9C9] p-10 rounded-3xl w-full lg:w-[50%] "
+            className="bg-[#B9B9C9] p-10 rounded-3xl w-full mt-10 lg:w-[50%] "
           >
             <h3 className="text-center text-[#9C0B35] font-manrope font-extrabold text-[26px]">
-              {t('VacanciesHeaderTitles')}
+              {t('Комьюнити-менеджер')}
             </h3>
             <p className="py-10 font-manrope font-medium text-[26px] text-center">
-              {t('VacanciesDescription')}
+              {t('Коммьюнити-менеджеры отвечают за создание, развитие, управление и общение с участниками сообщества')}
             </p>
             <div className="text-center">
               <Button
                 className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
                 onClick={openModal}
               >
-                {t('VacanciesSecondButtonTitle')}
+                {t('Подробнее')}
               </Button>
             </div>
           </div>
@@ -74,36 +75,36 @@ export const Vacancies: React.FC = () => {
       <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
         <div className="w-full p-10">
           <div>
-            <h1 className='font-manrope text-center font-bold text-[36px]'>{t('madal')}</h1>
-            <p className="mt-4 font-bold text-[32px] font-manrope ">{t('opisanie')}:</p>
+            <h1 className='font-manrope text-center font-bold text-[36px]'>{t('Менеджер по работе с агентами')}</h1>
+            <p className="mt-4 font-bold text-[32px] font-manrope ">{t('Описание')}</p>
             <p className="mt-2 font-semibold text-[26px] font-manrope">
-              {t('madal1')}
+              {t('Менеджер по работе с агентами будет отвечать за взаимодействие с мастерами и салонами красоты, которые интегрируются в систему бронирования bookers. Основная задача – обеспечение успешной интеграции агентов, поддержка и развитие взаимоотношений с ними.')}
             </p>
             <p className="mt-2">
 
             </p>
 
             <div className="mt-4">
-              <p className="font-bold text-[32px] font-manrope">{t('madal2')}:</p>
+              <p className="font-bold text-[32px] font-manrope">{t('Обязанности')}</p>
               <ul className="list-disc pl-5 mt-2 space-y-2 font-semibold text-[26px] font-manrope ">
-                <li>{t('madal3')}</li>
-                <li>{t('madal4')}</li>
-                <li>{t('madal5')}</li>
-                <li>{t('madal6')}</li>
-                <li>{t('madal7')}</li>
-                <li>{t('madal8')}</li>
-                <li>{t('madal9')}</li>
-                <li>{t('madal10')}</li>
+                <li>{t('Поиск и привлечение новых мастеров и салонов красоты для интеграции в систему bookers.')}</li>
+                <li>{t('Обеспечение качественной поддержки агентов на всех этапах интеграции.')}</li>
+                <li>{t('Проведение обучающих сессий и тренингов по использованию платформы.')}</li>
+                <li>{t('Консультирование агентов по вопросам работы с системой бронирования и решению возникающих проблем.')}</li>
+                <li>{t('Анализ потребностей агентов и внесение предложений по улучшению платформы.')}</li>
+                <li>{t('Постоянное взаимодействие с действующими агентами для поддержания долгосрочных отношений.')}</li>
+                <li>{t('Мониторинг и анализ эффективности работы агентов в системе.')}</li>
+                <li>{t('Подготовка отчетности по результатам работы с агентами.')}</li>
               </ul>
             </div>
 
             <div className="mt-4">
-              <p className="font-bold text-[32px] font-manrope">{t('madal11')}:</p>
+              <p className="font-bold text-[32px] font-manrope">{t('Требования')}</p>
               <ul className="list-disc pl-5 mt-2 space-y-2 font-semibold text-[26px] font-manrope">
-                <li>{t('madal12')}</li>
-                <li>{t('madal13')}</li>
-                <li>{t('madal14')}</li>
-                <li>{t('madal15')}</li>
+                <li>{t('Опыт работы в сфере продаж, клиентского сервиса или управления аккаунтами.')}</li>
+                <li>{t('Понимание специфики работы в индустрии красоты.')}</li>
+                <li>{t('Отличные коммуникативные навыки и способность устанавливать контакты.')}</li>
+                <li>{t('Умение работать в команде и самостоятельно.')}</li>
                 <li>{t('madal16')}</li>
                 <li>{t('madal17')}</li>
                 <li>{t('madal18')}</li>

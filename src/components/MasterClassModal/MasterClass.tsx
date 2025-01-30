@@ -101,22 +101,26 @@ export const MasterClassModal = () => {
 
     useEffect(() => {
 
-        if (SendCode) {
+        if (SendCode && masterClassHolat) {
             setStatus('OTPcode');
             setSendCode(null);
             setBtnStatus(false);
-        } else if (error) {
+        } else if (error && masterClassHolat) {
             setStatus('Error');
             setError(null);
             setBtnStatus(false);
-        } else if (CheckCode?.body === formData.contactInformation && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode') {
+        } else if (CheckCode?.body === formData.contactInformation && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode' && masterClassHolat) {
             MasterClassSave();
             setCheckCode(null);
-        } else if (Response) {
+
+        } else if (Response && masterClassHolat) {
             setStatus('Ok');
             resetForm();
             setMasterClass(null);
             setBtnStatus(false);
+        }else if (CheckCode?.success === false && CheckCode?.message === "Kod mos emas" && status === 'OTPcode' && masterClassHolat) {
+            setBtnStatus(false);
+            toastBtn(t('Код неправильный'), 'error');
         }
     }, [SendCode, error, CheckCode, Response]);
 
@@ -260,19 +264,19 @@ export const MasterClassModal = () => {
 
 
 
-useEffect(() => {
-    // Close dropdown if click is outside of the dropdown
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShowDropdown(false); // Close the dropdown
-      }
-    };
+    useEffect(() => {
+        // Close dropdown if click is outside of the dropdown
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setShowDropdown(false); // Close the dropdown
+            }
+        };
 
-    document.addEventListener('mousedown', handleClickOutside); // Listen for click events
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // Cleanup the event listener
-    };
-  }, []);
+        document.addEventListener('mousedown', handleClickOutside); // Listen for click events
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside); // Cleanup the event listener
+        };
+    }, []);
 
 
     return (
@@ -343,11 +347,11 @@ useEffect(() => {
                                     <label className="block text-gray-700 font-medium  mb-2">{t('время проведения*')}</label>
                                     <div className="flex gap-2">
 
-                                        <div ref={dropdownRef}  className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
+                                        <div ref={dropdownRef} className={`  cursor-pointer relative border-2 ${errors.hour || errors.minute ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0`}>
                                             {/* Input */}
-                                            <div onClick={() => setShowDropdown(!showDropdown)} 
+                                            <div onClick={() => setShowDropdown(!showDropdown)}
                                                 className="flex items-center justify-between"
-                                                
+
                                             >
                                                 <span className="text-gray-600">
                                                     {selectedHour !== null && selectedMinute !== null
@@ -412,7 +416,7 @@ useEffect(() => {
 
                                     <textarea
                                         id="lastName"
-                                        name="eventDescription"                                      
+                                        name="eventDescription"
                                         value={formData.eventDescription}
                                         onChange={handleChange}
                                         className={`border-2 ${errors.eventDescription ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
@@ -461,7 +465,7 @@ useEffect(() => {
                                         name="participationFee"
                                         value={formData.participationFee}
                                         onChange={handleChange}
-                                        
+
                                         className={`border-2 focus:none ${errors.participationFee ? "border-red-500" : "border-gray-700"} bg-[#B9B9C9]  p-5 rounded-xl w-full focus:outline-none focus:ring-0 `} />
                                 </div>
                             </div>
