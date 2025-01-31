@@ -21,9 +21,25 @@ export const leaveFeedbackSave : string = `${BASE_URL}/api/leave/feedback/save`;
 //leave/feedback/master/or/salon-search
 
 export const leaveFeedbackMasterOrSalonSearch : string = `${BASE_URL}/api/leave/feedback/master/or/salon`;
+//---------------------------------leave-feedback-Controller-------------------------------
 
 
+//---------------------------------vacancies-Controller-------------------------------
 
+export const vacanciesSave : string = `${BASE_URL}/vacancies/save`
+
+//---------------------------------vacancies-Controller-------------------------------
+
+//---------------------------------master-Class-request-Controller-------------------------------
+
+export const masterClassRequest : string = `${BASE_URL}/api/masterClass/request`
+////---------------------------------master-Class-request-Controller-------------------------------
+
+//---------------------------------api/help/web/site-Controller-------------------------------
+
+export const helpType : string = `${BASE_URL}/api/help/web/site`;
+
+//---------------------------------api/help/web/site-Controller-------------------------------
 
 //---------------------------------Attachment-Controller-------------------------------
 // AttachmentUpload

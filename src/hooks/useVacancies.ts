@@ -1,8 +1,9 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { vacanciesSave } from "@/helpers/Url";
 import useVacanciesStore from "@/Store/VacanciesStore";
 export function useVacancies(data: any) {
    
-    const apiUrl = `http://207.154.246.120:8080/vacancies/save`;
+    const apiUrl = vacanciesSave;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setResponse} = useVacanciesStore();
     const VacanciesSave = async () => {

@@ -1,10 +1,11 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { helpType } from "@/helpers/Url";
 
 import useHelpTypeStore from "@/Store/HelpType";
 
 
 export function useHelpType() {
-    const apiUrl = `http://207.154.246.120:8080/api/help/web/site`;
+    const apiUrl = helpType;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "GET");
     const { setHelpType, setError, setLoading } = useHelpTypeStore();
 

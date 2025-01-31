@@ -1,8 +1,9 @@
 import { useGlobalRequest } from "@/helpers/Quary/quary";
+import { masterClassRequest } from "@/helpers/Url";
 import useMasterClassStore from "@/Store/MasterClassStore";
 export function useMasterClass(data: any) {
    
-    const apiUrl = `http://207.154.246.120:8080/api/masterClass/request`;
+    const apiUrl = masterClassRequest;
     const { globalDataFunc } = useGlobalRequest(apiUrl, "POST", data);
     const { setMasterClass} = useMasterClassStore();
     const MasterClassSave = async () => {
