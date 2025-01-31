@@ -264,7 +264,7 @@ export default function MasterProfile() {
 
   return (
     <div className="min-h-screen bg-[#111827]">
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className=" mx-auto py-8">
         <div className="flex flex-col md:flex-row items-center mb-10 gap-5 md:gap-10">
           <Button
             onClick={() => navigate(-1)}

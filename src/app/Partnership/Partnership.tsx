@@ -100,7 +100,7 @@ export const Partnership: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="w-full sm:w-[60%]">
+                            <div className="w-full xl:w-[60%]">
                                 <h2 className="font-manrope font-extrabold text-[20px] sm:text-[24px] text-[#9C0B35] leading-[30px] sm:leading-[40px]">
                                     {t('Станьте бизнес-партнером bookers и оцените преимущества системы управления и мониторинга.')}
                                 </h2>

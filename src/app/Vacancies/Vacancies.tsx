@@ -36,18 +36,29 @@ export const Vacancies: React.FC = () => {
       <div className='bg-[#111827]'>
 
         <div className='mx-auto pb-20 '>
-          <div className='flex justify-between items-center gap-10 pb-20'>
-            <div className='w-[50%]'>
-              <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-4xl'>{t("Компания Well Tech:  Вакансии")}</h1>
-              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t("Вы готовы нести  ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды.")}</p>
-              <p className='font-manrope text-[16px] md:text-[18px] font-medium text-[#B9B9C9] leading-[24px] md:leading-[30px] my-5 md:my-10 text-left'>{t('В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.')}
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-10 pb-20">
+            {/* Matn qismi */}
+            <div className="w-full lg:w-[50%] order-2 lg:order-1 text-center lg:text-left">
+              <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-3xl lg:text-4xl">
+                {t("Компания Well Tech: Вакансии")}
+              </h1>
+              <p className="font-manrope text-[16px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[24px] lg:leading-[30px] my-5 lg:my-10">
+                {t("Вы готовы нести ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды.")}
+              </p>
+              <p className="font-manrope text-[16px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[24px] lg:leading-[30px] my-5 lg:my-10">
+                {t("В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.")}
               </p>
             </div>
-            <div className='w-[50%]'>
-              <img src={img} alt="" />
+
+            {/* Rasm qismi */}
+            <div className="w-full lg:w-[50%] order-1 lg:order-2 flex justify-center">
+              <img src={img} alt="" className="w-full lg:w-auto" />
             </div>
           </div>
-          <HeaderTitles text={t('Вакансии')}/>
+
+
+
+          <HeaderTitles text={t('Вакансии')} />
           <div
             id="vacancies"
             className="bg-[#B9B9C9] p-10 rounded-3xl w-full mt-10 lg:w-[50%] "
@@ -129,15 +140,15 @@ export const Vacancies: React.FC = () => {
             </p>
 
             <div className='text-center mt-10'>
-            <Button
-              className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
-              onClick={() => {
-                setVacanciesHolat(true);
-                setModalOpen(false);
-              }}
-            >
-              {t('Отправить резюме')}
-            </Button>
+              <Button
+                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+                onClick={() => {
+                  setVacanciesHolat(true);
+                  setModalOpen(false);
+                }}
+              >
+                {t('Отправить резюме')}
+              </Button>
             </div>
           </div>
         </div>

@@ -43,20 +43,20 @@ export const AboutCompany: React.FC = () => {
     return (
         <div className='bg-[#111827]'>
             <div className='mx-auto '>
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-12">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-10 pb-20">
                     {/* Matn qismi */}
-                    <div className="relative">
-                        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[50px] leading-[50px] tracking-[-0.04em]">
+                    <div className="w-full lg:w-[50%] order-2 lg:order-1 text-center lg:text-left">
+                        <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-3xl lg:text-4xl">
                             {t('Компания Well Tech предлагает продукты программных обеспечений для создания автоматизации процессов и улучшения эффективности бизнес процессов')}
                         </h1>
-                        <p className="text-[#B9B9C9] hidden lg:flex lg:text-lg font-medium text-[26px] py-10 font-manrope leading-[26px]">
+                        <p className="text-[#B9B9C9]  lg:flex lg:text-lg font-medium text-[26px] py-10 font-manrope leading-[26px]">
                             {t('Компания Well Tech ведет свою деятельность в сфере информационных технологий и активно участвует в развитии IT-инфраструктуры нашей страны. За короткий срок своего существования наша компания реализовала ряд успешных проектов, включая bookers')}
                         </p>
                     </div>
 
                     {/* Dumaloq rasm */}
-                    <div className="relative flex justify-center">
-                        <img className="w-full max-w-[450px] sm:max-w-[550px] lg:max-w-none rounded-full aspect-square object-cover" src={imgSplide} alt="img" />
+                    <div className="w-full lg:w-[50%] order-1 lg:order-2 flex justify-center">
+                        <img className="w-full lg:w-auto" src={imgSplide} alt="img" />
                     </div>
                 </div>
 
