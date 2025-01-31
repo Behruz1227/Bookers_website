@@ -23,6 +23,7 @@ import { IoAlertCircleOutline } from "react-icons/io5"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import useMasterCategoryStore from "@/Store/MasterCategoryStore"
 import Loading from "@/components/Loading/Loading"
+import LoginIndex from "@/Store"
 
 interface AttachmentItem {
   attachmentId: string
@@ -68,6 +69,7 @@ interface MasterDetails {
 export default function MasterProfile() {
   const { t } = useTranslation()
   const { id } = useParams()
+  const {setLoginHolat } = LoginIndex();
   const navigate = useNavigate()
   const [gallery, setGallery] = useState<GalleryItem[]>([])
   const [masterDetails, setMasterDetails] = useState<MasterDetails | null>({
@@ -93,7 +95,7 @@ export default function MasterProfile() {
     reviews: null,
     serviceId: "",
   })
-  console.log("asdfghsdrtf", masterDetails)
+
 
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -518,7 +520,7 @@ export default function MasterProfile() {
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                    onClick={() => alert("Войти / Регистрация")}
+                    onClick={() => setLoginHolat(true)}
                   >
                     {t("Зарегистрироваться")}
                   </Button>

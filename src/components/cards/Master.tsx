@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next"
 import { FaRegUser } from "react-icons/fa6"
 import { IoAlertCircleOutline } from "react-icons/io5"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
+import LoginIndex from "@/Store"
 
 interface MasterProps {
   id: string
@@ -70,8 +71,7 @@ export default function MasterCard({
   const [imageLoading, setImageLoading] = useState(true) // Added image loading state
 
   const roleGet = localStorage.getItem("Role")
-  const handleAppointmentClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
+  const handleAppointmentClick = () => {
     if (hasToken) {
       // Check for token before opening modal
       setIsModalOpen(true)
@@ -85,7 +85,7 @@ export default function MasterCard({
     setIsModalOpen(false)
     setPage(1)
   }
-
+  const {setLoginHolat } = LoginIndex();
   const phoneNumber = localStorage.getItem("phoneNumber")
   const { response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
@@ -407,7 +407,7 @@ export default function MasterCard({
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                    onClick={() => alert("Войти / Регистрация")}
+                    onClick={() => setLoginHolat(true)}
                   >
                     {t("Зарегистрироваться")}
                   </Button>
