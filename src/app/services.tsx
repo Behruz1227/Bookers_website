@@ -41,7 +41,7 @@ function Services() {
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
   const [search, setSearch] = useState<string>("")
-  const [debouncedSearch, setDebouncedSearch] = useState<string>("")
+  
 
   const { globalDataFunc: fetchCategories } = useGlobalRequest(
     `${BASE_URL}/api/category`,
@@ -50,16 +50,8 @@ function Services() {
 
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [search]);
-
   const { globalDataFunc: fetchMastersByCategory } = useGlobalRequest(
-    `${BASE_URL}/api/service/website-master?categoryId=${selectedCategory}&page=${page}&size=${size}&info=${debouncedSearch}`,
+    `${BASE_URL}/api/service/website-master?categoryId=${selectedCategory}&page=${page}&size=${size}&info=${search}`,
     "GET"
   )
 
@@ -122,7 +114,7 @@ function Services() {
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
             <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
-              {t("Услуги мастеров и салонов красоты")}: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
+              {t("Услуги мастеров и салонов красоты")}: {category?.body.find((item: { id: string; name: string; }) => item.id === selectedCategory)?.name || ""}
             </h1>
             <img
               src={HeroImg}
@@ -137,7 +129,7 @@ function Services() {
               </SelectTrigger>
               <SelectContent className="bg-[#B9B9C9] rounded-2xl border-none">
                 <SelectGroup>
-                  {category?.body.map((category: any) => (
+                  {category?.body.map((category: { id: string; name: string; }) => (
                     <SelectItem
                       key={category.id}
                       value={category.id}
@@ -167,7 +159,7 @@ function Services() {
               <>
                 <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
                   {Array.isArray(masters) &&
-                    masters.map((master: any, index) => (
+                    masters.map((master: { id: string, mainPhoto: string, fullName: string, salonName: string, masterSpecialization: string[], feedbackCount: number, orderCount: number, clientCount: number, masterServicePrice: number, district: string, street: string, house: string, serviceId: string, attachmentId: string}, index) => (
                       <div key={master.id || index}>
                         <MasterCard
                           id={master.id}
