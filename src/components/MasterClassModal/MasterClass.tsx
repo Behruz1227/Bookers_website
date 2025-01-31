@@ -218,7 +218,6 @@ export const MasterClassModal = () => {
 
     const handleSubmit = () => {
         if (validateForm()) {
-            console.log(formData);
             SendCodeBtn();
             setBtnStatus(true);
         }

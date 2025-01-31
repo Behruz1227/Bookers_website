@@ -42,7 +42,7 @@ export default function Blogcard({ image, date, title, description, id }: CardPr
 
         {/* Button */}
         <button
-          onClick={() => console.log(`Card ${id} clicked`)}
+         
           className="text-[18px] text-[#9C0B35] font-manrope font-bold leading-[34px]">
           Подробнее
         </button>

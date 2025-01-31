@@ -39,10 +39,10 @@ export function useRegisterMaster(
             });
 
             setResponse(response.data);
-            console.log(response);
+          
             // Save response data
         } catch (err: any) {
-            console.log(err);
+       
 
             setError(err.response ? err.response.data : "An error occurred"); // Set error message
         } finally {

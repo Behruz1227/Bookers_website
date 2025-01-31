@@ -2,7 +2,7 @@
 export function saveAuthData(token: string, role: string) {
     localStorage.setItem('Token', token);
     localStorage.setItem('Role', role);
-    console.log('Token va Role saqlandi!');
+
 }
 
 // Token va role ni olish funksiyasi
@@ -15,7 +15,7 @@ export function getAuthData() {
 export function clearAuthData() {
     localStorage.removeItem('Token');
     localStorage.removeItem('Role');
-    console.log('Token va Role o\'chirildi!');
+
 }
 
 // Misol uchun foydalanish

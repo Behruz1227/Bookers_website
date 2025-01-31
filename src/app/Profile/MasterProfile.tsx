@@ -119,7 +119,7 @@ export default function MasterProfile() {
   })
 
   const { MasterCategory } = useMasterCategoryStore()
-  console.log(MasterCategory, "MasterCategory")
+
 
   const {
     response: responseCheck,
@@ -214,6 +214,7 @@ export default function MasterProfile() {
       setErrorMessage(errorCheck?.message)
     }
   }, [responseCheck, errorCheck])
+
 
   useEffect(() => {
     if (response?.success) {

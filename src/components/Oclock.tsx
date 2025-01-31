@@ -12,7 +12,7 @@ function Oclock() {
 
     const handleTimeSelect = (time: string) => {
         setSelectedTime(time);
-        console.log(`Selected time: ${time}`);
+        
     };
 
     return (

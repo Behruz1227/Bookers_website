@@ -25,7 +25,6 @@ const Header: React.FC = () => {
     useEffect(() => {
         globalDataFunc();
     }, [])
-    console.log('get me', response?.body);
     const res = response?.body;
     const { setLoginHolat } = LoginIndex();
     const token = localStorage.getItem('Token');
@@ -41,6 +40,7 @@ const Header: React.FC = () => {
     }, [])
 
     const { category } = useCategoryStore(); // Assuming `category` is typed correctly in the store
+    
 
     // Fallback item to be used when category.body is empty or undefined
     const fallbackCategory = {
@@ -249,7 +249,7 @@ const Header: React.FC = () => {
                 showHeader && (
                     <div className={`flex items-center gap-28 lg:justify-end justify-center   bg-[#111827] z-[5] py-6`}>
             <div
-              onClick={() => navigate('/Master/...')}
+              onClick={() => navigate(`Services/${category.body[0].id}`)}
               className="p-2 bg-[#9C0B35] rounded-full border">
               <FaSearch color="white" />
             </div>

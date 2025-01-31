@@ -167,7 +167,7 @@ export const Login: React.FC = () => {
                 registerMaster();
             } else {
                 toastBtn(t('заполните информацию'), 'error');
-                console.log(phoneNumberInput.length, userRole, firstName.length, lastName.length, nickname.length);
+               
 
             }
         } else {

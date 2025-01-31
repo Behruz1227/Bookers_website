@@ -29,7 +29,7 @@ function Services() {
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [masters, setMasters] = useState<any[]>([])
-  console.log(masters);
+
 
 
 

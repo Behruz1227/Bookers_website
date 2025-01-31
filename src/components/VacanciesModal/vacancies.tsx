@@ -137,7 +137,7 @@ export const VacanciesModal = () => {
         setErrors((prev) => ({ ...prev, [name]: false }));
 
     };
-    console.log(formData);
+
 
 
     const isEmailValid = (email: string) => {

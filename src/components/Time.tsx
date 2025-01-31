@@ -9,12 +9,12 @@ const TimePicker: React.FC = () => {
 
   const handleHourChange = (hour: number) => {
     setSelectedHour(hour);
-    console.log(`Selected Hour: ${hour} ч.`); // Tanlangan soatni konsolga chiqarish
+    
   };
 
   const handleMinuteChange = (minute: number) => {
     setSelectedMinute(minute);
-    console.log(`Selected Minute: ${minute} мин.`); // Tanlangan minutani konsolga chiqarish
+    
   };
 
   return (
