@@ -67,8 +67,8 @@ export const AboutCompany: React.FC = () => {
                         {[
                             "Свидетельство о регистрации базы персональных данных в Государственном реестре баз персональных данных",
                         ].map((desc, index) => (
-                            <div key={index} className="bg-[#B9B9C9] rounded-3xl p-6 sm:p-8 md:p-10 w-full">
-                                <p className="font-manrope font-medium text-[20px] sm:text-[22px] md:text-[26px] text-center px-4 sm:px-8 md:px-10">
+                            <div key={index} className="bg-[#B9B9C9] rounded-3xl p-6 sm:w-full md:p-10 w-full">
+                                <p className="font-manrope font-medium text-[20px] sm:text-[22px]  text-center px-4 sm:px-8 ">
                                     {t(desc)}
                                 </p>
                                 <div className="text-center pt-6 sm:pt-8 md:pt-10">
