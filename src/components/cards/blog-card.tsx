@@ -47,6 +47,7 @@ export default function Blogcard({ image, date, title, description, id }: CardPr
           Подробнее
         </button>
       </div>
+      <p className=' hidden'>{id}</p>
     </div>
   )
 }
