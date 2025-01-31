@@ -11,12 +11,13 @@ import { useTranslation } from 'react-i18next'
 import React from 'react'
 import { FaRegCircleCheck } from 'react-icons/fa6'
 import Button from '@/components/button/Button'
+import LoginIndex from '@/Store'
 
 //card
 
 export const Partnership: React.FC = () => {
     const { t } = useTranslation()
-
+    const {setLoginHolat } = LoginIndex();
     return (
         <div>
             <div className='bg-[#111827]'>
@@ -102,7 +103,7 @@ export const Partnership: React.FC = () => {
 
                             <div className="w-full xl:w-[60%]">
                                 <h2 className="font-manrope font-extrabold text-[20px] sm:text-[24px] text-[#9C0B35] leading-[30px] sm:leading-[40px]">
-                                    {t('Станьте бизнес-партнером bookers и оцените преимущества системы управления и мониторинга.')}
+                                    {t('Станьте бизнес-партнером bookers и оцените преимущества системы управления и мониторинга. ')}
                                 </h2>
                             </div>
 
@@ -115,7 +116,7 @@ export const Partnership: React.FC = () => {
                                 </Button>
                                 <Button
                                     className="w-full sm:w-[340px] h-[56px] sm:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
-                                    onClick={() => alert("Скачать приложение")}
+                                    onClick={() => setLoginHolat(true)}
                                 >
                                     {t("Войти / Регистрация")}
                                 </Button>
