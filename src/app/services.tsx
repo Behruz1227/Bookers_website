@@ -30,10 +30,10 @@ function Services() {
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [masters, setMasters] = useState<any[]>([])
   console.log(masters);
-  
-  
-  
-  
+
+
+
+
   const { setMasterCategory } = useMasterCategoryStore();
 
 
@@ -65,7 +65,7 @@ function Services() {
 
   useEffect(() => {
     fetchCategories()
-    
+
     if (id) {
       setSelectedCategory(id)
     }
@@ -110,8 +110,8 @@ function Services() {
   }
 
   const { category } = useCategoryStore();
-  
-  
+
+
 
   return (
     <div>
@@ -119,7 +119,7 @@ function Services() {
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
             <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
-             {t("Услуги мастеров и салонов красоты")}: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
+              {t("Услуги мастеров и салонов красоты")}: {category?.body.find((item: any) => item.id === selectedCategory)?.name || ""}
             </h1>
             <img
               src={HeroImg}
@@ -147,7 +147,7 @@ function Services() {
               </SelectContent>
             </Select>
             <div className="w-full md:w-1/2">
-            <Input
+              <Input
                 placeholder={t("Поиск мастеров/салонов/услуг")}
                 type="search"
                 value={search}
@@ -162,7 +162,7 @@ function Services() {
               <Loading />
             ) : (
               <>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-10">
+                <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
                   {Array.isArray(masters) &&
                     masters.map((master: any, index) => (
                       <div key={master.id || index}>
@@ -173,19 +173,21 @@ function Services() {
                           serviceId={master.serviceId}
                           name={master.fullName}
                           salon={master.salonName || ""}
-                          role={master.masterSpecialization?.[0] || t('Мастер')}
+                          role={master.masterSpecialization?.[0] || t("Мастер")}
                           address={`${master.district || ""} ${master.street || ""} ${master.house || ""}`}
                           masterServicePrice={master.masterServicePrice?.toString() || "0"}
                           feedbackCount={master.feedbackCount || 0}
                           orderCount={master.orderCount || 0}
                           clientCount={master.clientCount || 0}
                           firstButtonTitle={t("Профиль")}
-                          secondButtonTitle={t("Записаться")}
+                          secondButtonTitle={t("bronqilish")}
                           onProfileClick={() => handleMasterProfileClick(master.id)}
                         />
                       </div>
                     ))}
                 </div>
+
+
                 <div className="mt-10">
                   {masters.length > 0 && (
                     <Button

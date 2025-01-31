@@ -32,6 +32,7 @@ interface MasterProps {
   firstButtonTitle?: string
   secondButtonTitle?: string
   onProfileClick?: () => void
+
   mainPhoto?: string
   masterId?: string // Add masterId prop
 }
@@ -60,7 +61,6 @@ export default function MasterCard({
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [status, setStatus] = useState<string | null>("null")
   const [page, setPage] = useState<number | null>(1)
   const [otpCodeInput, setOtpCodeInput] = useState<string>("") // Added state to clear OTP input
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
@@ -105,7 +105,6 @@ export default function MasterCard({
   const {
     response: responseCode,
     globalDataFunc: globalDataFuncCode,
-    error: errorCode,
   } = useGlobalRequest(
     `${BASE_URL}/api/auth/sendCode?purpose=false&ROLE=${roleGet === "ROLE_CLIENT" ? "CLIENT" : "MASTER"}`,
     "POST",
@@ -238,21 +237,22 @@ export default function MasterCard({
             </div>
           )}
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <h3 className="font-bold font-manrope text-[24px]">{name}</h3>
               {salon && (
                 <>
-                  <span className="font-manrope font-bold text-[24px]">/</span>
+                  <span className="hidden sm:inline font-manrope font-bold text-[24px]">/</span>
                   <span className="font-manrope font-medium text-[24px]">{salon}</span>
                 </>
               )}
             </div>
+
             {role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>}
           </div>
         </div>
 
         <div className="space-y-3">
-          <div className="flex justify-between items-center py-3">
+          <div className="flex justify-between py-3">
             <Rate disabled value={feedbackCount} className="text-[#9C0B35] text-lg" />
             <span className="font-manrope font-medium text-[16px] text-[#4F4F4F]">
               {orderCount} {t("order")}, {clientCount} {t("clients")}
@@ -278,7 +278,7 @@ export default function MasterCard({
           </div>
         </div>
 
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex justify-center gap-3">
           <Button
             onClick={onProfileClick}
             className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
@@ -286,7 +286,7 @@ export default function MasterCard({
             {firstButtonTitle}
           </Button>
           <Button
-             onClick={handleAppointmentClick} 
+            onClick={handleAppointmentClick}
             className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
           >
             {secondButtonTitle}
@@ -298,7 +298,7 @@ export default function MasterCard({
         {page === 1 ? (
           <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
             <div className="text-center mb-6">
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("Signup")}</h2>
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("bronqilish")}</h2>
             </div>
             <div>
               <CalendarTimeSelection masterId={masterId || id} onTimeSelect={handleTimeSelect} />
@@ -313,7 +313,7 @@ export default function MasterCard({
                 }}
                 disabled={!selectedDateTime || isSubmitting}
               >
-                {isSubmitting ? t("Signup") : selectedDateTime ? t("Signup") : t("Signup")}
+                {isSubmitting ? t("bronqilish") : selectedDateTime ? t("bronqilish") : t("bronqilish")}
               </Button>
             </div>
           </div>
@@ -359,19 +359,19 @@ export default function MasterCard({
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
                 <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-                  {t("ApplicationAccepted")}
+                  {t("Заявка принята")}
                 </h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                  {t("Yourequest")}
+                  {t("Ваша заявка принята. Cтатус вашей записи можно")}
                   <br />
-                  {t("bookersmobile")}
+                  {t("отслеживать в мобильном приложении bookers")}
                 </p>
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
                     onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
-                    {t("Downloadapp")}
+                    {t("Скачать приложение")}
                   </Button>
                 </div>
               </div>
@@ -380,18 +380,18 @@ export default function MasterCard({
             <div className="p-6 rounded-[20px]">
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("approval")}</h2>
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("Ваша запись отправленана утверждение мастеру")}</h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                  {t("Yourequest")}
+                  {t("Ваша заявка принята. Cтатус вашей записи можно")}
                   <br />
-                  {t("bookersmobile")}
+                  {t("отслеживать в мобильном приложении bookers")}
                 </p>
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
                     onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
-                    {t("Downloadapp")}
+                    {t("Скачать приложение")}
                   </Button>
                 </div>
               </div>
@@ -401,15 +401,15 @@ export default function MasterCard({
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoAlertCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
                 <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-                  {t("technician")}
+                  {t("Вы не можете записаться на услугу мастера")}
                 </h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Tosignup")}</p>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Что бы записаться необходимо пройти")} <br />{t("")}</p>
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                     onClick={() => alert("Войти / Регистрация")}
                   >
-                    {t("Register")}
+                    {t("Зарегистрироваться")}
                   </Button>
                 </div>
               </div>

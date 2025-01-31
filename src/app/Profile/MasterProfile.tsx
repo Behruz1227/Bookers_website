@@ -104,13 +104,12 @@ export default function MasterProfile() {
   const [otpCodeInput, setOtpCodeInput] = useState<string>("")
   const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
   const [checkCode, setCheckCode] = useState<boolean | null>(null)
-  const [imageLoading, setImageLoading] = useState(true)
   const [contentLoading, setContentLoading] = useState(true)
 
   const roleGet = localStorage.getItem("Role")
   const phoneNumber = localStorage.getItem("phoneNumber")
 
-  const { response, globalDataFunc, error } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
+  const { response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: masterDetails?.serviceId,
     date: selectedDateTime?.date,
     timeHour: selectedDateTime?.time.split(":")[0],
@@ -131,7 +130,6 @@ export default function MasterProfile() {
   const {
     response: responseCode,
     globalDataFunc: globalDataFuncCode,
-    error: errorCode,
   } = useGlobalRequest(
     `${BASE_URL}/api/auth/sendCode?purpose=false&ROLE=${roleGet === "ROLE_CLIENT" ? "CLIENT" : "MASTER"}`,
     "POST",
@@ -246,7 +244,7 @@ export default function MasterProfile() {
   }
 
   const handleAppointmentClick = () => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("Token")
     if (!token) {
       setIsModalOpen(true)
       setPage(3) // Set to page 3 which shows the login required modal
