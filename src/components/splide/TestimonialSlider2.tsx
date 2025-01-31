@@ -9,12 +9,14 @@ import { Pagination, Navigation } from "swiper/modules"
 import { TestimonialCard } from "@/components/cards/TestimonialCard2"
 import { useGlobalRequest } from "@/helpers/Quary/quary"
 import { BASE_URL } from "@/helpers/Url"
+import { useTranslation } from "react-i18next"
 
 interface TestimonialSliderProps {
   masterId: string
 }
 
 export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }) => {
+  const { t } = useTranslation()
   const { loading, error, response, globalDataFunc } = useGlobalRequest(
     `${BASE_URL}/api/leave/feedback/one/master?page=0&size=10&masterId=${masterId}`,
     "GET"
@@ -22,18 +24,17 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
 
   useEffect(() => {
     globalDataFunc()
-  }, [])
+  }, [globalDataFunc])
 
-  if (loading) {
-    return <div>Loading...</div>
+  if (loading || error || !response?.body?.object || response.body.object.length === 0) {
+    return null
   }
 
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+  const testimonials = response.body.object
 
   return (
     <div className="py-10 relative">
+      <h2 className="text-white text-center font-medium text-3xl mb-8">{t("Отзывы")}</h2>
       <style>
         {`
           .swiper-pagination {
@@ -69,41 +70,30 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({ masterId }
         `}
       </style>
 
-      {response?.body?.object?.length > 0 ? ( 
-        <>
-        
-          <Swiper
-            modules={[Pagination, Navigation]}
-            spaceBetween={24}
-            slidesPerView={3}
-            pagination={{
-              clickable: true,
-              renderBullet: (index, className) => {
-                if (index >= 5) return ""
-                return `<span class="${className}"></span>`
-              },
-            }}
-            
-            breakpoints={{
-              1280: { slidesPerView: 3 },
-              1024: { slidesPerView: 2, spaceBetween: 16 },
-              768: { slidesPerView: 1, spaceBetween: 12 },
-              0: { slidesPerView: 1, spaceBetween: 8 },
-              
-            }}
-          >
-            {response.body.object.map((testimonial: any, index: number) => (
-              <SwiperSlide key={index} className="pb-20">
-                <TestimonialCard {...testimonial} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          
-        </>
-      ) : (
-        ''
-      )}
+      <Swiper
+        modules={[Pagination, Navigation]}
+        spaceBetween={24}
+        slidesPerView={3}
+        pagination={{
+          clickable: true,
+          renderBullet: (index, className) => {
+            if (index >= 5) return ""
+            return `<span class="${className}"></span>`
+          },
+        }}
+        breakpoints={{
+          1280: { slidesPerView: 3 },
+          1024: { slidesPerView: 2, spaceBetween: 16 },
+          768: { slidesPerView: 1, spaceBetween: 12 },
+          0: { slidesPerView: 1, spaceBetween: 8 },
+        }}
+      >
+        {testimonials.map((testimonial: any, index: number) => (
+          <SwiperSlide key={index} className="pb-20">
+            <TestimonialCard {...testimonial} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   )
 }

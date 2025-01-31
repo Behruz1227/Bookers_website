@@ -127,10 +127,7 @@ export default function MasterProfile() {
     error: errorCheck,
   } = useGlobalRequest(`${BASE_URL}/api/auth/checkCode?code=${otpCodeInput}`, "POST", { phoneNumber })
 
-  const {
-    response: responseCode,
-    globalDataFunc: globalDataFuncCode,
-  } = useGlobalRequest(
+  const { response: responseCode, globalDataFunc: globalDataFuncCode } = useGlobalRequest(
     `${BASE_URL}/api/auth/sendCode?purpose=false&ROLE=${roleGet === "ROLE_CLIENT" ? "CLIENT" : "MASTER"}`,
     "POST",
     { phoneNumber },
@@ -274,10 +271,10 @@ export default function MasterProfile() {
             className="border-[#FFFFFF] text-[#FFFFFF] border rounded-[10px] flex items-center py-2 px-4 md:py-3 md:px-6 gap-2 text-sm md:text-base"
           >
             <MdArrowBackIos className="text-[#FFFFFF]" />
-            {t("MasterProfileBack")}
+            {t("Назад")}
           </Button>
           <h2 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-2xl md:text-4xl text-center md:text-left">
-            {t("Detailsaboutthemaster")}
+            {t("Подробности о мастере")}
           </h2>
         </div>
 
@@ -335,7 +332,6 @@ export default function MasterProfile() {
               </div>
             </div>
 
-
             <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:gap-6 py-6 sm:py-8 md:py-10">
               <div className="flex items-center gap-3 text-gray-600">
                 <MapPin className="text-[#9C0B35] w-[30px] h-[35px] sm:w-[35px] sm:h-[40px] md:w-[40px] md:h-[45px] flex-shrink-0" />
@@ -352,7 +348,6 @@ export default function MasterProfile() {
               </div>
             </div>
 
-
             <div className="flex flex-col sm:flex-row justify-between items-center py-3 gap-2 sm:gap-0">
               <p className="font-medium font-manrope text-base sm:text-lg md:text-xl lg:text-2xl text-center sm:text-left">
                 {t("NextEntry")}: <span className="font-medium">{t("Today")}</span>
@@ -367,7 +362,7 @@ export default function MasterProfile() {
                 onClick={handleAppointmentClick}
                 className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
               >
-                {t("Signup")}
+                {t("bronqilish")}
               </Button>
             </div>
           </div>
@@ -375,7 +370,7 @@ export default function MasterProfile() {
 
         <section className="mt-12">
           <h2 className="text-white text-center font-medium text-3xl mb-8">
-            {gallery.length > 0 ? t("MasterProfileGallery") : ""}
+            {gallery.length > 0 ? t("Галерея") : " "}
           </h2>
           {contentLoading ? (
             <div className="animate-pulse">
@@ -398,14 +393,7 @@ export default function MasterProfile() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-white text-center font-medium text-3xl ">{t("MasterProfileReviews")}</h2>
-          {contentLoading ? (
-            <div className="animate-pulse">
-              <div className="h-48 bg-gray-300 rounded-[20px]"></div>
-            </div>
-          ) : (
-            <TestimonialSlider masterId={id || ""} />
-          )}
+          <TestimonialSlider masterId={id || ""} />
         </section>
       </main>
 
@@ -413,7 +401,7 @@ export default function MasterProfile() {
         {page === 1 ? (
           <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
             <div className="text-center mb-6">
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("Signup")}</h2>
+              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("bronqilish")}</h2>
             </div>
             <div>
               <CalendarTimeSelection masterId={id} onTimeSelect={handleTimeSelect} />
@@ -427,7 +415,7 @@ export default function MasterProfile() {
                 }}
                 disabled={!selectedDateTime || isSubmitting}
               >
-                {isSubmitting ? t("Signup") : selectedDateTime ? t("Signup") : t("Signup")}
+                {isSubmitting ? t("bronqilish") : selectedDateTime ? t("bronqilish") : t("bronqilish")}
               </Button>
             </div>
           </div>
@@ -438,7 +426,7 @@ export default function MasterProfile() {
               <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
                 {localStorage.getItem("phoneNumber")}
               </h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">{t("sentCode")}</p>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">{t("Мы отправили вам SMS с кодом подтверждения.")}</p>
             </div>
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
@@ -462,7 +450,7 @@ export default function MasterProfile() {
                   HandleSubmit()
                 }}
               >
-                {t("Signup")}
+                {t("bronqilish")}
               </Button>
             </div>
           </div>
@@ -472,12 +460,12 @@ export default function MasterProfile() {
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
                 <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-                  {t("ApplicationAccepted")}
+                  {t("Заявка принята")}
                 </h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                  {t("Yourequest")}
+                  {t("Ваша заявка принята. Cтатус вашей записи можно")}
                   <br />
-                  {t("bookersmobile")}
+                  {t("отслеживать в мобильном приложении bookers")}
                 </p>
                 <div className="pt-10">
                   <Button
@@ -489,7 +477,7 @@ export default function MasterProfile() {
                       )
                     }
                   >
-                    {t("Downloadapp")}
+                    {t("Скачать приложение")}
                   </Button>
                 </div>
               </div>
@@ -498,11 +486,11 @@ export default function MasterProfile() {
             <div className="p-6 rounded-[20px]">
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("approval")}</h2>
+                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("Ваша запись отправленана утверждение мастеру")}</h2>
                 <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
-                  {t("Yourequest")}
+                  {t("Ваша заявка принята. Cтатус вашей записи можно")}
                   <br />
-                  {t("bookersmobile")}
+                  {t("отслеживать в мобильном приложении bookers")}
                 </p>
                 <div className="pt-10">
                   <Button
@@ -514,7 +502,7 @@ export default function MasterProfile() {
                       )
                     }
                   >
-                    {t("Downloadapp")}
+                    {t("Скачать приложение")}
                   </Button>
                 </div>
               </div>
@@ -524,15 +512,15 @@ export default function MasterProfile() {
               <div className="flex flex-col items-center justify-center gap-10 py-10">
                 <IoAlertCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
                 <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
-                  {t("technician")}
+                  {t("Вы не можете записаться на услугу мастера")}
                 </h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Tosignup")}</p>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Что бы записаться необходимо пройти")} <br />{t("регистрацию клиента")}</p>
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                     onClick={() => alert("Войти / Регистрация")}
                   >
-                    {t("Register")}
+                    {t("Зарегистрироваться")}
                   </Button>
                 </div>
               </div>
