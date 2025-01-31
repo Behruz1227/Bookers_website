@@ -62,15 +62,15 @@ interface MasterDetails {
   phoneNumber: string
   price: number
   specialization: string
-  reviews: any[] | null
+  reviews:  string | null
   serviceId: string
 }
 
 export default function MasterProfile() {
   const { t } = useTranslation()
   const { id } = useParams()
-  const {setLoginHolat } = LoginIndex();
   const navigate = useNavigate()
+  const { setLoginHolat } = LoginIndex();
   const [gallery, setGallery] = useState<GalleryItem[]>([])
   const [masterDetails, setMasterDetails] = useState<MasterDetails | null>({
     attachmentId: "",
@@ -96,16 +96,14 @@ export default function MasterProfile() {
     serviceId: "",
   })
 
-
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
   const [otpCodeInput, setOtpCodeInput] = useState<string>("")
-  const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
-  const [checkCode, setCheckCode] = useState<boolean | null>(null)
+
   const [contentLoading, setContentLoading] = useState(true)
 
   const roleGet = localStorage.getItem("Role")
@@ -155,12 +153,15 @@ export default function MasterProfile() {
 
   useEffect(() => {
     if (id && MasterCategory) {
-      const master = MasterCategory.find((m: any) => m.id === id)
+      const master = MasterCategory.find((m: { id: string }) => m.id === id)
       if (master) {
         setMasterDetails(master)
         setLoading(false)
         setContentLoading(false)
       }
+    }
+    if (MasterCategory == null) {
+      navigate(-1)
     }
   }, [id, MasterCategory])
 
@@ -179,6 +180,7 @@ export default function MasterProfile() {
       })
     }
   }, [responseCode])
+
 
   const HandleSubmit = async () => {
     if (isSubmitting) return
@@ -258,11 +260,6 @@ export default function MasterProfile() {
     return <Loading />
   }
 
-  const imageUrl = masterDetails.attachmentId
-    ? attachment + masterDetails.attachmentId
-    : masterDetails.mainPhoto
-      ? attachment + masterDetails.mainPhoto
-      : null
 
   return (
     <div className="min-h-screen bg-[#111827]">
@@ -433,10 +430,9 @@ export default function MasterProfile() {
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
                 length={4}
-                onInput={(value: any) => {
+                onInput={(value: string[]) => {
                   setOtpCodeInput(value.join(""))
-                  setLoginCheck(null)
-                  setCheckCode(null)
+
                 }}
                 value={otpCodeInput}
                 style={{
@@ -520,7 +516,10 @@ export default function MasterProfile() {
                 <div className="pt-10">
                   <Button
                     className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                    onClick={() => setLoginHolat(true)}
+                    onClick={() => {
+                      setLoginHolat(true)
+                      closeModal()
+                    }}
                   >
                     {t("Зарегистрироваться")}
                   </Button>

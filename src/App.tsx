@@ -7,8 +7,6 @@ import Tariffs from "./app/tariffs/tariffs";
 import { StandardsSafety } from "./app/StandardsSafety/StandardsSafety";
 import { Vacancies } from "./app/Vacancies/Vacancies";
 import { Partnership } from "./app/Partnership/Partnership";
-import { getLocationPermission } from "./helpers/ForLocation/Location";
-import { useEffect, useState } from "react";
 import Services from "./app/services";
 import MasterProfile from "./app/Profile/MasterProfile";
 
@@ -16,22 +14,6 @@ import './i18n';
 import Header from "./components/Header/Header";
 
 function App() {
-  const [location, setLocation] = useState<any>();
-  const [error, setError] = useState<any>();
-  const userLocation: any = localStorage.getItem("userLocation");
-  useEffect(() => {
-    if (!userLocation) {
-      getLocationPermission(
-        (loc: any) => {
-          setLocation(loc);
-          setError(null);
-        },
-        (err) => {
-          setError(err);
-        }
-      );
-    }
-  }, []);
 
   return (
     <div className="container">

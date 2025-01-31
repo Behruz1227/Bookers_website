@@ -3,10 +3,7 @@ import Button from "./button/Button"
 import { BASE_URL } from "@/helpers/Url"
 import { useTranslation } from "react-i18next"
 
-interface TimeSlot {
-  time: string
-  available: boolean
-}
+
 
 interface CalendarTimeSelectionProps {
   masterId: string| number |undefined

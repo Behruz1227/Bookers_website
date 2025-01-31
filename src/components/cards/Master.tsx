@@ -64,10 +64,9 @@ export default function MasterCard({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [page, setPage] = useState<number | null>(1)
   const [otpCodeInput, setOtpCodeInput] = useState<string>("") // Added state to clear OTP input
-  const [loginCheck, setLoginCheck] = useState<boolean | null>(null)
-  const [checkCode, setCheckCode] = useState<boolean | null>(null)
+  
   const [hasToken, setHasToken] = useState(false) // Added state for token
-  const [otpError, setOtpError] = useState<string | null>(null) // Added OTP error state
+
   const [imageLoading, setImageLoading] = useState(true) // Added image loading state
 
   const roleGet = localStorage.getItem("Role")
@@ -148,7 +147,7 @@ export default function MasterCard({
         })
       }
     } else {
-      setOtpError(null)
+      
       await globalDataFunc()
     }
     setIsSubmitting(false)
@@ -329,11 +328,8 @@ export default function MasterCard({
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
                 length={4}
-                onInput={(value: any) => {
+                onInput={(value:  string []) => {
                   setOtpCodeInput(value.join(""))
-                  setLoginCheck(null)
-                  setCheckCode(null)
-                  setOtpError(null) // Clear error when user types
                 }}
                 value={otpCodeInput} // Added value prop to clear input after submission
                 style={{
