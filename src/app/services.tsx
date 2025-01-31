@@ -80,7 +80,9 @@ function Services() {
       fetchMastersByCategory()
         .then((data: any) => {
           if (data && data.body && Array.isArray(data.body.object)) {
+            
             setMasters(data.body.object)
+            
           } else {
             setMasters([])
           }
@@ -102,7 +104,8 @@ function Services() {
   }
 
   const handleLoadMore = () => {
-    setPage(prevPage => prevPage + 1)
+
+    setSize(size + 5)
   }
 
   const handleMasterProfileClick = (masterId: string) => {
@@ -189,7 +192,7 @@ function Services() {
 
 
                 <div className="mt-10">
-                  {masters.length > 0 && (
+                  {masters.length == size && (
                     <Button
                       className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
                       onClick={handleLoadMore}
