@@ -108,7 +108,7 @@ function Home() {
     { text: t("Модуль комьюнити") },
   ];
 
- 
+
   const {
     loading: statsLoading,
     error: statsError,
@@ -118,7 +118,7 @@ function Home() {
     `${dashboard}`,
     'GET',
   );
-  const { setOtzivHolat, setMasterClassHolat,setLoginHolat } = LoginIndex();
+  const { setOtzivHolat, setMasterClassHolat, setLoginHolat } = LoginIndex();
 
   const {
     loading: categoryLoading,
@@ -146,7 +146,7 @@ function Home() {
   return (
     <>
       <div className='bg-[#111827] w-full mx-auto '>
-      <div className=" w-full h-">
+        <div className=" w-full h-">
           <div>
           </div>
         </div>
@@ -168,8 +168,8 @@ function Home() {
           }
         ]} />
         <Line />
-        <section  id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
-          <OfferCards icon={Gift} data={FirstCard} onclickSecondButton={() => setLoginHolat(true)} title={t("Что предлагает BOOKERS клиентам услуг красоты? ")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Войти / Регистрация")} />
+        <section id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
+          <OfferCards icon={Gift} data={FirstCard} onclickFirstButton={() => window.localStorage} onclickSecondButton={() => setLoginHolat(true)} title={t("Что предлагает BOOKERS клиентам услуг красоты? ")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Войти / Регистрация")} />
           <OfferCards icon={HandCoins} data={TwoCard} title={t("Что предлагает BOOKERS мастерам?")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Оформить подписку")} />
           <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("Какую интеграцию предлагает BOOKERS бизнес-партнерам:")} onclickSecondButton={() => setLoginHolat(true)} firstButtonTitle={t("Интеграция")} secondButtonTitle={t("Войти / Регистрация")} />
         </section>
@@ -179,7 +179,7 @@ function Home() {
           <HeaderTitles text={t("Выберите категорию услуг красоты в bookers")} />
           <div className='pt-10'>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-20">
-              {categories.map((item: {id: number, attachmentId: string, name: string }) => (
+              {categories.map((item: { id: number, attachmentId: string, name: string }) => (
                 <ServiceCard
                   key={item.id}
                   className='px-10'
@@ -209,18 +209,22 @@ function Home() {
             <Card description={t("Мониторинг интереса  — постоянный анализ и отслеживание предпочтений и интересов аудитории для более точного удовлетворения их потребностей.")} />
             <Card description={t("Создание эффективного канала продвижения — разработка и внедрение стратегий, которые обеспечат максимальную эффективность в продвижении ваших услуг и продуктов.")} />
           </div>
-          <div className="w-full bg-[#B9B9C9] rounded-[16px]">
-            <div className="flex flex-col xl:flex-row justify-between items-center p-6 md:p-10 gap-6">
-              <h2 className="text-[#9C0B35] font-manrope font-extrabold leading-[30px] md:leading-[40px] text-[18px] md:text-[24px] text-center md:text-left">
-                {t("Для  создания объявления и обеспечения видимости мероприятия в мобильном приложении и на сайте BOOKERS отправьте заявку.")}
+          <div className="w-full bg-[#B9B9C9] rounded-[16px] p-4 sm:p-6 md:p-10">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+              <h2 className="text-[#9C0B35] font-manrope font-extrabold text-center md:text-left leading-[26px] sm:leading-[30px] md:leading-[40px] text-[16px] sm:text-[18px] md:text-[24px]">
+                {t(
+                  "Для  создания объявления и обеспечения видимости мероприятия в мобильном приложении и на сайте BOOKERS отправьте заявку."
+                )}
               </h2>
-              <div>
-                <button className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]" onClick={()=>{
-                  setMasterClassHolat(true)
-                }}>{t("Отправить заявку")}</button>
-              </div>
+              <button
+                className="w-full sm:w-[300px] md:w-[440px] h-[50px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
+                onClick={() => setMasterClassHolat(true)}
+              >
+                {t("Отправить заявку")}
+              </button>
             </div>
           </div>
+
         </section>
         <Line />
         <section>
@@ -228,7 +232,7 @@ function Home() {
             <HeaderTitles text={t("Ознакомьтесь с отзывами клиентов касательно услуг мастеров и салонов красоты перед бронированием")} />
           </div>
           <div className='pt-10'>
-          <TestimonialSlider />
+            <TestimonialSlider />
           </div>
           <div className='flex justify-center'>
             <Button
@@ -272,16 +276,16 @@ function Home() {
         </section>
         <section>
           <div className='pb-20'>
-          <HeaderTitles text={t("Новости bookers")} />
+            <HeaderTitles text={t("Новости bookers")} />
           </div>
-          <BlogSlider page={0} size={5} /> 
+          <BlogSlider page={0} size={5} />
           <div className='flex justify-center pb-20'  >
             <Button
               className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
               onClick={() => alert("Скачать приложение")}
             >
               {t("Все новости")}
-            </Button>  
+            </Button>
           </div>
         </section>
       </div>

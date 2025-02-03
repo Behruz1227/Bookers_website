@@ -61,23 +61,26 @@ export const Vacancies: React.FC = () => {
           <HeaderTitles text={t('Вакансии')} />
           <div
             id="vacancies"
-            className="bg-[#B9B9C9] p-10 rounded-3xl w-full mt-10 lg:w-[50%] "
+            className="bg-[#B9B9C9] p-6 sm:p-8 md:p-10 rounded-3xl w-full mt-10 lg:w-[50%] text-center"
           >
-            <h3 className="text-center text-[#9C0B35] font-manrope font-extrabold text-[26px]">
-              {t('Комьюнити-менеджер')}
+            <h3 className="text-[#9C0B35] font-manrope font-extrabold text-[20px] sm:text-[24px] md:text-[26px]">
+              {t("Комьюнити-менеджер")}
             </h3>
-            <p className="py-10 font-manrope font-medium text-[26px] text-center">
-              {t('Коммьюнити-менеджеры отвечают за создание, развитие, управление и общение с участниками сообщества')}
+            <p className="py-6 sm:py-8 md:py-10 font-manrope font-medium text-[16px] sm:text-[18px] md:text-[22px] leading-[24px] sm:leading-[26px] md:leading-[30px]">
+              {t(
+                "Коммьюнити-менеджеры отвечают за создание, развитие, управление и общение с участниками сообщества"
+              )}
             </p>
-            <div className="text-center">
+            <div className="flex justify-center">
               <Button
-                className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] hover:opacity-90"
+                className="w-full sm:w-[300px] md:w-[340px] h-[50px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px] hover:opacity-90"
                 onClick={openModal}
               >
-                {t('Подробнее')}
+                {t("Подробнее")}
               </Button>
             </div>
           </div>
+
 
 
         </div>
