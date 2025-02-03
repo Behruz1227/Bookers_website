@@ -3,10 +3,8 @@ import Button from "./button/Button"
 import { BASE_URL } from "@/helpers/Url"
 import { useTranslation } from "react-i18next"
 
-
-
 interface CalendarTimeSelectionProps {
-  masterId: string| number |undefined
+  masterId: string | number | undefined
   onTimeSelect?: (date: string, time: string) => void
 }
 
@@ -167,9 +165,9 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
       <h2 className="text-xl font-semibold mb-4 flex justify-center text-gray-900">
         {selectedDate ? formatDate(selectedDate) : formatCurrentDate()}
       </h2>
-      <div className="flex justify-center">
+      <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-6 w-full max-w-6xl mx-auto px-4">
         {/* Calendar Section */}
-        <div className="w-[534.22px] bg-[#B1B1C2] rounded-[20px] shadow-lg p-6">
+        <div className="w-full max-w-[534px] bg-[#B1B1C2] rounded-[20px] shadow-lg p-4 sm:p-6">
           <div className="flex justify-between items-center mb-8">
             <button
               onClick={() => changeMonth(-1)}
@@ -189,7 +187,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
             </button>
           </div>
 
-          <div className="grid grid-cols-7 gap-1">
+          <div className="grid grid-cols-7 gap-1 text-xs sm:text-sm">
             {daysOfWeek.map((day, index) => (
               <div
                 key={index}
@@ -218,7 +216,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                   key={day}
                   onClick={() => !isPastDate && handleDateSelect(day)}
                   className={`
-                    h-10 flex items-center justify-center text-sm cursor-pointer
+                    h-8 sm:h-10 flex items-center justify-center text-xs sm:text-sm cursor-pointer
                     transition-colors duration-200 rounded-full
                     ${
                       isSelected
@@ -238,9 +236,9 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
         </div>
 
         {/* Time Slots Section */}
-        <div className="w-full max-w-lg">
+        <div className="w-full lg:max-w-lg">
           {selectedDate && (
-            <div className="rounded-[20px] p-6">
+            <div className="rounded-[20px] ">
               <h3 className="text-lg font-medium mb-4 text-gray-900">{t("Свободное время")}</h3>
 
               {isLoading ? (
@@ -248,12 +246,12 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
               ) : errorMessage ? (
                 <div className="text-center py-4 text-red-600">{errorMessage}</div>
               ) : availableTimeSlots.length > 0 ? (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4">
                   {availableTimeSlots.map((time) => (
                     <Button
                       key={time}
                       onClick={() => handleTimeSelect(time)}
-                      className={`py-2 px-4 rounded-[5px] text-center transition-colors ${
+                      className={`py-2 px-2 sm:px-4 rounded-[5px] text-center transition-colors text-sm sm:text-base ${
                         selectedTime === time
                           ? "bg-[#9C0B35] text-white"
                           : "bg-white hover:bg-[#9C0B35] hover:text-white text-gray-900"
