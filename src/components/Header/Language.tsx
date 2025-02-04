@@ -7,7 +7,9 @@ export const Language: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference for dropdown
   const { t, i18n } = useTranslation();
-  const lang = localStorage.getItem('i18nextLng') || 'uz';
+  const lang = localStorage.getItem('i18nextLng') || 'uz-UZ';
+  console.log(lang);
+  
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -42,19 +44,19 @@ export const Language: React.FC = () => {
   const language: Option[] = [
     {
       id: 1,
-      value: 'uz',
+      value: 'uz-UZ',
       label: t('uzbek'),
       img: 'https://img.icons8.com/color/48/uzbekistan.png',
     },
     {
       id: 2,
-      value: 'ru',
+      value: 'ru-RU',
       label: t('rus'),
       img: 'https://img.icons8.com/officel/80/russian-federation.png',
     },
     {
       id: 3,
-      value: 'en',
+      value: 'en-EN',
       label: t('english'),
       img: 'https://img.icons8.com/color/48/great-britain.png',
     },

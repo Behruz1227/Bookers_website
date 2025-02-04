@@ -17,7 +17,7 @@ i18n
   .use(initReactI18next) // React integratsiyasi uchun
   .init({
     resources,
-    fallbackLng: 'uz', // Standart til
+    fallbackLng: 'ru-RU', // Standart til
     interpolation: {
       escapeValue: false, // XSS hujumlarini oldini olish uchun
     },
