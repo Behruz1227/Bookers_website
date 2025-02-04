@@ -16,6 +16,8 @@ import { saveAuthData } from "@/helpers/Token";
 import LoginIndex from "@/Store";
 import Loading from "@/components/Loading/Loading";
 import { useTranslation } from "react-i18next";
+import { getMe } from "@/helpers/Url";
+import { useGlobalRequest } from "@/helpers/Quary/quary";
 
 interface FileState {
     file: File
@@ -36,7 +38,12 @@ export const Login: React.FC = () => {
     const [nickname, setNickname] = useState("");
     const [lang, setLang] = useState(userLang);
     const [imageFile, setImageFile] = useState<File | null>(null);
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+     const { response:resss, globalDataFunc, } = useGlobalRequest(getMe, 'GET');
+
+     if (resss !== undefined) {
+        localStorage.setItem("phoneNumber", resss.body?.phoneNumber || "")
+     }
     const toastBtn = (text: string, type: "success" | "error") => {
 
         messageApi.open({
@@ -89,7 +96,9 @@ export const Login: React.FC = () => {
             setSendCode(null)
         } else if (LoginCheck?.success === true && status === 'OTPcode' && loginHolat) {
             setStatus('Ok');
+
             saveAuthData(LoginCheck?.body, LoginCheck?.message);
+            globalDataFunc()
         } else if (CheckCode?.body === phoneNumberInput && CheckCode?.success === true && CheckCode?.message === "Muvaffaqiyatli" && status === 'OTPcode' && loginHolat) {
             setStatus('Registration');
         } else if (LoginCheck?.success === false && LoginCheck?.status === "OK" && LoginCheck?.message === "Kod mos emas" && loginHolat) {
@@ -101,6 +110,7 @@ export const Login: React.FC = () => {
         } if (response?.success === true && response?.message === "Muvaffaqiyatli" && status === "Registration" && loginHolat) {
             saveAuthData(response?.body, role ? role : '');
             setStatus('Ok');
+            globalDataFunc()
         } if (response?.success === false && response?.message === 'Telefon raqami allaqachon mavjud' && status === "Registration" && loginHolat) {
             toastBtn(t('Номер телефона уже существует'), 'error');
         }

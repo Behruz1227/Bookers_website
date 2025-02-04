@@ -10,8 +10,6 @@ import Button from "../button/Button";
 import { FiPhoneCall } from "react-icons/fi";
 import LoginIndex from "@/Store";
 import { t } from "i18next";
-import { useGlobalRequest } from "@/helpers/Quary/quary";
-import { getMe } from "@/helpers/Url";
 import useCategoryStore from "@/Store/Category";
 import { useCategory } from "@/hooks/useCategory";
 import { useHelpType } from "@/hooks/useHelpType";
@@ -21,14 +19,11 @@ import { FaSearch } from "react-icons/fa";
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
-    const { response, globalDataFunc, } = useGlobalRequest(getMe, 'GET');
-    useEffect(() => {
-        globalDataFunc();
-    }, [])
-    const res = response?.body;
+   
+    
     const { setLoginHolat } = LoginIndex();
     const token = localStorage.getItem('Token');
-    localStorage.setItem("phoneNumber", res?.phoneNumber || "")
+
 
     const navigate = useNavigate(); 
 
