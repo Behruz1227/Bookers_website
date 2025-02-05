@@ -169,8 +169,8 @@ function Home() {
         ]} />
         <Line />
         <section id="offer" className='grid grid-cols-1 xl:grid-cols-3 lg:gap-10 gap-6 md:grid-cols-1'>
-          <OfferCards icon={Gift} data={FirstCard} onclickFirstButton={() => window.localStorage} onclickSecondButton={() => setLoginHolat(true)} title={t("Что предлагает BOOKERS клиентам услуг красоты? ")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Войти / Регистрация")} />
-          <OfferCards icon={HandCoins} data={TwoCard} title={t("Что предлагает BOOKERS мастерам?")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Оформить подписку")} />
+          <OfferCards icon={Gift} data={FirstCard} onclickFirstButton={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')} onclickSecondButton={() => setLoginHolat(true)} title={t("Что предлагает BOOKERS клиентам услуг красоты? ")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Войти / Регистрация")} />
+          <OfferCards icon={HandCoins} data={TwoCard} onclickFirstButton={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')} title={t("Что предлагает BOOKERS мастерам?")} firstButtonTitle={t("Скачать приложение")} secondButtonTitle={t("Оформить подписку")} />
           <OfferCards icon={FiRefreshCw} data={ThreeCard} title={t("Какую интеграцию предлагает BOOKERS бизнес-партнерам:")} onclickSecondButton={() => setLoginHolat(true)} firstButtonTitle={t("Интеграция")} secondButtonTitle={t("Войти / Регистрация")} />
         </section>
 
@@ -210,20 +210,21 @@ function Home() {
             <Card description={t("Создание эффективного канала продвижения — разработка и внедрение стратегий, которые обеспечат максимальную эффективность в продвижении ваших услуг и продуктов.")} />
           </div>
           <div className="w-full bg-[#B9B9C9] rounded-[16px] p-4 sm:p-6 md:p-10">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div className="flex flex-col md:flex-col lg:flex-row justify-between items-center gap-4 md:gap-6">
               <h2 className="text-[#9C0B35] font-manrope font-extrabold text-center md:text-left leading-[26px] sm:leading-[30px] md:leading-[40px] text-[16px] sm:text-[18px] md:text-[24px]">
                 {t(
                   "Для  создания объявления и обеспечения видимости мероприятия в мобильном приложении и на сайте BOOKERS отправьте заявку."
                 )}
               </h2>
               <button
-                className="w-full sm:w-[300px] md:w-[440px] h-[50px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
+                className="w-full sm:w-[300px] md:w-full lg:w-[440px] h-[50px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
                 onClick={() => setMasterClassHolat(true)}
               >
                 {t("Отправить заявку")}
               </button>
             </div>
           </div>
+
 
         </section>
         <Line />

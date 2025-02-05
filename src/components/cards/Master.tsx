@@ -64,7 +64,7 @@ export default function MasterCard({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [page, setPage] = useState<number | null>(1)
   const [otpCodeInput, setOtpCodeInput] = useState<string>("") // Added state to clear OTP input
-  
+
   const [hasToken, setHasToken] = useState(false) // Added state for token
 
   const [imageLoading, setImageLoading] = useState(true) // Added image loading state
@@ -84,7 +84,7 @@ export default function MasterCard({
     setIsModalOpen(false)
     setPage(1)
   }
-  const {setLoginHolat } = LoginIndex();
+  const { setLoginHolat } = LoginIndex();
   const phoneNumber = localStorage.getItem("phoneNumber")
   const { response, globalDataFunc } = useGlobalRequest(`${BASE_URL}/api/order/save?status=OTHER`, "POST", {
     serviceId: serviceId,
@@ -147,7 +147,7 @@ export default function MasterCard({
         })
       }
     } else {
-      
+
       await globalDataFunc()
     }
     setIsSubmitting(false)
@@ -277,16 +277,16 @@ export default function MasterCard({
           </div>
         </div>
 
-        <div className="mt-4 flex justify-center gap-3">
+        <div className="mt-4 flex flex-col md:flex-row justify-center gap-3">
           <Button
             onClick={onProfileClick}
-            className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+            className="w-full md:w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]"
           >
             {firstButtonTitle}
           </Button>
           <Button
             onClick={handleAppointmentClick}
-            className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+            className="w-full md:w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px]"
           >
             {secondButtonTitle}
           </Button>
@@ -328,7 +328,7 @@ export default function MasterCard({
             <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
               <Input.OTP
                 length={4}
-                onInput={(value:  string []) => {
+                onInput={(value: string[]) => {
                   setOtpCodeInput(value.join(""))
                 }}
                 value={otpCodeInput} // Added value prop to clear input after submission
