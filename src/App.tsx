@@ -16,10 +16,11 @@ import Header from "./components/Header/Header";
 function App() {
 
   return (
-    <div className="container">
+    <div>
       <ToastContainer />
       <BrowserRouter>
         <Header />
+        <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/AboutCompany" element={<AboutCompany />} />
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Services/:id" element={<Services />} />
           <Route path="/Master/:id" element={<MasterProfile />} />
         </Routes>
+        </div>
       </BrowserRouter>
       
     </div>

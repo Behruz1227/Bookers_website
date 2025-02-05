@@ -103,7 +103,7 @@ export const Language: React.FC = () => {
 
       {/* Mobile View */}
       <div className="block lg:hidden">
-        <div className="flex flex-wrap gap-2 p-4">
+        <div className="flex flex-wrap gap-1 p-2">
           {language.map((item) => (
             <button
               key={item.id}
@@ -116,7 +116,7 @@ export const Language: React.FC = () => {
               }`}
             >
               <img src={item.img} alt={`${item.label} icon`} className="w-6 h-6" />
-              <span>{item.label}</span>
+              <span className=' hidden lg:inline'>{item.label}</span>
             </button>
           ))}
         </div>

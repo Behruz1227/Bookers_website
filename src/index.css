@@ -3,39 +3,65 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
 
-.otp-input > * input {
-   padding: 5% !important;
-   width: 100% !important;
-   font-size: 20px !important;
-  }
-  /* Checkboxni xususiylashtirish */
-body{
-    background-color: #111827;
+.otp-input>* input {
+  padding: 5% !important;
+  width: 100% !important;
+  font-size: 20px !important;
+}
+
+/* Checkboxni xususiylashtirish */
+body {
+  background-color: #111827;
 }
 
 .masterOrSalonName .ant-select-selector {
-    background-color: #B9B9C9 !important;
-    /* color: chartreuse !important; */
-    height: 100% !important;
-    border: none !important;
-    box-shadow: none !important;
-    width: 100% !important;
-    padding: 0 !important;
-    font-size: 16px !important;
+  background-color: #B9B9C9 !important;
+  /* color: chartreuse !important; */
+  height: 100% !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+  font-size: 16px !important;
 }
 
 /* Spin indikatorining rangini red qilib o'zgartirish */
 .red-spin .ant-spin-dot i {
-    background-color:#9C0B35!important;
-  }
-  
-  input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none; /* Webkit brauzerlari uchun */
-  
+  background-color: #9C0B35 !important;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  /* Webkit brauzerlari uchun */
+
+}
+
+
+.ddddd {
+  .ant-menu-submenu-title{
+    color: #9C0B35 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    background-color: #111827 !important;
+  }
+  .ant-menu-item {
+    color: #ffffff !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+  .ant-menu-item-active{
+    padding: 0 !important;
+    text-align: center !important;
+    background-color: #9C0B35 !important;
+  }
+  .ant-menu-item-selected{
+    background-color: #111827 !important;
+  }
+  }
