@@ -56,10 +56,13 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0 !important;
     text-align: center !important;
   }
+  .ant-menu-item:hover{
+    color: #9C0B35 !important;
+  }
   .ant-menu-item-active{
     padding: 0 !important;
     text-align: center !important;
-    background-color: #9C0B35 !important;
+    background-color: #111827 !important;
   }
   .ant-menu-item-selected{
     background-color: #111827 !important;

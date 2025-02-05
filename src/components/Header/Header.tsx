@@ -60,6 +60,24 @@ const Header: React.FC = () => {
         ),
     }));
 
+    const menuItems1 = [
+        {
+            key: "kk", // "Key" emas, "key"
+            label: <span className="hover:text-[#9C0B35] text-lg text-white">Бронирование</span>,
+            children: categoriesToDisplay.map((item: { name: string; id: string }) => ({
+                key: item.id, // "key" kichik harfda
+                label: (
+                    <Link
+                        to={item.id ? `/Services/${item.id}` : "/Services"}
+                        className="hover:text-[#9C0B35] text-[#21212E]"
+                    >
+                        {item.name}
+                    </Link>
+                ),
+            })),
+        },
+    ];
+    
     
 
 
@@ -272,7 +290,7 @@ const Header: React.FC = () => {
                                 defaultSelectedKeys={['1']}
                                 defaultOpenKeys={['sub1']}
                                 mode="inline"
-                                items={menuItems}
+                                items={menuItems1}
                             />
                         </div>
 
