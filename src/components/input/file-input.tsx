@@ -56,7 +56,7 @@ const { t } = useTranslation()
         className={`
           flex items-center  
           border-2 border-[#9C0B35] rounded-full
-          px-8 py-3 pt-4 cursor-pointer
+          px-8 py-1 pt-2 cursor-pointer
           ${fileState ? 'bg-none' : 'border hover:bg-rose-50'}
         `}
       >

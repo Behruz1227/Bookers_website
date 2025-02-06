@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import logo from '../../assets/img/Layer_1.png';
-import logoText from '../../assets/img/Мои записи.svg';
+import logo from "../../assets/img/Layer_1.png";
+import logoText from "../../assets/img/Мои записи.svg";
 import { Language } from "./Language";
 import { Dropdown, Menu, MenuProps, Space } from "antd";
 import { IoChevronDownOutline } from "react-icons/io5";
@@ -15,335 +15,376 @@ import { useCategory } from "@/hooks/useCategory";
 import { useHelpType } from "@/hooks/useHelpType";
 import { FaSearch } from "react-icons/fa";
 
-
-
 const Header: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
+  const [isOpen, setIsOpen] = useState(false); // Mobil menyuni boshqarish uchun state
 
+  const { setLoginHolat } = LoginIndex();
+  const token = localStorage.getItem("Token");
 
-    const { setLoginHolat } = LoginIndex();
-    const token = localStorage.getItem('Token');
+  const navigate = useNavigate();
 
+  const { fetchHelpType } = useHelpType();
+  const { fetchCategory } = useCategory(); // Custom hook to fetch categories
+  useEffect(() => {
+    fetchCategory();
+    fetchHelpType();
+  }, []);
 
-    const navigate = useNavigate();
+  const { category } = useCategoryStore(); // Assuming `category` is typed correctly in the store
 
-    const { fetchHelpType } = useHelpType();
-    const { fetchCategory } = useCategory(); // Custom hook to fetch categories
-    useEffect(() => {
-        fetchCategory();
-        fetchHelpType();
-    }, [])
+  // Fallback item to be used when category.body is empty or undefined
+  const fallbackCategory = {};
 
-    const { category } = useCategoryStore(); // Assuming `category` is typed correctly in the store
+  // If category.body is empty or undefined, use fallbackCategory
+  const categoriesToDisplay =
+    category?.body && Array.isArray(category.body) && category.body.length > 0
+      ? category.body
+      : [fallbackCategory];
 
+  // Dynamically generate menu items
+  const menuItems: MenuProps["items"] = categoriesToDisplay.map(
+    (item: { name: string; id: string }) => ({
+      key: item.id, // Use `id` as the unique key
+      label: (
+        <Link
+          to={item.id ? `/Services/${item.id}` : "/Services"}
+          className="hover:text-[#9C0B35] text-[#21212E]"
+        >
+          {item.name} {/* Displaying ID and name */}
+        </Link>
+      ),
+    })
+  );
 
-    // Fallback item to be used when category.body is empty or undefined
-    const fallbackCategory = {
+  const menuItems1 = [
+    {
+      key: "kk", // "Key" emas, "key"
+      label: (
+        <span className="hover:text-[#9C0B35] text-lg text-white">
+          Бронирование
+        </span>
+      ),
+      children: categoriesToDisplay.map(
+        (item: { name: string; id: string }) => ({
+          key: item.id, // "key" kichik harfda
+          label: (
+            <Link
+              onClick={() => setIsOpen(false)}
+              to={item.id ? `/Services/${item.id}` : "/Services"}
+              className="hover:text-[#9C0B35] text-[#21212E]"
+            >
+              {item.name}
+            </Link>
+          ),
+        })
+      ),
+    },
+  ];
 
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 0) {
+        // Scroll 500px dan ko'proq pastga tushsa, header umuman yashiringan bo'ladi
+        setShowHeader(false);
+      } else {
+        // Scroll 500px dan kam bo'lsa, headerni ko'rsatish
+        setShowHeader(true);
+      }
+
+      // Skroll holatini saqlash
+      setLastScrollY(currentScrollY);
     };
 
-    // If category.body is empty or undefined, use fallbackCategory
-    const categoriesToDisplay = category?.body && Array.isArray(category.body) && category.body.length > 0
-        ? category.body
-        : [fallbackCategory];
+    window.addEventListener("scroll", handleScroll);
 
-    // Dynamically generate menu items
-    const menuItems: MenuProps['items'] = categoriesToDisplay.map((item: { name: string, id: string }) => ({
-        key: item.id, // Use `id` as the unique key
-        label: (
-            <Link
-                to={item.id ? `/Services/${item.id}` : "/Services"}
-                className="hover:text-[#9C0B35] text-[#21212E]"
-            >
-                {item.name} {/* Displaying ID and name */}
-            </Link>
-        ),
-    }));
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
-    const menuItems1 = [
+  const items = [
+    {
+      key: "sub1",
+      label: (
+        <span className="hover:text-[#9C0B35] text-lg text-white">Bookers</span>
+      ),
+      children: [
         {
-            key: "kk", // "Key" emas, "key"
-            label: <span className="hover:text-[#9C0B35] text-lg text-white">Бронирование</span>,
-            children: categoriesToDisplay.map((item: { name: string; id: string }) => ({
-                key: item.id, // "key" kichik harfda
-                label: (
-                    <Link onClick={()=>setIsOpen(false)}
-                        to={item.id ? `/Services/${item.id}` : "/Services"}
-                        className="hover:text-[#9C0B35] text-[#21212E]"
-                    >
-                        {item.name}
-                    </Link>
-                ),
-            })),
-        },
-    ];
-    
-    
-
-
-
-    const [showHeader, setShowHeader] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > 0) {
-                // Scroll 500px dan ko'proq pastga tushsa, header umuman yashiringan bo'ladi
-                setShowHeader(false);
-            } else {
-                // Scroll 500px dan kam bo'lsa, headerni ko'rsatish
-                setShowHeader(true);
-            }
-
-            // Skroll holatini saqlash
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [lastScrollY]);
-
-
-    const items = [
-        {
-          key: 'sub1',
+          key: "1",
           label: (
-                        <span className="hover:text-[#9C0B35] text-lg text-white">Bookers</span>
-                    ),
+            <Link onClick={() => setIsOpen(false)} to="/#offer">
+              О продукте
+            </Link>
+          ),
+        },
+        {
+          key: "2",
+          label: <span className="text-white">О компании</span>,
           children: [
-            
-                {
-                    key: '1',
-                    label: (
-                        <Link onClick={()=>setIsOpen(false)} to="/#offer">О продукте</Link>
-                    ),
-                },
-                {
-                    key: '2',
-                    label: (
-                        <span className="text-white">О компании</span>
-                    ),
-                    children: [
-                        {
-                            key: '2-1',
-                            label: (
-                                <Link onClick={()=>setIsOpen(false)} to="/AboutCompany#about">Нормативные права</Link>
-                            ),
-                        },
-                        {
-                            key: '2-2',
-                            label: (
-                                <Link onClick={()=>setIsOpen(false)} to="/AboutCompany#company1">Наша миссия</Link>
-                            ),
-                        },
-                        {
-                            key: '2-3',
-                            label: (
-                                <Link onClick={()=>setIsOpen(false)}  to="/AboutCompany#company2">Команда</Link>
-                            ),
-                        },
-                    ],
-                },
-                {
-                    key: '3',
-                    label: (
-                        <Link onClick={()=>setIsOpen(false)} to="/StandardsSafety">Стандартизация / Безопасность</Link>
-                    ),
-            
-                },
-                {
-                    key: '4',
-                    label: (
-                        <Link onClick={()=>setIsOpen(false)} to="/Vacancies#vacancies">Вакансии</Link>
-                    ),
-            
-                }
-            
-            
+            {
+              key: "2-1",
+              label: (
+                <Link onClick={() => setIsOpen(false)} to="/AboutCompany#about">
+                  Нормативные права
+                </Link>
+              ),
+            },
+            {
+              key: "2-2",
+              label: (
+                <Link
+                  onClick={() => setIsOpen(false)}
+                  to="/AboutCompany#company1"
+                >
+                  Наша миссия
+                </Link>
+              ),
+            },
+            {
+              key: "2-3",
+              label: (
+                <Link
+                  onClick={() => setIsOpen(false)}
+                  to="/AboutCompany#company2"
+                >
+                  Команда
+                </Link>
+              ),
+            },
           ],
         },
-      ];
-      
-    const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
-    }
-    return (
-        <div className={`sticky top-0 select-none bg-[#111827] left-0 right-0 z-[6]  container`}>
-            <header className="bg-[#111827]  text-white relative z-[5] ">
-                <div className="mx-auto flex justify-between items-center py-3">
-                    {/* Logo bo'limi */}
-                    <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
-                        <Link to='/'>
-                            <img className="w-full h-full pb-2" src={logo} alt="logo" />
-                            <img src={logoText} alt="logo text" />
-                        </Link>
-                    </div>
+        {
+          key: "3",
+          label: (
+            <Link onClick={() => setIsOpen(false)} to="/StandardsSafety">
+              Стандартизация / Безопасность
+            </Link>
+          ),
+        },
+        {
+          key: "4",
+          label: (
+            <Link onClick={() => setIsOpen(false)} to="/Vacancies#vacancies">
+              Вакансии
+            </Link>
+          ),
+        },
+      ],
+    },
+  ];
 
-                    {/* Asosiy navigatsiya */}
-                    <div className="hidden lg:flex ml-[5%] 2xl:ml-[10%] xl:ml-[16%] lg:ml-[7%] ">
-                        {/* Bookers menyusi */}
-                        <Dropdown
-                            menu={{ items: Bookers }}
-                            trigger={["hover"]}
-                            getPopupContainer={(trigger: HTMLElement) => trigger.parentElement!}
-                            overlayStyle={{ minWidth: "300px" }}
-                        >
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space className="hover:text-[#9C0B35]">
-                                    Bookers
-                                    <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
-                                </Space>
-                            </a>
-                        </Dropdown>
-                    </div>
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
+  };
+  return (
+    <div
+      className={`sticky top-0 select-none bg-[#111827] left-0 right-0 z-[6] container`}
+    >
+      <header className="bg-[#111827] text-white relative z-[5] ">
+        <div className="mx-auto flex justify-between items-center py-3">
+          {/* Logo bo'limi */}
+          <div className="w-[40px] h-[75px] grid grid-cols-1 justify-center items-center">
+            <Link to="/">
+              <img className="w-full h-full pb-2" src={logo} alt="logo" />
+              <img src={logoText} alt="logo text" />
+            </Link>
+          </div>
 
-                    <div className="hidden lg:flex">
-                        {/* Бронирование menyusi */}
-                        <Dropdown
-                            menu={{ items: menuItems }} // Assign generated items to the menu
-                            overlayClassName="bookers-dropdown"
-                            trigger={["hover"]}
-                            overlayStyle={{ minWidth: "300px" }}
-                        >
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space className="hover:text-[#9C0B35]">
-                                    Бронирование
-                                    <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
-                                </Space>
-                            </a>
-                        </Dropdown>
-                    </div>
+          {/* Asosiy navigatsiya */}
+          <div className="hidden lg:flex ml-[5%] 2xl:ml-[10%] xl:ml-[16%] lg:ml-[7%] ">
+            {/* Bookers menyusi */}
+            <Dropdown
+              menu={{ items: Bookers }}
+              trigger={["hover"]}
+              getPopupContainer={(trigger: HTMLElement) =>
+                trigger.parentElement!
+              }
+              overlayStyle={{ minWidth: "300px" }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="hover:text-[#9C0B35]">
+                  Bookers
+                  <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
 
-                    {/* Qo'shimcha navigatsiya */}
-                    <div className="hidden lg:flex hover:text-[#9C0B35]">
-                        <Link to="/Partnership">Партнерство</Link>
-                    </div>
-                    <div className="hidden lg:flex">
-                        {/* Til tanlash bo'limi */}
-                        <Language />
-                    </div>
+          <div className="hidden lg:flex">
+            {/* Бронирование menyusi */}
+            <Dropdown
+              menu={{ items: menuItems }} // Assign generated items to the menu
+              overlayClassName="bookers-dropdown"
+              trigger={["hover"]}
+              overlayStyle={{ minWidth: "300px" }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="hover:text-[#9C0B35]">
+                  Бронирование
+                  <IoChevronDownOutline className="w-6 h-6 pt-1 transition duration-300" />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
 
-                    {/* Login/Register tugmasi */}
-                    {!token ?
-                        <div className="absolute lg:block hidden lg:relative lg:right-0 right-16">
-                            <Button onClick={() => setLoginHolat(true)}
-                                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
-                            >
-                                <span className="hover:opacity-90">{t("Войти / Регистрация")}</span>
-                            </Button>
-                        </div> :
-                        <div className=" lg:flex hidden flex-col items-end justify-end">
-                            <Button onClick={() => {
-                                navigate("/#offer")
-                            }}
-                                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
-                            >
-                                <span className="hover:opacity-90">{t("Личный кабинет")}</span>
-                            </Button>
-                        </div>
-                    }
-                    {/* Mobil menyu tugmasi */}
-                    <button
-                        className="lg:hidden focus:outline-none"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle Navigation Menu"
-                    >
-                        <span
-                            className={`block w-6 h-0.5 bg-white mb-1 transition-transform duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`}
-                        ></span>
-                        <span
-                            className={`block w-6 h-0.5 bg-white mb-1 transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`}
-                        ></span>
-                        <span
-                            className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
-                        ></span>
-                    </button>
-                </div>
+          {/* Qo'shimcha navigatsiya */}
+          <div className="hidden lg:flex hover:text-[#9C0B35]">
+            <Link to="/Partnership">Партнерство</Link>
+          </div>
+          <div className="hidden lg:flex">
+            {/* Til tanlash bo'limi */}
+            <Language />
+          </div>
 
-                {/* Mobil menyu */}
-                <div
-                    className={`lg:hidden  transition-all duration-500 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
-                >
-                    <div className="flex flex-col items-center py-1 gap-6">
-                        <div>
-                            <Menu
-                                onClick={onClick}
-                                style={{ width: 256, }}
-                                className="bg-[#111827] text-white ddddd "
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub2']}
-                                mode="inline"
-                                items={items}
-                            />
-                            
-                        </div>
-                        <div>
-                        <Menu
-                                onClick={onClick}
-                                style={{ width: 256 }}
-                                className="bg-[#111827] text-white ddddd"
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
-                                mode="inline"
-                                items={menuItems1}
-                            />
-                        </div>
-
-                        <div className="hover:text-[#9C0B35]">
-                            <Link to="/Partnership">Партнерство</Link>
-
-                        </div>
-                        <div className="flex items-center justify-center gap-2 border font-semibold border-white pl-2 pr-4 w-[250px] py-2 rounded-full">
-                            <FiPhoneCall className="bg-[#9C0B35] p-2 rounded-full " size={30} />
-                            <span>+998 77 308-88-88</span>
-                        </div>
-                        <div>
-                            {/* Til tanlash bo'limi */}
-                            <Language />
-                        </div>
-                        {!token ?
-                            <div className="lg:hidden block lg:relative lg:right-0 right-16">
-                                <Button onClick={() => setLoginHolat(true)}
-                                    className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
-                                >
-                                    <span className="hover:opacity-90">{t("Войти / Регистрация")}</span>
-                                </Button>
-                            </div> :
-                            <div className="flex lg:hidden flex-col items-end justify-end">
-                                <Button onClick={() => {
-                                    navigate("/#offer")
-                                }}
-                                    className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
-                                >
-                                    <span className="hover:opacity-90">{t("Личный кабинет")}</span>
-                                </Button>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </header>
-            {
-                showHeader && (
-                    <div className={`flex items-center gap-28 lg:justify-end justify-center   bg-[#111827] z-[5] py-6`}>
-                        <div
-                            onClick={() => navigate(`Services/${category.body[0].id}`)}
-                            className="p-2 bg-[#9C0B35] rounded-full border">
-                            <FaSearch color="white" />
-                        </div>
-                        <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
-                            <FiPhoneCall color="white" className="bg-[#9C0B35] p-2 rounded-full " size={30} />
-                            <span className='text-white'>+998 77 308-88-88</span>
-                        </div>
-                    </div>
-                )
-            }
+          {/* Login/Register tugmasi */}
+          {!token ? (
+            <div className="absolute lg:block hidden lg:relative lg:right-0 right-16">
+              <Button
+                onClick={() => setLoginHolat(true)}
+                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+              >
+                <span className="hover:opacity-90">
+                  {t("Войти / Регистрация")}
+                </span>
+              </Button>
+            </div>
+          ) : (
+            <div className=" lg:flex hidden flex-col items-end justify-end">
+              <Button
+                onClick={() => {
+                  navigate("/#offer");
+                }}
+                className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+              >
+                <span className="hover:opacity-90">{t("Личный кабинет")}</span>
+              </Button>
+            </div>
+          )}
+          {/* Mobil menyu tugmasi */}
+          <button
+            className="lg:hidden focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            <span
+              className={`block w-6 h-0.5 bg-white mb-1 transition-transform duration-300 ${
+                isOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-white mb-1 transition-opacity duration-300 ${
+                isOpen ? "opacity-0" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${
+                isOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            ></span>
+          </button>
         </div>
-    );
+
+        {/* Mobil menyu */}
+        <div
+          className={`lg:hidden  transition-all duration-500 ease-in-out ${
+            isOpen
+              ? "max-h-screen opacity-100"
+              : "max-h-0 opacity-0 overflow-hidden"
+          }`}
+        >
+          <div className="flex flex-col items-center py-1 gap-6">
+            <div>
+              <Menu
+                onClick={onClick}
+                style={{ width: 256 }}
+                className="bg-[#111827] text-white ddddd "
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub2"]}
+                mode="inline"
+                items={items}
+              />
+            </div>
+            <div>
+              <Menu
+                onClick={onClick}
+                style={{ width: 256 }}
+                className="bg-[#111827] text-white ddddd"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                mode="inline"
+                items={menuItems1}
+              />
+            </div>
+
+            <div className="hover:text-[#9C0B35]">
+              <Link to="/Partnership">Партнерство</Link>
+            </div>
+            <div className="flex items-center justify-center gap-2 border font-semibold border-white pl-2 pr-4 w-[250px] py-2 rounded-full">
+              <FiPhoneCall
+                className="bg-[#9C0B35] p-2 rounded-full "
+                size={30}
+              />
+              <span>+998 77 308-88-88</span>
+            </div>
+            <div>
+              {/* Til tanlash bo'limi */}
+              <Language />
+            </div>
+            {!token ? (
+              <div className="lg:hidden block lg:relative lg:right-0 right-16">
+                <Button
+                  onClick={() => setLoginHolat(true)}
+                  className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+                >
+                  <span className="hover:opacity-90">
+                    {t("Войти / Регистрация")}
+                  </span>
+                </Button>
+              </div>
+            ) : (
+              <div className="flex lg:hidden flex-col items-end justify-end">
+                <Button
+                  onClick={() => {
+                    navigate("/#offer");
+                  }}
+                  className="py-3 ld:px-12  px-8 rounded-[40px] bg-[#9C0B35] text-white leading-[30px]"
+                >
+                  <span className="hover:opacity-90">
+                    {t("Личный кабинет")}
+                  </span>
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+      {showHeader && (
+        <div
+          className={`flex items-center gap-28 lg:justify-end justify-center   bg-[#111827] z-[5] py-6`}
+        >
+          <div
+            onClick={() => navigate(`Services/${category.body[0].id}`)}
+            className="p-2 bg-[#9C0B35] rounded-full border"
+          >
+            <FaSearch color="white" />
+          </div>
+          <div className="hidden lg:flex items-center gap-2 border font-semibold border-white pl-2 pr-4 py-2 rounded-full">
+            <FiPhoneCall
+              color="white"
+              className="bg-[#9C0B35] p-2 rounded-full "
+              size={30}
+            />
+            <span className="text-white">+998 77 308-88-88</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Header;

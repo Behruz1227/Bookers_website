@@ -117,7 +117,7 @@ function Footer() {
               </div>
             </div>
             <div className="flex flex-col items-center sm:items-start gap-5">
-              <p className="text-[20px] font-bold">{t('Загрузите наше приложение на')}</p>
+              <p className="text-[20px] text-center font-bold">{t('Загрузите наше приложение на')}</p>
               <div className="flex gap-4">
                 <a href="#"><img src={APP} alt="App Store" /></a>
                 <a href="#"><img src={Play} alt="Google Play" /></a>
