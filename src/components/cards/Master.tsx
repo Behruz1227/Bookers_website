@@ -215,40 +215,41 @@ export default function MasterCard({
         )}
 
         <div className="flex items-center gap-4 mt-4 mb-3">
-          {avatar ? (
-            <div className="relative w-20 h-20 max-w-full max-h-full">
-              {imageLoading && (
-                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-200 rounded-full">
-                  <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#9C0B35]"></div>
-                </div>
-              )}
-              <img
-                src={attachment + avatar || "/placeholder.svg"}
-                alt={name}
-                className={`w-20 h-20 max-w-full max-h-full rounded-full object-cover shadow-md transition-opacity duration-300 shrink-0 ${imageLoading ? "opacity-0" : "opacity-100"}`}
-                onLoad={() => setImageLoading(false)}
-              />
-            </div>
-          ) : (
-            <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center flex-none">
-              <FaRegUser size={30} className="text-[#9c0b35]" />
-            </div>
-          )}
-
-          <div>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <h3 className="font-bold font-manrope text-[24px]">{name}</h3>
-              {salon && (
-                <>
-                  <span className="hidden sm:inline font-manrope font-bold text-[24px]">/</span>
-                  <span className="font-manrope font-medium text-[24px]">{salon}</span>
-                </>
-              )}
-            </div>
-
-            {role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>}
-          </div>
+  {avatar ? (
+    <div className="relative w-20 h-20 overflow-hidden rounded-full shrink-0">
+      {imageLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+          <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#9C0B35]"></div>
         </div>
+      )}
+      <img
+        src={attachment + avatar || "/placeholder.svg"}
+        alt={name}
+        className="w-full h-full object-cover"
+        onLoad={() => setImageLoading(false)}
+      />
+    </div>
+  ) : (
+    <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center shrink-0">
+      <FaRegUser size={30} className="text-[#9c0b35]" />
+    </div>
+  )}
+
+  <div>
+    <div className="flex flex-col sm:flex-row gap-2">
+      <h3 className="font-bold font-manrope text-[24px]">{name}</h3>
+      {salon && (
+        <>
+          <span className="hidden sm:inline font-manrope font-bold text-[24px]">/</span>
+          <span className="font-manrope font-medium text-[24px]">{salon}</span>
+        </>
+      )}
+    </div>
+
+    {role && <p className="font-manrope font-medium text-[16px] text-[#4F4F4F]">{role}</p>}
+  </div>
+</div>
+
 
 
         <div className="space-y-3">
