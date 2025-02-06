@@ -60,6 +60,24 @@ const Header: React.FC = () => {
         ),
     }));
 
+    const menuItems1 = [
+        {
+            key: "kk", // "Key" emas, "key"
+            label: <span className="hover:text-[#9C0B35] text-lg text-white">Бронирование</span>,
+            children: categoriesToDisplay.map((item: { name: string; id: string }) => ({
+                key: item.id, // "key" kichik harfda
+                label: (
+                    <Link onClick={()=>setIsOpen(false)}
+                        to={item.id ? `/Services/${item.id}` : "/Services"}
+                        className="hover:text-[#9C0B35] text-[#21212E]"
+                    >
+                        {item.name}
+                    </Link>
+                ),
+            })),
+        },
+    ];
+    
     
 
 
@@ -102,7 +120,7 @@ const Header: React.FC = () => {
                 {
                     key: '1',
                     label: (
-                        <Link to="/#offer">О продукте</Link>
+                        <Link onClick={()=>setIsOpen(false)} to="/#offer">О продукте</Link>
                     ),
                 },
                 {
@@ -114,19 +132,19 @@ const Header: React.FC = () => {
                         {
                             key: '2-1',
                             label: (
-                                <Link to="/AboutCompany#about">Нормативные права</Link>
+                                <Link onClick={()=>setIsOpen(false)} to="/AboutCompany#about">Нормативные права</Link>
                             ),
                         },
                         {
                             key: '2-2',
                             label: (
-                                <Link to="/AboutCompany#company1">Наша миссия</Link>
+                                <Link onClick={()=>setIsOpen(false)} to="/AboutCompany#company1">Наша миссия</Link>
                             ),
                         },
                         {
                             key: '2-3',
                             label: (
-                                <Link to="/AboutCompany#company2">Команда</Link>
+                                <Link onClick={()=>setIsOpen(false)}  to="/AboutCompany#company2">Команда</Link>
                             ),
                         },
                     ],
@@ -134,14 +152,14 @@ const Header: React.FC = () => {
                 {
                     key: '3',
                     label: (
-                        <Link to="/StandardsSafety">Стандартизация / Безопасность</Link>
+                        <Link onClick={()=>setIsOpen(false)} to="/StandardsSafety">Стандартизация / Безопасность</Link>
                     ),
             
                 },
                 {
                     key: '4',
                     label: (
-                        <Link to="/Vacancies#vacancies">Вакансии</Link>
+                        <Link onClick={()=>setIsOpen(false)} to="/Vacancies#vacancies">Вакансии</Link>
                     ),
             
                 }
@@ -155,7 +173,7 @@ const Header: React.FC = () => {
         console.log('click ', e);
     }
     return (
-        <div className={`sticky top-0 select-none bg-[#111827] left-0 right-0 z-[6] container`}>
+        <div className={`sticky top-0 select-none bg-[#111827] left-0 right-0 z-[6]  container`}>
             <header className="bg-[#111827]  text-white relative z-[5] ">
                 <div className="mx-auto flex justify-between items-center py-3">
                     {/* Logo bo'limi */}
@@ -251,14 +269,14 @@ const Header: React.FC = () => {
                 <div
                     className={`lg:hidden  transition-all duration-500 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
                 >
-                    <div className="flex flex-col items-center py-4 gap-6">
+                    <div className="flex flex-col items-center py-1 gap-6">
                         <div>
                             <Menu
                                 onClick={onClick}
-                                style={{ width: 256 }}
-                                className="bg-[#111827] text-white ddddd"
+                                style={{ width: 256, }}
+                                className="bg-[#111827] text-white ddddd "
                                 defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
+                                defaultOpenKeys={['sub2']}
                                 mode="inline"
                                 items={items}
                             />
@@ -272,7 +290,7 @@ const Header: React.FC = () => {
                                 defaultSelectedKeys={['1']}
                                 defaultOpenKeys={['sub1']}
                                 mode="inline"
-                                items={menuItems}
+                                items={menuItems1}
                             />
                         </div>
 
