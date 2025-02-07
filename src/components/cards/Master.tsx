@@ -298,17 +298,19 @@ export default function MasterCard({
 
       <UniversalModal isOpen={isModalOpen} onClose={closeModal}>
         {page === 1 ? (
-          <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
-            <div className="text-center mb-6">
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("bronqilish")}</h2>
+          <div className="p-4 sm:p-6 bg-[#B9B9C9] rounded-[20px]">
+            <div className="text-center mb-4 sm:mb-6">
+              <h2 className="font-manrope font-extrabold text-2xl sm:text-3xl md:text-4xl text-gray-900 mb-2">
+                {t("bronqilish")}
+              </h2>
             </div>
             <div>
               <CalendarTimeSelection masterId={masterId || id} onTimeSelect={handleTimeSelect} />
             </div>
             {errorMessage && <div className="text-red-600 text-center mt-4 mb-2">{errorMessage}</div>}
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-4 sm:mt-6">
               <Button
-                className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
                 onClick={() => {
                   SendCode()
                   setPage(2)
@@ -321,14 +323,14 @@ export default function MasterCard({
           </div>
         ) : page === 2 ? (
           <div className="p-6  rounded-[20px]">
-            <div className="flex flex-col items-center justify-center">
-              <h1 className="font-manrope font-extrabold text-[44px] leading-[54px]">{t("OTPCode")}</h1>
-              <h2 className="font-bold font-manrope text-[#30px] leading-[36px] pt-5">
+            <div className="flex flex-col items-center justify-center text-center">
+              <h1 className="font-manrope font-extrabold text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] leading-[40px] sm:leading-[46px] md:leading-[50px] lg:leading-[54px]">{t("OTPCode")}</h1>
+              <h2 className="font-bold font-manrope text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] leading-[28px] sm:leading-[32px] md:leading-[34px] lg:leading-[36px] pt-5">
                 {localStorage.getItem("phoneNumber")}
               </h2>
-              <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] leading-[20px]">{t("sentCode")}</p>
+              <p className="font-manrope font-medium text-[#4F4F4F] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[18px] sm:leading-[20px] md:leading-[22px] lg:leading-[24px]">{t("sentCode")}</p>
             </div>
-            <div className="flex items-center flex-col gap-20 justify-center otp-input p-6">
+            <div className="flex items-center flex-col gap-10 sm:gap-14 md:gap-16 lg:gap-20 justify-center otp-input p-6">
               <Input.OTP
                 length={4}
                 onInput={(value: string[]) => {
@@ -337,13 +339,13 @@ export default function MasterCard({
                 value={otpCodeInput} // Added value prop to clear input after submission
                 style={{
                   display: "flex",
-                  width: "60%",
+                  width: "100%",
                   justifyContent: "between",
-                  gap: "20px",
+                  gap: "10px",
                 }}
               />
               <Button
-                className=" w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full max-w-md h-12 sm:h-14 md:h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => {
                   HandleSubmit()
                 }}
@@ -354,20 +356,19 @@ export default function MasterCard({
           </div>
         ) : page === 3 ? (
           response?.status === "CREATED" ? (
-            <div className="p-6 rounded-[20px]">
-              <div className="flex flex-col items-center justify-center gap-10 py-10">
-                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+            <div className="p-4 sm:p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-6 sm:gap-10 py-6 sm:py-10">
+                <IoMdCheckmarkCircleOutline className="text-[#9C0B35] text-6xl sm:text-[100px]" />
+                <h2 className="font-manrope font-extrabold text-2xl sm:text-4xl text-gray-900 mb-2 text-center">
                   {t("Заявка принята")}
                 </h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+                <p className="font-manrope font-medium text-[#4F4F4F] text-lg sm:text-[22px] text-center">
                   {t("Ваша заявка принята. Cтатус вашей записи можно")}
-                  <br />
                   {t("отслеживать в мобильном приложении bookers")}
                 </p>
-                <div className="pt-10">
+                <div className="pt-6 sm:pt-10">
                   <Button
-                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    className="w-[240px] sm:w-[340px] h-[50px] sm:h-[66px] rounded-[30px] sm:rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
                     onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Скачать приложение")}
@@ -376,18 +377,18 @@ export default function MasterCard({
               </div>
             </div>
           ) : response?.status === "WAIT" ? (
-            <div className="p-6 rounded-[20px]">
-              <div className="flex flex-col items-center justify-center gap-10 py-10">
-                <IoMdCheckmarkCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">{t("Ваша запись отправленана утверждение мастеру")}</h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">
+            <div className="p-4 sm:p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-6 sm:gap-10 py-6 sm:py-10">
+                <IoMdCheckmarkCircleOutline className="text-[#9C0B35] text-6xl sm:text-[100px]" />
+                <h2 className="font-manrope font-extrabold text-2xl sm:text-4xl text-gray-900 mb-2 text-center">{t("Ваша запись отправленана утверждение мастеру")}</h2>
+                <p className="font-manrope font-medium text-[#4F4F4F] text-lg sm:text-[22px] text-center">
                   {t("Ваша заявка принята. Cтатус вашей записи можно")}
                   <br />
                   {t("отслеживать в мобильном приложении bookers")}
                 </p>
-                <div className="pt-10">
+                <div className="pt-6 sm:pt-10">
                   <Button
-                    className="w-[340px] h-[66px] rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[18px] leading-[30px] hover:bg-[#9C0B35] hover:text-white"
+                    className="w-[240px] sm:w-[340px] h-[50px] sm:h-[66px] rounded-[30px] sm:rounded-[40px] border-2 border-[#9C0B35] text-[#9C0B35] font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
                     onClick={() => window.open('https://apps.apple.com/uz/app/bookers-%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D0%BB%D1%83%D0%B3/id6503646200', '_blank')}
                   >
                     {t("Скачать приложение")}
@@ -396,23 +397,29 @@ export default function MasterCard({
               </div>
             </div>
           ) : (
-            <div className="p-6 rounded-[20px]">
-              <div className="flex flex-col items-center justify-center gap-10 py-10">
-                <IoAlertCircleOutline style={{ color: "#9C0B35", fontSize: "100px" }} />
-                <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2 text-center">
+            <div className="p-4 sm:p-6 rounded-[20px]">
+              <div className="flex flex-col items-center justify-center gap-6 sm:gap-10 py-6 sm:py-10">
+                <IoAlertCircleOutline className="text-[#9C0B35] text-6xl sm:text-[100px]" />
+                <h2 className="font-manrope font-extrabold text-2xl sm:text-4xl text-gray-900 text-center">
                   {t("Вы не можете записаться на услугу мастера")}
                 </h2>
-                <p className="font-manrope font-medium text-[#4F4F4F] text-[22px] text-center">{t("Что бы записаться необходимо пройти")} <br />{t("")}</p>
-                <div className="pt-10">
+                <p className="font-manrope font-medium text-[#4F4F4F] text-lg sm:text-[22px] text-center">
+                  {t("Что бы записаться необходимо пройти")}
+                </p>
+                <div className="pt-6 sm:pt-10">
                   <Button
-                    className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
-                    onClick={() => setLoginHolat(true)}
+                    className="w-[240px] sm:w-[340px] h-[50px] sm:h-[66px] rounded-[30px] sm:rounded-[40px]  bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px]"
+                    onClick={() => {
+                      setLoginHolat(true)
+                      closeModal()
+                    }}
                   >
-                    {t("Зарегистрироваться")}
+                    {t("Ro‘yxatdan o‘tish")}
                   </Button>
                 </div>
               </div>
             </div>
+
           )
         ) : null}
       </UniversalModal>
