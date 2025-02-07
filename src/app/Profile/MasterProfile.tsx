@@ -62,7 +62,7 @@ interface MasterDetails {
   phoneNumber: string
   price: number
   specialization: string
-  reviews:  string | null
+  reviews: string | null
   serviceId: string
 }
 
@@ -399,19 +399,21 @@ export default function MasterProfile() {
 
       <UniversalModal isOpen={isModalOpen} onClose={closeModal}>
         {page === 1 ? (
-          <div className="p-6 bg-[#B9B9C9] rounded-[20px]">
-            <div className="text-center mb-6">
-              <h2 className="font-manrope font-extrabold text-4xl text-gray-900 mb-2">{t("bronqilish")}</h2>
+          <div className="p-4 sm:p-6 bg-[#B9B9C9] rounded-[20px]">
+            <div className="text-center mb-4 sm:mb-6">
+              <h2 className="font-manrope font-extrabold text-2xl sm:text-3xl md:text-4xl text-gray-900 mb-2">
+                {t("bronqilish")}
+              </h2>
             </div>
             <div>
               <CalendarTimeSelection masterId={id} onTimeSelect={handleTimeSelect} />
             </div>
             {errorMessage && <div className="text-red-600 text-center mt-4 mb-2">{errorMessage}</div>}
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-4 sm:mt-6">
               <Button
-                className="w-full max-w-md h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
                 onClick={() => {
-                  globalDataFuncCode()
+                  globalDataFuncCode();
                 }}
                 disabled={!selectedDateTime || isSubmitting}
               >
@@ -419,6 +421,7 @@ export default function MasterProfile() {
               </Button>
             </div>
           </div>
+
         ) : page === 2 ? (
           <div className="p-6  rounded-[20px]">
             <div className="flex flex-col items-center justify-center">
