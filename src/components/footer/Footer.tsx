@@ -26,7 +26,7 @@ function Footer() {
           {/* Documentation */}
           <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Документация")}</h2>
-            <div className="flex flex-col items-center md:items-start gap-2 text-base">
+            <div className="flex text-center md:text-left flex-col items-center md:items-start gap-2 text-base">
               {HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const statusMap: Record<string, string> = {
                   TERMS_OF_USE_WEB: t('Условия использования'),
@@ -51,8 +51,8 @@ function Footer() {
           </div>
           {/* Main Links */}
           <div className="flex flex-col gap-5  items-center md:items-start">
-            <h2 className="text-[20px] font-bold">{t("Ссылки основных страниц")}</h2>
-            <div className="flex flex-col items-center md:items-start gap-2 text-base">
+            <h2 className="text-[20px] text-center md:text-left font-bold">{t("Ссылки основных страниц")}</h2>
+            <div className="flex flex-col text-center md:text-left items-center md:items-start gap-2 text-base">
               <Link to="/#offer">{t("клиентам")}</Link>
               <Link to="/#offer">{t("мастерам")}</Link>
               <Link to="/#offer">{t('Бизнес-партнерство')}</Link>
@@ -79,16 +79,16 @@ function Footer() {
           {/* Contacts */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("контактные данные")}</h2>
-            <div className="flex flex-col items-center md:items-start gap-2 text-base">
-              <p  className="flex items-start gap-3">
+            <div className="flex flex-col items-center text-center md:text-left md:items-start gap-2 text-base">
+              <p  className="flex items-start gap-2">
                 <img src={Pin} alt="Pin" />
                 <p>Республика Узбекистан, город Ташкент</p>
               </p>
-              <p  className="flex items-start gap-3">
+              <p  className="flex items-start gap-2">
                 <img src={Phone} alt="Phone" />
                 <p>+998 77 308-88-88</p>
               </p>
-              <p  className="flex items-start gap-3">
+              <p  className="flex items-start gap-2">
                 <img src={Messege} alt="Message" />
                 <p>info@welltech.uz</p>
               </p>
