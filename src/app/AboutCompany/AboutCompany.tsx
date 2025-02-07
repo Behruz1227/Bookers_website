@@ -43,15 +43,15 @@ export const AboutCompany: React.FC = () => {
     return (
         <div className='bg-[#111827]'>
             <div className='mx-auto '>
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-10 pb-20 px-4">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-6  pb-20 px-4">
                     {/* Matn qismi */}
                     <div className="w-full lg:w-[50%] order-2 lg:order-1 text-center lg:text-left max-w-md mx-auto lg:max-w-none">
-                        <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight">
+                        <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[44px] leading-tight">
                             {t(
                                 'Компания Well Tech предлагает продукты программных обеспечений для создания автоматизации процессов и улучшения эффективности бизнес процессов'
                             )}
                         </h1>
-                        <p className="text-[#B9B9C9] text-sm sm:text-base md:text-lg font-medium py-6 md:py-8 lg:py-10 font-manrope leading-snug md:leading-[26px]">
+                        <p className="text-[#B9B9C9] font-manrope font-medium text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] leading-[22px] sm:leading-[24px] md:leading-[26px] lg:leading-[28px] py-4 sm:py-6 md:py-8 lg:py-10">
                             {t(
                                 'Компания Well Tech ведет свою деятельность в сфере информационных технологий и активно участвует в развитии IT-инфраструктуры нашей страны. За короткий срок своего существования наша компания реализовала ряд успешных проектов, включая bookers'
                             )}
@@ -60,15 +60,16 @@ export const AboutCompany: React.FC = () => {
 
                     {/* Dumaloq rasm */}
                     <div className="w-full lg:w-[50%] order-1 lg:order-2 flex justify-center">
-                        <img className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-auto" src={imgSplide} alt="img" />
+                        <img className="w-full max-w-[250px] sm:max-w-[300px] md:max-w-[400px] lg:w-auto" src={imgSplide} alt="img" />
                     </div>
                 </div>
 
 
 
+
                 <div id='about'>
                     <HeaderTitles text={t('Свидетельства и сертификатdbookers')} size='' />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 py-8 sm:py-12 md:py-16 lg:py-20">
+                    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 py-8 sm:py-12 md:py-16 lg:py-20">
                         {[
                             "Свидетельство о регистрации базы персональных данных в Государственном реестре баз персональных данных",
                             "Свидетельство о регистрации базы персональных данных в Государственном реестре баз персональных данных"
@@ -80,15 +81,16 @@ export const AboutCompany: React.FC = () => {
 
                                 <div className="text-center pt-4 sm:pt-6 md:pt-8 lg:pt-10">
                                     <Button
-                                        className="w-full max-w-[300px] sm:max-w-[320px] md:max-w-[340px] h-[50px] sm:h-[55px] md:h-[60px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[26px] sm:leading-[28px] md:leading-[30px]"
+                                        className="w-full md:w-full h-[50px] sm:h-[55px] md:h-[60px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[26px] sm:leading-[28px] md:leading-[30px]"
                                         onClick={openModal}
                                     >
-                                        {t('Подробнее')}
+                                        {t("Подробнее")}
                                     </Button>
                                 </div>
                             </div>
                         ))}
                     </div>
+
 
                 </div>
                 <div id='company1'>
@@ -182,10 +184,10 @@ export const AboutCompany: React.FC = () => {
                 </div>
             </div>
             <Footer />
-            <UniversalModal isOpen={isModalOpen} onClose={closeModal} style="max-h-[90vh] w-[90%]">
+            <UniversalModal isOpen={isModalOpen} onClose={closeModal} >
                 <div >
                     <div className='flex justify-center items-center'>
-                        <img src={guvohnoma} alt="guvohnoma" className='text-center border-none w-full py-20 pl-20 pr-10' />
+                        <img src={guvohnoma} alt="guvohnoma" className='px-10 pb-10' />
                     </div>
                 </div>
             </UniversalModal>

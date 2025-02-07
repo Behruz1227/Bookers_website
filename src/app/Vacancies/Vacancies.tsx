@@ -36,30 +36,32 @@ export const Vacancies: React.FC = () => {
       <div className='bg-[#111827]'>
 
         <div className='mx-auto pb-20 '>
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-10 pb-20">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6 sm:gap-8 lg:gap-10 pb-10 sm:pb-16 md:pb-20">
             {/* Matn qismi */}
             <div className="w-full lg:w-[50%] order-2 lg:order-1 text-center lg:text-left">
-              <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-3xl lg:text-4xl">
+              <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[44px] leading-tight">
                 {t("Компания Well Tech: Вакансии")}
               </h1>
-              <p className="font-manrope text-[16px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[24px] lg:leading-[30px] my-5 lg:my-10">
+
+              <p className="font-manrope text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[22px] sm:leading-[24px] md:leading-[26px] lg:leading-[28px] my-4 sm:my-6 lg:my-8">
                 {t("Вы готовы нести ответственность за свою работу и результаты, способствовать эффективному выполнению задач и достижению результатов? Компания Well Tech открыта для реализации новых возможностей и расширять состав команды.")}
               </p>
-              <p className="font-manrope text-[16px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[24px] lg:leading-[30px] my-5 lg:my-10">
+
+              <p className="font-manrope text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] font-medium text-[#B9B9C9] leading-[22px] sm:leading-[24px] md:leading-[26px] lg:leading-[28px] my-4 sm:my-6 lg:my-8">
                 {t("В команде мы поощряем активное взаимодействие и обмен идеями, совместно работать, находить наилучшие решения и быстро адаптироваться к изменениям.")}
               </p>
             </div>
 
             {/* Rasm qismi */}
             <div className="w-full lg:w-[50%] order-1 lg:order-2 flex justify-center">
-              <img src={img} alt="" className="w-full lg:w-auto" />
+              <img src={img} alt="" className="w-full max-w-[250px] sm:max-w-[350px] md:max-w-[450px] lg:w-auto" />
             </div>
           </div>
 
 
 
           <HeaderTitles text={t('Вакансии')} />
-          <div
+          {/* <div
             id="vacancies"
             className="bg-[#B9B9C9] p-6 sm:p-8 md:p-10 rounded-3xl w-full mt-10 lg:w-[50%] text-center"
           >
@@ -78,6 +80,28 @@ export const Vacancies: React.FC = () => {
               >
                 {t("Подробнее")}
               </Button>
+            </div>
+          </div> */}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 py-8 sm:py-12 md:py-16 lg:py-20">
+            <div className="bg-[#B9B9C9] rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 w-full md:w-full col-span-1 lg:col-span-1">
+              <h3 className="text-[#9C0B35] font-manrope font-extrabold text-[20px] sm:text-[24px] md:text-[26px] text-center">
+                {t("Комьюнити-менеджер")}
+              </h3>
+              <p className="font-manrope font-normal text-[16px] py-5 md:py-10 sm:text-[22px] md:text-[24px] lg:text-[26px] text-center px-2 sm:px-6 md:px-8">
+                {t(
+                  "Коммьюнити-менеджеры отвечают за создание, развитие, управление и общение с участниками сообщества"
+                )}
+              </p>
+
+              <div className="text-center">
+                <Button
+                  className="w-full md:w-full h-[50px] sm:h-[55px] md:h-[60px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[26px] sm:leading-[28px] md:leading-[30px]"
+                  onClick={openModal}
+                >
+                  {t("Подробнее")}
+                </Button>
+              </div>
             </div>
           </div>
 

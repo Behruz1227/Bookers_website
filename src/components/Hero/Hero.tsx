@@ -16,7 +16,7 @@ type HeroProps = {
     slides: Slide[];
 };
 
-const Hero: React.FC<HeroProps> = ({ slides }) => {
+const  Hero: React.FC<HeroProps> = ({ slides }) => {
     return (
         <div className="relative py-5 select-none w-full md:mt-0">
             <style>
