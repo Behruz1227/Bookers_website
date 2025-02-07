@@ -530,7 +530,7 @@ export default function MasterProfile() {
                       closeModal()
                     }}
                   >
-                    {t("Ro‘yxatdan o‘tish")}
+                    {t("Записаться")}
                   </Button>
                 </div>
               </div>

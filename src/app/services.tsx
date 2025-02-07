@@ -37,7 +37,7 @@ function Services() {
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
   const [search, setSearch] = useState<string>("")
-  
+
 
   const { globalDataFunc: fetchCategories } = useGlobalRequest(
     `${BASE_URL}/api/category`,
@@ -68,9 +68,9 @@ function Services() {
       fetchMastersByCategory()
         .then((data: any) => {
           if (data && data.body && Array.isArray(data.body.object)) {
-            
+
             setMasters(data.body.object)
-            
+
           } else {
             setMasters([])
           }
@@ -109,9 +109,10 @@ function Services() {
       <div className="bg-[#111827] w-full mx-auto ">
         <main className="">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
-            <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[30px] sm:text-[40px] lg:text-[50px] leading-[35px] sm:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left">
+            <h1 className="text-[20px] sm:text-[30px] md:text-[40px] lg:text-[50px] leading-[25px] sm:leading-[35px] md:leading-[45px] lg:leading-[50px] tracking-[-0.04em] pt-6 lg:pt-10 text-center lg:text-left font-manrope font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35]">
               {t("Услуги мастеров и салонов красоты")}: {category?.body.find((item: { id: string; name: string; }) => item.id === selectedCategory)?.name || ""}
             </h1>
+
             <img
               src={HeroImg}
               alt="img"
@@ -155,7 +156,7 @@ function Services() {
               <>
                 <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
                   {Array.isArray(masters) &&
-                    masters.map((master: { id: string, mainPhoto: string, fullName: string, salonName: string, masterSpecialization: string[], feedbackCount: number, orderCount: number, clientCount: number, masterServicePrice: number, district: string, street: string, house: string, serviceId: string, attachmentId: string}, index) => (
+                    masters.map((master: { id: string, mainPhoto: string, fullName: string, salonName: string, masterSpecialization: string[], feedbackCount: number, orderCount: number, clientCount: number, masterServicePrice: number, district: string, street: string, house: string, serviceId: string, attachmentId: string }, index) => (
                       <div key={master.id || index}>
                         <MasterCard
                           id={master.id}
@@ -182,11 +183,13 @@ function Services() {
                 <div className="mt-10">
                   {masters.length == size && (
                     <Button
-                      className="w-[340px] h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[18px] leading-[30px] "
+                      className="w-[250px] sm:w-[220px] xs:w-full max-w-[250px] h-[50px] sm:h-[60px] md:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px] px-6"
                       onClick={handleLoadMore}
                     >
                       {t("Показать больше")}
                     </Button>
+
+
                   )}
                 </div>
               </>
