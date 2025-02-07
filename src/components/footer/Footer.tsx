@@ -22,11 +22,11 @@ function Footer() {
     <div className="bg-[#111827] w-full text-[#ffffff]">
       <div className="">
         {/* Top Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center  lg:text-left">
           {/* Documentation */}
           <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Документация")}</h2>
-            <div className="flex flex-col gap-2 text-base">
+            <div className="flex flex-col items-center md:items-start gap-2 text-base">
               {HelpType?.body?.map((item: { helpStatus: string, id: number }) => {
                 const statusMap: Record<string, string> = {
                   TERMS_OF_USE_WEB: t('Условия использования'),
@@ -52,7 +52,7 @@ function Footer() {
           {/* Main Links */}
           <div className="flex flex-col gap-5  items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Ссылки основных страниц")}</h2>
-            <div className="flex flex-col gap-2 text-base">
+            <div className="flex flex-col items-center md:items-start gap-2 text-base">
               <Link to="/#offer">{t("клиентам")}</Link>
               <Link to="/#offer">{t("мастерам")}</Link>
               <Link to="/#offer">{t('Бизнес-партнерство')}</Link>
@@ -64,7 +64,7 @@ function Footer() {
           {/* Registration */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("Вход / Регистрация")}</h2>
-            <div className="flex flex-col gap-2 text-base">
+            <div className="flex flex-col items-center md:items-start gap-2 text-base">
               <p onClick={() => {
                 setLoginHolat(true);
                 setLoginRole("CLIENT");
@@ -79,7 +79,7 @@ function Footer() {
           {/* Contacts */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <h2 className="text-[20px] font-bold">{t("контактные данные")}</h2>
-            <div className="flex flex-col gap-2 text-base">
+            <div className="flex flex-col items-center md:items-start gap-2 text-base">
               <p  className="flex items-start gap-3">
                 <img src={Pin} alt="Pin" />
                 <p>Республика Узбекистан, город Ташкент</p>
