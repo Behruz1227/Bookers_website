@@ -16,7 +16,7 @@ type HeroProps = {
     slides: Slide[];
 };
 
-const  Hero: React.FC<HeroProps> = ({ slides }) => {
+const Hero: React.FC<HeroProps> = ({ slides }) => {
     return (
         <div className="relative py-5 select-none w-full md:mt-0">
             <style>
@@ -65,28 +65,27 @@ const  Hero: React.FC<HeroProps> = ({ slides }) => {
                     <SwiperSlide key={index} className="h-auto flex items-center">
                         <div className="flex flex-col-reverse lg:flex-row justify-center items-center h-full p-4 lg:p-8">
                             <div className="w-full lg:w-1/2 text-white lg:text-left text-center lg:mb-0 mb-4">
-                                <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[50px] leading-[50px] tracking-[-0.04em]">
+                                <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FB7CA1] to-[#9C0B35] font-manrope font-extrabold text-[32px] leading-[36px] sm:text-[40px] sm:leading-[44px] lg:text-[50px] lg:leading-[50px] tracking-[-0.04em]">
                                     {slide.title}
                                 </h1>
-                                <p className="text-[#B9B9C9] hidden lg:flex lg:text-lg font-medium text-[26px] py-10 font-manrope leading-[26px]">
+                                <p className="text-[#B9B9C9] text-[16px] leading-[20px] sm:text-[20px] sm:leading-[24px] hidden lg:flex lg:text-lg font-medium lg:text-[26px] lg:leading-[26px] py-4 sm:py-6 lg:py-10 font-manrope">
                                     {slide.description}
                                 </p>
                                 {slide.description2 && (
-                                    <p className="text-[#B9B9C9] hidden lg:flex lg:text-lg text-base mt-4">
+                                    <p className="text-[#B9B9C9] text-[14px] leading-[18px] sm:text-[18px] sm:leading-[22px] hidden lg:flex lg:text-lg text-base mt-2 sm:mt-4">
                                         {slide.description2}
                                     </p>
                                 )}
                             </div>
                             <div className="w-full lg:w-1/2 flex justify-center mt-4 lg:mt-0">
                                 <img
-                                    className="rounded-lg"
+                                    className="rounded-lg w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px]"
                                     src={slide.image}
                                     alt="Hero image"
-                                    width={400}
-                                    height={400}
                                 />
                             </div>
                         </div>
+
                     </SwiperSlide>
                 ))}
             </Swiper>

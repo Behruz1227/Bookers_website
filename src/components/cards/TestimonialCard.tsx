@@ -17,16 +17,14 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
   salonName
 }) => {
   return (
-    <Card
-      className=" w-full py-5 rounded-3xl shadow-lg h-[339px]  bg-[#B9B9C9] border-none"
-    >
-      <div className="relative">
+    <Card className="w-full py-5 rounded-3xl shadow-lg bg-[#B9B9C9] border-none h-auto md:h-[339px]">
+      <div className="relative ">
         <div className="flex items-start gap-4">
           <div className="relative mb-3">
             <Avatar
-              src={attachment + clientAttachmentId} 
+              src={attachment + clientAttachmentId}
               size={48}
-              className="shadow-sm "
+              className="shadow-sm"
             />
             <div className="absolute -top-1 -right-1">
               <svg
@@ -53,26 +51,21 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
           </div>
         </div>
         <div>
-          <p
-            className="mt-2 h-[120px] text-black text-[18px] font-manrope tracking-[-0.25px] leading-[27px] font-normal "
-
-          >
+          <p className="mt-2 h-auto md:h-[120px] text-black text-[16px] md:text-[18px] font-manrope tracking-[-0.25px] leading-[24px] md:leading-[27px] font-normal">
             {text}
           </p>
-          <div className="py-5 ">
-            <img className='w-full' src={line} alt="line " />
+          <div className="py-5">
+            <img className="w-full" src={line} alt="line" />
           </div>
         </div>
-        <div
-          className="flex items-center gap-2 text-black text-[16px] leading-[24px] font-medium   "
-          style={{ fontFamily: 'Manrope, sans-serif' }}
-        >
-          <span className='font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{masterName}</span>
+        <div className="flex flex-wrap items-center gap-2 text-black text-[14px] sm:text-[16px] leading-[22px] sm:leading-[24px] font-medium">
+          <span className="font-manrope font-medium tracking-[-0.25px]">{masterName}</span>
           <span>/</span>
-          <span className='text-[#9C0B35] font-manrope font-medium text-[16px] leading-[24px] tracking-[-0.25px]'>{salonName}</span>
+          <span className="text-[#9C0B35] font-manrope font-medium tracking-[-0.25px]">{salonName}</span>
         </div>
       </div>
     </Card>
+
   );
 };
 
