@@ -115,49 +115,34 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   }
 
   const formatDate = (date: Date) => {
-    const language = localStorage.getItem("i18nextLng")
-    const localeMap = {
-      uz: "uz-UZ",
-      ru: "ru-RU",
-      en: "en-US",
-    }
+    const language = localStorage.getItem("i18nextLng") || "en"
+    const options: Intl.DateTimeFormatOptions = { weekday: "long", day: "numeric", month: "long" }
 
-    return date.toLocaleDateString(localeMap[language as keyof typeof localeMap], {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-    })
+    return new Intl.DateTimeFormat(language, options).format(date)
   }
 
   const formatCurrentDate = () => {
     const today = new Date()
-    const language = localStorage.getItem("i18nextLng")
-    const localeMap = {
-      uz: "uz-UZ",
-      ru: "ru-RU",
-      en: "en-US",
-    }
+    const language = localStorage.getItem("i18nextLng") || "en"
 
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
+    // Format date without the day of week first
+    const dateFormatter = new Intl.DateTimeFormat(language, {
       day: "numeric",
       month: "long",
-    }
+    })
 
-    const formatter = new Intl.DateTimeFormat(localeMap[language as keyof typeof localeMap], options)
-    const parts = formatter.formatToParts(today)
+    // Get day of week separately
+    const weekdayFormatter = new Intl.DateTimeFormat(language, {
+      weekday: "long",
+    })
 
-    const weekday = parts.find((part) => part.type === "weekday")?.value || ""
-    const day = parts.find((part) => part.type === "day")?.value || ""
-    const month = parts.find((part) => part.type === "month")?.value || ""
+    const date = dateFormatter.format(today)
+    const weekday = weekdayFormatter.format(today)
 
-    if (language === "ru") {
-      return `Сегодня ${weekday}, ${day} ${month}`
-    } else if (language === "uz") {
-      return `Bugun ${weekday}, ${day} ${month}`
-    } else {
-      return `Today ${weekday}, ${month} ${day}`
-    }
+    // Use translation for "Today" word
+    const todayWord = t("today")
+
+    return `${todayWord} ${weekday}, ${date}`
   }
 
   return (
@@ -218,11 +203,12 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                   className={`
                     h-8 sm:h-10 flex items-center justify-center text-xs sm:text-sm cursor-pointer
                     transition-colors duration-200 rounded-full
-                    ${isSelected
-                      ? "bg-[#9C0B35] text-white"
-                      : isPastDate
-                        ? "text-gray-400 cursor-not-allowed"
-                        : "hover:bg-[#9C0B35] hover:text-white"
+                    ${
+                      isSelected
+                        ? "bg-[#9C0B35] text-white"
+                        : isPastDate
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "hover:bg-[#9C0B35] hover:text-white"
                     }
                     ${isWeekend && !isSelected ? "text-[#9C0B35]" : "text-gray-900"}
                   `}
@@ -251,10 +237,11 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                       <Button
                         key={time}
                         onClick={() => handleTimeSelect(time)}
-                        className={`py-2 px-2 rounded-[5px] text-center transition-colors text-sm w-full ${selectedTime === time
+                        className={`py-2 px-2 rounded-[5px] text-center transition-colors text-sm w-full ${
+                          selectedTime === time
                             ? "bg-[#9C0B35] text-white"
                             : "bg-white hover:bg-[#9C0B35] hover:text-white text-gray-900"
-                          }`}
+                        }`}
                       >
                         {time}
                       </Button>
