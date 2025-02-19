@@ -39,9 +39,7 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
   const firstDayOfMonth = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7
 
   useEffect(() => {
-    if (selectedDate && masterId) {
-      fetchAvailableTimeSlots()
-    }
+    if (selectedDate && masterId) fetchAvailableTimeSlots()
   }, [selectedDate, masterId])
 
   const fetchAvailableTimeSlots = async () => {
@@ -201,8 +199,8 @@ export default function CalendarTimeSelection({ masterId, onTimeSelect }: Calend
                   key={day}
                   onClick={() => !isPastDate && handleDateSelect(day)}
                   className={`
-                    h-8 sm:h-10 flex items-center justify-center text-xs sm:text-sm cursor-pointer
-                    transition-colors duration-200 rounded-full
+                    h-8 sm:h-10 w-8 sm:w-10 flex items-center justify-center text-xs sm:text-sm cursor-pointer
+                    transition-colors duration-200
                     ${
                       isSelected
                         ? "bg-[#9C0B35] text-white"

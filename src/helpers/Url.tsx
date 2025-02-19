@@ -1,6 +1,8 @@
 //swagger url
 export const BASE_URL: string = "http://207.154.246.120:8080";
 
+export const currentByMaster = `${BASE_URL}/api/user/web/get-one/`
+
 //img
 export const attachment : string = `${BASE_URL}/api/attachment/getFile/`;
 
