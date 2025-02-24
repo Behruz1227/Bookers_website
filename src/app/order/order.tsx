@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useGlobalRequest} from "@/helpers/Quary/quary.tsx";
-import {BASE_URL, currentByMaster} from "@/helpers/Url.tsx";
+import {BASE_URL, currentByMaster, currentByMasterGallery} from "@/helpers/Url.tsx";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import Loading from "@/components/Loading/Loading.tsx";
@@ -13,6 +13,8 @@ import {IoAlertCircleOutline} from "react-icons/io5";
 import {UniversalModal} from "@/components/Modal/UniversalModal.tsx";
 import {toast} from "react-toastify";
 import GradientText from "@/app/order/components/header.tsx";
+import MasterGallery, {IMasterGallery} from "@/app/order/components/master-gallery.tsx";
+import Feedback from "@/app/order/components/feedback.tsx";
 
 const Order = () => {
     const {t} = useTranslation()
@@ -22,7 +24,6 @@ const Order = () => {
     const [activeTab, setActiveTab] = useState<0 | 1 | 2 | 3>(0)
     const [page, setPage] = useState(1)
     const [selectedDateTime, setSelectedDateTime] = useState<{ date: string; time: string } | null>(null)
-    // const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [phoneNumber, setPhoneNumber] = useState("")
     const [userFullName, setUserFullName] = useState("")
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -30,7 +31,12 @@ const Order = () => {
 
     const {globalDataFunc: fetchMastersBy} = useGlobalRequest(`${currentByMaster}${id}`, "GET")
     const {
-        response: responseCode,
+        globalDataFunc: masterGalleryFetch,
+        // loading: masterGalleryLoading,
+        response: masterGalleryResponse
+    } = useGlobalRequest(`${currentByMasterGallery}${id}`, "GET")
+    const {
+        // response: responseCode,
         globalDataFunc: globalDataFuncCode,
     } = useGlobalRequest(`${BASE_URL}/api/auth/sendCode/web`, "POST", {phoneNumber: phoneNumber?.replace(/[^\d+]/g, "")})
     const {
@@ -65,20 +71,9 @@ const Order = () => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     if (responseCode?.success) {
-    //         toast.dismiss()
-    //         toast.success(t("CodeSent"), {
-    //             position: "top-right",
-    //             autoClose: 3000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //         })
-    //     }
-    // }, [responseCode])
+    useEffect(() => {
+        if (id && activeTab === 1) masterGalleryFetch().then(() => "")
+    }, [activeTab, id, masterGalleryFetch]);
 
     useEffect(() => {
         if (responseCheck?.success) {
@@ -138,9 +133,9 @@ const Order = () => {
     return (
         <div className={'my-5'}>
             <div className={'text-center mt-5 mb-10'}>
-            {activeTab === 0 && <GradientText text="Подробности о мастере"/>}
-            {activeTab === 1 && <GradientText text="Записаться"/>}
-            {activeTab === 2 && <GradientText text="Введите своё имя и телефон"/>}
+                {activeTab === 0 && <GradientText text="Подробности о мастере"/>}
+                {activeTab === 1 && <GradientText text="Записаться"/>}
+                {activeTab === 2 && <GradientText text="Введите своё имя и телефон"/>}
             </div>
             {activeTab === 0 && (<>
                 {loading ? <Loading/> : masterData ? (
@@ -169,8 +164,7 @@ const Order = () => {
                             {t("bronqilish")}
                         </h2>
                     </div>
-                    <CalendarTimeSelection masterId={masterData?.id} onTimeSelect={handleTimeSelect}/>
-                    {/*{errorMessage && <div className="text-red-600 text-center mt-4 mb-2">{errorMessage}</div>}*/}
+                    <CalendarTimeSelection isNotToken masterId={masterData?.id} onTimeSelect={handleTimeSelect}/>
                     <div className="flex justify-center mt-4 sm:mt-6">
                         <Button
                             className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[50px] sm:h-[58px] md:h-[62px] lg:h-[66px] rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg leading-[30px] hover:opacity-90"
@@ -180,6 +174,18 @@ const Order = () => {
                             {selectedDateTime ? t("bronqilish") : t("bronqilish")}
                         </Button>
                     </div>
+                </div>
+                <div className={'my-10'}>
+                    <div className={'text-center mb-5'}><GradientText text={'Gallery'}/></div>
+                    {masterGalleryResponse?.body?.length > 0 ? (<div className={'grid grid-cols-1 gap-7'}>
+                        {masterGalleryResponse?.body?.map((item: IMasterGallery, index: number) => (
+                            <MasterGallery {...item} key={index}/>
+                        ))}
+                    </div>) : null}
+                </div>
+                <div className={'my-10'}>
+                    <div className={'text-center mb-5'}><GradientText text={'Отзывы'}/></div>
+                    <Feedback/>
                 </div>
             </>)}
             {activeTab === 2 && (<>

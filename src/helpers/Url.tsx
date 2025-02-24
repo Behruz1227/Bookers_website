@@ -2,6 +2,7 @@
 export const BASE_URL: string = "http://207.154.246.120:8080";
 
 export const currentByMaster = `${BASE_URL}/api/user/web/get-one/`
+export const currentByMasterGallery = `${BASE_URL}/api/gallery/user/`
 
 //img
 export const attachment : string = `${BASE_URL}/api/attachment/getFile/`;

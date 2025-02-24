@@ -173,7 +173,7 @@ export const LeaveFeedback = () => {
     roleName: item.roleName, // RoleName ni saqlash
   }));
   useEffect(() => {
-    globalDataFunc();
+    // globalDataFunc();
     setMasterOrSalon("");
   }, [searchText]);
 
