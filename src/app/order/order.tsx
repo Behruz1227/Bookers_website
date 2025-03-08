@@ -141,8 +141,8 @@ const Order = () => {
                 {loading ? <Loading/> : masterData ? (
                     <div className="w-full grid grid-cols-1 lg:grid-cols-2">
                         <MasterCard
-                            attachmentId={masterData.attachmentId}
-                            avatar={masterData.mainPhoto}
+                            attachmentId={masterData.mainPhoto}
+                            avatar={masterData.attachmentId}
                             name={masterData.fullName}
                             salon={masterData.salonName || ""}
                             role={masterData.masterSpecialization?.[0] || t("Мастер")}
