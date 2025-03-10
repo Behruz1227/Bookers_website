@@ -197,7 +197,7 @@ const Order = () => {
                                     htmlFor="fullName"
                                     className="block text-gray-700 font-medium mb-2"
                                 >
-                                    {t("fullName*")}
+                                    Полное имя*
                                 </label>
                                 <input
                                     id="fullName"
@@ -211,7 +211,7 @@ const Order = () => {
                                     htmlFor="phoneNumber"
                                     className="block text-gray-700 font-medium mb-2"
                                 >
-                                    {t("Номер телефона*")}
+                                    Номер телефона*
                                 </label>
                                 <input
                                     type="text"
@@ -236,21 +236,23 @@ const Order = () => {
                             }}
                             disabled={!phoneNumber || !userFullName}
                         >
-                            {t("Signup")}
+                            Записаться
                         </Button>
                     </div>
                 </div>
             </>)}
 
-            <UniversalModal isOpen={isModalOpen} onClose={closeModal}>
+            <UniversalModal isOpen={isModalOpen} onClose={() => {
+                closeModal()
+                }}>
                 {page === 1 ? (
                     <div className="p-6  rounded-[20px]">
                         <div className="flex flex-col items-center justify-center text-center">
-                            <h1 className="font-manrope font-extrabold text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] leading-[40px] sm:leading-[46px] md:leading-[50px] lg:leading-[54px]">{t("OTPCode")}</h1>
+                            <h1 className="font-manrope font-extrabold text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] leading-[40px] sm:leading-[46px] md:leading-[50px] lg:leading-[54px]">OTP Код</h1>
                             <h2 className="font-bold font-manrope text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] leading-[28px] sm:leading-[32px] md:leading-[34px] lg:leading-[36px] pt-5">
                                 {phoneNumber}
                             </h2>
-                            <p className="font-manrope font-medium text-[#4F4F4F] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[18px] sm:leading-[20px] md:leading-[22px] lg:leading-[24px]">{t("sentCode")}</p>
+                            <p className="font-manrope font-medium text-[#4F4F4F] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[18px] sm:leading-[20px] md:leading-[22px] lg:leading-[24px]">Код отправлен</p>
                         </div>
                         <div
                             className="flex items-center flex-col gap-10 sm:gap-14 md:gap-16 lg:gap-20 justify-center otp-input p-6">
@@ -268,9 +270,9 @@ const Order = () => {
                             <Button
                                 className="w-full max-w-md h-12 sm:h-14 md:h-16 rounded-[40px] bg-[#9C0B35] text-white font-bold text-base sm:text-lg hover:bg-[#7d092a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 onClick={globalDataFuncCheck}
-                                disabled={!otpCodeInput}
+                                // disabled={!otpCodeInput}
                             >
-                                {t("Signup")}
+                                Записаться
                             </Button>
                         </div>
                     </div>
